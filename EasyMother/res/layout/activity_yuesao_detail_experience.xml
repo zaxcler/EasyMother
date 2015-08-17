@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    
+
+    
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="工作履历"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:text="   设置android textview行间有两种方式android:lineSpacingExtra设置行间距，如”6dip”。android:lineSpacingMultiplier设置行间距的倍数，如”2″。设置TextView组件内首字缩进String 中可用"
+            android:textColor="@color/boroblacktext"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/lightredwine_border"
+            android:padding="@dimen/dp_5"
+            android:text="查看全部"
+            android:gravity="center"
+            android:drawableLeft="@drawable/search"
+            android:textColor="@color/lightredwine"
+            android:textSize="@dimen/sp_16" />
+    </LinearLayout>
+    
+
+    
+
+</LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/commontitle" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:orientation="vertical" >
+
+            <include
+                android:id="@+id/layout1"
+                layout="@layout/cuiruishi_project1" />
+
+            <include
+                android:id="@+id/layout2"
+                layout="@layout/cuiruishi_project2" />
+
+            <include
+                android:id="@+id/layout3"
+                layout="@layout/cuiruishi_project3" />
+
+            <include
+                android:id="@+id/layout4"
+                layout="@layout/cuiruishi_project4" />
+
+            <include
+                android:id="@+id/layout5"
+                layout="@layout/cuiruishi_project5" />
+
+            <include
+                android:id="@+id/layout6"
+                layout="@layout/cuiruishi_project6" />
+
+            <include
+                android:id="@+id/layout7"
+                layout="@layout/cuiruishi_project7" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

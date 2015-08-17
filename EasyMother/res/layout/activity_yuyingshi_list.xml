@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background" >
+
+    <include
+        android:id="@+id/title1"
+        android:layout_alignParentTop="true"
+        layout="@layout/commontitle" />
+
+    <View
+        android:id="@+id/vt1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/title1"
+        android:background="@color/line" />
+
+    <LinearLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@color/redboro"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:background="@color/lightredwine"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textView2"
+                android:layout_alignTop="@+id/textView2"
+                android:text="预产期"
+                android:textSize="@dimen/sp_10" />
+
+            <TextView
+                android:id="@+id/starttime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_toRightOf="@+id/textView1"
+                android:text="07月27号"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_10" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="结    束"
+                android:textSize="@dimen/sp_10" />
+
+            <TextView
+                android:id="@+id/endtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView4"
+                android:layout_alignLeft="@+id/starttime"
+                android:text="07月28号"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_10" />
+
+            <TextView
+                android:id="@+id/counttime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/endtime"
+                android:layout_alignBottom="@+id/endtime"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_toRightOf="@+id/endtime"
+                android:text="共1天"
+                android:textSize="@dimen/sp_10" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/filter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:drawableLeft="@drawable/choose"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="筛选" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/line" />
+
+        <TextView
+            android:id="@+id/sort"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:drawableLeft="@drawable/sort"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="排序" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_layout"
+        android:layout_below="@+id/vt1"
+        android:divider="@color/background"
+        android:dividerHeight="@dimen/dp_10" >
+    </ListView>
+
+    <include
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vt1"
+        layout="@layout/search_item" />
+
+</RelativeLayout>

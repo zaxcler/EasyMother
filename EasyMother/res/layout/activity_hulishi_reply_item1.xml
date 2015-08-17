@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/dp_10" >
+
+        <LinearLayout
+            android:id="@+id/pictures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView3"
+            android:layout_below="@+id/textView3"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView3"
+            android:layout_alignLeft="@+id/textView1"
+            android:text="1楼"
+            android:textColor="@color/boroblacktext"
+            android:textSize="@dimen/dp_12" />
+
+        <com.easymother.customview.CircleImageView
+            android:id="@+id/circleImageView1"
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/baby" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/textView1"
+            android:drawableLeft="@drawable/reply"
+            android:text="回复"
+            android:textColor="@color/boro" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView2"
+            android:layout_marginLeft="19dp"
+            android:layout_toRightOf="@+id/circleImageView1"
+            android:text="杨烨"
+            android:textColor="@color/blackgreen"
+            android:textSize="@dimen/sp_20" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView4"
+            android:layout_alignBottom="@+id/textView4"
+            android:layout_toRightOf="@+id/textView4"
+            android:text="9分钟前"
+            android:textColor="@color/boroblacktext"
+            android:textSize="@dimen/dp_12" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:layout_toRightOf="@+id/textView2"
+            android:text="丨"
+            android:textColor="@color/boroblacktext"
+            android:textSize="@dimen/dp_12" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView2"
+            android:layout_below="@+id/circleImageView1"
+            android:layout_marginTop="22dp"
+            android:text="回复" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView3"
+            android:layout_toRightOf="@+id/textView3"
+            android:text="郭泽"
+            android:textColor="@color/blackgreen" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/pictures"
+            android:layout_toRightOf="@+id/textView6"
+            android:text="：瞎扯淡。。" />
+
+        <LinearLayout
+            android:layout_alignLeft="@+id/textView3"
+            android:id="@+id/linearlayout"
+            android:layout_below="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_5"
+            android:background="@color/background"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="郭泽" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我还是到哪块快打死了阿斯顿空间啊啊很少肯定就按时发空间啊" />
+
+        </LinearLayout>
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignLeft="@+id/textView3"
+            android:layout_below="@id/linearlayout"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/line" />
+    </RelativeLayout>
+
+</LinearLayout>

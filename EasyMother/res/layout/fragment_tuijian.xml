@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:clipChildren="false" 
+    android:clipToPadding="false"
+     android:layerType="software" 
+    android:id="@+id/viewpager_container"
+    android:orientation="horizontal" >
+   
+    <android.support.v4.view.ViewPager
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/tuijian_viewpager"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:clipChildren="false"
+        
+        >
+    </android.support.v4.view.ViewPager>
+    
+
+</LinearLayout>

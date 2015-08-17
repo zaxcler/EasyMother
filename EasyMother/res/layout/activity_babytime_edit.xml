@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+    
+    <include layout="@layout/commontitle"/>
+    
+    <EditText 
+        android:id="@+id/baby_edit"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:hint="new day new begaining..."
+        android:gravity="top"
+        android:layout_height="@dimen/dp_150"/>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_photo"	
+            android:layout_margin="@dimen/dp_10"
+            android:src="@drawable/babytime_add1"
+            />
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_photo"	
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/dp_10"
+            android:src="@drawable/diandian"
+            />
+    </LinearLayout>
+
+</LinearLayout>

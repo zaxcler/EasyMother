@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fragment_title_height"
+        android:background="@color/white"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/home_page_wish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/wish" />
+
+        <TextView
+            android:id="@+id/home_page_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:drawableLeft="@drawable/location1"
+            android:gravity="center"
+            android:text="杭州" />
+
+        <TextView
+            android:id="@+id/home_page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/home_page_area"
+            android:layout_alignBottom="@+id/home_page_area"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="轻松妈妈"
+            android:textSize="@dimen/sp_20"
+            android:textColor="@color/orange_red"
+             />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="#cfcfcf" />
+
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/pulltoreflashscrollview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <com.easymother.customview.ImageCycleView
+                android:id="@+id/home_page_ad"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_200" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_height_5"
+                android:background="@color/background" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:src="@drawable/hron"
+                    android:layout_width="@dimen/horn_width"
+                    android:layout_height="@dimen/horn_height"
+                    android:layout_marginLeft="@dimen/dp_margin_left_10"
+                    android:layout_marginRight="@dimen/dp_margin_right_10" />
+
+                <View
+                    android:layout_width="@dimen/dp_width_1"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#ececec" />
+
+                <ViewFlipper
+                    android:id="@+id/homepage_notice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_margin_left_10"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:textColor="@color/boro" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@color/background"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5" >
+
+                <LinearLayout
+                    android:id="@+id/yuesao"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_64"
+                        android:layout_height="@dimen/dp_64"
+                        android:src="@drawable/home_yuesao" />
+
+                    <TextView
+                        android:id="@+id/yuesao_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="月嫂"
+                        android:textColor="@color/boroblacktext" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/yuyingshi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                         android:layout_width="@dimen/dp_64"
+                        android:layout_height="@dimen/dp_64"
+                        android:src="@drawable/home_yys" />
+
+                    <TextView
+                        android:id="@+id/yuyingshi_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="育婴师"
+                        android:textColor="@color/boroblacktext" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cuirushi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_64"
+                        android:layout_height="@dimen/dp_64"
+                        android:src="@drawable/home_crs" />
+
+                    <TextView
+                        android:id="@+id/cuirushi_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="催乳师"
+                        android:textColor="@color/boroblacktext" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/duanqihuli"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                         android:layout_width="@dimen/dp_64"
+                        android:layout_height="@dimen/dp_64"
+                        android:src="@drawable/home_hls" />
+
+                    <TextView
+                        android:id="@+id/duanqihuli_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="短期护理"
+                        android:textColor="@color/boroblacktext" />
+                </LinearLayout>
+            </LinearLayout>
+
+            
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_2"
+                android:background="#eeeeee" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tuijian_yuesao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="  推荐月嫂"
+                        android:textColor="@color/boroblacktext" />
+
+                    <View
+                        android:layout_width="@dimen/dp_width_2"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="#ececec" />
+
+                    <TextView
+                        android:id="@+id/tuijian_yuyingshi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="推荐育婴师"
+                        android:textColor="@color/boroblacktext" />
+
+                    <View
+                        android:layout_width="@dimen/dp_width_2"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="#ececec" />
+
+                    <TextView
+                        android:id="@+id/tuijian_cuirushi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="推荐催乳师"
+                        android:textColor="@color/boroblacktext" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/scorllbar"
+                    android:layout_width="@dimen/dp_2"
+                    android:layout_height="@dimen/dp_2"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:background="@color/deeppink" />
+            </LinearLayout>
+
+            <!-- <LinearLayout
+                android:id="@+id/tuijian_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_420"
+                android:orientation="vertical" >
+            </LinearLayout> -->
+
+            
+            <android.support.v4.view.ViewPager
+                android:id="@+id/tuijian_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_420" >
+            </android.support.v4.view.ViewPager>
+            
+        </LinearLayout>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+
+</LinearLayout>

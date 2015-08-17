@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/commontitle" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line" />
+
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/wish_pulltoreflash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10" >
+
+                <View
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:text="月嫂" />
+
+                <View
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/ys_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:padding="@dimen/dp_10"
+                android:text="什么都没有哦" />
+
+            <com.easymother.customview.MyListview
+                android:id="@+id/wish_ys_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:divider="@color/background"
+                android:dividerHeight="@dimen/dp_10" >
+            </com.easymother.customview.MyListview>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10" >
+
+                <View
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:text="育婴师" />
+
+                <View
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/yys_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:padding="@dimen/dp_10"
+                android:text="什么都没有哦" />
+
+            <com.easymother.customview.MyListview
+                android:id="@+id/wish_yys_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:divider="@color/background"
+                android:dividerHeight="@dimen/dp_10" >
+            </com.easymother.customview.MyListview>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10" >
+
+                <View
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:text="催乳师" />
+
+                <View
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/crs_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:padding="@dimen/dp_10"
+                android:text="什么都没有哦" />
+
+            <com.easymother.customview.MyListview
+                android:id="@+id/wish_crs_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:divider="@color/background"
+                android:dividerHeight="@dimen/dp_10" >
+            </com.easymother.customview.MyListview>
+        </LinearLayout>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+
+</LinearLayout>

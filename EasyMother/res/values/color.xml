@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--橘红色  -->
+    <color name="orange_red">#FF3A1D</color>
+    <!-- 白色-->
+    <color name="white">#ffffff</color>
+    
+    <!--灰色  -->
+    <color name="boro">#afafaf</color>
+    <!--灰白色  -->
+    <color name="borowhite">#FAFAFB</color>
+     <!--透明  -->
+    <color name="alpha">#00000000</color>
+    <!-- 红灰色 -->
+    <color name="redboro">#f8f2f4</color>
+    
+    <!--灰色字体 -->
+    <color name="borotext">#cdcdcd</color>
+    <!--灰黑色字体 -->
+    <color name="boroblacktext">#979797</color>
+    
+    <!-- 背景色 灰 -->
+    <color name="background">#f6f6f6</color>
+    <!-- 酒红色 -->
+    <color name="redwine">#bf2339</color>
+    <!-- 淡酒红色 -->
+    <color name="lightredwine">#fc5a87</color>
+    <!-- 水红色 -->
+    <color name="waterpink">#fd69a5</color>
+    <!-- 绿色 -->
+    <color name="green">#75b48d</color>
+    <!-- 深粉红色 -->
+    <color name="deeppink">#f80079</color>
+    <!-- 深红色 -->
+    <color name="deepred">#aa4130</color>
+    <!-- 泥红色 -->
+    <color name="mudred">#c77658</color>
+    <!--黑色字体-->
+    <color name="blacktext">#4c4c4c</color>
+    <!--分割线-->
+    <color name="line">#cfcfcf</color>
+    <!--泥黄色-->
+    <color name="mudyellow">#fdb05c</color>
+     <!--深泥黄色-->
+    <color name="deepmudyellow">#d77e2b</color>
+     <!--紫色-->
+    <color name="purple">#935aab</color>
+     <!--紫黑色-->
+    <color name="purpleblack">#5b416c</color>
+     <!--深紫色-->
+    <color name="deeppurple">#535298</color>
+    
+     <!--黄绿色-->
+    <color name="yellowgreen">#c1bf43</color>
+     <!--黄色-->
+    <color name="yellow">#eba230</color>
+     <!--黄色1-->
+    <color name="yellow1">#b89040</color>
+    
+     <!--蓝绿色-->
+    <color name="bluegreen">#65abc2</color>
+     <!--深灰色-->
+    <color name="deepboro">#7d7d7d</color>
+     <!--黑绿色-->
+    <color name="blackgreen">#385375</color>
+    
+    
+    
+    
+</resources>

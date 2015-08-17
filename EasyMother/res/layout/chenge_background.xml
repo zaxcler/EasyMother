@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:background="@color/white"
+    android:gravity="center">
+    
+    <TextView android:layout_width="wrap_content"
+        android:text="更改囡囡封面"
+        android:textSize="@dimen/sp_16"
+        android:padding="@dimen/dp_10"
+        android:textColor="@color/lightredwine"
+        android:layout_height="wrap_content"
+        android:id="@+id/change_background"/>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"/>
+    <TextView android:layout_width="wrap_content"
+        android:text="取消"
+        android:textSize="@dimen/sp_16"
+        android:padding="@dimen/dp_10"
+        android:textColor="@color/lightredwine"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancle"/>
+
+</LinearLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical" 
+    android:background="@color/white">
+    <ImageView 
+        android:layout_margin="@dimen/dp_5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_350"
+        android:id="@+id/tuijian_photo"
+        android:layout_gravity="center"
+        android:background="@drawable/test1"
+        android:scaleType="fitXY"/>
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="@dimen/dp_5"
+        android:background="@color/white"
+        >
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tuijian_name"
+            android:text="王阿芬"
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/boroblacktext"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tuijian_price"
+            android:text="￥6000"
+            android:layout_below="@id/tuijian_name"
+            android:textColor="@color/deeppink"
+            android:layout_alignParentLeft="true"
+           />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tuijian_num"
+            android:text="142242"
+            android:drawableLeft="@drawable/like_deepyellow"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/deeppink"/>
+        
+    </RelativeLayout>
+    
+
+</LinearLayout>

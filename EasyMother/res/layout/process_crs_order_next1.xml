@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/commontitle" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/dp_10" >
+
+                <TextView
+                    android:id="@+id/w1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView1"
+                    android:layout_alignParentTop="true"
+                    android:paddingBottom="@dimen/dp_5"
+                    android:paddingTop="@dimen/dp_5"
+                    android:text="雇主信息" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/w1"
+                    android:text="姓    名：" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView1"
+                    android:layout_below="@+id/textView1"
+                    android:layout_marginTop="16dp"
+                    android:text="电    话" />
+
+                <EditText
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView2"
+                    android:layout_alignLeft="@+id/textView3"
+                    android:background="@color/white"
+                    android:text="12312321412"
+                    android:textColor="@color/boroblacktext"
+                    android:textSize="@dimen/sp_14" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignLeft="@id/textView4"
+                    android:layout_below="@id/textView4"
+                    android:background="@color/line" />
+
+                <EditText
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/w1"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/w1"
+                    android:background="@color/white"
+                    android:text="张三"
+                    android:textColor="@color/boroblacktext"
+                    android:textSize="@dimen/sp_14" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignLeft="@id/textView3"
+                    android:layout_below="@id/textView3"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/w1"
+                    android:layout_below="@+id/textView2"
+                    android:layout_marginTop="15dp"
+                    android:text="服务地址：" />
+
+                <EditText
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView9"
+                    android:layout_alignLeft="@+id/textView4"
+                    android:background="@color/white"
+                    android:text="杭州市江干区城星路XX大夏XX室"
+                    android:textColor="@color/boroblacktext"
+                    android:textSize="@dimen/sp_14" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignLeft="@id/textView11"
+                    android:layout_below="@id/textView11"
+                    android:background="@color/line" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_60"
+                 >
+
+                <LinearLayout
+                    android:id="@+id/layout1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="分娩方式" />
+
+                    <RadioGroup
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <RadioButton
+                            android:gravity="center"
+                            android:checked="true"
+                            android:focusable="true"
+                            android:id="@+id/radioButton1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@null"
+                            android:drawableLeft="@drawable/radiobutton"
+                            android:text="顺产" />
+
+                        <RadioButton
+                            android:id="@+id/radioButton2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@null"
+                            android:drawableLeft="@drawable/radiobutton"
+                            android:text="剖腹产" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView6"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/textView6"
+                    android:src="@drawable/canleder" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imageView1"
+                    android:layout_toRightOf="@+id/imageView1"
+                    android:text="2015-08-28" />
+                <View android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line"
+                    android:layout_alignLeft="@id/textView7"
+                    android:layout_alignRight="@id/textView7"
+                    android:layout_below="@id/textView7"/>
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/layout1"
+                    android:layout_below="@+id/layout1"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="分娩日期" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView6"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="注：护理师上门期间罗飞需要用户承担" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/lightredwine_solid"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10"
+                android:text="提交预约信息"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

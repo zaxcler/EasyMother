@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/title1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fragment_title_height"
+        android:gravity="center_vertical" 
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/more"
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_5"
+            android:src="@drawable/camera" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="囡囡记"
+            android:textColor="@color/orange_red"
+            android:textSize="@dimen/sp_20" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/title1"
+        android:background="@color/line" />
+
+    <TextView
+        android:id="@+id/move"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/babytime_move"
+        android:gravity="center|bottom"
+        android:text="启程"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_20" />
+
+    <ImageView
+        android:id="@+id/baby_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_150"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/title1"
+        android:background="@drawable/baby_image3"
+        android:scaleType="fitXY" />
+
+    <com.easymother.customview.CircleImageView
+        android:id="@+id/circleImageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/view1"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="128dp"
+        android:src="@drawable/user_photo" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/baby_image"
+        android:textSize="@dimen/sp_16"
+        android:layout_toRightOf="@+id/circleImageView1"
+        android:text="Angle" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@id/textView1"
+        android:layout_toRightOf="@+id/circleImageView1"
+        android:text="出生️12天" />
+
+    <ImageView
+        android:id="@+id/add_babytime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/circleImageView1"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/babytime_add" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_above="@id/move"
+        android:layout_below="@id/add_babytime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_16"
+        android:layout_centerHorizontal="true"
+        android:ems="1"
+        android:text="记录宝宝成长每一天" />
+
+</RelativeLayout>

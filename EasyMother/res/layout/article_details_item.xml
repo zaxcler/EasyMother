@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:background="@drawable/white_solid"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/baby_image3" />
+
+    <TextView
+        android:layout_marginLeft="@dimen/dp_10"
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="人的智力会遗传" />
+
+    <TextView
+        android:layout_marginLeft="@dimen/dp_10"
+        android:id="@+id/textView2"
+        android:textSize="@dimen/sp_12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/boroblacktext"
+        android:text="阿斯顿撒大奥斯卡的拉升阿森纳你代理商的拉伸法师撒了巨大是老大" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_5"
+        android:background="@drawable/lightredwine_border"
+        android:textColor="@color/lightredwine"
+        android:text="点击阅读全文" />
+
+</LinearLayout>

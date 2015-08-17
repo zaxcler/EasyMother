@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/commontitle" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <com.easymother.customview.CircleImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="@dimen/dp_72"
+                    android:layout_height="@dimen/dp_72"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:src="@drawable/user_photo" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView1"
+                    android:layout_toRightOf="@+id/textView1"
+                    android:text="李四" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView3"
+                    android:layout_alignBottom="@+id/textView3"
+                    android:layout_alignLeft="@+id/textView2"
+                    android:text="400-231-2132"
+                    android:textColor="@color/boroblacktext" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imageView1"
+                    android:layout_alignLeft="@+id/textView3"
+                    android:text="护理师等级："
+                    android:textColor="@color/boroblacktext" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView5"
+                    android:layout_toLeftOf="@+id/textView4"
+                    android:text="电话："
+                    android:textColor="@color/boroblacktext" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView4"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_toRightOf="@+id/imageView1"
+                    android:text="姓名：" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView4"
+                    android:layout_alignBottom="@+id/textView4"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:text="￥480/次"
+                    android:textColor="@color/mudyellow"
+                    android:textSize="@dimen/dp_18" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageView1"
+                    android:layout_marginTop="16dp"
+                    android:layout_toRightOf="@+id/imageView1"
+                    android:text="项目名称：" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar1"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/textView5"
+                    android:layout_toRightOf="@+id/textView5"
+                    android:numStars="5"
+                    android:rating="3.5" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/textView8"
+                    android:text="产前开奶" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/dp_10" >
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_toLeftOf="@+id/textView9"
+                    android:drawableLeft="@drawable/clock"
+                    android:gravity="center"
+                    android:text="项目时长:"
+                    android:textColor="@color/boroblacktext"
+                    android:textSize="@dimen/dp_10" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/textView10"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_22"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="服务类型" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignLeft="@id/textView11"
+                    android:layout_below="@id/textView11"
+                    android:background="@color/line" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignLeft="@id/textView11"
+                    android:layout_below="@id/layout2"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/view2"
+                    android:layout_below="@+id/view2"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="项目总费用" />
+
+                <LinearLayout
+                    android:id="@+id/layout2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/view1"
+                    android:layout_below="@id/view1"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/black_border"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/reduce"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/dp_5"
+                        android:text="-" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/line" />
+
+                    <TextView
+                        android:id="@+id/num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="1" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/line" />
+
+                    <TextView
+                        android:id="@+id/add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/dp_5"
+                        android:text="+" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView10"
+                    android:layout_alignBottom="@+id/textView10"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:gravity="center"
+                    android:text="120分钟起"
+                    android:textColor="@color/boroblacktext"
+                    android:textSize="@dimen/dp_10" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/view1"
+                    android:layout_below="@+id/view1"
+                    android:layout_marginTop="14dp"
+                    android:text="服务次数" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView11"
+                    android:layout_alignBottom="@+id/textView11"
+                    android:layout_alignLeft="@+id/textView10"
+                    android:background="@drawable/purple_solid"
+                    android:paddingBottom="@dimen/dp_3"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingTop="@dimen/dp_3"
+                    android:text="单次"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView15"
+                    android:layout_alignBottom="@+id/textView15"
+                    android:layout_alignRight="@+id/textView9"
+                    android:text="￥480元"
+                    android:textColor="@color/mudyellow" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView12"
+                    android:layout_alignBottom="@+id/textView12"
+                    android:layout_toRightOf="@+id/textView10"
+                    android:background="@drawable/purple_border"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/dp_3"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingTop="@dimen/dp_3"
+                    android:text="多次"
+                    android:textColor="@color/purple" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/layout3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/view1"
+                android:layout_below="@id/view1"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/white_solid"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/reduce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/dp_5"
+                    android:text="今天" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:id="@+id/num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/lightredwine"
+                    android:padding="@dimen/dp_5"
+                    android:text="明天"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:id="@+id/add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/dp_5"
+                    android:text="后天" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:id="@+id/add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/dp_5"
+                    android:text="星期四" />
+            </LinearLayout>
+
+            <com.easymother.customview.MyGridView
+                android:id="@+id/gridView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:horizontalSpacing="@dimen/dp_2"
+                android:verticalSpacing="@dimen/dp_2"
+                android:layout_marginRight="@dimen/dp_20"
+                android:background="@drawable/backgroup_solid"
+                android:gravity="@color/line"
+                android:numColumns="4" >
+            </com.easymother.customview.MyGridView>
+
+            <Button
+                android:id="@+id/begain_sign"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/lightredwine_solid"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10"
+                android:text="开始签约"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

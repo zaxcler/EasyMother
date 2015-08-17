@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.easymother.main"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+    
+      <uses-permission android:name="android.permission.INTERNET" /><!-- 访问网络权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /><!-- //读写权限 -->
+    <uses-permission android:name="android.permission.CAMERA"/><!-- 照相机权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/><!-- 打电话权限 -->
+
+    <application
+        android:allowBackup="true"
+        android:name="com.easymother.configure.MyApplication"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:theme="@android:style/Theme.NoTitleBar"  
+            android:name="com.easymother.main.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- 月嫂列表 -->
+        <activity android:name="com.easymother.main.homepage.YueSaoListActivity" android:windowSoftInputMode="adjustPan"></activity>
+        <!-- 育婴师列表 -->
+        <activity android:name="com.easymother.main.homepage.YuYingShiListActivity" android:windowSoftInputMode="adjustPan"></activity>
+        <!-- 催乳师列表 -->
+        <activity android:name="com.easymother.main.homepage.CuiRuShiListActivity" android:windowSoftInputMode="adjustPan"></activity>
+      
+        <!-- 囡囡记列表 -->
+        <activity android:name="com.easymother.main.babytime.BabyTimeActivity" android:windowSoftInputMode="adjustPan"></activity>
+        <!-- 囡囡添加编辑 -->
+        <activity android:name="com.easymother.main.babytime.BabyTimeEditActivity" android:windowSoftInputMode="adjustPan"></activity>
+        <!-- 囡囡信息 -->
+        <activity android:name="com.easymother.main.babytime.BabyTimeInfomationActivity" android:windowSoftInputMode="adjustPan"></activity>
+      
+        
+        
+        <!-- 月嫂详情 -->
+        <activity android:name="com.easymother.main.homepage.YueSaoDetailActivity" ></activity>
+        <!-- 催乳师详情 -->
+        <activity android:name="com.easymother.main.homepage.CuiRuShiDetailActivity" ></activity>
+        <!-- 育婴师详情 -->
+        <activity android:name="com.easymother.main.homepage.YuYingShiDetailActivity" ></activity>
+        <!-- 月嫂育婴师签约流程 -->
+        <activity android:name="com.easymother.main.homepage.OrderYSandYYSProcess" ></activity>
+        <!-- 月嫂育婴师签约流程1 -->
+        <activity android:name="com.easymother.main.homepage.OrderYSandYYSProcess1" ></activity>
+        <!-- 月嫂育婴师签约流程2 -->
+        <activity android:name="com.easymother.main.homepage.OrderYSandYYSProcess2" ></activity>
+        <!-- 月嫂育婴师签约流程3 -->
+        <activity android:name="com.easymother.main.homepage.OrderYSandYYSProcess3" ></activity>
+        <!-- 月嫂育婴师签约流程4 -->
+        <activity android:name="com.easymother.main.homepage.OrderYSandYYSProcess4" ></activity>
+        <!-- 月嫂育婴师签约流程5 -->
+        <activity android:name="com.easymother.main.homepage.OrderYSandYYSProcess5" ></activity>
+        <!-- 月嫂育婴师签约流程6 -->
+        <activity android:name="com.easymother.main.homepage.OrderYSandYYSProcess6" ></activity>
+        <!-- 月嫂育婴师签约流程7 -->
+        <activity android:name="com.easymother.main.homepage.OrderYSandYYSProcess7" ></activity>
+        <!-- 月嫂育婴师签约流程8 -->
+        <activity android:name="com.easymother.main.homepage.OrderYSandYYSProcess8" ></activity>
+        <!-- 我的订单 -->
+        <activity android:name="com.easymother.main.homepage.OrderListActivity" ></activity>
+        <!-- 短期列表 -->
+        <activity android:name="com.easymother.main.homepage.ShortOrderListActivity" ></activity>
+        <!-- 短期流程1 -->
+        <activity android:name="com.easymother.main.homepage.ShortOrderSProcess1" ></activity>
+        <!-- 短期流程2 -->
+        <activity android:name="com.easymother.main.homepage.ShortOrderSProcess3" ></activity>
+        <!-- 视频列表 -->
+        <activity android:name="com.easymother.main.homepage.VideoListActivity" ></activity>
+        <!-- 催乳师项目列表 -->
+        <activity android:name="com.easymother.main.homepage.CuiRuiShiProjectActivity" ></activity>
+        <!-- 催乳师预约流程 -->
+        <activity android:name="com.easymother.main.homepage.OrderCRSProcess" ></activity>
+        <!-- 催乳师预约流程1 -->
+        <activity android:name="com.easymother.main.homepage.OrderCRSProcess1" ></activity>
+        <!-- 催乳师预约流程2-->
+        <activity android:name="com.easymother.main.homepage.OrderCRSProcess2" ></activity>
+        <!-- 催乳师预约流程3 -->
+        <activity android:name="com.easymother.main.homepage.OrderCRSProcess3" ></activity>
+       
+        <!-- 个人登录流程 -->
+        <activity android:name="com.easymother.main.my.LoginOrRegisterActivity" ></activity>
+        <!-- 注册流程 -->
+        <activity android:name="com.easymother.main.my.RegisterActivity" ></activity>
+        <!-- 忘记密码1-->
+        <activity android:name="com.easymother.main.my.ForgetPasswordActivity1" ></activity>
+        <!-- 忘记密码2 -->
+        <activity android:name="com.easymother.main.my.ForgetPasswordActivity2" ></activity>
+        <!-- 我的收藏 -->
+        <activity android:name="com.easymother.main.my.CollectListActivity" ></activity>
+        <!-- 我的评论 -->
+        <activity android:name="com.easymother.main.my.CommentActivity" ></activity>
+        <!-- 个人信息 -->
+        <activity android:name="com.easymother.main.my.InfomationActivity" ></activity>
+        <!-- 个人信息更改密码 -->
+        <activity android:name="com.easymother.main.my.InfomationChangePasswordActivity" ></activity>
+        <!-- 个人信息更改文字 -->
+        <activity android:name="com.easymother.main.my.InfomationChangeTextActivity" ></activity>
+        <!-- 订单详情 -->
+        <activity android:name="com.easymother.main.my.OrderDetailActivity" ></activity>
+        <!-- 设置关于界面 -->
+        <activity android:name="com.easymother.main.my.SettingAboutActivity" ></activity>
+        <!--设置界面-->
+        <activity android:name="com.easymother.main.my.SettingActivity" ></activity>
+        <!-- 设置建议 -->
+        <activity android:name="com.easymother.main.my.SettingSueegstionActivity" ></activity>
+        <!-- 话题列表 -->
+        <activity android:name="com.easymother.main.my.TopicListActivity" ></activity>
+        <!-- 话题回复列表 -->
+        <activity android:name="com.easymother.main.my.TopicReplyListActivity" ></activity>
+        <!-- 联系我们 -->
+        <activity android:name="com.easymother.main.my.ContactActivity" ></activity>
+        <!-- 版本更新 -->
+        <activity android:name="com.easymother.main.my.VersionActivity" ></activity>
+       
+        
+        <!-- 护理师空间列表 -->
+        <activity android:name="com.easymother.main.community.HuLiShiZoneListActivity" ></activity>
+        <!-- 护理师空间-->
+        <activity android:name="com.easymother.main.community.HuLiShiZoneDetailActivity" ></activity>
+       
+        <!-- 消息管理 -->
+        <activity android:name="com.easymother.main.community.MessageContralActivity" ></activity>
+        <!-- 互动回复 -->
+        <activity android:name="com.easymother.main.community.HuLiShiReplyListActivity" ></activity>
+        <!-- 医食衣趣 -->
+        <activity android:name="com.easymother.main.community.YSYQActicvity" ></activity>
+        <!-- 文章列表 -->
+        <activity android:name="com.easymother.main.community.ArticleListActivity" ></activity>
+       
+        
+        <!-- 我的心愿单 -->
+        <activity android:name="com.easymother.main.homepage.MyWishListActivity" ></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/commontitle" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/baby_image3" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imageView1"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="发表156篇文章"
+                    android:textColor="@color/waterpink"
+                    android:textSize="@dimen/sp_10" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView1"
+                    android:layout_alignLeft="@+id/textView1"
+                    android:text="生肖：狗"
+                    android:textColor="@color/boroblacktext"
+                    android:textSize="@dimen/sp_10" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView2"
+                    android:layout_alignLeft="@+id/textView2"
+                    android:text="星座：水平座"
+                    android:textColor="@color/boroblacktext"
+                    android:textSize="@dimen/sp_10" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView3"
+                    android:layout_alignLeft="@+id/textView3"
+                    android:text="籍贯：浙江杭州"
+                    android:textColor="@color/boroblacktext"
+                    android:textSize="@dimen/sp_10" />
+
+                <TextView
+                    android:id="@+id/age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView4"
+                    android:layout_alignLeft="@+id/textView4"
+                    android:text="年龄：45岁"
+                    android:textColor="@color/boroblacktext"
+                    android:textSize="@dimen/sp_10" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/age"
+                    android:layout_alignLeft="@+id/age"
+                    android:text="工龄：10年"
+                    android:textColor="@color/boroblacktext"
+                    android:textSize="@dimen/sp_10" />
+
+                <TextView
+                    android:id="@+id/ysname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView6"
+                    android:layout_alignLeft="@+id/textView6"
+                    android:text="郭大美" />
+
+                <TextView
+                    android:id="@+id/worktime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView1"
+                    android:layout_alignBottom="@+id/textView1"
+                    android:layout_alignParentRight="true"
+                    android:text="位雇主喜欢她"
+                    android:textSize="@dimen/sp_10" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/worktime"
+                    android:layout_alignBottom="@+id/worktime"
+                    android:layout_toLeftOf="@+id/worktime"
+                    android:text="5430"
+                    android:textColor="@color/lightredwine"
+                    android:textSize="@dimen/sp_10" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_alignBaseline="@+id/textView9"
+                    android:layout_alignBottom="@+id/textView9"
+                    android:layout_toLeftOf="@+id/textView9"
+                    android:drawableLeft="@drawable/like_red_small"
+                    android:gravity="center"
+                    android:text="共有"
+                    android:textSize="@dimen/sp_10" />
+            </RelativeLayout>
+
+            <!--
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/galley1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </android.support.v7.widget.RecyclerView>
+            -->
+
+            <com.easymother.customview.MyListview
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/background"
+                android:dividerHeight="@dimen/dp_10" >
+            </com.easymother.customview.MyListview>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
