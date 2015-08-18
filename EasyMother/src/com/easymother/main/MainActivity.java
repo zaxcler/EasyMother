@@ -62,8 +62,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		transaction.add(R.id.main_content, homePageFragment);//添加fragment
 		transaction.show(homePageFragment);//显示fragment
 		transaction.commit();//提交
-		communityImageView.setImageDrawable(getResources().getDrawable(R.drawable.community_choose));
-		communityText.setTextColor(getResources().getColor(R.color.lightredwine));
+		homeImageView.setImageDrawable(getResources().getDrawable(R.drawable.community_choose));
+		homeText.setTextColor(getResources().getColor(R.color.lightredwine));
 		
 		
 	}
@@ -73,9 +73,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		community_page.setOnClickListener(this);
 		babytime_page.setOnClickListener(this);
 		my_page.setOnClickListener(this);
-		
-		
-		
 	}
 
 	private void findView() {
@@ -95,9 +92,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		communityText=(TextView) findViewById(R.id.community_page_text);
 		babytimeText=(TextView) findViewById(R.id.babytime_page_text);
 		mytText=(TextView) findViewById(R.id.my_page_text);
-		
-		
-		
 		
 	}
 

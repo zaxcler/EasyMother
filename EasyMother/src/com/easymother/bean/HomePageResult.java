@@ -53,4 +53,10 @@ public class HomePageResult {
 	public List<Banners> getBanners(){
 	return this.bannerss;
 	}
+	@Override
+	public String toString() {
+		return "HomePageResult [wishCount=" + wishCount + ", yuesaos=" + yuesaos + ", cuirushis=" + cuirushis
+				+ ", yuyingshis=" + yuyingshis + ", bannerTextss=" + bannerTextss + ", bannerss=" + bannerss + "]";
+	}
+	
 }

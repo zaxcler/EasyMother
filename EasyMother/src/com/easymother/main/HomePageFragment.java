@@ -4,37 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.Header;
-import org.w3c.dom.Text;
+import org.json.JSONObject;
 
+import com.easymother.bean.BannerTexts;
+import com.easymother.bean.Banners;
+import com.easymother.bean.HomePageResult;
 import com.easymother.configure.MyApplication;
-import com.easymother.customview.AutoTextView;
 import com.easymother.customview.ImageCycleView;
 import com.easymother.customview.ImageCycleView.ImageCycleViewListener;
-import com.easymother.customview.MyLinearlayout;
-import com.easymother.main.R;
-import com.easymother.main.R.id;
-import com.easymother.main.R.layout;
+import com.easymother.customview.MyViewPager;
 import com.easymother.main.homepage.CuiRuShiListActivity;
-import com.easymother.main.homepage.CuiRuiShiProjectActivity;
 import com.easymother.main.homepage.MyWishListActivity;
 import com.easymother.main.homepage.ShortOrderListActivity;
 import com.easymother.main.homepage.TuiJianFragment;
 import com.easymother.main.homepage.YuYingShiListActivity;
 import com.easymother.main.homepage.YueSaoListActivity;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.LayoutParams;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,9 +41,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.TranslateAnimation;
-import android.webkit.WebView.FindListener;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -73,8 +68,8 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 
 	private TextView private_more;// 私人定制
 	
-//	private LinearLayout tuijian_content;//推荐左右滑动的容器
-	private ViewPager tuijian_content;//推荐左右滑动的容器
+//	private ViewPager tuijian_content;//推荐左右滑动的容器
+	private MyViewPager tuijian_content;//推荐左右滑动的容器
 	
 	private FragmentTransaction transaction;//推荐的fragment的管理器
 	
@@ -85,19 +80,11 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	private int lastPosition=MyApplication.getScreen_width()/12*1;// scorllbar上次滑动到的位置
 	
 	//------网咯获取数据----
-	private String URL="app/index/toIndex";
+//	private String URL="app/index/toIndex";
 	
-	// 测试数据--以后要改成网络访问获取图片-------------------
+	private String URL="http://zaxcler.oss-cn-beijing.aliyuncs.com/test.txt";
 	private ArrayList<String> mImageUrl = null;
-	private String imageUrl1 = "http://pic.nipic.com/2007-11-09/2007119122519868_2.jpg";
-	private String imageUrl2 = "http://pic1.nipic.com/2008-09-08/200898163242920_2.jpg";
-	private String imageUrl3 = "http://pic1.nipic.com/2008-09-08/200898163242920_2.jpg";
-	private String imageUrl4 = "http://pic1.nipic.com/2008-09-08/200898163242920_2.jpg";
-	private String imageUrl5 = "http://pic1.nipic.com/2008-09-08/200898163242920_2.jpg";
-	private String imageUrl6 = "http://pic1.nipic.com/2008-09-08/200898163242920_2.jpg";
-	private String imageUrl7 = "http://pic1.nipic.com/2008-09-08/200898163242920_2.jpg";
-
-	// ------------------------------------
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -107,6 +94,8 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		init();
 		return homepage;
 	}
+	
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -116,35 +105,28 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 
 	private void init() {
 
-		homepage_ad.setAutoCycle(true);// 设置自动循环
 		
-//		NetworkHelper.doGet(URL, new () {
-//			
-//			@Override
-//			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
-//				
-//			}
-//			
-//			@Override
-//			public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		} );
+		
+		//获取网路数据
+		NetworkHelper.doGet(URL,new JsonHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+				super.onSuccess(statusCode, headers, response);
+				Log.e("response-------->", response.toString());
+				HomePageResult pageResult=JsonUtils.getHomePageResult(response);
+				Log.e("pageResult-------->", pageResult.getBanners().toString());
+				BindData(pageResult);//绑定数据到界面
+			}
+			
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
-		// 测试——————————————————————————
-		mImageUrl = new ArrayList<String>();
-		mImageUrl.add(imageUrl1);
-		mImageUrl.add(imageUrl2);
-		mImageUrl.add(imageUrl3);
-		mImageUrl.add(imageUrl4);
-		mImageUrl.add(imageUrl5);
-		mImageUrl.add(imageUrl6);
-		mImageUrl.add(imageUrl7);
-
-		homepage_ad.setImageResources(mImageUrl,
-				new ImageCycleViewClickLisenter(), stype);
-		// ————————————————————————————————
 
 		
 		//初始化话水平的红色滑动条
@@ -154,25 +136,6 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		params.width = scrollbarLength;
 		scorllbar.setLayoutParams(params);
 		scrollbarMove(0);
-		//测试数据
-//		List<TextView> textViews=new ArrayList<TextView>();
-		TextView textView=new TextView(getActivity());
-		textView.setText("轻松妈妈开发");
-		TextView textView1=new TextView(getActivity());
-		textView1.setText("我是阿斯顿卡萨丁");
-		TextView textView2=new TextView(getActivity());
-		textView2.setText("轻按时大大撒妈妈开发");
-		TextView textView3=new TextView(getActivity());
-		textView3.setText("轻松撒大声地妈开发");
-		
-		homepage_notic.addView(textView);
-		homepage_notic.addView(textView1);
-		homepage_notic.addView(textView2);
-		homepage_notic.addView(textView3);
-		homepage_notic.setInAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_bottom_in));
-		homepage_notic.setOutAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_bottom_in));
-		homepage_notic.setFlipInterval(3000);
-		homepage_notic.startFlipping();
 		
 		
 		tuijian_cuirushi.setOnClickListener(this);
@@ -186,20 +149,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		homepage_wish.setOnClickListener(this);
 		
 		
-//		transaction=getFragmentManager().beginTransaction();
-//		tuijian_ysf=new TuiJianFragment();
-//		transaction.add(R.id.tuijian_content, tuijian_ysf);
-//		transaction.show(tuijian_ysf);
-//		transaction.commit();
-		List<TuiJianFragment> fragments=new ArrayList<>();
-		TuiJianFragment fragment=new TuiJianFragment();
-		TuiJianFragment fragment1=new TuiJianFragment();
-		TuiJianFragment fragment2=new TuiJianFragment();
-		fragments.add(fragment);
-		fragments.add(fragment1);
-		fragments.add(fragment2);
-		HomePageFragmentAdapter arg0=new HomePageFragmentAdapter(getFragmentManager(),fragments);
-		tuijian_content.setAdapter(arg0);
+		
 		
 		scrollView.setMode(Mode.PULL_FROM_START);//设置只能下拉刷新
 		scrollView.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
@@ -213,6 +163,68 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		});
 
 	}
+	/**
+	 * 绑定数据到界面
+	 * @param pageResult
+	 */
+	protected void BindData(HomePageResult pageResult) {
+		/*
+		 * 绑定banner数据
+		 */
+		List<Banners> banners=pageResult.getBanners();
+		
+		mImageUrl=new ArrayList<>();
+		for (int i = 0; i < banners.size(); i++) {
+//			mImageUrl.add(MyApplication.BASE_PICTURE+banners.get(i).getLogo());
+			mImageUrl.add(banners.get(i).getImages());
+		}
+		
+		
+		
+		
+				homepage_ad.setImageResources(mImageUrl,
+						new ImageCycleViewClickLisenter());
+		
+		
+		/*
+		 * 绑定bannertexts数据
+		 */
+		List<BannerTexts> bannerTexts=pageResult.getBannerTexts();
+		for (BannerTexts bannerText : bannerTexts) {
+			TextView textView=new TextView(getActivity());
+			Log.e("textView", bannerText.getTitle());
+			textView.setText(bannerText.getTitle());
+			textView.setSingleLine();
+			homepage_notic.addView(textView);
+		}
+		//开启flip的动画
+		homepage_notic.setInAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_bottom_in));
+		homepage_notic.setOutAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_bottom_in));
+		homepage_notic.setFlipInterval(3000);
+		homepage_notic.startFlipping();
+		
+		/*
+		 * 绑定推荐的数据
+		 */
+		
+		List<TuiJianFragment> fragments=new ArrayList<>();
+		
+		TuiJianFragment fragment=new TuiJianFragment("yuesao",pageResult.getYuesao());
+		TuiJianFragment fragment1=new TuiJianFragment("yuyingshi",pageResult.getYuyingshi());
+		TuiJianFragment fragment2=new TuiJianFragment("cuirushi",pageResult.getCuirushi());
+		fragments.add(fragment);
+		fragments.add(fragment1);
+		fragments.add(fragment2);
+		HomePageFragmentAdapter arg0=new HomePageFragmentAdapter(getFragmentManager(),fragments);
+		tuijian_content.setAdapter(arg0);
+		
+		
+		
+		
+				
+		
+		
+	}
 
 	private void findView() {
 
@@ -225,8 +237,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		tuijian_yuyingshi=(TextView) homepage.findViewById(R.id.tuijian_yuyingshi);
 		tuijian_cuirushi=(TextView) homepage.findViewById(R.id.tuijian_cuirushi);
 		
-//		tuijian_content= (LinearLayout) homepage.findViewById(R.id.tuijian_content);
-		tuijian_content= (ViewPager) homepage.findViewById(R.id.tuijian_content);
+		tuijian_content= (MyViewPager) homepage.findViewById(R.id.tuijian_content);
 		
 		yuesao= (LinearLayout) homepage.findViewById(R.id.yuesao);
 		yuyingshi= (LinearLayout) homepage.findViewById(R.id.yuyingshi);
@@ -277,17 +288,6 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		
 	}
 
-	@Override
-	public void onStart() {
-		super.onStart();
-		homepage_ad.startImageTimerTask();// 开启轮播图滚动
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-		homepage_ad.stopImageTimerTask();// 关闭轮播图滚动
-	}
 
 	private class ImageCycleViewClickLisenter implements ImageCycleViewListener {
 
@@ -331,50 +331,15 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 
 		case R.id.tuijian_yuesao:
 			scrollbarMove(0);
-//			if (tuijian_ysf==null) {
-//				tuijian_ysf=new TuiJianFragment();
-//				transaction.add(R.id.tuijian_content, tuijian_ysf);
-//			}
-//			if (tuijian_crsf!=null) {
-//				transaction.hide(tuijian_crsf);
-//			}
-//			if (tuijian_yysf!=null) {
-//				transaction.hide(tuijian_yysf);
-//			}
-//			transaction.show(tuijian_ysf);
 			tuijian_content.setCurrentItem(0);
 			break;
 
 		case R.id.tuijian_yuyingshi:
 			scrollbarMove(1);
-//			if (tuijian_yysf==null) {
-//				tuijian_yysf=new TuiJianFragment();
-//				transaction.add(R.id.tuijian_content, tuijian_yysf);
-//				
-//			}
-//			if (tuijian_crsf!=null) {
-//				transaction.hide(tuijian_crsf);
-//			}
-//			if (tuijian_ysf!=null) {
-//				transaction.hide(tuijian_ysf);
-//			}
-//			transaction.show(tuijian_yysf);
 			tuijian_content.setCurrentItem(1);
 			break;
 		case R.id.tuijian_cuirushi:
 			scrollbarMove(2);
-//			if (tuijian_crsf==null) {
-//				tuijian_crsf=new TuiJianFragment();
-//				transaction.add(R.id.tuijian_content, tuijian_crsf);
-//				
-//			}
-//			if (tuijian_yysf!=null) {
-//				transaction.hide(tuijian_yysf);
-//			}
-//			if (tuijian_ysf!=null) {
-//				transaction.hide(tuijian_ysf);
-//			}
-//			transaction.show(tuijian_crsf);
 			tuijian_content.setCurrentItem(2);
 			break;
 		}

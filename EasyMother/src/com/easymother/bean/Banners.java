@@ -50,4 +50,10 @@ public class Banners {
 	public String getContent(){
 	return this.content;
 	}
+	@Override
+	public String toString() {
+		return "Banners [urlType=" + urlType + ", urlValue=" + urlValue + ", title=" + title + ", logo=" + logo
+				+ ", images=" + images + ", content=" + content + "]";
+	}
+	
 }

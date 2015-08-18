@@ -36,10 +36,8 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="轻松妈妈"
-            android:textSize="@dimen/sp_20"
             android:textColor="@color/orange_red"
-             />
-
+            android:textSize="@dimen/sp_20" />
     </RelativeLayout>
 
     <View
@@ -73,18 +71,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_30"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="horizontal" >
 
                 <ImageView
-                    android:src="@drawable/hron"
                     android:layout_width="@dimen/horn_width"
                     android:layout_height="@dimen/horn_height"
                     android:layout_marginLeft="@dimen/dp_margin_left_10"
-                    android:layout_marginRight="@dimen/dp_margin_right_10" />
+                    android:layout_marginRight="@dimen/dp_margin_right_10"
+                    android:src="@drawable/hron" />
 
                 <View
                     android:layout_width="@dimen/dp_width_1"
@@ -143,7 +141,7 @@
                     android:orientation="vertical" >
 
                     <ImageView
-                         android:layout_width="@dimen/dp_64"
+                        android:layout_width="@dimen/dp_64"
                         android:layout_height="@dimen/dp_64"
                         android:src="@drawable/home_yys" />
 
@@ -185,7 +183,7 @@
                     android:orientation="vertical" >
 
                     <ImageView
-                         android:layout_width="@dimen/dp_64"
+                        android:layout_width="@dimen/dp_64"
                         android:layout_height="@dimen/dp_64"
                         android:src="@drawable/home_hls" />
 
@@ -197,8 +195,6 @@
                         android:textColor="@color/boroblacktext" />
                 </LinearLayout>
             </LinearLayout>
-
-            
 
             <View
                 android:layout_width="match_parent"
@@ -267,20 +263,20 @@
                     android:background="@color/deeppink" />
             </LinearLayout>
 
-            <!-- <LinearLayout
+            <com.easymother.customview.MyViewPager
                 android:id="@+id/tuijian_content"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_420"
-                android:orientation="vertical" >
-            </LinearLayout> -->
+                android:layout_height="@dimen/dp_420" >
+            </com.easymother.customview.MyViewPager>
 
-            
+            <!--
             <android.support.v4.view.ViewPager
                 android:id="@+id/tuijian_content"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_420" >
             </android.support.v4.view.ViewPager>
-            
+            -->
+
         </LinearLayout>
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 

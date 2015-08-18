@@ -61,7 +61,7 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 	}
 
 	private void findView(View view) {
-		cycleView = (ImageCycleView) view.findViewById(R.id.imageCycleView1);
+		cycleView = (ImageCycleView) view.findViewById(R.id.imageCycleView2);
 		babyfood = (RelativeLayout) view.findViewById(R.id.babyfood);
 		motherfood = (RelativeLayout) view.findViewById(R.id.motherfood);
 		motherhuli = (RelativeLayout) view.findViewById(R.id.mmhuli);
@@ -101,9 +101,8 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 				// TODO Auto-generated method stub
 
 			}
-		}, 0);
+		});
 
-		cycleView.setAutoCycle(true);
 		babyfood.setOnClickListener(this);
 		motherfood.setOnClickListener(this);
 		motherhuli.setOnClickListener(this);
@@ -145,16 +144,6 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 
 	}
 
-	@Override
-	public void onStart() {
-		super.onStart();
-		cycleView.startImageTimerTask();
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-		cycleView.stopImageTimerTask();
-	}
+	
 
 }

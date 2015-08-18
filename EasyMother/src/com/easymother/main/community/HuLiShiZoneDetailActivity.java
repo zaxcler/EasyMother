@@ -1,7 +1,6 @@
 package com.easymother.main.community;
 
 import java.util.ArrayList;
-import android.support.v7.widget.*;
 import java.util.List;
 
 import android.app.Activity;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 
 import com.easymother.bean.TestBean;
 import com.easymother.customview.MyListview;

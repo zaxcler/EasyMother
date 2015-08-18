@@ -55,7 +55,7 @@
             android:orientation="vertical" >
 
             <com.easymother.customview.ImageCycleView
-                android:id="@+id/imageCycleView1"
+                android:id="@+id/imageCycleView2"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_150" >
             </com.easymother.customview.ImageCycleView>
@@ -122,7 +122,6 @@
                     android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/babyfood_today"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/alpha_solid"
@@ -174,7 +173,7 @@
                 android:layout_marginTop="@dimen/dp_5" >
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/imageView2"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dp_100"
                     android:layout_alignParentLeft="true"
@@ -185,7 +184,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/imageView1"
+                    android:layout_alignBottom="@id/imageView2"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="@dimen/dp_5"
                     android:gravity="center"
@@ -243,7 +242,7 @@
                 android:layout_marginTop="@dimen/dp_5" >
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/imageView3"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dp_100"
                     android:layout_alignParentLeft="true"
@@ -254,7 +253,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/imageView1"
+                    android:layout_alignBottom="@id/imageView3"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="@dimen/dp_5"
                     android:gravity="center"
@@ -312,7 +311,7 @@
                 android:layout_marginTop="@dimen/dp_5" >
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/imageView4"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dp_100"
                     android:layout_alignParentLeft="true"
@@ -323,7 +322,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/imageView1"
+                    android:layout_alignBottom="@id/imageView4"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="@dimen/dp_5"
                     android:gravity="center"

@@ -1,32 +1,25 @@
 package com.easymother.main.homepage;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.json.JSONArray;
-
-import com.easymother.utils.EasyMotherUtils;
-
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 
 public class TuiJianAdapter extends FragmentPagerAdapter {
-	private List<TuiJianFragment> list;
+	private List<TuiJianItemFragment> list;
 	private Activity activity;
 
-	public TuiJianAdapter(FragmentManager fm, JSONArray array) {
+	public TuiJianAdapter(FragmentManager fm, List<TuiJianItemFragment> list) {
 		this(null, fm, null);
 
 	}
 
-	public TuiJianAdapter(Activity activity, FragmentManager fm, JSONArray array) {
+	public TuiJianAdapter(Activity activity, FragmentManager fm, List<TuiJianItemFragment> list) {
 		super(fm);
-		list = new ArrayList<TuiJianFragment>();
+		this.list = list;
 		this.activity = activity;
 
 	}
@@ -35,12 +28,12 @@ public class TuiJianAdapter extends FragmentPagerAdapter {
 	public Fragment getItem(int arg0) {
 
 		Log.e("viewpageadapter----", arg0 + "");
-		return new TuiJianItemFragment();
+		return list.get(arg0);
 	}
 
 	@Override
 	public int getCount() {
-		return 3;
+		return list.size();
 	}
 	
 	

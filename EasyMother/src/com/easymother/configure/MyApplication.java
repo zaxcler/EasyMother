@@ -21,7 +21,9 @@ public class MyApplication  extends Application{
 	
 	private static int SCREEN_WIDTH;//屏幕宽度
 	private static int SCREEN_HEIGHT;//屏幕高度
-	
+	//基本地址
+	public final static String BASE_URL="http://192.168.1.112:8080/";
+	public final static String BASE_PICTURE="http://192.168.1.112:8080/resources/admin/store/";
 	private static Map<String,Set<Activity>> activityMAP;
 	
 	@Override

@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/tuijian_viewpager"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
         android:clipChildren="false"
         
         >

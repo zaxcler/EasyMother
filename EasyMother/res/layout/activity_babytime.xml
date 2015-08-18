@@ -21,8 +21,7 @@
             android:id="@+id/reflashlistview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@color/background"
-            android:dividerHeight="@dimen/dp_10" >
+            android:divider="@null">
         </com.easymother.customview.MyListview>
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
