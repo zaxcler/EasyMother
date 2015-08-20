@@ -6,11 +6,17 @@ import com.easymother.utils.EasyMotherUtils;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class CuiRuiShiProjectActivity extends Activity implements OnClickListener{
 	private LinearLayout layout1;
@@ -58,11 +64,28 @@ public class CuiRuiShiProjectActivity extends Activity implements OnClickListene
 		
 		switch (arg0.getId()) {
 		case R.id.layout1:
-			showDetail(R.layout.cuiruishi_project1_detail);
+			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
 			break;
+		case R.id.layout2:
+			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
+			break;
+		case R.id.layout3:
+			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
+			break;
+		case R.id.layout4:
+			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
+			break;
+		case R.id.layout5:
+			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
+			break;
+		case R.id.layout6:
+			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
+			break;
+		case R.id.layout7:
+			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
+			break;
+			
 
-		default:
-			break;
 		}
 		
 	}
@@ -71,10 +94,16 @@ public class CuiRuiShiProjectActivity extends Activity implements OnClickListene
 	 * 显示弹窗（详细信息）
 	 * @param resource
 	 */
-	private void showDetail(int resource){
+	private void showDetail(String path,int resource){
 
-		View view=LayoutInflater.from(this).inflate(resource, null);
-		final Dialog dialog=new Dialog(this);
+		View view=LayoutInflater.from(this).inflate(R.layout.cuiruishi_project1_detail, null);
+		WebView content=(WebView) view.findViewById(R.id.contents);
+		ImageView imageView=(ImageView) view.findViewById(R.id.imageView1);
+		imageView.setBackgroundResource(resource);
+		
+		content.loadUrl(path);
+		
+	    final Dialog dialog=new Dialog(this);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		view.findViewById(R.id.cancle).setOnClickListener(new OnClickListener() {
 			

@@ -26,6 +26,11 @@ public class EasyMotherUtils {
 	
 	private static List<String> list;//时间表
 	
+	/**
+	 * 跳转activity 不带数据直接跳转
+	 * @param activity
+	 * @param clazz
+	 */
 	public static void goActivity(Activity activity,Class clazz){
 		Intent intent=new Intent(activity,clazz);
 		activity.startActivity(intent);
@@ -77,7 +82,7 @@ public class EasyMotherUtils {
 	}
 	
 	/*
-	 * 打开系统摄像头拍照的方法
+	 * 打开系统相册的方法
 	 */
 	public static void chosePhoto(Activity activity,int requestCode,Uri path){
 		Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

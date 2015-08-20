@@ -29,10 +29,12 @@
 
     <ImageView
         android:id="@+id/image"
+        android:padding="@dimen/dp_5"
         android:layout_width="@dimen/dp_80"
         android:layout_height="@dimen/dp_120"
+        android:scaleType="fitXY"
         android:layout_marginLeft="@dimen/dp_10"
-        android:background="@drawable/test2" />
+        android:src="@drawable/test2" />
 
     <TextView
         android:id="@+id/textView1"

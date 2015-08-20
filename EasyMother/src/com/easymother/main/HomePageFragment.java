@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import com.easymother.bean.BannerTexts;
 import com.easymother.bean.Banners;
 import com.easymother.bean.HomePageResult;
+import com.easymother.bean.Root;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.ImageCycleView;
 import com.easymother.customview.ImageCycleView.ImageCycleViewListener;
@@ -31,7 +32,6 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +45,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 public class HomePageFragment extends Fragment implements OnClickListener {
@@ -80,9 +81,9 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	private int lastPosition=MyApplication.getScreen_width()/12*1;// scorllbar上次滑动到的位置
 	
 	//------网咯获取数据----
-//	private String URL="app/index/toIndex";
+	private String URL="app/index/toIndex";
 	
-	private String URL="http://zaxcler.oss-cn-beijing.aliyuncs.com/test.txt";
+//	private String URL="http://zaxcler.oss-cn-beijing.aliyuncs.com/test.txt";
 	private ArrayList<String> mImageUrl = null;
 	
 
@@ -114,16 +115,25 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
 				Log.e("response-------->", response.toString());
-				HomePageResult pageResult=JsonUtils.getHomePageResult(response);
-				Log.e("pageResult-------->", pageResult.getBanners().toString());
-				BindData(pageResult);//绑定数据到界面
+				
+				Root root=JsonUtils.getRootResult(response);
+				
+				if (root.getIsSuccess()) {
+					HomePageResult pageResult=JsonUtils.getHomePageResult(response);
+					Log.e("pageResult-------->", pageResult.getBanners().toString());
+					BindData(pageResult);//绑定数据到界面
+				}else {
+					Toast.makeText(getActivity(), "请求失败", 0).show();
+				}
+				
+				
+				
 			}
 			
 			
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				// TODO Auto-generated method stub
-				
+				Toast.makeText(getActivity(), "连接到服务器超时", 0).show();
 			}
 		});
 
@@ -195,8 +205,16 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 			Log.e("textView", bannerText.getTitle());
 			textView.setText(bannerText.getTitle());
 			textView.setSingleLine();
+			textView.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Toast.makeText(getActivity(), "打开外部链接", 0).show();
+				}
+			});
 			homepage_notic.addView(textView);
 		}
+		
 		//开启flip的动画
 		homepage_notic.setInAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_bottom_in));
 		homepage_notic.setOutAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_bottom_in));
@@ -293,7 +311,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 
 		@Override
 		public void onImageClick(int position, View imageView) {
-			
+			Toast.makeText(getActivity(), "打开外部链接", 0).show();
 
 		}
 

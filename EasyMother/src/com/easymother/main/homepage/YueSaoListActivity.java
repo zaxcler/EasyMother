@@ -3,6 +3,7 @@ package com.easymother.main.homepage;
 import java.util.ArrayList;
 import java.util.List;
 import com.easymother.bean.TestBean;
+import com.easymother.bean.YueSao;
 import com.easymother.main.HomePageFragment;
 import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
@@ -56,7 +57,9 @@ public class YueSaoListActivity extends Activity {
 	private TextView sort4;// 方式四
 
 	private LinearLayout bottom_layout;// 弹出框显示在这个view的上方
-	private float y;
+	private float y;//控制搜索框的显示与隐藏的关键
+	
+	private Button loadMore;//加载更多按钮
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,31 +100,20 @@ public class YueSaoListActivity extends Activity {
 
 	private void init() {
 
-		// title.setText("月嫂");
-		// back.setOnClickListener(new OnClickListener() {
-		// @Override
-		// public void onClick(View arg0) {
-		// YueSaoListActivity.this.finish();
-		// }
-		// });
+		
 
-		List<TestBean> list = new ArrayList<TestBean>();
-		TestBean bean1 = new TestBean();
-		TestBean bean2 = new TestBean();
-		TestBean bean3 = new TestBean();
-		TestBean bean4 = new TestBean();
-		TestBean bean5 = new TestBean();
-		TestBean bean6 = new TestBean();
-		TestBean bean7 = new TestBean();
-		list.add(bean1);
-		list.add(bean2);
-		list.add(bean3);
-		list.add(bean4);
-		list.add(bean5);
-		list.add(bean6);
-		list.add(bean7);
+		List<YueSao> list = new ArrayList<YueSao>();
+		YueSao yueSao=new YueSao();
+		list.add(yueSao);
+		list.add(yueSao);
+		list.add(yueSao);
+		list.add(yueSao);
+		list.add(yueSao);
+		list.add(yueSao);
+		list.add(yueSao);
+		list.add(yueSao);
 
-		YueSaoListAdapter adapter = new YueSaoListAdapter(
+		final YueSaoListAdapter adapter = new YueSaoListAdapter(
 				getApplicationContext(), list, R.layout.activity_yuesao_item);
 		listView.addHeaderView(search_layout);
 		listView.setAdapter(adapter);
@@ -156,7 +148,36 @@ public class YueSaoListActivity extends Activity {
 		listView.setLayoutAnimation(controller);
 		listView.startLayoutAnimation();
 
-		// listView.setOnTouchListener(this);
+		listView.setOnScrollListener(new OnScrollListener() {
+			
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				
+			}
+			
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				//当滑到最下端的时候后显示加载更多按钮
+				if (firstVisibleItem+visibleItemCount==totalItemCount-1) {
+					if(loadMore==null){
+						loadMore=new Button(YueSaoListActivity.this);
+						loadMore.setText("加载更多");
+						loadMore.setPadding(10, 10, 10, 10);
+						listView.addFooterView(loadMore);
+						loadMore.setOnClickListener(new OnClickListener() {
+							
+							@Override
+							public void onClick(View v) {
+								
+								YueSao yueSao1=new YueSao();
+								adapter.addAll(yueSao1);
+								adapter.notifyDataSetChanged();
+							}
+						});
+					}
+				}
+			}
+		});
 
 	}
 
