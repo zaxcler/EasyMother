@@ -22,9 +22,10 @@
 
         <ImageView
             android:id="@+id/more"
-            android:layout_width="@dimen/dp_32"
-            android:layout_height="@dimen/dp_32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_5"
             android:src="@drawable/wish" />
 
@@ -40,7 +41,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_alignBottom="@+id/view1"
         android:background="@color/line" />
 
 </LinearLayout>

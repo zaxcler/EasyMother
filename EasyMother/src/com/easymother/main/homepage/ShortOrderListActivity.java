@@ -200,14 +200,12 @@ public class ShortOrderListActivity extends Activity {
 		sort2 = (TextView) dialog.findViewById(R.id.sort2);
 		sort3 = (TextView) dialog.findViewById(R.id.sort3);
 		sort4 = (TextView) dialog.findViewById(R.id.sort4);
-		Button button = (Button) dialog.findViewById(R.id.submit);
 
 		sortClickListener listener = new sortClickListener(dialog);
 		sort1.setOnClickListener(listener);
 		sort2.setOnClickListener(listener);
 		sort3.setOnClickListener(listener);
 		sort4.setOnClickListener(listener);
-		button.setOnClickListener(listener);
 
 		dialog.show();
 		// Window dialogWindow=dialog.getWindow();

@@ -154,13 +154,13 @@
                     android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="李四" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="月嫂" />
@@ -186,7 +186,7 @@
                 android:paddingRight="@dimen/dp_20" >
 
                 <LinearLayout
-                    android:id="@+id/layout1"
+                    android:id="@+id/linealayout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
@@ -217,8 +217,8 @@
                     android:id="@+id/v1"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_alignLeft="@id/layout1"
-                    android:layout_below="@id/layout1"
+                    android:layout_alignLeft="@id/linealayout1"
+                    android:layout_below="@id/linealayout1"
                     android:layout_marginTop="@dimen/dp_10"
                     android:background="@color/line" />
 
@@ -234,7 +234,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/dp_20"
-                        android:text="服务款"
+                        android:text="支付类型"
                         android:textColor="@color/boroblacktext" />
 
                     <View
@@ -243,19 +243,19 @@
                         android:layout_weight="1" />
 
                     <TextView
-                        android:id="@+id/money"
+                        android:id="@+id/pay_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:text="￥500元"
-                        android:textColor="@color/lightredwine" />
+                        android:text="一次性付清"
+                        android:textColor="@color/boroblacktext" />
                 </LinearLayout>
 
                 <View
                     android:id="@+id/v2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_alignLeft="@id/layout1"
+                    android:layout_alignLeft="@id/linealayout1"
                     android:layout_below="@id/layout2"
                     android:layout_marginTop="@dimen/dp_10"
                     android:background="@color/line" />
@@ -264,7 +264,7 @@
                     android:id="@+id/layout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/layout1"
+                    android:layout_alignLeft="@id/linealayout1"
                     android:layout_below="@id/v2"
                     android:layout_marginTop="@dimen/dp_10"
                     android:orientation="horizontal" >
@@ -296,7 +296,7 @@
                     android:id="@+id/v3"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_alignLeft="@id/layout1"
+                    android:layout_alignLeft="@id/linealayout1"
                     android:layout_below="@id/layout3"
                     android:layout_marginTop="@dimen/dp_10"
                     android:background="@color/line" />

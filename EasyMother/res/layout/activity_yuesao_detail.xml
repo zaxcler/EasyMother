@@ -48,7 +48,6 @@
             android:background="@color/lightredwine"
             android:drawableLeft="@drawable/yue_now"
             android:gravity="center"
-            android:paddingLeft="@dimen/dp_10"
             android:text="立即预约"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16" />
@@ -70,16 +69,16 @@
 
             <include layout="@layout/activity_yuesao_detail_photo" />
 
-            <View
+            <View 
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_30"
+                android:layout_height="@dimen/dp_20"
                 android:background="@color/background" />
 
             <include layout="@layout/activity_yuesao_detail_like" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_30"
+                android:layout_height="@dimen/dp_20"
                 android:background="@color/background" />
 
             <include layout="@layout/activity_yuesao_detail_comment" />

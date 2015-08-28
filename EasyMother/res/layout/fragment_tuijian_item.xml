@@ -11,7 +11,7 @@
         android:layout_height="@dimen/dp_350"
         android:id="@+id/tuijian_photo"
         android:layout_gravity="center"
-        android:background="@drawable/test1"
+        android:src="@drawable/test1"
         android:scaleType="fitXY"/>
     <RelativeLayout 
         android:layout_width="match_parent"

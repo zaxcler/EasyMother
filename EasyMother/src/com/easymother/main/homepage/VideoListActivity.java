@@ -10,7 +10,10 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class VideoListActivity extends Activity {
 	private PullToRefreshListView listView;//视频列表
@@ -31,6 +34,7 @@ public class VideoListActivity extends Activity {
 	}
 
 	private void init() {
+		
 		//----------测试数据
 		List<TestBean> list = new ArrayList<TestBean>();
 		TestBean bean1 = new TestBean();
@@ -49,6 +53,13 @@ public class VideoListActivity extends Activity {
 		list.add(bean7);
 		VideoListAdapter adapter=new VideoListAdapter(this, list, R.layout.video_list_item);
 		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				
+			}
+		});
 		
 	}
 

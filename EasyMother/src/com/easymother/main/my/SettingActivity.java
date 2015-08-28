@@ -1,7 +1,15 @@
 package com.easymother.main.my;
 
+import org.apache.http.Header;
+import org.json.JSONObject;
+
+import com.easymother.configure.BaseInfo;
+import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.JsonUtils;
+import com.easymother.utils.NetworkHelper;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class SettingActivity extends Activity implements OnClickListener {
 	private LinearLayout about;
@@ -63,8 +72,26 @@ public class SettingActivity extends Activity implements OnClickListener {
 		case R.id.delete_cache:
 
 			break;
-		case R.id.button:
-
+		case R.id.exit:
+			NetworkHelper.doGet(BaseInfo.LOGOUT, new JsonHttpResponseHandler(){
+				@Override
+				public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+					super.onSuccess(statusCode, headers, response);
+					if (JsonUtils.getRootResult(response).getIsSuccess()) {
+						Toast.makeText(SettingActivity.this, "成功退出", 0).show();
+						MyApplication.editor.clear().commit();
+					}else {
+						Toast.makeText(SettingActivity.this, JsonUtils.getRootResult(response).getResult().toString(), 0).show();
+					}
+					
+				}
+				@Override
+				public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+					super.onFailure(statusCode, headers, responseString, throwable);
+					Toast.makeText(SettingActivity.this, "连接服务器失败", 0).show();
+				}
+			});
+			
 			break;
 		}
 

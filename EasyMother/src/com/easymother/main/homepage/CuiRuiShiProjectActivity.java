@@ -64,25 +64,25 @@ public class CuiRuiShiProjectActivity extends Activity implements OnClickListene
 		
 		switch (arg0.getId()) {
 		case R.id.layout1:
-			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 		case R.id.layout2:
-			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 		case R.id.layout3:
-			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 		case R.id.layout4:
-			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 		case R.id.layout5:
-			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 		case R.id.layout6:
-			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 		case R.id.layout7:
-			showDetail("file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 			
 
@@ -90,41 +90,7 @@ public class CuiRuiShiProjectActivity extends Activity implements OnClickListene
 		
 	}
 	
-	/**
-	 * 显示弹窗（详细信息）
-	 * @param resource
-	 */
-	private void showDetail(String path,int resource){
-
-		View view=LayoutInflater.from(this).inflate(R.layout.cuiruishi_project1_detail, null);
-		WebView content=(WebView) view.findViewById(R.id.contents);
-		ImageView imageView=(ImageView) view.findViewById(R.id.imageView1);
-		imageView.setBackgroundResource(resource);
-		
-		content.loadUrl(path);
-		
-	    final Dialog dialog=new Dialog(this);
-		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		view.findViewById(R.id.cancle).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				dialog.dismiss();
-			}
-		});
-		view.findViewById(R.id.yes).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				dialog.dismiss();
-				EasyMotherUtils.goActivity(CuiRuiShiProjectActivity.this,OrderCRSProcess.class);
-				CuiRuiShiProjectActivity.this.finish();
-			}
-		});
-		dialog.setContentView(view);
-		dialog.show();
-		
-	}
+	
 	
 
 }

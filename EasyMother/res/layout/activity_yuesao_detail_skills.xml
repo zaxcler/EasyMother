@@ -36,7 +36,7 @@
             android:text="在医院宝宝护理" />
 
         <TextView
-            android:id="@+id/text3"
+            android:id="@+id/check1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -65,7 +65,7 @@
             android:text="在医院产妇护理" />
 
         <TextView
-            android:id="@+id/text4"
+            android:id="@+id/check2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -94,7 +94,7 @@
             android:text="居家宝宝护理" />
 
         <TextView
-            android:id="@+id/text6"
+            android:id="@+id/check3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -123,7 +123,7 @@
             android:text="居家产妇护理" />
 
         <TextView
-            android:id="@+id/text8"
+            android:id="@+id/check4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

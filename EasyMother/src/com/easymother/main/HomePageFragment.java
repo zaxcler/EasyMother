@@ -10,6 +10,7 @@ import com.easymother.bean.BannerTexts;
 import com.easymother.bean.Banners;
 import com.easymother.bean.HomePageResult;
 import com.easymother.bean.Root;
+import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.ImageCycleView;
 import com.easymother.customview.ImageCycleView.ImageCycleViewListener;
@@ -19,7 +20,7 @@ import com.easymother.main.homepage.MyWishListActivity;
 import com.easymother.main.homepage.ShortOrderListActivity;
 import com.easymother.main.homepage.TuiJianFragment;
 import com.easymother.main.homepage.YuYingShiListActivity;
-import com.easymother.main.homepage.YueSaoListActivity;
+import com.easymother.main.homepage.CommonListActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
@@ -29,6 +30,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -73,10 +75,6 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	private MyViewPager tuijian_content;//推荐左右滑动的容器
 	
 	private FragmentTransaction transaction;//推荐的fragment的管理器
-	
-	private TuiJianFragment tuijian_ysf;//推荐月嫂fragment
-	private TuiJianFragment tuijian_yysf;//推荐育婴师fragment
-	private TuiJianFragment tuijian_crsf;//推荐催乳师fragment
 
 	private int lastPosition=MyApplication.getScreen_width()/12*1;// scorllbar上次滑动到的位置
 	
@@ -120,20 +118,18 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 				
 				if (root.getIsSuccess()) {
 					HomePageResult pageResult=JsonUtils.getHomePageResult(response);
+					MyApplication.editor.putInt("wishcount", pageResult.getWishCount()).commit();//将心愿单数量进行本地保存
 					Log.e("pageResult-------->", pageResult.getBanners().toString());
 					BindData(pageResult);//绑定数据到界面
 				}else {
 					Toast.makeText(getActivity(), "请求失败", 0).show();
 				}
 				
-				
-				
 			}
-			
-			
 			@Override
-			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				Toast.makeText(getActivity(), "连接到服务器超时", 0).show();
+			public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+				super.onFailure(statusCode, headers, throwable, errorResponse);
+				Toast.makeText(getActivity(), "连接服务器失败", 0).show();
 			}
 		});
 
@@ -185,14 +181,10 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		
 		mImageUrl=new ArrayList<>();
 		for (int i = 0; i < banners.size(); i++) {
-//			mImageUrl.add(MyApplication.BASE_PICTURE+banners.get(i).getLogo());
-			mImageUrl.add(banners.get(i).getImages());
+			mImageUrl.add(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+banners.get(i).getLogo());
 		}
 		
-		
-		
-		
-				homepage_ad.setImageResources(mImageUrl,
+		homepage_ad.setImageResources(mImageUrl,
 						new ImageCycleViewClickLisenter());
 		
 		
@@ -320,6 +312,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 		int id = view.getId();
+		Intent intent;
 		transaction=getFragmentManager().beginTransaction();
 		switch (id) {
 
@@ -333,18 +326,27 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 
 			break;
 		case R.id.yuesao:
-			EasyMotherUtils.goActivity(getActivity(), YueSaoListActivity.class);
+			intent=new Intent(getActivity(),CommonListActivity.class);
+			intent.putExtra("job", "YS");
+			startActivity(intent);
+			
 			break;
 
 		case R.id.yuyingshi:
-			EasyMotherUtils.goActivity(getActivity(), YuYingShiListActivity.class);
+			intent=new Intent(getActivity(),CommonListActivity.class);
+			intent.putExtra("job", "YYS");
+			startActivity(intent);
 			break;
 		case R.id.cuirushi:
-			EasyMotherUtils.goActivity(getActivity(), CuiRuShiListActivity.class);
+			intent=new Intent(getActivity(),CommonListActivity.class);
+			intent.putExtra("job", "CRS");
+			startActivity(intent);
 			break;
 
 		case R.id.duanqihuli:
-			EasyMotherUtils.goActivity(getActivity(), ShortOrderListActivity.class);
+			intent=new Intent(getActivity(),CommonListActivity.class);
+			intent.putExtra("job", "DQHLS");
+			startActivity(intent);
 			break;
 
 		case R.id.tuijian_yuesao:

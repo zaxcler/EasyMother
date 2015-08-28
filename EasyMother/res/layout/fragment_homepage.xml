@@ -5,40 +5,44 @@
     android:background="@color/background"
     android:orientation="vertical" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/fragment_title_height"
         android:background="@color/white"
-        android:gravity="center" >
+        android:gravity="center_vertical|fill_horizontal" >
+        
 
+        <TextView
+            android:id="@+id/home_page_area"
+            android:gravity="left|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:drawableLeft="@drawable/location1"
+            android:text="杭州" />
+
+        
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/home_page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="轻松妈妈"
+            android:textColor="@color/orange_red"
+            android:textSize="@dimen/sp_20" />
+
+      
         <ImageView
+            android:gravity="right|center_vertical"
             android:id="@+id/home_page_wish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:src="@drawable/wish" />
-
-        <TextView
-            android:id="@+id/home_page_area"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:drawableLeft="@drawable/location1"
-            android:gravity="center"
-            android:text="杭州" />
-
-        <TextView
-            android:id="@+id/home_page_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/home_page_area"
-            android:layout_alignBottom="@+id/home_page_area"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:text="轻松妈妈"
-            android:textColor="@color/orange_red"
-            android:textSize="@dimen/sp_20" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

@@ -16,11 +16,11 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_100"
             android:layout_weight="0.2"
-            android:background="@color/green"
+            android:background="@drawable/green_solid"
             android:gravity="center"
             android:text="产前开奶"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_18" />
+            android:textSize="@dimen/sp_16" />
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -118,12 +118,11 @@
                     android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:text="单/多"
+                        android:text="￥380"
                         android:textSize="@dimen/sp_10" />
 
                     <View
@@ -134,12 +133,11 @@
                         android:background="@color/green" />
 
                     <TextView
-                        android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:text="服务形式（次）"
+                        android:text="价格（元）"
                         android:textColor="@color/boroblacktext"
                         android:textSize="@dimen/sp_10" />
                 </RelativeLayout>
@@ -151,12 +149,11 @@
                     android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:text="单/多"
+                        android:text="120"
                         android:textSize="@dimen/sp_10" />
 
                     <View
@@ -167,12 +164,11 @@
                         android:background="@color/green" />
 
                     <TextView
-                        android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:text="服务形式（次）"
+                        android:text="单次时长（分钟）"
                         android:textColor="@color/boroblacktext"
                         android:textSize="@dimen/sp_10" />
                 </RelativeLayout>

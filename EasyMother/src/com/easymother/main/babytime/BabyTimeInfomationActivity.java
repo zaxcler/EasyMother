@@ -1,14 +1,28 @@
 package com.easymother.main.babytime;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.easymother.configure.BaseInfo;
 import com.easymother.customview.CircleImageView;
 import com.easymother.customview.MyPopupWindow;
 import com.easymother.customview.MyPopupWindow.OnMyPopupWindowsClick;
 import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.NetworkHelper;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
+import com.easymother.utils.JsonUtils;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,7 +30,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,10 +49,11 @@ public class BabyTimeInfomationActivity extends Activity implements
 	private final int TAKE_PHOTO = 1;// 照相取图
 	private final int CHOOSE_PHOTO = 0;// 相册取图
 	private final int CROP_PHOTO = 2;// 剪切图片
-	private final String URI = "file:///sdcard/temp.jpg";// 保存拍照后图片的URI
-	private final Uri uri = Uri.parse(URI);// //保存拍照后图片的URI
+	private final String URI2= "file:///sdcard/temp.jpg";// 保存拍照后图片的URI
+	private final Uri uri2 = Uri.parse(URI2);// //保存拍照后图片的URI
 	private final String URI1 = "file:///sdcard/temp1.jpg";// 保存剪切图片后的URI
-	private final Uri uri1 = Uri.parse(URI);// //保存剪切图片后的URI
+	private final Uri uri1 = Uri.parse(URI1);// //保存剪切图片后的URI
+	private boolean uploadstatu;//上传是否成功
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +92,7 @@ public class BabyTimeInfomationActivity extends Activity implements
 		int id = arg0.getId();
 		switch (id) {
 		case R.id.circleImageView1:
-			MyPopupWindow popupWindow = new MyPopupWindow(this,
+			final MyPopupWindow popupWindow = new MyPopupWindow(this,
 					R.layout.chenge_photo);
 			popupWindow.setOnMyPopupClidk(new OnMyPopupWindowsClick() {
 
@@ -85,7 +103,7 @@ public class BabyTimeInfomationActivity extends Activity implements
 					TextView choosephot = (TextView) view
 							.findViewById(R.id.choose_photo);
 					TextView cancle = (TextView) view.findViewById(R.id.cancle);
-					ChengeImageClickLisenter lisenter = new ChengeImageClickLisenter();
+					ChengeImageClickLisenter lisenter = new ChengeImageClickLisenter(popupWindow);
 					takephoto.setOnClickListener(lisenter);
 					choosephot.setOnClickListener(lisenter);
 					cancle.setOnClickListener(lisenter);
@@ -105,6 +123,10 @@ public class BabyTimeInfomationActivity extends Activity implements
 	}
 
 	private class ChengeImageClickLisenter implements OnClickListener {
+		MyPopupWindow window;
+		public ChengeImageClickLisenter(MyPopupWindow window) {
+			this.window=window;
+		}
 
 		@Override
 		public void onClick(View arg0) {
@@ -113,15 +135,15 @@ public class BabyTimeInfomationActivity extends Activity implements
 			case R.id.take_photo:
 				// 打开相机
 				EasyMotherUtils.takePhoto(BabyTimeInfomationActivity.this,
-						TAKE_PHOTO, uri);
+						TAKE_PHOTO, uri1);
 
 				break;
 
 			case R.id.choose_photo:
-
+				EasyMotherUtils.chosePhoto(BabyTimeInfomationActivity.this, CHOOSE_PHOTO, null);
 				break;
 			case R.id.cancle:
-
+				window.dismiss();
 				break;
 			}
 		}
@@ -132,13 +154,16 @@ public class BabyTimeInfomationActivity extends Activity implements
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		Uri uri;
 		if (resultCode == RESULT_OK) {
 			switch (requestCode) {
 			case TAKE_PHOTO:
-				EasyMotherUtils.cropPhoto(this, 100, 100, CROP_PHOTO, uri1);
+				EasyMotherUtils.cropPhoto(this, 100, 100, CROP_PHOTO, uri1,uri2);
 				
 				break;
 			case CHOOSE_PHOTO:
+				 uri=data.getData();
+				EasyMotherUtils.cropPhoto(this, 100, 100, CROP_PHOTO, uri,uri2);
 
 				break;
 			case CROP_PHOTO:
@@ -147,13 +172,11 @@ public class BabyTimeInfomationActivity extends Activity implements
 					bitmapOptions.inJustDecodeBounds = true;
 				      bitmapOptions.inSampleSize = 4;  
 				      bitmapOptions.inJustDecodeBounds = false;
-				    Bitmap  bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri1), null , bitmapOptions);  
+				    Bitmap  bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri2), null , bitmapOptions);  
 					circleImageView.setImageBitmap(bitmap);
+					String type="baby_image";
+					EasyMotherUtils.uploadPhoto(bitmap, BaseInfo.UPLOADPHTO,type);
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				break;
@@ -162,5 +185,6 @@ public class BabyTimeInfomationActivity extends Activity implements
 		}
 
 	}
+	
 
 }

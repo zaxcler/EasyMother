@@ -10,4 +10,9 @@
         <attr name="border_color" format="color" />
         <attr name="border_overlay" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="DoubleSeekBar">
+        <attr name="startText" format="integer" />
+        <attr name="endText" format="integer" />
+        <attr name="type" format="string" />
+    </declare-styleable>
 </resources>

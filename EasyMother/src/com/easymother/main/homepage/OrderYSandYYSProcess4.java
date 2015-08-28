@@ -5,6 +5,7 @@ import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 
 public class OrderYSandYYSProcess4 extends Activity {
 	private Button complete;//
-	
+	private Intent intent;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,6 +23,7 @@ public class OrderYSandYYSProcess4 extends Activity {
 		setContentView(R.layout.process_ysandyys_order_next4);
 		EasyMotherUtils.initTitle(this, "合同填写", false);
 		MyApplication.addActivityToMap(this, "YSprocess");
+		intent=getIntent();
 		findView();
 		init();
 	}
@@ -37,7 +39,8 @@ public class OrderYSandYYSProcess4 extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				EasyMotherUtils.goActivity(OrderYSandYYSProcess4.this, OrderYSandYYSProcess5.class);
+				intent.setClass(OrderYSandYYSProcess4.this, OrderYSandYYSProcess5.class);
+				startActivity(intent);
 				
 			}
 		});

@@ -9,7 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     
-    <EditText android:layout_width="match_parent"
+    <EditText 
+        android:id="@+id/suggestion"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="你的意见是我们最宝贵的财富"
         android:background="@drawable/boro_border"

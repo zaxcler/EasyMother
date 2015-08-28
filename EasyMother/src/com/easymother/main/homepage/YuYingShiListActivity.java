@@ -45,7 +45,17 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 
+ * 
+ * 此类已经弃用
+ * 
+ * 
+ * 
+ */
 public class YuYingShiListActivity extends Activity {
+	
+	
 
 	private ListView listView;// 
 	private View search_layout;// 搜索布局
@@ -103,13 +113,6 @@ public class YuYingShiListActivity extends Activity {
 
 	private void init() {
 
-		// title.setText("月嫂");
-		// back.setOnClickListener(new OnClickListener() {
-		// @Override
-		// public void onClick(View arg0) {
-		// YueSaoListActivity.this.finish();
-		// }
-		// });
 
 		List<TestBean> list = new ArrayList<TestBean>();
 		TestBean bean1 = new TestBean();
@@ -207,14 +210,12 @@ public class YuYingShiListActivity extends Activity {
 		sort2 = (TextView) dialog.findViewById(R.id.sort2);
 		sort3 = (TextView) dialog.findViewById(R.id.sort3);
 		sort4 = (TextView) dialog.findViewById(R.id.sort4);
-		Button button = (Button) dialog.findViewById(R.id.submit);
 
 		sortClickListener listener = new sortClickListener(dialog);
 		sort1.setOnClickListener(listener);
 		sort2.setOnClickListener(listener);
 		sort3.setOnClickListener(listener);
 		sort4.setOnClickListener(listener);
-		button.setOnClickListener(listener);
 
 		dialog.show();
 		// Window dialogWindow=dialog.getWindow();
@@ -245,26 +246,25 @@ public class YuYingShiListActivity extends Activity {
 			case R.id.sort1:
 				clearStatus();
 				sort1.setTextColor(getResources().getColor(R.color.waterpink));
+				dialog.dismiss();
 				break;
 
 			case R.id.sort2:
 				clearStatus();
 				sort2.setTextColor(getResources().getColor(R.color.waterpink));
-
+				dialog.dismiss();
 				break;
 			case R.id.sort3:
 				clearStatus();
 				sort3.setTextColor(getResources().getColor(R.color.waterpink));
-
+				dialog.dismiss();
 				break;
 			case R.id.sort4:
 				clearStatus();
 				sort4.setTextColor(getResources().getColor(R.color.waterpink));
-				break;
-			case R.id.submit:
-
 				dialog.dismiss();
 				break;
+			
 			}
 
 		}

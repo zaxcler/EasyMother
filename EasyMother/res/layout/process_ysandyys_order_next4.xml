@@ -30,11 +30,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:background="@color/white"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20"
                 android:orientation="vertical" >
 
                 <LinearLayout
                     android:id="@+id/layout1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/dp_20"
@@ -44,14 +46,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/dp_20"
-                        android:text="护理师姓名："
+                        android:text="丙   方："
                         android:textColor="@color/boroblacktext" />
 
                     <TextView
                         android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="毛啊懂"
+                        android:text="轻松妈妈"
                         android:textColor="@color/boroblacktext" />
                 </LinearLayout>
 
@@ -76,14 +78,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/dp_20"
-                        android:text="护理师电话："
+                        android:text="经办人："
                         android:textColor="@color/boroblacktext" />
 
                     <TextView
                         android:id="@+id/phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="400-1008-251"
+                        android:text="杭州创桥信息技术有限公司"
                         android:textColor="@color/boroblacktext" />
                 </LinearLayout>
 
@@ -109,7 +111,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/dp_20"
-                        android:text="合 同 类 型："
+                        android:text="联系电话："
                         android:textColor="@color/boroblacktext" />
 
                     <TextView
@@ -132,9 +134,44 @@
                     android:layout_height="1dp"
                     android:layout_alignLeft="@id/layout3"
                     android:layout_below="@id/layout3"
+                    android:background="@color/line" />
+                 <LinearLayout
+                    android:id="@+id/layout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/layout1"
+                    android:layout_below="@id/v3"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:text="单位地址："
+                        android:textColor="@color/boroblacktext" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="浙江省杭州市江干区"
+                        android:textColor="@color/boroblacktext" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+<View
+                    android:id="@+id/v4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignLeft="@id/layout3"
+                    android:layout_below="@id/layout4"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:background="@color/line" />
-
                 <ImageView
                     android:id="@+id/imageView1"
                     android:layout_width="wrap_content"

@@ -3,11 +3,13 @@ package com.easymother.main.homepage;
 import com.easymother.bean.CuiRuShi;
 import com.easymother.bean.YuYingShi;
 import com.easymother.bean.YueSao;
+import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -63,8 +65,8 @@ public class TuiJianItemFragment extends Fragment implements OnClickListener {
 		//type为月嫂的时候
 		if ("yuesao".equals(type)) {
 			if (yuesao.getImage()!=null) {
-//				ImageLoader.getInstance().displayImage(MyApplication.BASE_PICTURE+yuesao.getImage(), tuijian_photo);
-				ImageLoader.getInstance().displayImage("http://zaxcler.oss-cn-beijing.aliyuncs.com/12.jpg", tuijian_photo);
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+yuesao.getImage(), tuijian_photo);
+//				ImageLoader.getInstance().displayImage("http://zaxcler.oss-cn-beijing.aliyuncs.com/12.jpg", tuijian_photo);
 			}
 			if (yuesao.getRealName()!=null) {
 				tuijian_name.setText(yuesao.getRealName());
@@ -76,8 +78,8 @@ public class TuiJianItemFragment extends Fragment implements OnClickListener {
 		//type为育婴师的时候
 		if ("yuyingshi".equals(type)) {
 			if (yuyingshi.getImage()!=null) {
-//				ImageLoader.getInstance().displayImage(MyApplication.BASE_PICTURE+yuyingshi.getImage(), tuijian_photo);
-				ImageLoader.getInstance().displayImage("http://zaxcler.oss-cn-beijing.aliyuncs.com/13.jpg", tuijian_photo);
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+yuyingshi.getImage(), tuijian_photo);
+//				ImageLoader.getInstance().displayImage("http://zaxcler.oss-cn-beijing.aliyuncs.com/13.jpg", tuijian_photo);
 			}
 			if (yuyingshi.getRealName()!=null) {
 				tuijian_name.setText(yuyingshi.getRealName());
@@ -89,8 +91,8 @@ public class TuiJianItemFragment extends Fragment implements OnClickListener {
 		//type为催乳师的时候
 		if ("cuirushi".equals(type)) {
 			if (cuirushi.getImage()!=null) {
-//				ImageLoader.getInstance().displayImage(MyApplication.BASE_PICTURE+cuirushi.getImage(), tuijian_photo);
-				ImageLoader.getInstance().displayImage("http://zaxcler.oss-cn-beijing.aliyuncs.com/15.jpg", tuijian_photo);
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+cuirushi.getImage(), tuijian_photo);
+//				ImageLoader.getInstance().displayImage("http://zaxcler.oss-cn-beijing.aliyuncs.com/15.jpg", tuijian_photo);
 			}
 			if (cuirushi.getRealName()!=null) {
 				tuijian_name.setText(cuirushi.getRealName());
@@ -104,17 +106,24 @@ public class TuiJianItemFragment extends Fragment implements OnClickListener {
 
 	@Override
 	public void onClick(View arg0) {
+		Intent intent=new Intent();
 		if ("yuesao".equals(type)) {
-			
-			EasyMotherUtils.goActivity(getActivity(), YueSaoDetailActivity.class);
+			intent.setClass(getActivity(), YueSaoDetailActivity.class);
+			intent.putExtra("id", yuesao.getNurseId());
+			intent.putExtra("job", yuesao.getJob());
+			startActivity(intent);
 		}
 		if ("yuyingshi".equals(type)) {
-
-			EasyMotherUtils.goActivity(getActivity(), YuYingShiDetailActivity.class);
+			intent.setClass(getActivity(), YuYingShiDetailActivity.class);
+			intent.putExtra("id", yuyingshi.getNurseId());
+			intent.putExtra("job", yuyingshi.getJob());
+			startActivity(intent);
 		}
 		if ("cuirushi".equals(type)) {
-
-			EasyMotherUtils.goActivity(getActivity(), CuiRuShiDetailActivity.class);
+			intent.setClass(getActivity(), CuiRuShiDetailActivity.class);
+			intent.putExtra("id", cuirushi.getNurseId());
+			intent.putExtra("job", cuirushi.getJob());
+			startActivity(intent);
 		}
 
 	}

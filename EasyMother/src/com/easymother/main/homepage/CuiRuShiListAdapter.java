@@ -10,6 +10,15 @@ import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.ViewHolder;
 
+
+/**
+ * 
+ * 
+ * 此类已经弃用
+ * 
+ * 
+ * 
+ */
 public class CuiRuShiListAdapter extends CommonAdapter<TestBean> {
 	private List<TestBean> list;
 	private Context context;

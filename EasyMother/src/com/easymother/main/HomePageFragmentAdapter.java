@@ -21,7 +21,7 @@ import com.easymother.main.homepage.ShortOrderListActivity;
 import com.easymother.main.homepage.TuiJianFragment;
 import com.easymother.main.homepage.TuiJianItemFragment;
 import com.easymother.main.homepage.YuYingShiListActivity;
-import com.easymother.main.homepage.YueSaoListActivity;
+import com.easymother.main.homepage.CommonListActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;

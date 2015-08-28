@@ -45,11 +45,7 @@
             android:layout_marginRight="@dimen/dp_10"
             android:src="@drawable/pic5" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_20"
-            android:src="@drawable/go" />
+        
     </LinearLayout>
 
     <View
@@ -58,7 +54,7 @@
         android:background="@color/line" />
 
     <LinearLayout
-        android:id="@+id/share"
+        android:id="@+id/name_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -87,11 +83,7 @@
             android:layout_marginRight="@dimen/dp_10"
             android:textSize="@dimen/dp_16" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_20"
-            android:src="@drawable/go" />
+        
     </LinearLayout>
 
     <View
@@ -131,7 +123,7 @@
             android:textSize="@dimen/dp_16" />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/share"
+        android:id="@+id/hospital_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -159,15 +151,9 @@
             android:text="杭州省妇保"
             android:layout_marginRight="@dimen/dp_10"
             android:textSize="@dimen/dp_16" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_20"
-            android:src="@drawable/go" />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/share"
+        android:id="@+id/address_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -195,14 +181,9 @@
             android:text="尊宝大厦1111室内"
             android:layout_marginRight="@dimen/dp_10"
             android:textSize="@dimen/dp_16" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_20"
-            android:src="@drawable/go" />
-    </LinearLayout><LinearLayout
-        android:id="@+id/share"
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/time_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -230,12 +211,6 @@
             android:id="@+id/time"
             android:layout_marginRight="@dimen/dp_10"
             android:textSize="@dimen/dp_16" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_20"
-            android:src="@drawable/go" />
     </LinearLayout>
 
     <View

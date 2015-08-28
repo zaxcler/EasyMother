@@ -2,6 +2,7 @@ package com.easymother.main;
 
 import java.util.ArrayList;
 
+import com.easymother.configure.BaseInfo;
 import com.easymother.customview.ImageCycleView;
 import com.easymother.customview.ImageCycleView.ImageCycleViewListener;
 import com.easymother.main.community.HuLiShiZoneListActivity;
@@ -9,6 +10,9 @@ import com.easymother.main.community.MessageContralActivity;
 import com.easymother.main.community.YSYQActicvity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
+import com.easymother.utils.NetworkHelper;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -110,7 +114,14 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 		hulishizoom.setOnClickListener(this);
 		more.setOnClickListener(this);
 		message.setOnClickListener(this);
-
+	}
+	/**
+	 * 加载数据
+	 */
+	private void loadData(){
+		NetworkHelper.doGet(BaseInfo.COMMNUTITY, new JsonHttpResponseHandler(){
+			
+		});
 	}
 
 	@Override

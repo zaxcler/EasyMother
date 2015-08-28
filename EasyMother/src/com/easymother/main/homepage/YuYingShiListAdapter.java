@@ -2,6 +2,8 @@ package com.easymother.main.homepage;
 
 import java.util.List;
 
+
+
 import android.content.Context;
 import android.view.View;
 
@@ -9,6 +11,16 @@ import com.easymother.bean.TestBean;
 import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.ViewHolder;
+
+
+/**
+ * 
+ * 
+ * 此类已经弃用
+ * 
+ * 
+ * 
+ */
 
 public class YuYingShiListAdapter extends CommonAdapter<TestBean> {
 	private List<TestBean> list;

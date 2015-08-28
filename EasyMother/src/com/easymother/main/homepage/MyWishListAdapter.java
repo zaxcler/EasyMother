@@ -91,7 +91,7 @@ public class MyWishListAdapter<T> extends CommonAdapter<T> {
 			 * 设置之前先判断空
 			 */
 			if (bean.getSeniority()!=null) {
-				seniority.setText(bean.getSeniority());
+				seniority.setText(bean.getSeniority()+"");
 			}
 			
 			TextView age=holder.getView(R.id.textView4);
@@ -130,8 +130,7 @@ public class MyWishListAdapter<T> extends CommonAdapter<T> {
 			}
 			ImageView photo=holder.getView(R.id.image);
 			if (bean.getImage()!=null) {
-//				ImageLoader.getInstance().displayImage(MyApplication.BASE_PICTURE+bean.getImage(), photo);
-				ImageLoader.getInstance().displayImage("http://zaxcler.oss-cn-beijing.aliyuncs.com/11.jpg", photo);
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo);
 			}
 			
 
@@ -143,10 +142,10 @@ public class MyWishListAdapter<T> extends CommonAdapter<T> {
 			public void onClick(View arg0) {
 				
 				RequestParams params=new RequestParams();
+				Log.e("collectionId", bean.getCollectionId()+"");
 				params.put("collectionId", bean.getCollectionId());
 				//删除心愿单
-				NetworkHelper.doGet(BaseInfo.DELETE_WISH+bean.getCollectionId(), params, new JsonHttpResponseHandler(){
-//					NetworkHelper.doGet("http://zaxcler.oss-cn-beijing.aliyuncs.com/deletewish.txt", params, new JsonHttpResponseHandler(){
+				NetworkHelper.doGet(BaseInfo.DELETE_WISH, params, new JsonHttpResponseHandler(){
 					@Override
 					public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 						super.onSuccess(statusCode, headers, response);
@@ -183,12 +182,11 @@ public class MyWishListAdapter<T> extends CommonAdapter<T> {
 						
 					}
 					@Override
-					public void onFailure(int statusCode, Header[] headers, Throwable throwable,
-							JSONObject errorResponse) {
-						super.onFailure(statusCode, headers, throwable, errorResponse);
+					public void onFailure(int statusCode, Header[] headers, String responseString,
+							Throwable throwable) {
+						super.onFailure(statusCode, headers, responseString, throwable);
 						Toast.makeText(context, "请求失败", 0).show();
 					}
-					
 				});
 				
 			}

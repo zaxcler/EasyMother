@@ -1,19 +1,16 @@
 package com.easymother.main;
 
 
-import com.easymother.customview.ImageCycleView;
+import com.easymother.configure.BaseInfo;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -62,7 +59,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		transaction.add(R.id.main_content, homePageFragment);//添加fragment
 		transaction.show(homePageFragment);//显示fragment
 		transaction.commit();//提交
-		homeImageView.setImageDrawable(getResources().getDrawable(R.drawable.community_choose));
+		homeImageView.setImageDrawable(getResources().getDrawable(R.drawable.home_choose));
 		homeText.setTextColor(getResources().getColor(R.color.lightredwine));
 		
 		
@@ -200,6 +197,28 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			transaction.commit();
 			break;
 
+		}
+		
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCod, Intent arg2) {
+		super.onActivityResult(requestCode, resultCod, arg2);
+		switch (requestCode) {
+		case BaseInfo.REQUEST_CODE_LOGIN:
+			switch (resultCod) {
+			case BaseInfo.RESULT_CODE_LOGIN_SUCCESS:
+				
+				break;
+
+			default:
+				break;
+			}
+			
+			break;
+
+		default:
+			break;
 		}
 		
 	}

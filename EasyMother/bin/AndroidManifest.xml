@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="18" />
     
       <uses-permission android:name="android.permission.INTERNET" /><!-- 访问网络权限 -->
@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <!-- 月嫂列表 -->
-        <activity android:name="com.easymother.main.homepage.YueSaoListActivity" android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name="com.easymother.main.homepage.CommonListActivity" android:windowSoftInputMode="adjustPan"></activity>
         <!-- 育婴师列表 -->
         <activity android:name="com.easymother.main.homepage.YuYingShiListActivity" android:windowSoftInputMode="adjustPan"></activity>
         <!-- 催乳师列表 -->
@@ -89,6 +89,8 @@
         <activity android:name="com.easymother.main.homepage.OrderCRSProcess2" ></activity>
         <!-- 催乳师预约流程3 -->
         <activity android:name="com.easymother.main.homepage.OrderCRSProcess3" ></activity>
+        <!-- 信件列表 -->
+        <activity android:name="com.easymother.main.homepage.LetterListActivity" ></activity>
        
         <!-- 个人登录流程 -->
         <activity android:name="com.easymother.main.my.LoginOrRegisterActivity" ></activity>
@@ -124,6 +126,8 @@
         <activity android:name="com.easymother.main.my.ContactActivity" ></activity>
         <!-- 版本更新 -->
         <activity android:name="com.easymother.main.my.VersionActivity" ></activity>
+        <!-- 评论列表 -->
+        <activity android:name="com.easymother.main.my.CommentListActivity" ></activity>
        
         
         <!-- 护理师空间列表 -->

@@ -52,6 +52,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="毛啊懂"
+                        android:background="@color/white"
                         android:textColor="@color/boroblacktext" />
                 </LinearLayout>
 
@@ -84,6 +85,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="400-1008-251"
+                        android:background="@color/white"
                         android:textColor="@color/boroblacktext" />
                 </LinearLayout>
 

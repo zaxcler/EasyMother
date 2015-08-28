@@ -1,80 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/dp_200"
+     xmlns:app="http://schemas.android.com/apk/res/com.easymother.main"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
     android:background="@drawable/boro_border"
-    android:gravity="center"
     android:orientation="vertical" >
 
+    
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
         android:text="筛选"
-        android:textSize="@dimen/sp_16" />
+        android:textColor="@color/lightredwine"
+        android:textSize="22sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/line" />
 
-    <LinearLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="年龄区间"
+        android:textColor="@color/blacktext"
+        android:textSize="16sp" />
+ <com.easymother.customview.DoubleSeekBar
+        android:id="@+id/seekbar1"
+        app:type="age"
+        app:startText="20"
+        app:endText="60"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/dp_5"
-        android:gravity="center"
-        android:orientation="horizontal" >
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20" >
+    </com.easymother.customview.DoubleSeekBar>
+   
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="年龄"
-            android:textColor="@color/blacktext" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="价钱区间"
+         android:layout_marginBottom="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:textColor="@color/blacktext" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <Spinner android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner1"
-               android:entries="@array/age"/>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
+     <com.easymother.customview.DoubleSeekBar
+        android:id="@+id/seekbar2"
+        app:type="money"
+        app:startText="50"
+        app:endText="120"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/dp_5"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="价钱"
-            android:textColor="@color/blacktext" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <Spinner android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner2"
-                android:entries="@array/price"/>
-        </LinearLayout>
-    </LinearLayout>
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20" >
+    </com.easymother.customview.DoubleSeekBar>
     <Button
         android:id="@+id/submit"
         android:layout_width="@dimen/dp_100"
         android:layout_height="@dimen/dp_40"
         android:layout_marginBottom="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
+        android:layout_gravity="center_horizontal"
         android:background="@drawable/lightredwine_solid"
         android:text="确定"
         android:textColor="@color/white" />

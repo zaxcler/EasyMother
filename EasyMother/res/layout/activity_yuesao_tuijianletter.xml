@@ -7,6 +7,7 @@
     android:orientation="vertical" >
 
     <TextView
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="护理师推荐信"
@@ -22,6 +23,7 @@
         android:textSize="@dimen/sp_12" />
 
     <TextView
+        android:id="@+id/check_all"
         android:padding="@dimen/dp_5"
         android:background="@drawable/lightredwine_border"
         android:layout_marginTop="@dimen/dp_20"

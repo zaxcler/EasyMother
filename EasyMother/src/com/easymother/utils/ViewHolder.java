@@ -1,7 +1,6 @@
 package com.easymother.utils;
 
 
-import android.R;
 import android.content.Context;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -9,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class ViewHolder {
-	private int position;
+	public int position;
 	private View mConvertView;
 	private SparseArray<View> mView; 
 	
@@ -56,5 +55,6 @@ public class ViewHolder {
 
 		
 	}
+	
 
 }

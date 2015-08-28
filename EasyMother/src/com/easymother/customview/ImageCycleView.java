@@ -228,6 +228,9 @@ public class ImageCycleView extends LinearLayout {
 
 		@Override
 		public Object instantiateItem(ViewGroup container, final int position) {
+			if(mAdList.size()<=0){
+				return null;
+			}
 			String imageUrl = mAdList.get(position % mAdList.size());
 			ImageView imageView = null;
 			if (mImageViewCacheList.isEmpty()) {

@@ -10,6 +10,7 @@ import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.WishListResult;
 import com.easymother.bean.YuYingShi;
 import com.easymother.bean.YueSao;
+import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.MyListview;
 import com.easymother.main.R;
@@ -32,6 +33,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MyWishListActivity extends Activity {
 	private MyListview ysListview;// 月嫂列表
@@ -51,7 +53,7 @@ public class MyWishListActivity extends Activity {
 	private List<CuiRuShi> cuirushiList;
 	
 //	private final String WISH_LIST="app/nursecollection/collectionlist";
-	private final String WISH_LIST="http://zaxcler.oss-cn-beijing.aliyuncs.com/testwish.txt";
+//	private final String WISH_LIST="http://zaxcler.oss-cn-beijing.aliyuncs.com/testwish.txt";
 	
 	
 	@Override
@@ -82,17 +84,21 @@ public class MyWishListActivity extends Activity {
 		
 		RequestParams params=new RequestParams();
 		
-		NetworkHelper.doGet(WISH_LIST, params, new JsonHttpResponseHandler(){
+		NetworkHelper.doGet(BaseInfo.WISH_LIST, params, new JsonHttpResponseHandler(){
 			
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
+				
 				 WishListResult listResult=JsonUtils.getWishListResult(response);
+				 Log.e("WishListResult", listResult.toString());
 				 bindData(listResult);//绑定数据
 			}
 			@Override
-			public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-				super.onFailure(statusCode, headers, throwable, errorResponse);
+			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+				super.onFailure(statusCode, headers, responseString, throwable);
+				Log.e("获取心愿单列表失败", responseString);
+				Toast.makeText(MyWishListActivity.this, "请登录", 0).show();
 			}
 		});
 		
@@ -100,90 +106,95 @@ public class MyWishListActivity extends Activity {
 	}
 
 	protected void bindData(WishListResult listResult) {
-		yuesaoList=listResult.getYuesao();
-		yuyingshiList=listResult.getYuyingshi();
-		cuirushiList=listResult.getCuirushi();
-		
+		yuesaoList=listResult.getYS();
+		yuyingshiList=listResult.getYYS();
+		cuirushiList=listResult.getCRS();
+		Log.e("月嫂数量", yuesaoList.size()+"个");
+		Log.e("育婴师数量", yuyingshiList.size()+"个");
+		Log.e("催乳师数量", cuirushiList.size()+"个");
 		//短期月嫂和月嫂算在一起
-		if (listResult.getSHORT_YS()!=null) {
+		if (listResult.getSHORT_YS()!=null && yuesaoList!=null) {
 			yuesaoList.addAll(listResult.getSHORT_YS());
 		}
 		//短期育婴师和育婴师算在一起
-		if (listResult.getSHORT_YYS()!=null) {
+		if (listResult.getSHORT_YYS()!=null && yuyingshiList!=null) {
 			yuyingshiList.addAll(listResult.getSHORT_YYS());
 		}
 		
-		Log.e("yuesaoList------>", yuesaoList.size()+"-----");
-		Log.e("yuyingshiList------>", yuyingshiList.size()+"-----");
-		Log.e("cuirushiList------>", cuirushiList.size()+"-----");
-		
 		//如果有月嫂则不显示
-		if (yuesaoList.size()>0) {
+		if (yuesaoList!=null) {
 			ys_tv.setVisibility(View.GONE);
 		}
 		//如果有育婴师则不显示
-		if (yuyingshiList.size()>0) {
+		if (yuyingshiList!=null) {
 			yys_tv.setVisibility(View.GONE);
 		}
 		//如果有催乳师则不显示
-		if (cuirushiList.size()>0) {
+		if (cuirushiList!=null) {
 			crs_tv.setVisibility(View.GONE);
 		}
 		
-		
-		MyWishListAdapter<YueSao> adapter=new MyWishListAdapter<YueSao>(this, yuesaoList, "yuesao", R.layout.activity_yuesao_item);
-		ysListview.setAdapter(adapter);
-		ysListview.setOnItemClickListener(new OnItemClickListener() {
+		if (yuesaoList!=null) {
+			MyWishListAdapter<YueSao> adapter=new MyWishListAdapter<YueSao>(this, yuesaoList, "yuesao", R.layout.activity_yuesao_item);
+			ysListview.setAdapter(adapter);
+			ysListview.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				@SuppressWarnings("unchecked")
-				MyWishListAdapter<YueSao> ysAdapter=(MyWishListAdapter<YueSao>) arg0.getAdapter();
-				List<YueSao> baseBeans=ysAdapter.getList();
-				int id=baseBeans.get(arg2).getNurseId();
-				
-				Intent intent=new Intent(MyWishListActivity.this,YueSaoDetailActivity.class);
-				//传递数据
-				
-				startActivity(intent);
-			}
-		});
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+					@SuppressWarnings("unchecked")
+					MyWishListAdapter<YueSao> ysAdapter=(MyWishListAdapter<YueSao>) arg0.getAdapter();
+					List<YueSao> baseBeans=ysAdapter.getList();
+					int id=baseBeans.get(arg2).getNurseId();
+					
+					Intent intent=new Intent(MyWishListActivity.this,YueSaoDetailActivity.class);
+					//传递数据
+					
+					startActivity(intent);
+				}
+			});
+		}
 		
-		MyWishListAdapter<YuYingShi> adapter1=new MyWishListAdapter<YuYingShi>(this, yuyingshiList,"yuyingshi", R.layout.activity_yuesao_item);
-		yysListview.setAdapter(adapter1);
+		if (yuyingshiList!=null) {
+			MyWishListAdapter<YuYingShi> adapter1=new MyWishListAdapter<YuYingShi>(this, yuyingshiList,"yuyingshi", R.layout.activity_yuesao_item);
+			yysListview.setAdapter(adapter1);
+			
+			yysListview.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+					@SuppressWarnings("unchecked")
+					MyWishListAdapter<YuYingShi> ysAdapter=(MyWishListAdapter<YuYingShi>) arg0.getAdapter();
+					List<YuYingShi> baseBeans=ysAdapter.getList();
+					int id=baseBeans.get(arg2).getNurseId();
+					
+					Intent intent=new Intent(MyWishListActivity.this,YuYingShiDetailActivity.class);
+					//传递数据
+					
+					startActivity(intent);
+				}
+			});
+		}
 		
-		yysListview.setOnItemClickListener(new OnItemClickListener() {
+		if (cuirushiList!=null) {
+			MyWishListAdapter<CuiRuShi> adapter2=new MyWishListAdapter<CuiRuShi>(this, cuirushiList,"cuirushi", R.layout.activity_yuesao_item);
+			crsListview.setAdapter(adapter2);
+			crsListview.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				@SuppressWarnings("unchecked")
-				MyWishListAdapter<YuYingShi> ysAdapter=(MyWishListAdapter<YuYingShi>) arg0.getAdapter();
-				List<YuYingShi> baseBeans=ysAdapter.getList();
-				int id=baseBeans.get(arg2).getNurseId();
-				
-				Intent intent=new Intent(MyWishListActivity.this,YuYingShiDetailActivity.class);
-				//传递数据
-				
-				startActivity(intent);
-			}
-		});
-		MyWishListAdapter<CuiRuShi> adapter2=new MyWishListAdapter<CuiRuShi>(this, cuirushiList,"cuirushi", R.layout.activity_yuesao_item);
-		crsListview.setAdapter(adapter2);
-		crsListview.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				@SuppressWarnings("unchecked")
-				MyWishListAdapter<CuiRuShi> ysAdapter=(MyWishListAdapter<CuiRuShi>) arg0.getAdapter();
-				List<CuiRuShi> baseBeans=ysAdapter.getList();
-				int id=baseBeans.get(arg2).getNurseId();
-				
-				Intent intent=new Intent(MyWishListActivity.this,CuiRuShiDetailActivity.class);
-				//传递数据
-				
-				startActivity(intent);
-			}
-		});
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+					@SuppressWarnings("unchecked")
+					MyWishListAdapter<CuiRuShi> ysAdapter=(MyWishListAdapter<CuiRuShi>) arg0.getAdapter();
+					List<CuiRuShi> baseBeans=ysAdapter.getList();
+					int id=baseBeans.get(arg2).getNurseId();
+					
+					Intent intent=new Intent(MyWishListActivity.this,CuiRuShiDetailActivity.class);
+					//传递数据
+					
+					startActivity(intent);
+				}
+			});
+		}
+		
 	
 		
 		//listview 的item进入时的动画
