@@ -85,12 +85,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 	
 	private boolean hasVideo=false;//是否有视频
 	private boolean hasKongjian=false;//是否有空间
-	
 	private Intent intent;
-	
-	
-	
-	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
