@@ -29,7 +29,6 @@ public class JsonUtils {
 		HomePageResult result=JSON.parseObject(json, HomePageResult.class);
 		Log.e("result----------", json);
 		return result;
-		
 	}
 	/**
 	 * 根据 jsonObject 转换成类
@@ -142,8 +141,43 @@ public class JsonUtils {
 		}
 		return orderDetail;
 	}
-	
-	
+	/**
+	 * 通用解析jsonobject的方法
+	 * @param jsonObject
+	 * @param clazz
+	 * @return
+	 */
+	public static <T> T getResult(JSONObject jsonObject,Class<T> clazz){
+		Root root=getRootResult(jsonObject);
+		T t=null;
+		if (root.getIsSuccess()) {
+			t=JSON.parseObject(root.getResult().toString(), clazz);
+		}
+		return t;
+		
+	}
+	/**
+	 * 要求返回json格式为
+	 * {
+    "message":null,
+    "result":Array[3],
+    "code":null,
+    "isSuccess":true
+}
+	 * 通用解析jsonArray的方法
+	 * @param jsonObject
+	 * @param clazz
+	 * @return
+	 */
+	public static  <T> List<T>  getResultList(JSONObject jsonObject,Class<T> clazz){
+		Root root=getRootResult(jsonObject);
+		List<T> t=null;
+		if (root.getIsSuccess()) {
+			t=JSON.parseArray(root.getResult().toString(), clazz);
+		}
+		return t;
+		
+	}
 	
 	
 }

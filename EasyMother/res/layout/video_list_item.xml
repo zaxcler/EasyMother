@@ -14,32 +14,22 @@
         android:src="@drawable/home_banner" />
 
     <TextView
-        android:layout_marginBottom="@dimen/dp_5"
-        android:id="@+id/textView1"
+        android:id="@+id/upload_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView1"
-        android:layout_centerHorizontal="true"
-        android:text="王阿姨护理视频" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_alignParentRight="true"
-        android:text="6:33" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_toLeftOf="@+id/textView3"
+        android:layout_alignBaseline="@+id/video_name"
+        android:layout_alignBottom="@+id/video_name"
         android:paddingRight="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_5"
+        android:layout_alignParentRight="true"
         android:text="2015/7/12" />
-
+        
+    <TextView 
+        android:layout_marginBottom="@dimen/dp_5"
+        android:id="@+id/video_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/upload_time"
+        android:layout_alignBottom="@+id/imageView1"
+        android:text="王阿姨护理视频"/>
 </RelativeLayout>

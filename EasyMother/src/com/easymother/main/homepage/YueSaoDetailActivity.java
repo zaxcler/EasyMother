@@ -349,7 +349,10 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 //				EasyMotherUtils.goActivity(this, VideoListActivity.class);
 //			}
 			//测试
-			EasyMotherUtils.goActivity(this, VideoListActivity.class);
+			intent.setClass(this, VideoListActivity.class);
+			intent.putExtra("nursebase", baseBean);
+			intent.putExtra("nursejob", nurseJobBean);
+			startActivity(intent);
 			break;
 			
 		case R.id.kongjian:

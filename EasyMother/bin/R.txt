@@ -1449,7 +1449,7 @@ int drawable zone 0x7f020093
 int id View01 0x7f06001a
 int id View02 0x7f06001e
 int id about 0x7f06006c
-int id action_settings 0x7f060173
+int id action_settings 0x7f060175
 int id ad_rl 0x7f0600d7
 int id add 0x7f06003d
 int id add_babytime 0x7f0600fc
@@ -1769,6 +1769,7 @@ int id tv3 0x7f0600b1
 int id tv4 0x7f0600b2
 int id type 0x7f060144
 int id unorder 0x7f060134
+int id upload_time 0x7f060173
 int id user_address 0x7f06007e
 int id user_name 0x7f060080
 int id user_phone 0x7f060082
@@ -1780,6 +1781,7 @@ int id v4 0x7f060140
 int id v5 0x7f060158
 int id version 0x7f060090
 int id video 0x7f060035
+int id video_name 0x7f060174
 int id view1 0x7f060015
 int id view2 0x7f060016
 int id view3 0x7f06008b

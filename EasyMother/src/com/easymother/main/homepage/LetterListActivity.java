@@ -47,8 +47,8 @@ public class LetterListActivity extends Activity {
 		list.add(bean5);
 		list.add(bean6);
 		list.add(bean7);
-		VideoListAdapter adapter=new VideoListAdapter(this, list, R.layout.video_list_item);
-		listView.setAdapter(adapter);
+//		VideoListAdapter adapter=new VideoListAdapter(this, list, R.layout.video_list_item);
+//		listView.setAdapter(adapter);
 		
 	}
 
