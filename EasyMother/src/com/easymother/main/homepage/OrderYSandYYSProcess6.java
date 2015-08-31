@@ -37,6 +37,7 @@ public class OrderYSandYYSProcess6 extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
+				
 				EasyMotherUtils.goActivity(OrderYSandYYSProcess6.this, OrderYSandYYSProcess7.class);
 				
 			}

@@ -7,7 +7,6 @@
 
     <include
         android:id="@+id/title1"
-        android:layout_alignParentTop="true"
         layout="@layout/commontitle" />
     
 

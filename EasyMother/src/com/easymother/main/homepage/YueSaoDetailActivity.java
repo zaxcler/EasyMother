@@ -40,6 +40,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,10 +76,21 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 	private TextView comment_num;//评论数量
 	private TextView allcomment;//点击进入评论列表
 	private TextView check_all;//查看所有信件
+	private LinearLayout yuesaoskills;//月嫂skills
+	private LinearLayout yuyingshiskills;//育婴师skills
 	private TextView check1;//查看1
 	private TextView check2;//查看2
 	private TextView check3;//查看3
 	private TextView check4;//查看4
+	private TextView text1;//育婴师查看1
+	private TextView text4;//育婴师查看2
+	private TextView text6;//育婴师查看3
+	private TextView text8;//育婴师查看4
+	private TextView text10;//育婴师查看5
+	private TextView text12;//育婴师查看6
+	private TextView text14;//育婴师查看7
+	private TextView text16;//育婴师查看8
+	
 	
 	private NurseJobBean nurseJobBean;//nursejob
 	private NurseBaseBean baseBean;//
@@ -146,22 +158,22 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		nurseMarketPrice=(TextView) findViewById(R.id.market_price);
 		comment_num=(TextView) findViewById(R.id.comment_num);
 		
+		yuesaoskills=(LinearLayout) findViewById(R.id.yuesaoskills);
+		yuyingshiskills=(LinearLayout) findViewById(R.id.yuyingshiskills);
+		
+		text1=(TextView) findViewById(R.id.text1);
+		text4=(TextView) findViewById(R.id.text4);
+		text6=(TextView) findViewById(R.id.text6);
+		text1=(TextView) findViewById(R.id.text1);
+		text1=(TextView) findViewById(R.id.text1);
+		text1=(TextView) findViewById(R.id.text1);
+		text1=(TextView) findViewById(R.id.text1);
+		text1=(TextView) findViewById(R.id.text1);
+		text1=(TextView) findViewById(R.id.text1);
 		
 	}
 	private void init() {
 		
-		//-------测试数据
-		List<TestBean> beans=new ArrayList<TestBean>();
-		TestBean bean1=new TestBean();
-		
-		beans.add(bean1);
-		beans.add(bean1);
-		beans.add(bean1);
-		beans.add(bean1);
-		beans.add(bean1);
-		beans.add(bean1);
-		beans.add(bean1);
-		beans.add(bean1);
 		RequestParams params=new RequestParams();
 		params.put("job", job);
 		params.put("nurseId", id);
@@ -177,6 +189,18 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 				}
 			}
 		});
+		//-------测试数据
+		List<TestBean> beans=new ArrayList<TestBean>();
+		TestBean bean1=new TestBean();
+		
+		beans.add(bean1);
+		beans.add(bean1);
+		beans.add(bean1);
+		beans.add(bean1);
+		beans.add(bean1);
+		beans.add(bean1);
+		beans.add(bean1);
+		beans.add(bean1);
 		//----------后期改为网络访问	
 		YueSaoGridViewAdapter adapter=new YueSaoGridViewAdapter(this, beans, R.layout.activity_yuesao_gridview_item);
 		gridView.setAdapter(adapter);
@@ -193,10 +217,39 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		submit_comment.setOnClickListener(this);
 		allcomment.setOnClickListener(this);
 		check_all.setOnClickListener(this);
-		check1.setOnClickListener(this);
-		check2.setOnClickListener(this);
-		check3.setOnClickListener(this);
-		check4.setOnClickListener(this);
+		if ("YS".equals(job)) {
+			yuyingshiskills.setVisibility(View.GONE);
+			OnClickListener clickListener=new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					switch (v.getId()) {
+					case R.id.check1:
+						EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+						break;
+					case R.id.check2:
+						EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+						break;
+					case R.id.check3:
+						EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+						break;
+					case R.id.check4:
+						EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+						break;
+					}
+				}
+			};
+			check1.setOnClickListener(clickListener);
+			check2.setOnClickListener(clickListener);
+			check3.setOnClickListener(clickListener);
+			check4.setOnClickListener(clickListener);
+		}
+		if ("YYS".equals(job)) {
+			yuesaoskills.setVisibility(View.GONE);
+			
+			
+		}
+		
 		kongjian.setOnClickListener(this);
 		
 		
@@ -212,6 +265,14 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		 */
 		nurseJobBean=result.getNursejob();
 		baseBean=result.getNursebase();
+		if (baseBean==null) {
+			Toast.makeText(this, "没有baseBean信息", 0).show();
+			return;
+		}
+		if (nurseJobBean==null) {
+			Toast.makeText(this, "没有nurseJobBean信息", 0).show();
+			return;
+		}
 		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
 		
 		try {
@@ -269,18 +330,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 	public void onClick(View arg0) {
 		Intent intent=new Intent();
 		switch (arg0.getId()) {
-		case R.id.check1:
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
-			break;
-		case R.id.check2:
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
-			break;
-		case R.id.check3:
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
-			break;
-		case R.id.check4:
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
-			break;
+		
 		case R.id.buy_now:
 			intent.setClass(this, OrderYSandYYSProcess.class);
 			intent.putExtra("nursebase", baseBean);
@@ -310,7 +360,10 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 			EasyMotherUtils.goActivity(this, HuLiShiZoneDetailActivity.class);
 			break;
 		case R.id.submit_comment:
-			EasyMotherUtils.goActivity(this, CommentActivity.class);
+			intent.setClass(this, CommentActivity.class);
+			intent.putExtra("nursebase", baseBean);
+			intent.putExtra("nursejob", nurseJobBean);
+			startActivity(intent);
 			break;
 		case R.id.add:
 			RequestParams params=new RequestParams();

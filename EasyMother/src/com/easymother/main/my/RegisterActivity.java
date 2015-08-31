@@ -42,6 +42,7 @@ public class RegisterActivity extends Activity implements OnClickListener{
 	private TimerTask timerTask;//短信可以重新获取倒计时
 	private Timer timer;//计时器
 	private int time=60;//重新获取验证码的时间
+	private String appTokenId;//注册时获得的tokenid
 	
 	//倒计时，通过handler显示在界面上
 	private Handler handler=new Handler(){
@@ -129,6 +130,8 @@ public class RegisterActivity extends Activity implements OnClickListener{
         				};
         				timer=new Timer(true);
         				timer.schedule(timerTask, 1000, 1000);
+        				appTokenId=JsonUtils.getRootResult(response).getResult().toString();
+        				Log.e("apptokenid", JsonUtils.getRootResult(response).getResult().toString());
         				}else {
         					Toast.makeText(RegisterActivity.this, JsonUtils.getRootResult(response).getMessage(), 0).show();
 						}
@@ -167,6 +170,7 @@ public class RegisterActivity extends Activity implements OnClickListener{
         	params.put("mobile", phone);
         	params.put("password", passwordString);
         	params.put("yzm", identity_code_String);
+        	params.put("appTokenId", appTokenId);
         	NetworkHelper.doGetNoToken(BaseInfo.REGIST, params, new JsonHttpResponseHandler(){
         		@Override
         		public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

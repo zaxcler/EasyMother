@@ -19,6 +19,7 @@ import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,17 @@ public class OrderYSandYYSProcess5 extends Activity {
 	private Intent intent;
 	private NurseBaseBean nursebase;
 	private NurseJobBean nursejob;
+	
+	private TextView nurse_name;
+	private TextView nurse_phone;
+	private TextView nurse_address;
+	private ImageView nurse_image;
+	
+	private TextView user_name;
+	private TextView user_phone;
+	private TextView card_id;
+	private TextView user_address;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +68,18 @@ public class OrderYSandYYSProcess5 extends Activity {
 
 	private void findView() {
 		complete=(TextView) findViewById(R.id.button);
+		nurse_name=(TextView) findViewById(R.id.nurse_name);
+		nurse_phone=(TextView) findViewById(R.id.nurse_phone);
+		nurse_address=(TextView) findViewById(R.id.nurse_address);
+		user_name=(TextView) findViewById(R.id.user_name);
+		user_phone=(TextView) findViewById(R.id.user_phone);
+		card_id=(TextView) findViewById(R.id.card_id);
+		user_address=(TextView) findViewById(R.id.user_address);
 		hetong=(WebView) findViewById(R.id.hetong);
-		
 	}
 
 	private void init() {
+		showData();
 		hetong.loadUrl("file:///android_asset/demo.html");
 		complete.setOnClickListener(new OnClickListener() {
 			
@@ -77,6 +97,37 @@ public class OrderYSandYYSProcess5 extends Activity {
 				
 			}
 		});
+	}
+	/**
+	 * 
+	 * 展示数据
+	 */
+	public void showData(){
+		if (nursebase.getImage()!=null) {
+			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+nursebase.getImage(), nurse_image);
+		}
+		if (nursebase.getRealName()!=null) {
+			nurse_name.setText(nursebase.getRealName());
+		}
+		if (nursebase.getMobile()!=null) {
+			nurse_phone.setText(nursebase.getMobile());
+		}
+		if (nursebase.getCurrentAddress()!=null) {
+			nurse_address.setText(nursebase.getCurrentAddress());
+		}
+		if (!"".equals(MyApplication.preferences.getString("order_user_name", ""))) {
+			user_name.setText(MyApplication.preferences.getString("order_user_name", ""));
+		}
+		if (!"".equals(MyApplication.preferences.getString("order_user_phone", ""))) {
+			user_phone.setText(MyApplication.preferences.getString("order_user_phone", ""));
+		}
+		if (!"".equals(MyApplication.preferences.getString("order_user_card_id", ""))) {
+			card_id.setText(MyApplication.preferences.getString("order_user_card_id", ""));
+		}
+		if (!"".equals(MyApplication.preferences.getString("order_user_address", ""))) {
+			user_address.setText(MyApplication.preferences.getString("order_user_address", ""));
+		}
+		 
 	}
 	/**
 	 * 保存合同信息
@@ -149,12 +200,6 @@ public class OrderYSandYYSProcess5 extends Activity {
 		if (!"".equals(MyApplication.preferences.getString("order_user_phone", ""))) {
 			params.put("userMobile",MyApplication.preferences.getString("order_user_phone", ""));
 		}
-//		if (!"".equals(MyApplication.preferences.getString("order_user_card_id", ""))) {
-//			params.put("identificationCode",MyApplication.preferences.getString("order_user_card_id", ""));
-//		}
-//		if (!"".equals(MyApplication.preferences.getString("order_user_address", ""))) {
-//			params.put("address",MyApplication.preferences.getString("order_user_card_id", ""));
-//		}
 		if (nursejob.getNurseId()!=null) {
 			params.put("nurseId", nursejob.getNurseId());
 		}
@@ -164,6 +209,10 @@ public class OrderYSandYYSProcess5 extends Activity {
 		if (nursejob.getJob()!=null) {
 			params.put("job", nursejob.getJob());
 		}
+		if (nursejob.getPrice()!=null) {
+			params.put("price", nursejob.getPrice());
+		}
+		
 //		if (nursebase.getMobile()!=null) {
 //			params.put("nurseMobile", nursebase.getMobile());
 //		}
@@ -173,23 +222,36 @@ public class OrderYSandYYSProcess5 extends Activity {
 //		}
 		//雇佣时间
 		if (nursebase.getEmploymentStartTime()!=null) {
-			params.put("hireStartTime", nursebase.getEmploymentStartTime());
+			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+			String startDate=format.format(nursebase.getEmploymentStartTime());
+			params.put("hireStartTime", startDate);
+			Log.e("OrderYSandYYSProcess5_starttime", nursebase.getEmploymentStartTime()+"");
 		}
 		//雇佣结束时间
 		if (nursebase.getEmploymentEndTime()!=null) {
-			params.put("hireEndTime", nursebase.getEmploymentEndTime());
+			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+			String endDate=format.format(nursebase.getEmploymentEndTime());
+			params.put("hireEndTime",endDate);
 		}
 		if (nursebase.getEmploymentStartTime()!=null) {
-			params.put("realHireStartTime", nursebase.getEmploymentStartTime());
+			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+			String startDate=format.format(nursebase.getEmploymentStartTime());
+			params.put("realHireStartTime", startDate);
 		}
 		//雇佣结束时间
 		if (nursebase.getEmploymentEndTime()!=null) {
-			params.put("realHireEndTime", nursebase.getEmploymentEndTime());
+			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+			String endDate=format.format(nursebase.getEmploymentEndTime());
+			params.put("realHireEndTime", endDate);
 		}
 			params.put("status","未付款");
 			params.put("realAllAmount", 0);
 			params.put("nurseJobId", nursejob.getId());
 			params.put("isSee", intent.getByteExtra("isSee", (byte) 0));
+			params.put("allServerPrice", nursejob.getPrice());//总价
+			params.put("deposit", 500);
+			
+			
 			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 			Date date;
 			try {

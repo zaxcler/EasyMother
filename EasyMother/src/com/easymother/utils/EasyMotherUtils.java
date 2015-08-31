@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.alibaba.fastjson.JSON;
+import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.main.homepage.CuiRuiShiProjectActivity;
@@ -39,6 +40,7 @@ import android.view.Window;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EasyMotherUtils {
 	private static TextView title;// 标题
@@ -117,6 +119,7 @@ public class EasyMotherUtils {
 	
 	/*
 	 * 打开系统相册的方法
+	 * path 设置保存的uri地址
 	 */
 	public static void chosePhoto(Activity activity,int requestCode,Uri path){
 		Intent intent=new Intent();
@@ -253,9 +256,11 @@ public class EasyMotherUtils {
 		//文件名字
 		String name=DateFormat.format("yyyyMMdd_hhmmss", Calendar.getInstance(Locale.CHINA))+".jpg";
 		String filename="/sdcard/easymother"+name;
+		Log.e("上传图片名字", filename);
 		FileOutputStream outputStream;
 		try {
 			outputStream = new FileOutputStream(filename);
+			
 			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);//压缩并写入
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
@@ -264,6 +269,7 @@ public class EasyMotherUtils {
 		File photo=new File(filename);
 		if (photo!=null) {
 			try {
+				String namecode=photo.getName();
 				params.put("user_photo", photo);
 				NetworkHelper.doPostNoToken(url, params, new JsonHttpResponseHandler(){
 					@Override
@@ -274,11 +280,27 @@ public class EasyMotherUtils {
 						
 						if ("user_image".equals(type)) {
 							MyApplication.editor.putString("image", photos.get(0)).commit();
+							//成功上传，就修改服务器的头像名字
+							RequestParams params=new RequestParams();
+							params.put("image", photos.get(0));
+							params.put("id", MyApplication.preferences.getInt("id", 0));
+							NetworkHelper.doGet(BaseInfo.CHANGEINFO, params, new JsonHttpResponseHandler(){
+								public void onSuccess(int statusCode, Header[] headers, org.json.JSONObject response) {
+									if (JsonUtils.getRootResult(response).getIsSuccess()) {
+										Log.e("图片名字上传成功", response.toString());
+									}
+								};
+								public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+									
+								};
+							});
 						}
 						if ("baby_image".equals(type)) {
 							MyApplication.editor.putString("baby_image", photos.get(0)).commit();
 						}
-						
+						if (type==null) {
+							MyApplication.editor.putString("upload_images", photos.get(0)).commit();
+						}
 						Log.e("onSuccess——uploadstatu", uploadstatu+"");
 						Log.e("onSuccess——response", response.toString()+"");
 					}
@@ -308,7 +330,7 @@ public class EasyMotherUtils {
 				e.printStackTrace();
 			}
 		}
-		return false;
+		return true;
 		
 		
 	}

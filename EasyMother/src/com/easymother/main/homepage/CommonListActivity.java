@@ -197,9 +197,12 @@ public class CommonListActivity extends Activity {
 					startActivity(intent);
 				}
 				if ("YYS".equals(baseBean.getJob())) {
-					Intent intent=new Intent(CommonListActivity.this,YuYingShiDetailActivity.class);
+					Intent intent=new Intent(CommonListActivity.this,YueSaoDetailActivity.class);
 					intent.putExtra("id", baseBean.getNurseId());
+//					intent.putExtra("id", 14);//测试
 					intent.putExtra("job", baseBean.getJob());
+					intent.putExtra("startTime", "2015-08-30");
+					intent.putExtra("endTime", "2015-09-20");
 					startActivity(intent);
 				}
 				if ("CRS".equals(baseBean.getJob())) {

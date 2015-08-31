@@ -39,6 +39,7 @@
         android:layout_alignBottom="@+id/textView1"
         android:layout_toLeftOf="@+id/textView3"
         android:paddingRight="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_5"
         android:text="2015/7/12" />
 
 </RelativeLayout>

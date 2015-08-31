@@ -180,6 +180,7 @@ public class MyPageFragment extends Fragment implements OnClickListener {
 			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + preferences.getString("image", ""), circleImageView);
 			Log.e("用户图片", BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + preferences.getString("image", ""));
 			user_name.setText(preferences.getString("nickname", "请前去完善信息"));
+			
 		}else {
 			isOnLine = false;
 			circleImageView.setImageDrawable(getResources().getDrawable(R.drawable.user_defult));

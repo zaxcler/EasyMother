@@ -47,6 +47,7 @@
             android:drawableLeft="@drawable/yue_now"
             android:gravity="center"
             android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
             android:text="立即预约"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16" />

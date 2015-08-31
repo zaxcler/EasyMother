@@ -7,10 +7,11 @@
     <include
         android:id="@+id/title1"
         layout="@layout/commontitle" />
-    <View 
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line"/>
+        android:background="@color/line" />
 
     <LinearLayout
         android:id="@+id/bottom"
@@ -69,7 +70,7 @@
 
             <include layout="@layout/activity_yuesao_detail_photo" />
 
-            <View 
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_20"
                 android:background="@color/background" />
@@ -95,8 +96,16 @@
                 android:layout_height="@dimen/dp_30"
                 android:background="@color/background" />
 
-            <include layout="@layout/activity_yuesao_detail_skills" />
+            <include
+                android:id="@+id/yuesaoskills"
+                layout="@layout/activity_yuesao_detail_skills" />
+
+            <include
+                android:id="@+id/yuyingshiskills"
+                layout="@layout/activity_yuyingshi_detail_skills" />
+
             <include layout="@layout/activity_yuesao_detail_experience" />
+
             <include layout="@layout/activity_yuesao_detail_message" />
         </LinearLayout>
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
