@@ -1,10 +1,11 @@
 package com.easymother.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.json.JSONObject;
 
-public class Order {
+public class Order implements Serializable{
 	private Integer id;
 
     private String createUser;
@@ -71,7 +72,7 @@ public class Order {
 
     private Integer nurseJobId;
 
-    private Byte isSee;
+    private boolean isSee;
 
     private Date seeTime;
 
@@ -349,11 +350,11 @@ public class Order {
 		this.nurseJobId = nurseJobId;
 	}
 
-	public Byte getIsSee() {
+	public boolean getIsSee() {
 		return isSee;
 	}
 
-	public void setIsSee(Byte isSee) {
+	public void setIsSee(boolean isSee) {
 		this.isSee = isSee;
 	}
 

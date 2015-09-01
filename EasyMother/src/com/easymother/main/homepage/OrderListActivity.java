@@ -6,6 +6,8 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import com.easymother.bean.CuiRuShi;
+import com.easymother.bean.Order;
+import com.easymother.bean.OrderListResult;
 import com.easymother.bean.WishListResult;
 import com.easymother.bean.YuYingShi;
 import com.easymother.bean.YueSao;
@@ -43,9 +45,9 @@ public class OrderListActivity extends Activity {
 	private TextView yys_tv;// 没有育婴师时显示
 	private TextView crs_tv;// 没有催乳师时显示
 	
-	private List<YueSao> yuesaoList;
-	private List<YuYingShi> yuyingshiList;
-	private List<CuiRuShi> cuirushiList;
+	private List<Order> yuesaoList;
+	private List<Order> yuyingshiList;
+	private List<Order> cuirushiList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,12 +78,12 @@ public class OrderListActivity extends Activity {
 		
         RequestParams params=new RequestParams();
 		
-		NetworkHelper.doGet(BaseInfo.WISH_LIST, params, new JsonHttpResponseHandler(){
+		NetworkHelper.doGet(BaseInfo.ORDER_LIST, params, new JsonHttpResponseHandler(){
 			
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
-				 WishListResult listResult=JsonUtils.getWishListResult(response);
+				 OrderListResult listResult=JsonUtils.getResult(response, OrderListResult.class);
 				 bindData(listResult);//绑定数据
 			}
 			@Override
@@ -91,54 +93,55 @@ public class OrderListActivity extends Activity {
 		});
 	}
 		
-		protected void bindData(WishListResult listResult) {
+		protected void bindData(OrderListResult listResult) {
 			yuesaoList=listResult.getYS();
 			yuyingshiList=listResult.getYYS();
 			cuirushiList=listResult.getCRS();
 			
-			//短期月嫂和月嫂算在一起
-			if (listResult.getSHORT_YS()!=null && yuesaoList!=null) {
+			//短期月嫂和月嫂算在一起  先判断是否为空，然后判断是否有数据，若为空则不会继续判断
+			if (listResult.getSHORT_YS()!=null&&listResult.getSHORT_YS().size()>0 && yuesaoList!=null) {
 				yuesaoList.addAll(listResult.getSHORT_YS());
 			}
 			//短期育婴师和育婴师算在一起
-			if (listResult.getSHORT_YYS()!=null && yuyingshiList!=null) {
+			if (listResult.getSHORT_YYS()!=null&&listResult.getSHORT_YYS().size()>0&& yuyingshiList!=null) {
 				yuyingshiList.addAll(listResult.getSHORT_YYS());
 			}
 			
 			//如果有月嫂则不显示
-			if (yuesaoList!=null) {
+			if (yuesaoList!=null&&yuesaoList.size()>0) {
 				ys_tv.setVisibility(View.GONE);
 			}
 			//如果有育婴师则不显示
-			if (yuyingshiList!=null) {
+			if (yuyingshiList!=null&&yuyingshiList.size()>0) {
 				yys_tv.setVisibility(View.GONE);
 			}
 			//如果有催乳师则不显示
-			if (cuirushiList!=null) {
+			if (cuirushiList!=null&&cuirushiList.size()>0) {
 				crs_tv.setVisibility(View.GONE);
 			}
 			
-			if (yuesaoList!=null) {
-				OrderListAdapter<YueSao> adapter=new OrderListAdapter<YueSao>(this, yuesaoList, "yuesao", R.layout.activity_yuesao_item);
+			if (yuesaoList!=null&&yuesaoList.size()>0) {
+				OrderListAdapter<Order> adapter=new OrderListAdapter<Order>(this, yuesaoList, "yuesao", R.layout.activity_yuesao_item);
 				ysListview.setAdapter(adapter);
 				ysListview.setOnItemClickListener(new OnItemClickListener() {
 
 					@Override
 					public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 						@SuppressWarnings("unchecked")
-						OrderListAdapter<YueSao> ysAdapter=(OrderListAdapter<YueSao>) arg0.getAdapter();
-						List<YueSao> baseBeans=ysAdapter.getList();
-						int id=baseBeans.get(arg2).getNurseId();
+						OrderListAdapter<Order> ysAdapter=(OrderListAdapter<Order>) arg0.getAdapter();
+						List<Order> orders=ysAdapter.getList();
+						int id=orders.get(arg2).getId();
 						Intent intent=new Intent(OrderListActivity.this,OrderDetailActivity.class);
 						//传递数据
-						
+						intent.putExtra("id", id);
+						intent.putExtra("order", orders.get(arg2));
 						startActivity(intent);
 					}
 				});
 			}
 			
-			if (yuyingshiList!=null) {
-				OrderListAdapter<YuYingShi> adapter1=new OrderListAdapter<YuYingShi>(this, yuyingshiList,"yuyingshi", R.layout.activity_yuesao_item);
+			if (yuyingshiList!=null&&yuyingshiList.size()>0) {
+				OrderListAdapter<Order> adapter1=new OrderListAdapter<Order>(this, yuyingshiList,"yuyingshi", R.layout.activity_yuesao_item);
 				yysListview.setAdapter(adapter1);
 				
 				yysListview.setOnItemClickListener(new OnItemClickListener() {
@@ -146,33 +149,35 @@ public class OrderListActivity extends Activity {
 					@Override
 					public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 						@SuppressWarnings("unchecked")
-						OrderListAdapter<YuYingShi> ysAdapter=(OrderListAdapter<YuYingShi>) arg0.getAdapter();
-						List<YuYingShi> baseBeans=ysAdapter.getList();
-						int id=baseBeans.get(arg2).getNurseId();
+						OrderListAdapter<Order> ysAdapter=(OrderListAdapter<Order>) arg0.getAdapter();
+						List<Order> orders=ysAdapter.getList();
+						int id=orders.get(arg2).getId();
 						
 						Intent intent=new Intent(OrderListActivity.this,OrderDetailActivity.class);
 						//传递数据
-						
+						intent.putExtra("id", id);
+						intent.putExtra("order", orders.get(arg2));
 						startActivity(intent);
 					}
 				});
 			}
 			
-			if (cuirushiList!=null) {
-				OrderListAdapter<CuiRuShi> adapter2=new OrderListAdapter<CuiRuShi>(this, cuirushiList,"cuirushi", R.layout.activity_yuesao_item);
+			if (cuirushiList!=null&&cuirushiList.size()>0) {
+				OrderListAdapter<Order> adapter2=new OrderListAdapter<Order>(this, cuirushiList,"cuirushi", R.layout.activity_yuesao_item);
 				crsListview.setAdapter(adapter2);
 				crsListview.setOnItemClickListener(new OnItemClickListener() {
 
 					@Override
 					public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 						@SuppressWarnings("unchecked")
-						OrderListAdapter<CuiRuShi> ysAdapter=(OrderListAdapter<CuiRuShi>) arg0.getAdapter();
-						List<CuiRuShi> baseBeans=ysAdapter.getList();
-						int id=baseBeans.get(arg2).getNurseId();
+						OrderListAdapter<Order> ysAdapter=(OrderListAdapter<Order>) arg0.getAdapter();
+						List<Order> orders=ysAdapter.getList();
+						int id=orders.get(arg2).getId();
 						
 						Intent intent=new Intent(OrderListActivity.this,OrderDetailActivity.class);
 						//传递数据
-						
+						intent.putExtra("id", id);
+						intent.putExtra("order", orders.get(arg2));
 						startActivity(intent);
 					}
 				});
@@ -191,24 +196,24 @@ public class OrderListActivity extends Activity {
 		yysListview.startLayoutAnimation();
 		crsListview.setLayoutAnimation(controller);
 		crsListview.startLayoutAnimation();
-		OnItemClickLisenter lisenter=new OnItemClickLisenter();
-		ysListview.setOnItemClickListener(lisenter);
-		crsListview.setOnItemClickListener(lisenter);
-		yysListview.setOnItemClickListener(lisenter);
+//		OnItemClickLisenter lisenter=new OnItemClickLisenter();
+//		ysListview.setOnItemClickListener(lisenter);
+//		crsListview.setOnItemClickListener(lisenter);
+//		yysListview.setOnItemClickListener(lisenter);
 		
 
 	}
-	private class OnItemClickLisenter implements OnItemClickListener{
-
-		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-				long arg3) {
-			EasyMotherUtils.goActivity(OrderListActivity.this, OrderDetailActivity.class);
-			
-		}
-
-		
-		
-	}
+//	private class OnItemClickLisenter implements OnItemClickListener{
+//
+//		@Override
+//		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//				long arg3) {
+//			EasyMotherUtils.goActivity(OrderListActivity.this, OrderDetailActivity.class);
+//			
+//		}
+//
+//		
+//		
+//	}
 
 }

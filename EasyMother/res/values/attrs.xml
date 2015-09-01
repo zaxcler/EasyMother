@@ -15,4 +15,12 @@
         <attr name="endText" format="integer" />
         <attr name="type" format="string" />
     </declare-styleable>
+    <string-array name="change_reson">
+        <item >护理师太懒了</item>
+        <item >护理师收费有点高了</item>
+        <item >护理师不能照顾好宝宝</item>
+        <item >护理师不够细心、经常出错</item>
+        <item >护理师不够专业</item>
+        <item >其他</item>
+    </string-array>
 </resources>

@@ -10,11 +10,13 @@ import org.json.JSONObject;
 
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
+import com.easymother.bean.Order;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.main.my.LoginOrRegisterActivity;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -81,7 +83,7 @@ public class OrderYSandYYSProcess5 extends Activity {
 	private void init() {
 		showData();
 		hetong.loadUrl("file:///android_asset/demo.html");
-		complete.setOnClickListener(new OnClickListener() {
+		complete.setOnClickListener(new OnClickListener(){
 			
 			@Override
 			public void onClick(View arg0) {
@@ -89,11 +91,6 @@ public class OrderYSandYYSProcess5 extends Activity {
 				boolean saveContractStatu=saveContract();
 				//判断是否保存成功
 				boolean saveOrderstatu=saveOrder();
-				if (saveContractStatu && saveOrderstatu) {
-					intent.setClass(OrderYSandYYSProcess5.this, OrderYSandYYSProcess6.class);
-					startActivity(intent);
-				}
-				
 				
 			}
 		});
@@ -177,6 +174,7 @@ public class OrderYSandYYSProcess5 extends Activity {
 			
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+				Toast.makeText(OrderYSandYYSProcess5.this, "连接服务器失败", 0).show();
 				Log.e("onFailure","错误"+ arg2);
 			}
 		});
@@ -244,7 +242,7 @@ public class OrderYSandYYSProcess5 extends Activity {
 			String endDate=format.format(nursebase.getEmploymentEndTime());
 			params.put("realHireEndTime", endDate);
 		}
-			params.put("status","未付款");
+			params.put("status","NOPAY");
 			params.put("realAllAmount", 0);
 			params.put("nurseJobId", nursejob.getId());
 			params.put("isSee", intent.getByteExtra("isSee", (byte) 0));
@@ -267,11 +265,19 @@ public class OrderYSandYYSProcess5 extends Activity {
 				@Override
 				public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 					super.onSuccess(statusCode, headers, response);
+					if (JsonUtils.getRootResult(response).getIsSuccess()) {
+						Order order=JsonUtils.getResult(response, Order.class);
+						order.setPrice(0.01);
+						intent.putExtra("order",order);
+						intent.setClass(OrderYSandYYSProcess5.this, OrderYSandYYSProcess6.class);
+						startActivity(intent);
+					}
 					Log.e("success", response.toString());
 				}
 				@Override
 				public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 					super.onFailure(statusCode, headers, responseString, throwable);
+					Toast.makeText(OrderYSandYYSProcess5.this, "连接服务器失败", 0).show();
 					Log.e("success", responseString);
 				}
 			});

@@ -303,6 +303,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 
 		@Override
 		public void onImageClick(int position, View imageView) {
+			EasyMotherUtils.goActivity(getActivity(), WebViewActivity.class);
 			Toast.makeText(getActivity(), "打开外部链接", 0).show();
 
 		}

@@ -1,6 +1,7 @@
 package com.easymother.bean;
 
 public class Banners {
+	private int id;
 	
 	private String urlType;
 
@@ -14,6 +15,12 @@ public class Banners {
 
 	private String content;
 
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public void setUrlType(String urlType){
 	this.urlType = urlType;
 	}

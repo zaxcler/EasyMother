@@ -1,10 +1,12 @@
 package com.easymother.main.homepage;
 
+import com.alipay.sdk.pay.demo.PayYSorYYSActivity;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 public class OrderYSandYYSProcess6 extends Activity {
 	private Button complete;//
+	private Intent intent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,7 @@ public class OrderYSandYYSProcess6 extends Activity {
 		setContentView(R.layout.process_ysandyys_order_next6);
 		EasyMotherUtils.initTitle(this, "签订成功", false);
 		MyApplication.addActivityToMap(this, "YSprocess");
+		intent=getIntent();
 		findView();
 		init();
 	}
@@ -37,8 +41,8 @@ public class OrderYSandYYSProcess6 extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				
-				EasyMotherUtils.goActivity(OrderYSandYYSProcess6.this, OrderYSandYYSProcess7.class);
+				intent.setClass(OrderYSandYYSProcess6.this, PayYSorYYSActivity.class);
+				startActivity(intent);
 				
 			}
 		});

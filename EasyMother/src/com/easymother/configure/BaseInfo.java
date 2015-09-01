@@ -23,6 +23,8 @@ public class BaseInfo {
 		public final static String ORDER_DETAIL="app/order/toDetail";//查看订单详情
 		public final static String SAVE_COMMENT="app/ordercomment/toComment";//提交评价
 		public final static String CHECK_VIDEO="app/nursejobmedia/findMediaByJobId";//查看视频
+		public final static String ORDER_LIST="app/order/selectOrdersByUserId";//订单列表
+		public final static String CHANGE_ORDER_MSG="app/orderask/save";//修改订单
 		
 			
 		

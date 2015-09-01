@@ -140,11 +140,11 @@ public class CommentActivity extends Activity {
 		if (nursebase.getCurrentAddress()!=null) {
 			nurse_address.setText(nursebase.getCurrentAddress());
 		}
-		if (nursebase.getShowPrice()!=null) {
-			price.setText(nursebase.getShowPrice());
+		if (nursejob.getPrice()!=null) {
+			price.setText(nursejob.getPrice()+"元/月");
 		}
-		if (nursebase.getMarketPrice()!=null) {
-			marketprice.setText(nursebase.getMarketPrice());
+		if (nursejob.getMarketPrice()!=null) {
+			marketprice.setText("市场价："+nursejob.getMarketPrice());
 			marketprice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 		}
 		

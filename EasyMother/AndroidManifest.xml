@@ -29,6 +29,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.alipay.sdk.pay.demo.PayYSorYYSActivity"></activity>
+        <!-- 打开外部链接的webview -->
+        <activity android:name="com.easymother.main.WebViewActivity" ></activity>
         <!-- 月嫂列表 -->
         <activity android:name="com.easymother.main.homepage.CommonListActivity" android:windowSoftInputMode="adjustPan"></activity>
         <!-- 育婴师列表 -->
@@ -128,6 +131,10 @@
         <activity android:name="com.easymother.main.my.VersionActivity" ></activity>
         <!-- 评论列表 -->
         <activity android:name="com.easymother.main.my.CommentListActivity" ></activity>
+        <!-- 更改日期 -->
+        <activity android:name="com.easymother.main.my.ChangeDateActivity" ></activity>
+        <!-- 更换或退订 -->
+        <activity android:name="com.easymother.main.my.ChangeNurseActivity" ></activity>
        
         
         <!-- 护理师空间列表 -->

@@ -40,6 +40,7 @@ public class VideoListActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.video_list);
 		EasyMotherUtils.initTitle(this, "视频列表", false);
+		intent=getIntent();
 		nursebase=(NurseBaseBean) intent.getSerializableExtra("nursebase");
 		nursejob=(NurseJobBean) intent.getSerializableExtra("nursejob");
 		findView();

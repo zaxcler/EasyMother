@@ -22,7 +22,7 @@ public class NurseBaseBean implements Serializable{
 
 	private String currentAddress;
 
-	private String showPrice;
+	private String price;
 
 	private String marketPrice;
 	
@@ -115,11 +115,11 @@ public class NurseBaseBean implements Serializable{
 	}
 
 	public String getShowPrice() {
-		return showPrice;
+		return price;
 	}
 
 	public void setShowPrice(String showPrice) {
-		this.showPrice = showPrice;
+		this.price = showPrice;
 	}
 
 	public String getMarketPrice() {
@@ -198,7 +198,7 @@ public class NurseBaseBean implements Serializable{
 	public String toString() {
 		return "NurseBaseBean [nurseId=" + nurseId + ", realName=" + realName + ", seniority=" + seniority + ", age="
 				+ age + ", birthday=" + birthday + ", hometown=" + hometown + ", image=" + image + ", jobTitle="
-				+ jobTitle + ", currentAddress=" + currentAddress + ", showPrice=" + showPrice + ", marketPrice="
+				+ jobTitle + ", currentAddress=" + currentAddress + ", showPrice=" + price + ", marketPrice="
 				+ marketPrice + ", nums=" + nums + ", title=" + title + ", content=" + content + ", job=" + job
 				+ ", employmentStartTime=" + employmentStartTime + ", employmentEndTime=" + employmentEndTime
 				+ ", collectionId=" + collectionId + ", mobile=" + mobile + "]";
