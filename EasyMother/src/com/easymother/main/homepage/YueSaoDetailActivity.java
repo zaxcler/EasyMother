@@ -10,6 +10,7 @@ import java.util.Locale;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.easymother.bean.Certificate;
 import com.easymother.bean.DetailResult;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
@@ -91,6 +92,15 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 	private TextView text14;//育婴师查看7
 	private TextView text16;//育婴师查看8
 	
+	private TextView message_height;
+	private TextView message_edu;
+	private TextView message_weight;
+	private TextView message_pth;
+	private TextView message_sx;
+	private TextView message_address;
+	private TextView message_xz;
+	private TextView message_time;
+	
 	
 	private NurseJobBean nurseJobBean;//nursejob
 	private NurseBaseBean baseBean;//
@@ -144,6 +154,15 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		check3=(TextView) findViewById(R.id.check3);
 		check4=(TextView) findViewById(R.id.check4);
 		
+		message_height=(TextView) findViewById(R.id.message_height);
+		message_edu=(TextView) findViewById(R.id.message_edu);
+		message_weight=(TextView) findViewById(R.id.message_weight);
+		message_pth=(TextView) findViewById(R.id.message_pth);
+		message_sx=(TextView) findViewById(R.id.message_sx);
+		message_address=(TextView) findViewById(R.id.message_address);
+		message_xz=(TextView) findViewById(R.id.message_xz);
+		message_time=(TextView) findViewById(R.id.message_time);
+		
 		backgroudPhoto=(ImageView) findViewById(R.id.background_photo);
 		nursePhoto=(CircleImageView) findViewById(R.id.photo);
 		nurseName=(TextView) findViewById(R.id.name);
@@ -190,26 +209,18 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 			}
 		});
 		//-------测试数据
-		List<TestBean> beans=new ArrayList<TestBean>();
-		TestBean bean1=new TestBean();
+//		List<Certificate> beans=new ArrayList<Certificate>();
 		
-		beans.add(bean1);
-		beans.add(bean1);
-		beans.add(bean1);
-		beans.add(bean1);
-		beans.add(bean1);
-		beans.add(bean1);
-		beans.add(bean1);
-		beans.add(bean1);
 		//----------后期改为网络访问	
-		YueSaoGridViewAdapter adapter=new YueSaoGridViewAdapter(this, beans, R.layout.activity_yuesao_gridview_item);
-		gridView.setAdapter(adapter);
+//		List<Certificate> beans=new ArrayList<Certificate>();
+//		YueSaoGridViewAdapter adapter=new YueSaoGridViewAdapter(this, beans, R.layout.activity_yuesao_gridview_item);
+//		gridView.setAdapter(adapter);
 		//-------测试数据
-				List<TestBean> beans1=new ArrayList<TestBean>();
-				beans1.add(bean1);
-				beans1.add(bean1);
-		EmployerCommentAdapter commentAdapter=new EmployerCommentAdapter(this, beans1, R.layout.comment_item);
-		mListview.setAdapter(commentAdapter);
+//				List<TestBean> beans1=new ArrayList<TestBean>();
+//				beans1.add(bean1);
+//				beans1.add(bean1);
+//		EmployerCommentAdapter commentAdapter=new EmployerCommentAdapter(this, beans1, R.layout.comment_item);
+//		mListview.setAdapter(commentAdapter);
 		
 		order.setOnClickListener(this);
 		video.setOnClickListener(this);
@@ -307,7 +318,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 			}
 			nurseAge.setText(baseBean.getAge()+"岁");
 			nurseWorkEx.setText("从业"+nurseJobBean.getSeniority()+"年");
-			nurseLevel.setText(nurseJobBean.getLevel()+"");
+			nurseLevel.setText(nurseJobBean.getJobTitle()+"");
 			nurseCurrentPrice.setText("￥"+nurseJobBean.getPrice()+"元/26天");
 			
 			nurseMarketPrice.setText("市场价："+nurseJobBean.getMarketPrice()+"元/26天");
@@ -322,6 +333,39 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		}
 		like.setText(result.getScannerAmount()+"");
 		comment_num.setText("有"+result.getOrdercommentAmunt()+"位雇主对她进行了评价");
+		/**
+		 * 绑定证书部分
+		 */
+		if (result.getCertificates()!=null) {
+			List<Certificate> certificates=result.getCertificates();
+			YueSaoGridViewAdapter adapter=new YueSaoGridViewAdapter(this, certificates, R.layout.activity_yuesao_gridview_item);
+			gridView.setAdapter(adapter);
+		}
+		
+		/**
+		 * 绑定最下面nursebase部分
+		 */
+		if (baseBean.getHeight()!=null) {
+			message_height.setText("身高："+baseBean.getHeight()+"cm");
+		}
+		if (baseBean.getEducation()!=null) {
+			message_edu.setText("文化程度："+baseBean.getEducation());
+		}
+		if (baseBean.getWeight()!=null) {
+			message_weight.setText("体重："+baseBean.getWeight()+"kg");
+		}
+		if (baseBean.getProficiency()!=null) {
+			message_pth.setText("普通话水平："+baseBean.getProficiency());
+		}
+		if (baseBean.getYearLunar()!=null) {
+			message_sx.setText("生肖："+baseBean.getYearLunar());
+		}
+//		if (baseBean.get!=null) {
+//			message_xz.setText("现居地址："+baseBean.getCurrentAddress());
+//		}
+		if (baseBean.getSeniority()!=null) {
+			message_time.setText("工作经验："+baseBean.getSeniority()+"年");
+		}
 		
 	}
 

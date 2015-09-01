@@ -9,7 +9,7 @@
     
     <Spinner android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spiiner"
+        android:id="@+id/spinner"
         android:background="@drawable/white_solid2"
         android:layout_marginBottom="@dimen/dp_10"
         android:layout_marginLeft="@dimen/dp_10"

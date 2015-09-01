@@ -20,7 +20,7 @@ public class DetailResult {
 
 		private List<OrderComments> ordercommentss ;
 
-		private List<Certificates> certificatess ;
+		private List<Certificate> certificatess ;
 
 		private NurseBaseBean nursebase;
 
@@ -72,10 +72,10 @@ public class DetailResult {
 		public List<OrderComments> getOrdercomments(){
 		return this.ordercommentss;
 		}
-		public void setCertificates(List<Certificates> certificates){
+		public void setCertificates(List<Certificate> certificates){
 		this.certificatess = certificates;
 		}
-		public List<Certificates> getCertificates(){
+		public List<Certificate> getCertificates(){
 		return this.certificatess;
 		}
 		public void setNursebase(NurseBaseBean nursebase){

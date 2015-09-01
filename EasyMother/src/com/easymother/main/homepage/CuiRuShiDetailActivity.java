@@ -58,8 +58,8 @@ public class CuiRuShiDetailActivity extends Activity implements OnClickListener{
 		beans.add(bean1);
 		beans.add(bean1);
 		//----------后期改为网络访问	
-		YueSaoGridViewAdapter adapter=new YueSaoGridViewAdapter(this, beans, R.layout.activity_yuesao_gridview_item);
-		gridView.setAdapter(adapter);
+//		YueSaoGridViewAdapter adapter=new YueSaoGridViewAdapter(this, beans, R.layout.activity_yuesao_gridview_item);
+//		gridView.setAdapter(adapter);
 		//-------测试数据
 				List<TestBean> beans1=new ArrayList<TestBean>();
 				beans1.add(bean1);
