@@ -56,14 +56,14 @@
 
         <TextView
             android:id="@+id/nannan_name"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_200"
             android:layout_height="wrap_content"
-            
             android:textColor="@color/boroblacktext"
             android:layout_alignBaseline="@+id/textView3"
             android:layout_alignBottom="@+id/textView3"
             android:layout_alignParentRight="true"
             android:layout_marginRight="21dp"
+            android:gravity="right"
             android:paddingBottom="@dimen/dp_10"
             android:paddingTop="@dimen/dp_10"
             android:text="Angle" />
@@ -100,7 +100,10 @@
 
         <TextView
             android:id="@+id/nannan_sex"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_200"
+            android:gravity="right"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"
             android:textColor="@color/boroblacktext"
             android:layout_height="wrap_content"
             android:layout_above="@+id/View01"
@@ -119,7 +122,10 @@
 
         <TextView
             android:id="@+id/nannan_birthday"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_200"
+            android:gravity="right"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"
             android:textColor="@color/boroblacktext"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView6"

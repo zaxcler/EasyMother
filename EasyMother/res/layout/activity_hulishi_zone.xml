@@ -136,13 +136,10 @@
                     android:textSize="@dimen/sp_10" />
             </RelativeLayout>
 
-            <!--
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/galley1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </android.support.v7.widget.RecyclerView>
-            -->
+            <Gallery 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/gallery"/>
 
             <com.easymother.customview.MyListview
                 android:id="@+id/listview"

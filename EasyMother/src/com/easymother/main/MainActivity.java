@@ -1,9 +1,16 @@
 package com.easymother.main;
 
 
-import com.easymother.configure.BaseInfo;
+import java.io.FileNotFoundException;
 
+import com.easymother.configure.BaseInfo;
+import com.easymother.utils.EasyMotherUtils;
+
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -202,26 +209,29 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	}
 	
 	@Override
-	protected void onActivityResult(int requestCode, int resultCod, Intent arg2) {
-		super.onActivityResult(requestCode, resultCod, arg2);
-		switch (requestCode) {
-		case BaseInfo.REQUEST_CODE_LOGIN:
-			switch (resultCod) {
-			case BaseInfo.RESULT_CODE_LOGIN_SUCCESS:
-				
-				break;
-
-			default:
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode==Activity.RESULT_OK) {
+			switch (requestCode) {
+			case BabyTiemFragment.CHOOSE_PHOTO:
+				try {
+					Uri uri=data.getData();
+					BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();  
+					bitmapOptions.inJustDecodeBounds = true;
+					  bitmapOptions.inSampleSize = 4;  
+					  bitmapOptions.inJustDecodeBounds = false;
+					Bitmap  bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri), null , bitmapOptions);
+					EasyMotherUtils.uploadPhoto(bitmap,BaseInfo.UPLOADPHTO, "baby_background");
+					BabyTiemFragment.background.setImageBitmap(bitmap);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			}
-			
-			break;
-
-		default:
-			break;
 		}
-		
 	}
+	
 	
 
 }

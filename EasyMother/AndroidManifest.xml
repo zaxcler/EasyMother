@@ -45,6 +45,8 @@
         <activity android:name="com.easymother.main.babytime.BabyTimeEditActivity" android:windowSoftInputMode="adjustPan"></activity>
         <!-- 囡囡信息 -->
         <activity android:name="com.easymother.main.babytime.BabyTimeInfomationActivity" android:windowSoftInputMode="adjustPan"></activity>
+        <!-- 囡囡信息修改 -->
+        <activity android:name="com.easymother.main.babytime.ChanegBabyInfo" android:windowSoftInputMode="adjustPan"></activity>
       
         
         

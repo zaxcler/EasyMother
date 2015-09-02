@@ -414,7 +414,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.add:
 			RequestParams params=new RequestParams();
-			params.put("jobId", id);
+			params.put("jobId", nurseJobBean.getId());
 			params.put("startTime", intent.getStringExtra("startTime"));
 			params.put("endTime", intent.getStringExtra("endTime"));
 			NetworkHelper.doGet(BaseInfo.ADD_TO_WISH, params, new JsonHttpResponseHandler(){

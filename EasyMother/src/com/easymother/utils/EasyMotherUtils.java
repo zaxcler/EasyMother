@@ -13,8 +13,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.alibaba.fastjson.JSON;
+import com.easymother.bean.BabyInfoBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
+import com.easymother.main.BabyTiemFragment;
 import com.easymother.main.R;
 import com.easymother.main.homepage.CuiRuiShiProjectActivity;
 import com.easymother.main.homepage.OrderCRSProcess;
@@ -297,6 +299,53 @@ public class EasyMotherUtils {
 						}
 						if ("baby_image".equals(type)) {
 							MyApplication.editor.putString("baby_image", photos.get(0)).commit();
+							RequestParams params=new RequestParams();
+							params.put("babyImage", photos.get(0));
+							params.put("userId", MyApplication.preferences.getInt("id", 0));
+							params.put("id", MyApplication.preferences.getInt("baby_id", 0));
+							if ( MyApplication.preferences.getInt("baby_id", 0)==0) {
+								params.put("id","");
+							}else {
+								params.put("id",MyApplication.preferences.getInt("baby_id", 0));
+							}
+							NetworkHelper.doGet(BaseInfo.BABYTIME_SAVEINFO, params, new JsonHttpResponseHandler(){
+								public void onSuccess(int statusCode, Header[] headers, org.json.JSONObject response) {
+									if (JsonUtils.getRootResult(response).getIsSuccess()) {
+										Log.e("图片名字上传成功", response.toString());
+										BabyInfoBean babyInfoBean=JsonUtils.getResult(response, BabyInfoBean.class);
+										MyApplication.editor.putInt("baby_id",babyInfoBean.getId()).commit();
+									}
+								};
+								public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+									Log.e("图片名字上传失败", responseString);
+								};
+							});
+						}
+						if ("baby_background".equals(type)) {
+							
+							MyApplication.editor.putString("baby_background", photos.get(0)).commit();
+							RequestParams params=new RequestParams();
+							params.put("background", photos.get(0));
+							params.put("userId", MyApplication.preferences.getInt("id", 0));
+							if ( MyApplication.preferences.getInt("baby_id", 0)==0) {
+								params.put("id","");
+							}else {
+								params.put("id",MyApplication.preferences.getInt("baby_id", 0));
+							}
+							
+							NetworkHelper.doGet(BaseInfo.BABYTIME_SAVEINFO, params, new JsonHttpResponseHandler(){
+								public void onSuccess(int statusCode, Header[] headers, org.json.JSONObject response) {
+									if (JsonUtils.getRootResult(response).getIsSuccess()) {
+										Log.e("图片名字上传成功", response.toString());
+										BabyInfoBean babyInfoBean=JsonUtils.getResult(response, BabyInfoBean.class);
+										MyApplication.editor.putInt("baby_id",babyInfoBean.getId()).commit();
+									}
+								};
+								public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+									Log.e("图片名字上传失败", responseString);
+								};
+								
+							});
 						}
 						if (type==null) {
 							MyApplication.editor.putString("upload_images", photos.get(0)).commit();
@@ -306,12 +355,12 @@ public class EasyMotherUtils {
 					}
 					
 					@Override
-					public void onFailure(int statusCode, Header[] headers, Throwable throwable,
-							JSONArray errorResponse) {
-						super.onFailure(statusCode, headers, throwable, errorResponse);
+					public void onFailure(int statusCode, Header[] headers, String responseString,
+							Throwable throwable) {
+						super.onFailure(statusCode, headers, responseString, throwable);
 						uploadstatu=false;
 						Log.e("onFailure——uploadstatu", uploadstatu+"");
-						Log.e("onFailure——response", errorResponse.toString()+"");
+						Log.e("onFailure——response", responseString);
 					}
 						
 					

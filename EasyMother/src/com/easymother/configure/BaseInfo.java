@@ -25,6 +25,15 @@ public class BaseInfo {
 		public final static String CHECK_VIDEO="app/nursejobmedia/findMediaByJobId";//查看视频
 		public final static String ORDER_LIST="app/order/selectOrdersByUserId";//订单列表
 		public final static String CHANGE_ORDER_MSG="app/orderask/save";//修改订单
+
+		
+		
+		
+		
+		
+		public final static String BABYTIME_INDEX="app/babyinfo/toIndex";//囡囡记首页
+		public final static String BABYTIME_DETAIL="app/babyinfo/toDetail";//囡囡信息
+		public final static String BABYTIME_SAVEINFO="app/babyinfo/save";//囡囡记保存囡囡记信息
 		
 			
 		

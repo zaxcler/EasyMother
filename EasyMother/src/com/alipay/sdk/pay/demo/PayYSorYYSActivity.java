@@ -210,7 +210,7 @@ public class PayYSorYYSActivity extends FragmentActivity {
 		orderInfo += "&total_fee=" + "\"" + price + "\"";
 
 		// 服务器异步通知页面路径
-		orderInfo += "&notify_url=" + "\"" + "http://zhonglv.hzlianhai.com/easyMother/ordernotifyurl" + "\"";
+		orderInfo += "&notify_url=" + "\"" + "http://zhonglv.hzlianhai.com/easyMother/app/ordernotifyurl" + "\"";
 
 		// 服务接口名称， 固定值
 		orderInfo += "&service=\"mobile.securitypay.pay\"";

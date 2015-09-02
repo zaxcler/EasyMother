@@ -10,6 +10,7 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.utils.L;
 
 import android.app.Activity;
 import android.app.Application;
@@ -62,6 +63,7 @@ public class MyApplication  extends Application{
 				.tasksProcessingOrder(QueueProcessingType.LIFO)
 				.writeDebugLogs() // Remove for release app
 				.build();
+		L.disableLogging();
 		ImageLoader.getInstance().init(config);
 	}
 	

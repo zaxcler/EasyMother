@@ -303,7 +303,7 @@ public class CommonListActivity extends Activity {
 		//将传入的参数保存到本地params对象中
 		params.put("pageNo","1");
 		params.put("pageSize","10");
-		
+		params.put("sorting", "A");
 		
 		NetworkHelper.doGet(BaseInfo.SEARCH_URL, params, new JsonHttpResponseHandler(){
 			@Override

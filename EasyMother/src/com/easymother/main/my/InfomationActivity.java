@@ -111,7 +111,6 @@ public class InfomationActivity extends Activity implements OnClickListener {
 					takephoto.setOnClickListener(lisenter);
 					choosephot.setOnClickListener(lisenter);
 					cancle.setOnClickListener(lisenter);
-
 				}
 			});
 			popupWindow.showAtLocation(v, Gravity.BOTTOM
@@ -215,6 +214,7 @@ public class InfomationActivity extends Activity implements OnClickListener {
 			hospital.setText(MyApplication.preferences.getString("hospitalName", ""));
 			address.setText(MyApplication.preferences.getString("address", ""));
 			time.setText(MyApplication.preferences.getString("preDate", ""));
+			
 			
 		}
 

@@ -13,13 +13,7 @@
         android:gravity="center_vertical" 
         android:background="@color/white">
 
-        <ImageView
-            android:id="@+id/more"
-            android:layout_width="@dimen/dp_32"
-            android:layout_height="@dimen/dp_32"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_5"
-            android:src="@drawable/camera" />
+        
 
         <TextView
             android:id="@+id/title"
@@ -63,8 +57,8 @@
 
     <com.easymother.customview.CircleImageView
         android:id="@+id/circleImageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp_72"
+        android:layout_height="@dimen/dp_72"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/view1"
         android:layout_marginLeft="18dp"
@@ -72,23 +66,24 @@
         android:src="@drawable/user_photo" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/baby_name"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/baby_image"
         android:textSize="@dimen/sp_16"
+        android:text="请登录"
         android:layout_toRightOf="@+id/circleImageView1"
-        android:text="Angle" />
+         />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/days"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_alignLeft="@id/textView1"
+        android:layout_below="@+id/baby_name"
+        android:layout_alignLeft="@id/baby_name"
         android:layout_toRightOf="@+id/circleImageView1"
-        android:text="出生️12天" />
+         />
 
     <ImageView
         android:id="@+id/add_babytime"
