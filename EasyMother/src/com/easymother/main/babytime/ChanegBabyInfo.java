@@ -81,7 +81,7 @@ public class ChanegBabyInfo extends Activity  {
 						params.put("gender", text.getText().toString().trim());
 					}
 					
-					NetworkHelper.doGet(BaseInfo.BABYTIME_SAVEINFO, params, new JsonHttpResponseHandler(){
+					NetworkHelper.doGet(BaseInfo.BABYINFO_SAVEINFO, params, new JsonHttpResponseHandler(){
 						@Override
 						public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 							super.onSuccess(statusCode, headers, response);

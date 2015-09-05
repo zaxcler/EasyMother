@@ -6,7 +6,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.easymother.bean.UserInfo;
+import com.easymother.main.R;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
@@ -26,6 +28,9 @@ public class MyApplication  extends Application{
 	private static int SCREEN_HEIGHT;//屏幕高度
 	public static SharedPreferences preferences;//本地保存用户信息
 	public static SharedPreferences.Editor editor;//信息编辑器
+	
+	public static DisplayImageOptions options_image;//下载图片的默认配置
+	public static DisplayImageOptions options_photo;//下载图片的默认配置
 	
 	private static Map<String,Set<Activity>> activityMAP;
 	
@@ -65,6 +70,9 @@ public class MyApplication  extends Application{
 				.build();
 		L.disableLogging();
 		ImageLoader.getInstance().init(config);
+		options_image=new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.default_image).build();
+		options_photo=new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.default_photo).build();
+		
 	}
 	
 	public static int getScreen_width() {

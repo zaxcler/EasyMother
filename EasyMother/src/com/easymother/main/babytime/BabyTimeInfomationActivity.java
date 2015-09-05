@@ -31,6 +31,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -86,7 +87,7 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 		nannan_birthday.setOnClickListener(this);
 		RequestParams params=new RequestParams();
 		params.put("id", MyApplication.preferences.getInt("baby_id", 0));
-		NetworkHelper.doGet(BaseInfo.BABYTIME_DETAIL, params, new JsonHttpResponseHandler(){
+		NetworkHelper.doGet(BaseInfo.BABYINFO_DETAIL, params, new JsonHttpResponseHandler(){
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
@@ -153,10 +154,10 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 			intent.putExtra("type", "nannan_sex");
 			startActivity(intent);
 			break;
-		case R.id.nannan_birthday:
-			intent.putExtra("type", "nannan_birthday");
-			startActivity(intent);
-			break;
+//		case R.id.nannan_birthday:
+//			DatePicker picker=new DatePicker(this);
+//			picker.setOnClickListener(l);
+//			break;
 
 		}
 

@@ -41,11 +41,12 @@ public class TimeCounter {
 	 * @param endDate
 	 * @return
 	 */
-	public static int countTime(Date begaindate,Date endDate){
+	public static int countTimeOfDay(Date begaindate,Date endDate){
 		long countday=(endDate.getTime()-begaindate.getTime());
 		int day=(int)countday/1000/3600/24;
 		return day;
 		
 	}
-
+	
+	
 }

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/commontitle" />
-
+    <!--
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:id="@+id/pulltoreflash"
         android:layout_width="match_parent"
@@ -20,9 +20,18 @@
         <com.easymother.customview.MyListview
             android:id="@+id/reflashlistview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:divider="@null">
         </com.easymother.customview.MyListview>
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+    -->
+
+    <ListView
+        android:layout_below="@id/title1"
+        android:id="@+id/reflashlistview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null" >
+    </ListView>
 
 </RelativeLayout>

@@ -32,8 +32,10 @@ public class BaseInfo {
 		
 		
 		public final static String BABYTIME_INDEX="app/babyinfo/toIndex";//囡囡记首页
-		public final static String BABYTIME_DETAIL="app/babyinfo/toDetail";//囡囡信息
-		public final static String BABYTIME_SAVEINFO="app/babyinfo/save";//囡囡记保存囡囡记信息
+		public final static String BABYINFO_DETAIL="app/babyinfo/toDetail";//囡囡信息
+		public final static String BABYINFO_SAVEINFO="app/babyinfo/save";//囡囡记保存囡囡记信息
+		public final static String BABYTIME_SAVEINFO="app/babytime/save";//囡囡记保存囡囡日志
+		public final static String BABYTIME_LIST="app/babytime/findByUserId";//查看囡囡记列表
 		
 			
 		

@@ -5,6 +5,7 @@ import com.easymother.utils.EasyMotherUtils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -27,12 +28,14 @@ public class CuiRuiShiProjectActivity extends Activity implements OnClickListene
 	private LinearLayout layout6;
 	private LinearLayout layout7;
 	
+	private Intent intent;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_cuirushi_project);
-		
+		intent=getIntent();
 		findView();
 		init();
 		
@@ -64,24 +67,31 @@ public class CuiRuiShiProjectActivity extends Activity implements OnClickListene
 		
 		switch (arg0.getId()) {
 		case R.id.layout1:
+			intent.putExtra("CRS_Project", 1);
 			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 		case R.id.layout2:
+			intent.putExtra("CRS_Project", 2);
 			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 		case R.id.layout3:
+			intent.putExtra("CRS_Project", 3);
 			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 		case R.id.layout4:
+			intent.putExtra("CRS_Project", 4);
 			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 		case R.id.layout5:
+			intent.putExtra("CRS_Project", 5);
 			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 		case R.id.layout6:
+			intent.putExtra("CRS_Project", 6);
 			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 		case R.id.layout7:
+			intent.putExtra("CRS_Project", 7);
 			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
 			break;
 			

@@ -14,6 +14,7 @@ import com.easymother.bean.Certificate;
 import com.easymother.bean.DetailResult;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
+import com.easymother.bean.Order;
 import com.easymother.bean.TestBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.customview.CircleImageView;
@@ -35,6 +36,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,6 +44,7 @@ import android.view.Window;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,7 +58,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 	private RelativeLayout video;//点击显示video列表
 	private RelativeLayout kongjian;//点击显示护理师空间
 	
-	private TextView order;//预约
+	private TextView ordertext;//预约
 	private TextView addtowish;//添加到心愿单
 	private TextView submit_comment;//评价
 	private int id;//护理师id
@@ -79,6 +82,10 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 	private TextView check_all;//查看所有信件
 	private LinearLayout yuesaoskills;//月嫂skills
 	private LinearLayout yuyingshiskills;//育婴师skills
+	private LinearLayout cuirushiskills;//催乳师skills
+	private LinearLayout ysoryys;//月嫂或者育婴师的价格
+	private LinearLayout cuishi_stars;//催乳师的星星等级
+	
 	private TextView check1;//查看1
 	private TextView check2;//查看2
 	private TextView check3;//查看3
@@ -104,10 +111,12 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 	
 	private NurseJobBean nurseJobBean;//nursejob
 	private NurseBaseBean baseBean;//
-	
+	private ArrayList<Order> orders;//订单 传递到后面的订单流程里
 	private boolean hasVideo=false;//是否有视频
 	private boolean hasKongjian=false;//是否有空间
 	private Intent intent;
+	
+	private RatingBar ratingBar1;//催乳师的等级
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +142,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		id=intent.getIntExtra("id", 0);
 		job=intent.getStringExtra("job");
 		
+		
 		findView();
 		init();
 	}
@@ -143,7 +153,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		mListview=(MyListview) findViewById(R.id.comment);
 		video=(RelativeLayout) findViewById(R.id.video);
 		kongjian=(RelativeLayout) findViewById(R.id.kongjian);
-		order=(TextView) findViewById(R.id.buy_now);
+		ordertext=(TextView) findViewById(R.id.buy_now);
 		submit_comment=(TextView) findViewById(R.id.submit_comment);
 		addtowish=(TextView) findViewById(R.id.add);
 		like=(TextView) findViewById(R.id.like);
@@ -179,16 +189,21 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		
 		yuesaoskills=(LinearLayout) findViewById(R.id.yuesaoskills);
 		yuyingshiskills=(LinearLayout) findViewById(R.id.yuyingshiskills);
+		cuirushiskills=(LinearLayout) findViewById(R.id.cuirushiskills);
+		ysoryys=(LinearLayout) findViewById(R.id.ysoryys);
+		cuishi_stars=(LinearLayout) findViewById(R.id.cuishi_stars);
+		ratingBar1=(RatingBar) findViewById(R.id.ratingBar1);
 		
+		//育婴师的技能
 		text1=(TextView) findViewById(R.id.text1);
 		text4=(TextView) findViewById(R.id.text4);
 		text6=(TextView) findViewById(R.id.text6);
-		text1=(TextView) findViewById(R.id.text1);
-		text1=(TextView) findViewById(R.id.text1);
-		text1=(TextView) findViewById(R.id.text1);
-		text1=(TextView) findViewById(R.id.text1);
-		text1=(TextView) findViewById(R.id.text1);
-		text1=(TextView) findViewById(R.id.text1);
+		text8=(TextView) findViewById(R.id.text8);
+		text10=(TextView) findViewById(R.id.text10);
+		text12=(TextView) findViewById(R.id.text12);
+		text14=(TextView) findViewById(R.id.text14);
+		text16=(TextView) findViewById(R.id.text16);
+		
 		
 	}
 	private void init() {
@@ -222,34 +237,16 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 //		EmployerCommentAdapter commentAdapter=new EmployerCommentAdapter(this, beans1, R.layout.comment_item);
 //		mListview.setAdapter(commentAdapter);
 		
-		order.setOnClickListener(this);
+		ordertext.setOnClickListener(this);
 		video.setOnClickListener(this);
 		addtowish.setOnClickListener(this);
 		submit_comment.setOnClickListener(this);
 		allcomment.setOnClickListener(this);
 		check_all.setOnClickListener(this);
+		onSkillsClicklisener clickListener=new onSkillsClicklisener();
 		if ("YS".equals(job)) {
 			yuyingshiskills.setVisibility(View.GONE);
-			OnClickListener clickListener=new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					switch (v.getId()) {
-					case R.id.check1:
-						EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
-						break;
-					case R.id.check2:
-						EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
-						break;
-					case R.id.check3:
-						EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
-						break;
-					case R.id.check4:
-						EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
-						break;
-					}
-				}
-			};
+			cuirushiskills.setVisibility(View.GONE);
 			check1.setOnClickListener(clickListener);
 			check2.setOnClickListener(clickListener);
 			check3.setOnClickListener(clickListener);
@@ -257,12 +254,69 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		}
 		if ("YYS".equals(job)) {
 			yuesaoskills.setVisibility(View.GONE);
+			cuirushiskills.setVisibility(View.GONE);
+			text1.setOnClickListener(clickListener);
+			text4.setOnClickListener(clickListener);
+			text6.setOnClickListener(clickListener);
+			text8.setOnClickListener(clickListener);
+			text10.setOnClickListener(clickListener);
+			text12.setOnClickListener(clickListener);
+			text14.setOnClickListener(clickListener);
+			text16.setOnClickListener(clickListener);
 			
-			
+		}
+		if ("CRS".equals(job)) {
+			yuesaoskills.setVisibility(View.GONE);
+			yuesaoskills.setVisibility(View.GONE);
 		}
 		
 		kongjian.setOnClickListener(this);
 		
+		
+	}
+	
+	private class onSkillsClicklisener implements OnClickListener{
+
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.check1:
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+				break;
+			case R.id.check2:
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+				break;
+			case R.id.check3:
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+				break;
+			case R.id.check4:
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+				break;
+			case R.id.text1:
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+				break;
+			case R.id.text4:
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+				break;
+			case R.id.text6:
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+				break;
+			case R.id.text8:
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+				break;
+			case R.id.text10:
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+				break;
+			case R.id.text12:
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+			case R.id.text14:
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+				break;
+			case R.id.text16:
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+				break;
+			}
+		}
 		
 	}
 
@@ -276,6 +330,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		 */
 		nurseJobBean=result.getNursejob();
 		baseBean=result.getNursebase();
+		orders=(ArrayList<Order>) result.getOrders();
 		if (baseBean==null) {
 			Toast.makeText(this, "没有baseBean信息", 0).show();
 			return;
@@ -293,6 +348,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 			Log.e("startTime", startTime.toString());
 			baseBean.setEmploymentStartTime(startTime);
 			baseBean.setEmploymentEndTime(endTime);
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -310,18 +366,31 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 //			}
 			if (nurseJobBean.getJob()!=null) {
 				if ("YS".equals(nurseJobBean.getJob())) {
+					ratingBar1.setVisibility(View.GONE);
 					nurseType.setText("月嫂");
+					nurseLevel.setText(nurseJobBean.getJobTitle()+"");
+					nurseCurrentPrice.setText("￥"+nurseJobBean.getPrice()+"元/26天");
+					nurseMarketPrice.setText("市场价："+nurseJobBean.getMarketPrice()+"元/26天");
 				}
 				if ("YYS".equals(nurseJobBean.getJob())) {
+					ratingBar1.setVisibility(View.GONE);
 					nurseType.setText("育婴师");
+					nurseLevel.setText(nurseJobBean.getJobTitle()+"");
+					nurseCurrentPrice.setText("￥"+nurseJobBean.getPrice()+"元/26天");
+					nurseMarketPrice.setText("市场价："+nurseJobBean.getMarketPrice()+"元/26天");
+				}
+				if ("CRS".equals(nurseJobBean.getJob())) {
+					ysoryys.setVisibility(View.GONE);
+					nurseType.setText("催乳师");
+					if (nurseJobBean.getLevel()!=null) {
+						ratingBar1.setProgress(nurseJobBean.getLevel());
+					}else {
+						ratingBar1.setProgress(0);
+					}
 				}
 			}
 			nurseAge.setText(baseBean.getAge()+"岁");
 			nurseWorkEx.setText("从业"+nurseJobBean.getSeniority()+"年");
-			nurseLevel.setText(nurseJobBean.getJobTitle()+"");
-			nurseCurrentPrice.setText("￥"+nurseJobBean.getPrice()+"元/26天");
-			
-			nurseMarketPrice.setText("市场价："+nurseJobBean.getMarketPrice()+"元/26天");
 			nurseMarketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 			nurseAddress.setText("现居地："+baseBean.getCurrentAddress());
 			nurseHometown.setText("籍贯："+baseBean.getHometown());
@@ -373,12 +442,18 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View arg0) {
 		Intent intent=new Intent();
+		intent.putParcelableArrayListExtra("orders",  orders);
+		intent.putExtra("nursebase", baseBean);
+		intent.putExtra("nursejob", nurseJobBean);
 		switch (arg0.getId()) {
 		
 		case R.id.buy_now:
-			intent.setClass(this, OrderYSandYYSProcess.class);
-			intent.putExtra("nursebase", baseBean);
-			intent.putExtra("nursejob", nurseJobBean);
+			if ("YS".equals(nurseJobBean.getJob())||"YYS".equals(nurseJobBean.getJob())) {
+				intent.setClass(this, OrderYSandYYSProcess.class);
+			}
+			if ("CRS".equals(nurseJobBean.getJob())) {
+				intent.setClass(this, CuiRuiShiProjectActivity.class);
+			}
 			startActivity(intent);
 			break;
 
@@ -394,8 +469,6 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 //			}
 			//测试
 			intent.setClass(this, VideoListActivity.class);
-			intent.putExtra("nursebase", baseBean);
-			intent.putExtra("nursejob", nurseJobBean);
 			startActivity(intent);
 			break;
 			

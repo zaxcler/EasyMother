@@ -80,7 +80,7 @@ public class OrderYSandYYSProcess1 extends Activity {
 			String end = format.format(enddate);
 			startTime.setText(start);
 			endTime.setText(end);
-			int countday = TimeCounter.countTime(startdate, enddate);
+			int countday = TimeCounter.countTimeOfDay(startdate, enddate);
 			countTime.setText("共计" + countday + "天");
 		}
 		if (!isMeet) {

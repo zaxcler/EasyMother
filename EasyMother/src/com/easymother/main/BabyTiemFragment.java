@@ -129,6 +129,7 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 		String birthy=dateFormat.format(result.getBabyInfo().getBirthday());
 			MyApplication.editor.putString("nannan_birthday",birthy);
 		}
+		MyApplication.editor.commit();
 		String backgroundimage=result.getBabyInfo().getBackground();
 		if (backgroundimage!=null&&!"".equals(backgroundimage)) {
 			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+backgroundimage, background);

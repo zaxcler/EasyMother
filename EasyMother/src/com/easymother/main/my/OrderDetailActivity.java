@@ -250,7 +250,7 @@ public class OrderDetailActivity extends Activity {
 		if (orderDetail.getOrder().getAllServerPrice() != null || orderDetail.getOrder().getRealHireStartTime() != null
 				|| orderDetail.getOrder().getRealHireEndTime() != null) {
 			Double allPrice = orderDetail.getOrder().getAllServerPrice();
-			int day = TimeCounter.countTime(orderDetail.getOrder().getRealHireStartTime(),
+			int day = TimeCounter.countTimeOfDay(orderDetail.getOrder().getRealHireStartTime(),
 					orderDetail.getOrder().getRealHireEndTime());
 			// 转换成两位小数点
 			DecimalFormat format = new DecimalFormat(".##");

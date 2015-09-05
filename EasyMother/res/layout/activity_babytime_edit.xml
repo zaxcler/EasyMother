@@ -20,8 +20,17 @@
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:background="@color/white">
+        <GridView 
+            android:id="@+id/gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="3"
+            android:horizontalSpacing="@dimen/dp_2"
+            android:verticalSpacing="@dimen/dp_2">
+            
+        </GridView>
         <ImageView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,14 +38,7 @@
             android:layout_margin="@dimen/dp_10"
             android:src="@drawable/babytime_add1"
             />
-        <ImageView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/add_photo"	
-            android:layout_gravity="bottom"
-            android:layout_margin="@dimen/dp_10"
-            android:src="@drawable/diandian"
-            />
+        
     </LinearLayout>
 
 </LinearLayout>

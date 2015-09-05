@@ -3,8 +3,10 @@ package com.easymother.utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -33,6 +35,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.provider.Settings.System;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -190,7 +193,10 @@ public class EasyMotherUtils {
 			public void onClick(View arg0) {
 				dialog.dismiss();
 				if (activity instanceof CuiRuiShiProjectActivity) {
-					EasyMotherUtils.goActivity(activity,OrderCRSProcess.class);
+					//获取activity传递过来的intent并传递到OrderCRSProcess去
+					Intent intent=activity.getIntent();
+					intent.setClass(activity,OrderCRSProcess.class);
+					activity.startActivity(intent);
 					activity.finish();
 				}
 				
@@ -202,38 +208,42 @@ public class EasyMotherUtils {
 	}
 	/**
 	 * 获取时间表
+	 * @param day 0表示当天 1表示明天 2表示后天 3表示大后天
 	 * @return
 	 */
-	public static List<String> getTime(){
+	public static List<String> getTime(int day){
+//		Date currentDate=new Date(java.lang.System.currentTimeMillis());
+		Calendar calendar=Calendar.getInstance(Locale.CHINA);
+		String basetime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DAY_OF_MONTH)+1+day)+" ";
 		list=new ArrayList<String>();
-		list.add("8:00");
-		list.add("8:30");
-		list.add("9:00");
-		list.add("9:30");
-		list.add("10:00");
-		list.add("10:30");
-		list.add("11:00");
-		list.add("11:30");
-		list.add("12:00");
-		list.add("12:30");
-		list.add("13:00");
-		list.add("13:30");
-		list.add("14:00");
-		list.add("14:30");
-		list.add("15:00");
-		list.add("15:30");
-		list.add("16:00");
-		list.add("16:30");
-		list.add("17:00");
-		list.add("17:30");
-		list.add("18:00");
-		list.add("18:30");
-		list.add("19:00");
-		list.add("19:30");
-		list.add("20:00");
-		list.add("20:30");
-		list.add("21:00");
-		list.add("20:30");
+		list.add(basetime+"8:00:00");
+		list.add(basetime+"8:30:00");
+		list.add(basetime+"9:00:00");
+		list.add(basetime+"9:30:00");
+		list.add(basetime+"10:00:00");
+		list.add(basetime+"10:30:00");
+		list.add(basetime+"11:00:00");
+		list.add(basetime+"11:30:00");
+		list.add(basetime+"12:00:00");
+		list.add(basetime+"12:30:00");
+		list.add(basetime+"13:00:00");
+		list.add(basetime+"13:30:00");
+		list.add(basetime+"14:00:00");
+		list.add(basetime+"14:30:00");
+		list.add(basetime+"15:00:00");
+		list.add(basetime+"15:30:00");
+		list.add(basetime+"16:00:00");
+		list.add(basetime+"16:30:00");
+		list.add(basetime+"17:00:00");
+		list.add(basetime+"17:30:00");
+		list.add(basetime+"18:00:00");
+		list.add(basetime+"18:30:00");
+		list.add(basetime+"19:00:00");
+		list.add(basetime+"19:30:00");
+		list.add(basetime+"20:00:00");
+		list.add(basetime+"20:30:00");
+		list.add(basetime+"21:00:00");
+		list.add(basetime+"20:30:00");
 		return list;
 	}
 
@@ -308,7 +318,7 @@ public class EasyMotherUtils {
 							}else {
 								params.put("id",MyApplication.preferences.getInt("baby_id", 0));
 							}
-							NetworkHelper.doGet(BaseInfo.BABYTIME_SAVEINFO, params, new JsonHttpResponseHandler(){
+							NetworkHelper.doGet(BaseInfo.BABYINFO_SAVEINFO, params, new JsonHttpResponseHandler(){
 								public void onSuccess(int statusCode, Header[] headers, org.json.JSONObject response) {
 									if (JsonUtils.getRootResult(response).getIsSuccess()) {
 										Log.e("图片名字上传成功", response.toString());
@@ -328,12 +338,12 @@ public class EasyMotherUtils {
 							params.put("background", photos.get(0));
 							params.put("userId", MyApplication.preferences.getInt("id", 0));
 							if ( MyApplication.preferences.getInt("baby_id", 0)==0) {
-								params.put("id","");
+								params.put("babyId","");
 							}else {
-								params.put("id",MyApplication.preferences.getInt("baby_id", 0));
+								params.put("babyId",MyApplication.preferences.getInt("baby_id", 0));
 							}
 							
-							NetworkHelper.doGet(BaseInfo.BABYTIME_SAVEINFO, params, new JsonHttpResponseHandler(){
+							NetworkHelper.doGet(BaseInfo.BABYINFO_SAVEINFO, params, new JsonHttpResponseHandler(){
 								public void onSuccess(int statusCode, Header[] headers, org.json.JSONObject response) {
 									if (JsonUtils.getRootResult(response).getIsSuccess()) {
 										Log.e("图片名字上传成功", response.toString());
