@@ -51,24 +51,22 @@
                     android:text="电    话" />
 
                 <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/user_phone"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/textView2"
-                    android:layout_alignLeft="@+id/textView3"
+                    android:layout_alignLeft="@+id/user_nurse_name"
                     android:background="@color/white"
-                    android:text="12312321412"
                     android:textColor="@color/boroblacktext" />
 
                 <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/user_nurse_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/w1"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/w1"
                     android:background="@color/white"
-                    android:text="张三"
                     android:textColor="@color/boroblacktext" />
 
                 <TextView
@@ -81,12 +79,11 @@
                     android:text="服务地址：" />
 
                 <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/user_address"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/textView9"
-                    android:layout_alignLeft="@+id/textView4"
-                    android:text="杭州市江干区城星路XX大夏XX室"
+                    android:layout_alignLeft="@+id/user_phone"
                     android:textColor="@color/boroblacktext" />
 
                 <TextView
@@ -99,12 +96,11 @@
                     android:text="服务时间：" />
 
                 <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/time"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/textView10"
-                    android:layout_alignLeft="@+id/textView11"
-                    android:text="2015-08-06至2015-09-05"
+                    android:layout_alignLeft="@+id/user_address"
                     android:textColor="@color/boroblacktext" />
             </RelativeLayout>
 
@@ -154,16 +150,16 @@
                     android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/name"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/nurse_name"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="李四" />
+                        />
 
                     <TextView
                         android:id="@+id/type"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="月嫂" />
+                         />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -333,6 +329,7 @@
                 android:text="《雇主责任险》" />
 
             <Button
+                android:onClick="pay"
                 android:id="@+id/begain_next1"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"

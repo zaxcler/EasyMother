@@ -7,6 +7,7 @@ import java.util.Date;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alipay.sdk.pay.demo.PayCRSActivity;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
 import com.easymother.bean.Order;
@@ -191,7 +192,7 @@ public class OrderCRSProcess1 extends Activity {
 							Order order=JsonUtils.getResult(response, Order.class);
 							order.setPrice(0.01);
 							intent.putExtra("order",order);
-							intent.setClass(OrderCRSProcess1.this, OrderCRSProcess2.class);
+							intent.setClass(OrderCRSProcess1.this, PayCRSActivity.class);
 							intent.putExtra("userName",name );
 							intent.putExtra("mobile",phone );
 							intent.putExtra("address",address );

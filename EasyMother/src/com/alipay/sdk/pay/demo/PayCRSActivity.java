@@ -15,17 +15,22 @@ import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
 import com.easymother.bean.Order;
+import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
+import com.easymother.customview.CircleImageView;
 import com.easymother.main.R;
+import com.easymother.main.homepage.OrderCRSProcess3;
 import com.easymother.main.homepage.OrderYSandYYSProcess5;
 import com.easymother.main.homepage.OrderYSandYYSProcess8;
 import com.easymother.utils.EasyMotherUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class PayCRSActivity extends FragmentActivity {
 
@@ -56,7 +61,7 @@ public class PayCRSActivity extends FragmentActivity {
 				// 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
 				if (TextUtils.equals(resultStatus, "9000")) {
 					Toast.makeText(PayCRSActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-					intent.setClass(PayCRSActivity.this, OrderYSandYYSProcess8.class);
+					intent.setClass(PayCRSActivity.this, OrderCRSProcess3.class);
 					startActivity(intent);
 				} else {
 					// 判断resultStatus 为非“9000”则代表可能支付失败
@@ -67,7 +72,6 @@ public class PayCRSActivity extends FragmentActivity {
 					} else {
 						// 其他值就可以判断为支付失败，包括用户主动取消支付，或者系统返回的错误
 						Toast.makeText(PayCRSActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-
 					}
 				}
 				break;
@@ -87,6 +91,14 @@ public class PayCRSActivity extends FragmentActivity {
 	private NurseBaseBean nursebase;
 	private NurseJobBean nursejob;
 	private Order order;
+	private TextView user_name;
+	private TextView user_phone;
+	private TextView user_address;
+	private TextView time;
+	private TextView nurse_name;
+	private TextView type;
+	private TextView money;
+	private CircleImageView photo;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -98,6 +110,48 @@ public class PayCRSActivity extends FragmentActivity {
 		nursebase=(NurseBaseBean) intent.getSerializableExtra("nursebase");
 		nursejob=(NurseJobBean) intent.getSerializableExtra("nursejob");
 		order=(Order) intent.getParcelableExtra("order");
+		findView();
+		init();
+	}
+
+
+	private void findView() {
+		user_name=(TextView) findViewById(R.id.user_name);
+		user_phone=(TextView) findViewById(R.id.user_phone);
+		user_address=(TextView) findViewById(R.id.user_address);
+		time=(TextView) findViewById(R.id.time);
+		type=(TextView) findViewById(R.id.type);
+		money=(TextView) findViewById(R.id.money);
+		photo=(CircleImageView) findViewById(R.id.photo);
+		
+	}
+	private void init() {
+		user_name.setText(intent.getStringExtra("userName"));
+		user_phone.setText(intent.getStringExtra("mobile"));
+		user_address.setText(intent.getStringExtra("address"));
+		if (order!=null) {
+			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			Date startTime=order.getRealHireStartTime();
+			String startTimeString=format.format(startTime);
+			Date endTime=order.getRealHireStartTime();
+			String endTimeString=format.format(endTime);
+			time.setText(startTimeString+"至"+endTimeString);
+			if (order.getPrice()!=null) {
+				money.setText("￥"+order.getPrice()+"元");
+			}
+			
+		}
+		
+		if (nursebase.getImage()!=null) {
+			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+nursebase.getImage(), photo, MyApplication.options_photo);
+		}
+		if (nursejob.getNurseName()!=null) {
+			nurse_name.setText(nursejob.getNurseName());
+		}
+		if (nursejob.getJob()!=null) {
+			type.setText("催乳师");
+		}
+		
 	}
 
 	/**
@@ -105,15 +159,9 @@ public class PayCRSActivity extends FragmentActivity {
 	 * 
 	 */
 	public void pay(View v) {
-		String name="";
-		if ("YS".equals(nursejob.getJob())) {
-			name="月嫂定金";
-		}
-		if ("YYS".equals(nursejob.getJob())) {
-			name="育婴师定金";
-		}
+		
 		// 订单
-		String orderInfo = getOrderInfo(name, name, order.getPrice()+"");
+		String orderInfo = getOrderInfo("催乳师定金", "催乳师定金", order.getPrice()+"");
 
 		// 对订单做RSA 签名
 		String sign = sign(orderInfo);

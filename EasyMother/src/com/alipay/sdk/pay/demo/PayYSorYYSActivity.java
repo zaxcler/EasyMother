@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
@@ -87,6 +88,7 @@ public class PayYSorYYSActivity extends FragmentActivity {
 	private NurseBaseBean nursebase;
 	private NurseJobBean nursejob;
 	private Order order;
+	private TextView money;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -98,6 +100,12 @@ public class PayYSorYYSActivity extends FragmentActivity {
 		nursebase=(NurseBaseBean) intent.getSerializableExtra("nursebase");
 		nursejob=(NurseJobBean) intent.getSerializableExtra("nursejob");
 		order=(Order) intent.getParcelableExtra("order");
+		money=(TextView) findViewById(R.id.money);
+		if (order!=null) {
+			if (order.getPrice()!=null) {
+				money.setText("￥"+order.getPrice()+"元");
+			}
+		}
 	}
 
 	/**

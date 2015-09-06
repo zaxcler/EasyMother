@@ -29,6 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.alipay.sdk.pay.demo.PayCRSActivity"></activity>
         <activity android:name="com.alipay.sdk.pay.demo.PayYSorYYSActivity"></activity>
         <!-- 打开外部链接的webview -->
         <activity android:name="com.easymother.main.WebViewActivity" ></activity>
