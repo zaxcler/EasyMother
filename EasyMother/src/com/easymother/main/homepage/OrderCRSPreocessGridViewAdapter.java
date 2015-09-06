@@ -56,12 +56,15 @@ public class OrderCRSPreocessGridViewAdapter extends CommonAdapter<String> {
 			}
 			textView.setText(calendar.get(Calendar.HOUR_OF_DAY) + ":" + minute);
 			for (Order order : orders) {
-				long result1=order.getRealHireStartTime().getTime()-date.getTime();
-				long result2=order.getRealHireEndTime().getTime()-date.getTime();
-				if (result1<=0&&result2>=0) {
-					view.setBackgroundColor(context.getResources().getColor(R.color.boro));
-					view.setClickable(false);
+				if (order.getRealHireStartTime()!=null&&order.getRealHireEndTime()!=null) {
+					long result1=order.getRealHireStartTime().getTime()-date.getTime();
+					long result2=order.getRealHireEndTime().getTime()-date.getTime();
+					if (result1<=0&&result2>=0) {
+						view.setBackgroundColor(context.getResources().getColor(R.color.boro));
+						view.setClickable(false);
+					}
 				}
+				
 			}
 			if ( textView.getTag()!=null) {
 				Log.e("tag", textView.getTag()+"");

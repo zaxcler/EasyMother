@@ -24,6 +24,7 @@ import com.loopj.android.http.RequestParams;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
@@ -87,8 +88,9 @@ public class OrderListActivity extends Activity {
 				 bindData(listResult);//绑定数据
 			}
 			@Override
-			public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-				super.onFailure(statusCode, headers, throwable, errorResponse);
+			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+				super.onFailure(statusCode, headers, responseString, throwable);
+				Log.e("订单查询失败", responseString);
 			}
 		});
 	}

@@ -1,6 +1,7 @@
 package com.easymother.bean;
 
 import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class BabyTimeBean {
@@ -39,6 +40,8 @@ public class BabyTimeBean {
     private String babyName;
     
     private String babyImage;
+    
+    private List<String> babyImages;
     
     private String gender;
     
@@ -213,4 +216,16 @@ public class BabyTimeBean {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
+
+	public List<String> getBabyImages() {
+		return babyImages;
+	}
+
+	public void setBabyImages(List<String> babyImages) {
+		this.babyImages = babyImages;
+	}
+
+	
+    
+    
 }

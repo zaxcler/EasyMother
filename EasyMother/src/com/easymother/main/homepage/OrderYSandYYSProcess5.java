@@ -149,7 +149,7 @@ public class OrderYSandYYSProcess5 extends Activity {
 			params.put("identificationCode",MyApplication.preferences.getString("order_user_card_id", ""));
 		}
 		if (!"".equals(MyApplication.preferences.getString("order_user_address", ""))) {
-			params.put("address",MyApplication.preferences.getString("order_user_card_id", ""));
+			params.put("address",MyApplication.preferences.getString("order_user_address", ""));
 		}
 		
 		if (nursejob.getNurseId()!=null) {

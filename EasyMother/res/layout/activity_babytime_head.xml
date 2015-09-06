@@ -6,7 +6,7 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/nannan_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/circleImageView1"
@@ -16,17 +16,17 @@
         android:text="Angle" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/days"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/nannan_name"
+        android:layout_below="@+id/nannan_name"
         android:text="出生24天" />
 
     <com.easymother.customview.CircleImageView
         android:id="@+id/circleImageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp_72"
+        android:layout_height="@dimen/dp_72"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/dp_16"

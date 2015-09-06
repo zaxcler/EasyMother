@@ -27,7 +27,7 @@ import com.easymother.main.homepage.OrderYSandYYSProcess5;
 import com.easymother.main.homepage.OrderYSandYYSProcess8;
 import com.easymother.utils.EasyMotherUtils;
 
-public class PayYSorYYSActivity extends FragmentActivity {
+public class PayCRSActivity extends FragmentActivity {
 
 	// 商户PID
 	public static final String PARTNER = "2088812003704461";
@@ -55,25 +55,25 @@ public class PayYSorYYSActivity extends FragmentActivity {
 
 				// 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
 				if (TextUtils.equals(resultStatus, "9000")) {
-					Toast.makeText(PayYSorYYSActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-					intent.setClass(PayYSorYYSActivity.this, OrderYSandYYSProcess8.class);
+					Toast.makeText(PayCRSActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+					intent.setClass(PayCRSActivity.this, OrderYSandYYSProcess8.class);
 					startActivity(intent);
 				} else {
 					// 判断resultStatus 为非“9000”则代表可能支付失败
 					// “8000”代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
 					if (TextUtils.equals(resultStatus, "8000")) {
-						Toast.makeText(PayYSorYYSActivity.this, "支付结果确认中", Toast.LENGTH_SHORT).show();
+						Toast.makeText(PayCRSActivity.this, "支付结果确认中", Toast.LENGTH_SHORT).show();
 
 					} else {
 						// 其他值就可以判断为支付失败，包括用户主动取消支付，或者系统返回的错误
-						Toast.makeText(PayYSorYYSActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+						Toast.makeText(PayCRSActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
 
 					}
 				}
 				break;
 			}
 			case SDK_CHECK_FLAG: {
-				Toast.makeText(PayYSorYYSActivity.this, "检查结果为：" + msg.obj, Toast.LENGTH_SHORT).show();
+				Toast.makeText(PayCRSActivity.this, "检查结果为：" + msg.obj, Toast.LENGTH_SHORT).show();
 				break;
 			}
 			default:
@@ -91,7 +91,7 @@ public class PayYSorYYSActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.process_ysandyys_order_next7);
+		setContentView(R.layout.process_duanqi_order_next3);
 		EasyMotherUtils.initTitle(this, "支付定金", false);
 		MyApplication.addActivityToMap(this, "YSprocess");
 		intent=getIntent();
@@ -132,7 +132,7 @@ public class PayYSorYYSActivity extends FragmentActivity {
 			@Override
 			public void run() {
 				// 构造PayTask 对象
-				PayTask alipay = new PayTask(PayYSorYYSActivity.this);
+				PayTask alipay = new PayTask(PayCRSActivity.this);
 				// 调用支付接口，获取支付结果
 				String result = alipay.pay(payInfo);
 
@@ -159,7 +159,7 @@ public class PayYSorYYSActivity extends FragmentActivity {
 			@Override
 			public void run() {
 				// 构造PayTask 对象
-				PayTask payTask = new PayTask(PayYSorYYSActivity.this);
+				PayTask payTask = new PayTask(PayCRSActivity.this);
 				// 调用查询接口，获取查询结果
 				boolean isExist = payTask.checkAccountIfExist();
 

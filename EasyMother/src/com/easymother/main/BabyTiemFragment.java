@@ -125,7 +125,7 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 			MyApplication.editor.putString("nannan_name",result.getBabyInfo().getBabyName());
 		}
 		if (result.getBabyInfo().getBirthday()!=null) {
-		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String birthy=dateFormat.format(result.getBabyInfo().getBirthday());
 			MyApplication.editor.putString("nannan_birthday",birthy);
 		}

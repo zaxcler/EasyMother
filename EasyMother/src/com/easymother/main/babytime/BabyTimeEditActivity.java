@@ -11,6 +11,7 @@ import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.main.homepage.CommentImageAdapter;
+import com.easymother.main.my.LoginOrRegisterActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
@@ -66,10 +67,17 @@ public class BabyTimeEditActivity extends Activity {
 						//判断本地是否保存之前从服务器获取的囡囡信息，如果有，表示服务器中有囡囡信息，服务器只修改，如果没有，服务器就新创建
 						int baby_id=MyApplication.preferences.getInt("baby_id", 0);
 						if (baby_id==0) {
-							params.put("id", "");
+							params.put("baby_id", "");
 						}else {
-							params.put("id", baby_id);
+							params.put("baby_id", baby_id);
 						}
+						if (MyApplication.preferences.getInt("id", 0)!=0) {
+							params.put("userId", MyApplication.preferences.getInt("id", 0));
+						}else {
+							EasyMotherUtils.goActivity(BabyTimeEditActivity.this, LoginOrRegisterActivity.class);
+							BabyTimeEditActivity.this.finish();
+						}
+						desc=baby_edit.getText().toString().trim();
 						if (desc!=null&&!"".equals(desc)) {
 							params.put("content", desc);
 						}

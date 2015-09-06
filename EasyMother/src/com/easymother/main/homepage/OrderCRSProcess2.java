@@ -22,7 +22,7 @@ public class OrderCRSProcess2 extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.process_duanqi_order_next3);
-		EasyMotherUtils.initTitle(this, "信息填写", false);
+		EasyMotherUtils.initTitle(this, "信息确认", false);
 		MyApplication.addActivityToMap(this, "CRSprocess");
 		findView();
 		init();

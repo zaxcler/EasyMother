@@ -51,40 +51,39 @@
                     android:text="电    话" />
 
                 <EditText
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/user_phone"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/textView2"
-                    android:layout_alignLeft="@+id/textView3"
+                    android:layout_alignLeft="@+id/user_name"
                     android:background="@color/white"
-                    android:text="12312321412"
+                    android:phoneNumber="true"
                     android:textColor="@color/boroblacktext"
                     android:textSize="@dimen/sp_14" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_alignLeft="@id/textView4"
-                    android:layout_below="@id/textView4"
+                    android:layout_alignLeft="@id/user_phone"
+                    android:layout_below="@id/user_phone"
                     android:background="@color/line" />
 
                 <EditText
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/w1"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/w1"
                     android:background="@color/white"
-                    android:text="张三"
                     android:textColor="@color/boroblacktext"
                     android:textSize="@dimen/sp_14" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_alignLeft="@id/textView3"
-                    android:layout_below="@id/textView3"
+                    android:layout_alignLeft="@id/user_name"
+                    android:layout_below="@id/user_name"
                     android:background="@color/line" />
 
                 <TextView
@@ -97,21 +96,20 @@
                     android:text="服务地址：" />
 
                 <EditText
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/user_address"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/textView9"
-                    android:layout_alignLeft="@+id/textView4"
+                    android:layout_alignLeft="@+id/user_phone"
                     android:background="@color/white"
-                    android:text="杭州市江干区城星路XX大夏XX室"
                     android:textColor="@color/boroblacktext"
                     android:textSize="@dimen/sp_14" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_alignLeft="@id/textView11"
-                    android:layout_below="@id/textView11"
+                    android:layout_alignLeft="@id/user_address"
+                    android:layout_below="@id/user_address"
                     android:background="@color/line" />
             </RelativeLayout>
 
@@ -137,6 +135,7 @@
                         android:text="分娩方式" />
 
                     <RadioGroup
+                        android:id="@+id/radiogroup"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -149,22 +148,22 @@
                             android:id="@+id/radioButton1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:button="@null"
-                            android:drawableLeft="@drawable/radiobutton"
                             android:text="顺产" />
+                            <!-- android:button="@null"
+                            android:drawableLeft="@drawable/radiobutton" -->
 
                         <RadioButton
                             android:id="@+id/radioButton2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:button="@null"
-                            android:drawableLeft="@drawable/radiobutton"
                             android:text="剖腹产" />
+                            <!-- android:button="@null"
+                            android:drawableLeft="@drawable/radiobutton" -->
                     </RadioGroup>
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/calender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/textView6"
@@ -173,18 +172,18 @@
                     android:src="@drawable/canleder" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/predate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/imageView1"
-                    android:layout_toRightOf="@+id/imageView1"
-                    android:text="2015-08-28" />
+                    android:layout_alignBottom="@+id/calender"
+                    android:layout_toRightOf="@+id/calender"
+                    />
                 <View android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/line"
-                    android:layout_alignLeft="@id/textView7"
-                    android:layout_alignRight="@id/textView7"
-                    android:layout_below="@id/textView7"/>
+                    android:layout_alignLeft="@id/predate"
+                    android:layout_alignRight="@id/predate"
+                    android:layout_below="@id/predate"/>
 
                 <TextView
                     android:id="@+id/textView6"
@@ -202,6 +201,7 @@
                     android:layout_below="@+id/textView6"
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_marginLeft="@dimen/dp_10"
+                    android:textColor="@color/boroblacktext"
                     android:text="注：护理师上门期间罗飞需要用户承担" />
 
             </RelativeLayout>

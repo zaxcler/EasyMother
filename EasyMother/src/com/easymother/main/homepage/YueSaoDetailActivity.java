@@ -137,12 +137,19 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 				});
 			}
 		});
-		EasyMotherUtils.initTitle(this, "月嫂详情", true);
+		
 		intent=getIntent();
 		id=intent.getIntExtra("id", 0);
 		job=intent.getStringExtra("job");
-		
-		
+		if ("YS".equals(job)) {
+			EasyMotherUtils.initTitle(this, "月嫂详情", true);
+		}
+		if ("YYS".equals(job)) {
+			EasyMotherUtils.initTitle(this, "月嫂详情", true);
+		}
+		if ("CRS".equals(job)) {
+			EasyMotherUtils.initTitle(this, "月嫂详情", true);
+		}
 		findView();
 		init();
 	}

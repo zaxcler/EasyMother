@@ -51,6 +51,7 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 	private RatingBar ratingBar1;
 	private CircleImageView imageView1;
 	OrderCRSPreocessGridViewAdapter adapter ;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -137,8 +138,10 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 
 			@Override
 			public void onClick(View arg0) {
-				EasyMotherUtils.goActivity(OrderCRSProcess.this, OrderCRSProcess1.class);
-
+				intent.putExtra("startTime", "2015-09-06 09:00:00");
+				intent.putExtra("endTime", "2015-09-10 09:00:00");
+				intent.setClass(OrderCRSProcess.this, OrderCRSProcess1.class);
+				startActivity(intent);
 			}
 		});
 
@@ -151,6 +154,9 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				ViewHolder holder=(ViewHolder) arg1.getTag();
 				TextView textView=holder.getView(R.id.time);
+				if (isChoose) {
+					return;
+				}
 				if ("flag".equals(textView.getTag())) {
 					textView.setTag(null);
 					isChoose=false;
@@ -176,6 +182,11 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 				clicktimes++;
 			}
 		});
+		
+		day1.setOnClickListener(this);
+		day2.setOnClickListener(this);
+		day3.setOnClickListener(this);
+		day4.setOnClickListener(this);
 
 	}
 
@@ -186,23 +197,31 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 		case R.id.day1:
 			day1.setTextColor(getResources().getColor(R.color.white));
 			day1.setBackgroundColor(getResources().getColor(R.color.lightredwine));
-			adapter.notifyDataSetChanged();
+			adapter = new OrderCRSPreocessGridViewAdapter(this, EasyMotherUtils.getTime(0),
+					R.layout.crs_gridview_item,orders);
+			gridView.setAdapter(adapter);
 			break;
 
 		case R.id.day2:
 			day2.setTextColor(getResources().getColor(R.color.white));
 			day2.setBackgroundColor(getResources().getColor(R.color.lightredwine));
-			adapter.notifyDataSetChanged();
+			adapter = new OrderCRSPreocessGridViewAdapter(this, EasyMotherUtils.getTime(1),
+					R.layout.crs_gridview_item,orders);
+			gridView.setAdapter(adapter);
 			break;
 		case R.id.day3:
 			day3.setTextColor(getResources().getColor(R.color.white));
 			day3.setBackgroundColor(getResources().getColor(R.color.lightredwine));
-			adapter.notifyDataSetChanged();
+			adapter = new OrderCRSPreocessGridViewAdapter(this, EasyMotherUtils.getTime(3),
+					R.layout.crs_gridview_item,orders);
+			gridView.setAdapter(adapter);
 			break;
 		case R.id.day4:
 			day4.setTextColor(getResources().getColor(R.color.white));
 			day4.setBackgroundColor(getResources().getColor(R.color.lightredwine));
-			adapter.notifyDataSetChanged();
+			adapter = new OrderCRSPreocessGridViewAdapter(this, EasyMotherUtils.getTime(4),
+					R.layout.crs_gridview_item,orders);
+			gridView.setAdapter(adapter);
 			break;
 
 		}

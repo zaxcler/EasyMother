@@ -37,6 +37,7 @@
 
         <TextView
             android:id="@+id/content"
+            android:layout_marginLeft="@dimen/dp_10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/createdate"
@@ -79,8 +80,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/days"
-            android:layout_alignRight="@+id/photo"
             android:text="天啦"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_10"
             android:textColor="@color/boroblacktext"
             android:textSize="@dimen/sp_12" />
 
@@ -108,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView5"
             android:layout_alignBottom="@+id/textView5"
-            android:layout_alignRight="@+id/photo"
+            android:layout_alignRight="@+id/textView1"
             android:drawableLeft="@drawable/babytime_share"
             android:gravity="clip_horizontal"
             android:text="TextView"
@@ -118,7 +120,7 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/photo"
+            android:layout_alignLeft="@+id/content"
             android:layout_below="@+id/line"
             android:drawableLeft="@drawable/babytime_edit"
             android:gravity="clip_horizontal"

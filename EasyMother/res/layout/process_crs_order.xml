@@ -302,12 +302,13 @@
 
                 <TextView
                     android:id="@+id/day1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_5"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="@dimen/dp_5"
                     android:gravity="center"
+                    android:textColor="@color/white" 
+                    android:background="@color/lightredwine"
                     android:paddingTop="@dimen/dp_5"
                     android:text="今天" />
 
@@ -318,12 +319,12 @@
 
                 <TextView
                     android:id="@+id/day2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/lightredwine"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:padding="@dimen/dp_5"
                     android:text="明天"
-                    android:textColor="@color/white" />
+                    />
 
                 <View
                     android:layout_width="1dp"
@@ -332,11 +333,10 @@
 
                 <TextView
                     android:id="@+id/day3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_5"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                     android:padding="@dimen/dp_5"
                     android:gravity="center"
                     android:paddingTop="@dimen/dp_5"
                     android:text="后天" />
@@ -348,11 +348,10 @@
 
                 <TextView
                     android:id="@+id/day4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_5"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                     android:padding="@dimen/dp_5"
                     android:gravity="center"
                     android:paddingTop="@dimen/dp_5"
                     android:text="星期四" />
