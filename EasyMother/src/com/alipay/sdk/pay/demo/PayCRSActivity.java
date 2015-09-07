@@ -133,7 +133,7 @@ public class PayCRSActivity extends FragmentActivity {
 			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			Date startTime=order.getRealHireStartTime();
 			String startTimeString=format.format(startTime);
-			Date endTime=order.getRealHireStartTime();
+			Date endTime=order.getRealHireEndTime();
 			String endTimeString=format.format(endTime);
 			time.setText(startTimeString+"至"+endTimeString);
 			if (order.getPrice()!=null) {

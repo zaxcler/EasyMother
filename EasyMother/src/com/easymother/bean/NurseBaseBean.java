@@ -42,6 +42,8 @@ public class NurseBaseBean implements Serializable{
     private Integer int2;
 
     private Integer sorting;
+    
+    private Integer price;
 
     private String account;
 
@@ -87,11 +89,25 @@ public class NurseBaseBean implements Serializable{
 
     private Byte isFreeze;
     
+    private String jobTitle;
+    
     private  Double  weight;
     // 家庭遗传病
     private String familyDisease;
     
-    private List<String> workImageArrays;
+    public String getJobTitle() {
+		return jobTitle;
+	}
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
+	public Integer getPrice() {
+		return price;
+	}
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+	private List<String> workImageArrays;
     
 	public Integer getId() {
 		return id;

@@ -39,10 +39,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@id/w1"
+                    android:textColor="@color/boroblacktext"
                     android:text="姓    名：" />
 
                 <TextView
                     android:id="@+id/textView2"
+                    android:textColor="@color/boroblacktext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView1"
@@ -55,12 +57,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/textView2"
-                    android:layout_alignLeft="@+id/user_nurse_name"
+                    android:layout_alignLeft="@+id/user_name"
                     android:background="@color/white"
                     android:textColor="@color/boroblacktext" />
 
                 <TextView
-                    android:id="@+id/user_nurse_name"
+                    android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/w1"
@@ -71,6 +73,7 @@
 
                 <TextView
                     android:id="@+id/textView9"
+                    android:textColor="@color/boroblacktext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/w1"
@@ -88,6 +91,7 @@
 
                 <TextView
                     android:id="@+id/textView10"
+                    android:textColor="@color/boroblacktext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -130,12 +134,14 @@
 
                     <TextView
                         android:id="@+id/textView5"
+                        android:textColor="@color/boroblacktext"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="护理师姓名" />
 
                     <TextView
                         android:id="@+id/textView6"
+                        android:textColor="@color/boroblacktext"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="护理师工种" />
@@ -151,12 +157,14 @@
 
                     <TextView
                         android:id="@+id/nurse_name"
+                        android:textColor="@color/boroblacktext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         />
 
                     <TextView
                         android:id="@+id/type"
+                        android:textColor="@color/boroblacktext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                          />
@@ -285,6 +293,7 @@
                         android:layout_gravity="right"
                         android:drawableLeft="@drawable/zhifubao"
                         android:gravity="center"
+                        android:textColor="@color/boroblacktext"
                         android:text="支付宝支付" />
                 </LinearLayout>
 
@@ -308,7 +317,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="意外险" />
 
                 <View
                     android:layout_width="0dp"
@@ -316,13 +325,15 @@
                     android:layout_weight="1" />
             </LinearLayout>
 
-            <CheckBox
+            <TextView
                 android:id="@+id/checkBox1"
+                android:textColor="@color/boroblacktext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="《PICC家政服务机构责任险》" />
 
-            <CheckBox
+            <TextView
+                android:textColor="@color/boroblacktext"
                 android:id="@+id/checkBox2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

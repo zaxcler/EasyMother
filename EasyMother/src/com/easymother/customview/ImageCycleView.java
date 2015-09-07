@@ -177,6 +177,9 @@ public class ImageCycleView extends LinearLayout {
 
 		@Override
 		public void onPageSelected(int index) {
+			if (mImageViews.length==0) {
+				return;
+			}
 			index = index % mImageViews.length;
 			// 设置当前显示的图片
 			// 设置图片滚动指示器背

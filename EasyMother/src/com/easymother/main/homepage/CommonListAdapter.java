@@ -96,7 +96,7 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 		 * 设置之前先判断空
 		 */
 		if (bean.getSeniority()!=null) {
-			seniority.setText(bean.getSeniority()+"");
+			seniority.setText("从业"+bean.getSeniority()+"年");
 		}
 		
 		TextView age=holder.getView(R.id.textView4);
@@ -117,12 +117,12 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 			currentAddress.setText(bean.getCurrentAddress());
 		}
 		
-		TextView showPrice=holder.getView(R.id.textView7);
+		TextView Price=holder.getView(R.id.textView7);
 		/*
 		 * 设置之前先判断空
 		 */
-		if (bean.getShowPrice()!=null) {
-			showPrice.setText(bean.getShowPrice());
+		if (bean.getPrice()!=null) {
+			Price.setText(bean.getPrice()+"元/26天");
 		}
 		
 		TextView marketPrice=holder.getView(R.id.textView8);
@@ -130,8 +130,12 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 		 * 设置之前先判断空
 		 */
 		if (bean.getMarketPrice()!=null) {
-			marketPrice.setText(bean.getMarketPrice());
+			marketPrice.setText("市场价："+bean.getMarketPrice()+"元/26天");
 			marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+		}
+		TextView dengji=holder.getView(R.id.textView9);
+		if (bean.getJobTitle()!=null) {
+			dengji.setText("等级："+bean.getJobTitle());
 		}
 		
 		ImageView photo=holder.getView(R.id.image);

@@ -1,196 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-<LinearLayout 
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background" >
+    android:layout_height="match_parent" >
 
-    <include layout="@layout/commontitle" />
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center" >
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="@dimen/dp_60"
-            android:layout_height="@dimen/dp_100"
+        <include layout="@layout/commontitle" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="@dimen/dp_60"
+                android:layout_height="@dimen/dp_100"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:background="@drawable/test2" />
+
+           
+
+            <TextView
+                android:id="@+id/nurse_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/work_express"
+                android:layout_alignBottom="@+id/work_express"
+                android:layout_marginRight="@dimen/dp_5"
+                android:layout_toRightOf="@+id/work_express"
+                android:text="45岁"
+                android:textColor="@color/boroblacktext"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:id="@+id/nurse_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/nurse_age"
+                android:layout_alignBottom="@+id/nurse_age"
+                android:layout_toRightOf="@+id/nurse_age"
+                android:text="杭州"
+                android:textColor="@color/boroblacktext"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image"
+                android:layout_toLeftOf="@+id/nurse_address"
+                android:text="给她打分" />
+
+            <RatingBar
+                android:id="@+id/ratingBar1"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/image"
+                android:layout_marginRight="16dp"
+                android:clickable="true"
+                android:numStars="5"
+                android:rating="3.5" />
+
+            <TextView
+                android:id="@+id/nurse_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/image"
+                android:layout_alignLeft="@+id/work_express"
+                android:text="现居住于杭州下沙"
+                android:textSize="@dimen/sp_12" />
+             <TextView
+                android:id="@+id/work_express"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/nurse_address"
+                android:layout_alignLeft="@+id/nurse_type"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_5"
+                android:text="从业8年"
+                android:textColor="@color/boroblacktext"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:id="@+id/nurse_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/work_express"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_toRightOf="@+id/image"
+                android:background="@drawable/lightredwine_solid"
+                android:padding="@dimen/dp_2"
+                android:text="月嫂"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:id="@+id/nurse_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/nurse_type"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_toRightOf="@+id/image"
+                android:text="王阿芬"
+                android:textColor="@color/blacktext"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:id="@+id/marketprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/nurse_area"
+                android:layout_alignBottom="@+id/nurse_area"
+                android:layout_alignRight="@+id/price"
+                android:text="市场价：15800元/26元"
+                android:textColor="@color/boroblacktext"
+                android:textSize="@dimen/dp_10" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/ratingBar1"
+                android:layout_alignTop="@+id/nurse_type"
+                android:text="5800元/月"
+                android:textColor="@color/lightredwine"
+                android:textSize="@dimen/sp_16" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/white"
+            android:padding="@dimen/dp_20"
+            android:text="添加照片/备注" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/add_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_10"
+                android:src="@drawable/babytime_add1" />
+
+            <com.easymother.customview.MyGridView
+                android:id="@+id/gridview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="@dimen/dp_1"
+                android:numColumns="3"
+                android:verticalSpacing="@dimen/dp_1" >
+            </com.easymother.customview.MyGridView>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line" />
+
+        <EditText
+            android:id="@+id/comment_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="top"
+            android:hint="请输入评价内容"
+            android:lines="5"
+            android:padding="@dimen/dp_10" />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
-            android:background="@drawable/test2" />
-
-        <TextView
-            android:id="@+id/nurse_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="@dimen/dp_5"
-            android:layout_marginTop="14dp"
-            android:layout_toRightOf="@+id/image"
-            android:text="王阿芬"
-            android:textColor="@color/blacktext"
-            android:textSize="@dimen/sp_16" />
-
-        <TextView
-            android:id="@+id/nurse_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/nurse_name"
-            android:layout_marginLeft="@dimen/dp_5"
-            android:layout_toRightOf="@+id/image"
-            android:background="@drawable/lightredwine_solid"
-            android:padding="@dimen/dp_2"
-            android:text="月嫂"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_12" />
-
-        <TextView
-            android:id="@+id/work_express"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/nurse_type"
-            android:layout_below="@+id/nurse_type"
-            android:layout_marginRight="@dimen/dp_5"
-            android:text="从业8年"
-            android:textColor="@color/boroblacktext"
-            android:textSize="@dimen/sp_12" />
-
-        <TextView
-            android:id="@+id/nurse_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/work_express"
-            android:layout_alignBottom="@+id/work_express"
-            android:layout_marginRight="@dimen/dp_5"
-            android:layout_toRightOf="@+id/work_express"
-            android:text="45岁"
-            android:textColor="@color/boroblacktext"
-            android:textSize="@dimen/sp_12" />
-
-        <TextView
-            android:id="@+id/nurse_area"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/nurse_age"
-            android:layout_alignBottom="@+id/nurse_age"
-            android:layout_toRightOf="@+id/nurse_age"
-            android:text="杭州"
-            android:textColor="@color/boroblacktext"
-            android:textSize="@dimen/sp_12" />
-
-        <TextView
-            android:id="@+id/nurse_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/work_express"
-            android:layout_below="@+id/work_express"
-            android:text="现居住于杭州下沙"
-            android:textSize="@dimen/sp_12" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/image"
-            android:layout_toLeftOf="@+id/nurse_address"
-            android:text="给她打分" />
-
-        <TextView
-            android:id="@+id/marketprice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/nurse_area"
-            android:layout_alignRight="@+id/price"
-            android:text="市场价：15800元/26元"
-            android:textColor="@color/boroblacktext"
-            android:textSize="@dimen/dp_10" />
-
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/nurse_type"
-            android:layout_alignLeft="@+id/ratingBar1"
-            android:text="5800元/月"
-            android:textColor="@color/lightredwine"
-            android:textSize="@dimen/sp_16" />
-
-        <RatingBar
-            android:id="@+id/ratingBar1"
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/image"
-            android:layout_marginRight="16dp"
-            android:clickable="true"
-            android:numStars="5"
-            android:rating="3.5" />
-
-    </RelativeLayout>
-    <TextView 
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="添加照片/备注"
-       android:padding="@dimen/dp_20"
-       android:background="@color/white"
-       />
-    <View android:layout_width="match_parent"
-        android:layout_height="1dp"
-       android:background="@color/line"/>
-    <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/white">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/add_photo"	
-            android:layout_margin="@dimen/dp_10"
-            android:src="@drawable/babytime_add1"
-            />
-      <com.easymother.customview.MyGridView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:id="@+id/gridview"
-           android:horizontalSpacing="@dimen/dp_1"
-           android:verticalSpacing="@dimen/dp_1"
-           android:numColumns="3">
-      </com.easymother.customview.MyGridView> 
-        
-       
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/lightredwine"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"
+            android:text="发表评论"
+            android:textColor="@color/white" />
     </LinearLayout>
-     <View android:layout_width="match_parent"
-        android:layout_height="1dp"
-       android:background="@color/line"/>
-     <EditText 
-         android:id="@+id/comment_content"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:lines="5"
-         android:background="@color/white"
-         android:gravity="top"
-         android:hint="请输入评价内容"
-         />
 
-     <Button android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/submit"
-        android:background="@color/lightredwine"
-        android:text="发表评论"
-        android:textColor="@color/white"
-        android:paddingTop="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_20"
-        android:paddingBottom="@dimen/dp_10"
-        />
-</LinearLayout>
 </ScrollView>

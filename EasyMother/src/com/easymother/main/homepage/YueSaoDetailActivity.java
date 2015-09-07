@@ -145,10 +145,10 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 			EasyMotherUtils.initTitle(this, "月嫂详情", true);
 		}
 		if ("YYS".equals(job)) {
-			EasyMotherUtils.initTitle(this, "月嫂详情", true);
+			EasyMotherUtils.initTitle(this, "育婴师详情", true);
 		}
 		if ("CRS".equals(job)) {
-			EasyMotherUtils.initTitle(this, "月嫂详情", true);
+			EasyMotherUtils.initTitle(this, "催乳师详情", true);
 		}
 		findView();
 		init();
@@ -374,6 +374,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 			if (nurseJobBean.getJob()!=null) {
 				if ("YS".equals(nurseJobBean.getJob())) {
 					ratingBar1.setVisibility(View.GONE);
+					cuishi_stars.setVisibility(View.GONE);
 					nurseType.setText("月嫂");
 					nurseLevel.setText(nurseJobBean.getJobTitle()+"");
 					nurseCurrentPrice.setText("￥"+nurseJobBean.getPrice()+"元/26天");
@@ -381,6 +382,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 				}
 				if ("YYS".equals(nurseJobBean.getJob())) {
 					ratingBar1.setVisibility(View.GONE);
+					cuishi_stars.setVisibility(View.GONE);
 					nurseType.setText("育婴师");
 					nurseLevel.setText(nurseJobBean.getJobTitle()+"");
 					nurseCurrentPrice.setText("￥"+nurseJobBean.getPrice()+"元/26天");

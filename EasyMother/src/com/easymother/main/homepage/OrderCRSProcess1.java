@@ -1,5 +1,6 @@
-package com.easymother.main.homepage;
 
+package com.easymother.main.homepage;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -7,6 +8,7 @@ import java.util.Date;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alipay.apmobilesecuritysdk.a.f;
 import com.alipay.sdk.pay.demo.PayCRSActivity;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
@@ -162,8 +164,8 @@ public class OrderCRSProcess1 extends Activity {
 					params.put("userName", name);
 					params.put("mobile", phone);
 					params.put("address", address);
-					String startTime=intent.getStringExtra("startTime");
-					String endTime=intent.getStringExtra("endTime");
+					final String startTime=intent.getStringExtra("startTime");
+					final String endTime=intent.getStringExtra("endTime");
 					if (startTime!=null&&!"".equals(startTime)) {
 						params.put("hireStartTime", startTime);
 						params.put("realHireStartTime", startTime);
@@ -191,11 +193,22 @@ public class OrderCRSProcess1 extends Activity {
 							if (JsonUtils.getRootResult(response).getIsSuccess()) {
 							Order order=JsonUtils.getResult(response, Order.class);
 							order.setPrice(0.01);
+							SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+							
+							try {
+								Date startdate= format.parse(startTime);
+								Date enddate=format.parse(endTime);
+								order.setRealHireStartTime(startdate);
+								order.setRealHireEndTime(enddate);
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							intent.putExtra("order",order);
-							intent.setClass(OrderCRSProcess1.this, PayCRSActivity.class);
 							intent.putExtra("userName",name );
 							intent.putExtra("mobile",phone );
 							intent.putExtra("address",address );
+							intent.setClass(OrderCRSProcess1.this, PayCRSActivity.class);
 							startActivity(intent);
 							}else {
 								Log.e("保存订单失败", response.toString());

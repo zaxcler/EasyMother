@@ -41,7 +41,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/createdate"
-            android:text=" 我叫舒玫。伴着一声清脆的啼哭声，打破了2006年10月10日清晨的宁静，我于7点34分“准时”来到了这个缤纷多彩的世界，像天使一样降落在亲爱的爸爸妈妈身边。"
             android:textColor="@color/boroblacktext" />
 
         <com.easymother.customview.MyGridView

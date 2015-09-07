@@ -6,6 +6,7 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import com.easymother.bean.NurseBaseBean;
+import com.easymother.bean.NurseJobBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.DoubleSeekBar;
@@ -326,6 +327,7 @@ public class CommonListActivity extends Activity {
 				super.onSuccess(statusCode, headers, response);
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
 					List<NurseBaseBean> list=JsonUtils.getNurseBaseBeanList(response);
+//					List<NurseJobBean> list=JsonUtils.getResultList(response, NurseJobBean.class);
 					if (notice==null) {
 						notice=new TextView(CommonListActivity.this);
 						notice.setText("没有匹配的结果");

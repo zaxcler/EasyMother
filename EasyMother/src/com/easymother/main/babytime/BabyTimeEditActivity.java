@@ -82,16 +82,25 @@ public class BabyTimeEditActivity extends Activity {
 							params.put("content", desc);
 						}
 						//上传之前添加的图片
-						for (Bitmap bitmap : images) {
-							EasyMotherUtils.uploadPhoto(bitmap, BaseInfo.UPLOADPHTO, null);
-							String name=MyApplication.preferences.getString("upload_images", "");
-							if (!"".equals(name)&&name!=null) {
-								imagesname.add(name);
+//						for (Bitmap bitmap : images) {
+//							EasyMotherUtils.uploadPhoto(bitmap, BaseInfo.UPLOADPHTO, "baby");
+//							String name=MyApplication.preferences.getString("baby", "");
+//							if (!"".equals(name)&&name!=null) {
+//								name="\""+name+"\"";
+//								imagesname.add(name);
+//							}
+//						}
+//						for (Bitmap bitmap : images) {
+//							EasyMotherUtils.uploadPhoto(bitmap, BaseInfo.UPLOADPHTO, "baby");
+//						}
+//						if (imagesname.size()>0) {
+							String name=EasyMotherUtils.photosname.toString();
+							if (name!=null&&!"".equals(name)) {
+								params.put("images", name);
 							}
-						}
-						if (imagesname.size()>0) {
-							params.put("images", imagesname.toString());
-						}
+							EasyMotherUtils.photosname.clear();
+							Log.e("上传的图片名字", "图片名字"+imagesname.toString());
+//						}
 						NetworkHelper.doGet(BaseInfo.BABYTIME_SAVEINFO, params, new JsonHttpResponseHandler(){
 							@Override
 							public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -154,6 +163,7 @@ public class BabyTimeEditActivity extends Activity {
 				options.inJustDecodeBounds=false;
 				try {
 					Bitmap bitmap=BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri), null, options);
+					EasyMotherUtils.uploadPhoto(bitmap, BaseInfo.UPLOADPHTO, "baby");
 					images.add(bitmap);//保存图片后面上传
 					if (adapter==null) {
 						adapter=new CommentImageAdapter(BabyTimeEditActivity.this, images, R.layout.comment_image);

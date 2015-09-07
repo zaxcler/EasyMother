@@ -104,6 +104,39 @@ public class NetworkHelper{
 //		httpClient.get(url,params, handler);
 	}
 	
+	/**
+	 * 带参数的post请求
+	 * @param url
+	 * @param params
+	 * @param handler 处理二进制数据
+	 */
+	public static void doPost(String url,RequestParams params,BinaryHttpResponseHandler handler){
+		params.put("appToken", getAppToken());
+		httpClient.get(BaseInfo.BASE_URL+url,params, handler);
+	}
+	/**
+	 * 带参数的Post请求
+	 * @param url
+	 * @param params
+	 * @param handler 处理文本数据
+	 */
+	public static void doPost(String url,RequestParams params,TextHttpResponseHandler handler){
+		params.put("appToken", getAppToken());
+		httpClient.get(BaseInfo.BASE_URL+url,params, handler);
+	}
+	/**
+	 * 带参数的Post请求
+	 * @param url
+	 * @param params
+	 * @param handler 处理json数据
+	 */
+	public static void doPost(String url,RequestParams params,JsonHttpResponseHandler handler){
+		params.put("appToken", getAppToken());
+		httpClient.get(BaseInfo.BASE_URL+url,params, handler);
+	}
+
+	
+	
 	
 	/**
 	 * 无参数的get请求

@@ -70,8 +70,8 @@ public class MyApplication  extends Application{
 				.build();
 		L.disableLogging();
 		ImageLoader.getInstance().init(config);
-		options_image=new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.default_image).build();
-		options_photo=new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.default_photo).build();
+		options_image=new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.default_image).showImageOnFail(R.drawable.default_image).build();
+		options_photo=new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.default_photo).showImageOnFail(R.drawable.default_photo).build();
 		
 	}
 	

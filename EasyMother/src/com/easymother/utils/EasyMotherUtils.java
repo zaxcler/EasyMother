@@ -54,7 +54,7 @@ public class EasyMotherUtils {
 	private static RightButtonLisenter button;//右边按钮的回调 
 	
 	private static List<String> list;//时间表
-	
+	public static List<String> photosname=new ArrayList<>();//上传的图片名字
 	
 	
 	/**
@@ -282,12 +282,14 @@ public class EasyMotherUtils {
 		if (photo!=null) {
 			try {
 				String namecode=photo.getName();
+				Log.e("他妈的名字", namecode);
 				params.put("user_photo", photo);
 				NetworkHelper.doPostNoToken(url, params, new JsonHttpResponseHandler(){
 					@Override
 					public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
 						super.onSuccess(statusCode, headers, response);
 						uploadstatu=false;
+						Log.e("上传图片的时候返回", "返回"+response.toString());
 						List<String> photos=JSON.parseArray(response.toString(), String.class);
 						
 						if ("user_image".equals(type)) {
@@ -357,8 +359,11 @@ public class EasyMotherUtils {
 								
 							});
 						}
-						if (type==null) {
-							MyApplication.editor.putString("upload_images", photos.get(0)).commit();
+						//上传图片名字，转换成json数组格式
+						if (type!="baby_background" && type!="user_image" && type!="baby_image") {
+							for (String string : photos){
+								photosname.add("\""+string+"\"");
+							}
 						}
 						Log.e("onSuccess——uploadstatu", uploadstatu+"");
 						Log.e("onSuccess——response", response.toString()+"");
