@@ -3,6 +3,7 @@ package com.easymother.main.my;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.WeiXinUtils;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
@@ -10,6 +11,7 @@ import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -64,7 +66,7 @@ public class SettingActivity extends Activity implements OnClickListener {
 
 			break;
 		case R.id.share:
-			
+			WeiXinUtils.shareDownloadUrl(this, "www.qsmam.com", R.drawable.babytime_share, SendMessageToWX.Req.WXSceneSession);
 			break;
 		case R.id.suggestion:
 			EasyMotherUtils.goActivity(this, SettingSueegstionActivity.class);

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.alidao.mama.WeiXinUtils;
 import com.easymother.bean.UserInfo;
 import com.easymother.main.R;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -13,6 +14,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.utils.L;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import android.app.Activity;
 import android.app.Application;
@@ -34,6 +37,9 @@ public class MyApplication  extends Application{
 	
 	private static Map<String,Set<Activity>> activityMAP;
 	
+	
+	public static final String APP_ID="wxcacf2de19303ba3";//微信的id
+	public static IWXAPI WX_API;//微信的api根，所有微信api根据 WX_API 调用；
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -41,18 +47,34 @@ public class MyApplication  extends Application{
 		editor=preferences.edit();//初始化编辑器
 		
 		initImageLoader(getApplicationContext());//初始化imageloader
-		
+		//初始化时得到屏幕尺寸
 		WindowManager manager=(WindowManager) getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics dm=new DisplayMetrics();
 		manager.getDefaultDisplay().getMetrics(dm);
 		SCREEN_WIDTH=dm.widthPixels;
 		SCREEN_HEIGHT=dm.heightPixels;
-		
+		//初始化保存activity的集合
 		@SuppressWarnings("unused")
 		Set<Activity> activities=new HashSet<Activity>();
 		activityMAP=new HashMap();
 		Log.e("screen_width--------", SCREEN_WIDTH+"");
+		
+		//初始化微信
+		initWX();
+		
+		
 	}
+	
+	
+	/*
+	 * 初始化微信
+	 */
+	public void initWX(){
+		//初始化微信
+		WX_API=WXAPIFactory.createWXAPI(getApplicationContext(),APP_ID);//初始化微信api
+		WX_API.registerApp(APP_ID);//将app注册到微信中
+	}
+		
 	
 	public static void initImageLoader(Context context)
 	{
