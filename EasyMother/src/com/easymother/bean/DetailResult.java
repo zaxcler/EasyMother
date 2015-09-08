@@ -15,6 +15,8 @@ public class DetailResult {
 		private int scannerAmount;
 
 		private int orderCommentAmunt;
+		
+		private Letter letter;
 
 		private List<Order> orderss ;
 
@@ -24,6 +26,13 @@ public class DetailResult {
 
 		private NurseBaseBean nursebase;
 
+		
+		public Letter getLetter() {
+			return letter;
+		}
+		public void setLetter(Letter letter) {
+			this.letter = letter;
+		}
 		public void setMediaAmount(int mediaAmount){
 		this.mediaAmount = mediaAmount;
 		}

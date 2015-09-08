@@ -67,7 +67,8 @@
                 android:layout_marginRight="16dp"
                 android:clickable="true"
                 android:numStars="5"
-                android:rating="3.5" />
+                android:isIndicator="false"
+                />
 
             <TextView
                 android:id="@+id/nurse_address"

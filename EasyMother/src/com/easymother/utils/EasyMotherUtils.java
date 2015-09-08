@@ -360,7 +360,7 @@ public class EasyMotherUtils {
 							});
 						}
 						//上传图片名字，转换成json数组格式
-						if (type!="baby_background" && type!="user_image" && type!="baby_image") {
+						if (type==null) {
 							for (String string : photos){
 								photosname.add("\""+string+"\"");
 							}

@@ -19,7 +19,6 @@
             android:divider="@color/background"
             android:dividerHeight="@dimen/dp_10"
             android:background="@color/background" >
-            
         </com.easymother.customview.MyListview>
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 

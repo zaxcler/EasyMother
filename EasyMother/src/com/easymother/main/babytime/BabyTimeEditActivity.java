@@ -163,7 +163,7 @@ public class BabyTimeEditActivity extends Activity {
 				options.inJustDecodeBounds=false;
 				try {
 					Bitmap bitmap=BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri), null, options);
-					EasyMotherUtils.uploadPhoto(bitmap, BaseInfo.UPLOADPHTO, "baby");
+					EasyMotherUtils.uploadPhoto(bitmap, BaseInfo.UPLOADPHTO, null);
 					images.add(bitmap);//保存图片后面上传
 					if (adapter==null) {
 						adapter=new CommentImageAdapter(BabyTimeEditActivity.this, images, R.layout.comment_image);

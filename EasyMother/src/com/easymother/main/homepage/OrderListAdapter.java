@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.Order;
+import com.easymother.bean.OrderListBean;
 import com.easymother.configure.BaseInfo;
+import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.ViewHolder;
@@ -36,15 +38,13 @@ public class OrderListAdapter<T> extends CommonAdapter<T> {
 	@Override
 	public void setDataToItem(final ViewHolder holder, final T t) {
 		final View convertview=holder.getConvertView();
-		
-			
-			final Order bean=(Order) t;
+			final OrderListBean bean=(OrderListBean) t;
 			TextView name=holder.getView(R.id.textView1);
 			/*
 			 * 设置之前先判断空
 			 */
-			if (bean.getNurseName()!=null) {
-				name.setText(bean.getNurseName());
+			if (bean.getRealName()!=null) {
+				name.setText(bean.getRealName());
 			}
 			TextView job=holder.getView(R.id.textView2);
 			/*
@@ -72,48 +72,54 @@ public class OrderListAdapter<T> extends CommonAdapter<T> {
 			/*
 			 * 设置之前先判断空
 			 */
-//			if (bean.getSeniority()!=null) {
-//				seniority.setText(bean.getSeniority()+"");
-//			}
-//			
-//			TextView age=holder.getView(R.id.textView4);
-//			age.setText(bean.getAge()+"岁");
-//			
-//			TextView area=holder.getView(R.id.textView5);
-//			/*
-//			 * 设置之前先判断空
-//			 */
-//			if (bean.getHometown()!=null) {
-//				area.setText(bean.getHometown());
-//			}
-//			TextView currentAddress=holder.getView(R.id.textView6);
-//			/*
-//			 * 设置之前先判断空
-//			 */
-//			if (bean.getCurrentAddress()!=null) {
-//				currentAddress.setText(bean.getCurrentAddress());
-//			}
-//			
-//			TextView showPrice=holder.getView(R.id.textView7);
-//			/*
-//			 * 设置之前先判断空
-//			 */
-//			if (bean.getShowPrice()!=null) {
-//				showPrice.setText(bean.getShowPrice());
-//			}
-//			
-//			TextView marketPrice=holder.getView(R.id.textView8);
-//			/*
-//			 * 设置之前先判断空
-//			 */
-//			if (bean.getMarketPrice()!=null) {
-//				marketPrice.setText(bean.getMarketPrice());
-//				marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-//			}
-//			ImageView photo=holder.getView(R.id.image);
-//			if (bean.getImage()!=null) {
-//				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo);
-//			}
+			if (bean.getSeniority()!=null) {
+				seniority.setText("从业"+bean.getSeniority()+"年");
+			}
+			
+			TextView age=holder.getView(R.id.textView4);
+			age.setText(bean.getAge()+"岁");
+			
+			TextView area=holder.getView(R.id.textView5);
+			/*
+			 * 设置之前先判断空
+			 */
+			if (bean.getHometown()!=null) {
+				area.setText(bean.getHometown());
+			}
+			TextView currentAddress=holder.getView(R.id.textView6);
+			/*
+			 * 设置之前先判断空
+			 */
+			if (bean.getCurrentAddress()!=null) {
+				currentAddress.setText(bean.getCurrentAddress());
+			}
+			
+			TextView showPrice=holder.getView(R.id.textView7);
+			/*
+			 * 设置之前先判断空
+			 */
+			if (bean.getPrice()!=null) {
+				showPrice.setText(bean.getPrice()+"元/26天");
+			}
+			TextView dengji=holder.getView(R.id.textView9);
+			/*
+			 * 设置之前先判断空
+			 */
+			if (bean.getJobTitle()!=null) {
+				dengji.setText(bean.getJobTitle());
+			}
+			TextView marketPrice=holder.getView(R.id.textView8);
+			/*
+			 * 设置之前先判断空
+			 */
+			if (bean.getMarketPrice()!=null) {
+				marketPrice.setText("市场价："+bean.getMarketPrice()+"元/26天");
+				marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+			}
+			ImageView photo=holder.getView(R.id.image);
+			if (bean.getImage()!=null) {
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo,MyApplication.options_image);
+			}
 			
 
 		holder.getView(R.id.delete).setVisibility(View.GONE);

@@ -2,8 +2,8 @@ package com.easymother.configure;
 
 public class BaseInfo {
 	//基本地址
-		public final static String BASE_URL="http://192.168.1.102:8080/easyMother/";//基本url
-//		public final static String BASE_URL="http://121.40.152.3/easyMother/";//基本url
+//		public final static String BASE_URL="http://192.168.1.102:8080/easyMother/";//基本url
+		public final static String BASE_URL="http://121.40.152.3/easyMother/";//基本url
 		public final static String BASE_PICTURE="resources/admin/store/";//图片基本url
 		public final static String DELETE_WISH="app/nursecollection/toDelete";//删除心愿单
 		public final static String SEARCH_URL="app/nursejob/search";//搜索url（月嫂，育婴师，催乳师）
@@ -25,6 +25,9 @@ public class BaseInfo {
 		public final static String CHECK_VIDEO="app/nursejobmedia/findMediaByJobId";//查看视频
 		public final static String ORDER_LIST="app/order/selectOrdersByUserId";//订单列表
 		public final static String CHANGE_ORDER_MSG="app/orderask/save";//修改订单
+	
+		public final static String CHCLK_LETTER="app/nursepushletter/findByNurseIdAndJob";//查看订单
+		public final static String CHCLK_ALL_COMMENTS="app/ordercomment/selectByNurseIdAndJob";//查看订单
 
 		
 		

@@ -111,18 +111,24 @@ public class TuiJianItemFragment extends Fragment implements OnClickListener {
 			intent.setClass(getActivity(), YueSaoDetailActivity.class);
 			intent.putExtra("id", yuesao.getNurseId());
 			intent.putExtra("job", yuesao.getJob());
+			intent.putExtra("startTime", "2015-08-30");
+			intent.putExtra("endTime", "2015-09-20");
 			startActivity(intent);
 		}
 		if ("yuyingshi".equals(type)) {
-			intent.setClass(getActivity(), YuYingShiDetailActivity.class);
+			intent.setClass(getActivity(), YueSaoDetailActivity.class);
 			intent.putExtra("id", yuyingshi.getNurseId());
 			intent.putExtra("job", yuyingshi.getJob());
+			intent.putExtra("startTime", "2015-08-30");
+			intent.putExtra("endTime", "2015-09-20");
 			startActivity(intent);
 		}
 		if ("cuirushi".equals(type)) {
-			intent.setClass(getActivity(), CuiRuShiDetailActivity.class);
+			intent.setClass(getActivity(), YueSaoDetailActivity.class);
 			intent.putExtra("id", cuirushi.getNurseId());
 			intent.putExtra("job", cuirushi.getJob());
+			intent.putExtra("startTime", "2015-08-30");
+			intent.putExtra("endTime", "2015-09-20");
 			startActivity(intent);
 		}
 

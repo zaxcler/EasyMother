@@ -5,12 +5,9 @@ import java.util.List;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-import com.easymother.bean.CuiRuShi;
 import com.easymother.bean.Order;
+import com.easymother.bean.OrderListBean;
 import com.easymother.bean.OrderListResult;
-import com.easymother.bean.WishListResult;
-import com.easymother.bean.YuYingShi;
-import com.easymother.bean.YueSao;
 import com.easymother.configure.BaseInfo;
 import com.easymother.customview.MyListview;
 import com.easymother.main.R;
@@ -46,9 +43,9 @@ public class OrderListActivity extends Activity {
 	private TextView yys_tv;// 没有育婴师时显示
 	private TextView crs_tv;// 没有催乳师时显示
 	
-	private List<Order> yuesaoList;
-	private List<Order> yuyingshiList;
-	private List<Order> cuirushiList;
+	private List<OrderListBean> yuesaoList;
+	private List<OrderListBean> yuyingshiList;
+	private List<OrderListBean> cuirushiList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -123,16 +120,16 @@ public class OrderListActivity extends Activity {
 			}
 			
 			if (yuesaoList!=null&&yuesaoList.size()>0) {
-				OrderListAdapter<Order> adapter=new OrderListAdapter<Order>(this, yuesaoList, "yuesao", R.layout.activity_yuesao_item);
+				OrderListAdapter<OrderListBean> adapter=new OrderListAdapter<OrderListBean>(this, yuesaoList, "yuesao", R.layout.activity_yuesao_item);
 				ysListview.setAdapter(adapter);
 				ysListview.setOnItemClickListener(new OnItemClickListener() {
 
 					@Override
 					public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 						@SuppressWarnings("unchecked")
-						OrderListAdapter<Order> ysAdapter=(OrderListAdapter<Order>) arg0.getAdapter();
-						List<Order> orders=ysAdapter.getList();
-						int id=orders.get(arg2).getId();
+						OrderListAdapter<OrderListBean> ysAdapter=(OrderListAdapter<OrderListBean>) arg0.getAdapter();
+						List<OrderListBean> orders=ysAdapter.getList();
+						int id=orders.get(arg2).getOrderId();
 						Intent intent=new Intent(OrderListActivity.this,OrderDetailActivity.class);
 						//传递数据
 						intent.putExtra("id", id);
@@ -143,7 +140,7 @@ public class OrderListActivity extends Activity {
 			}
 			
 			if (yuyingshiList!=null&&yuyingshiList.size()>0) {
-				OrderListAdapter<Order> adapter1=new OrderListAdapter<Order>(this, yuyingshiList,"yuyingshi", R.layout.activity_yuesao_item);
+				OrderListAdapter<OrderListBean> adapter1=new OrderListAdapter<OrderListBean>(this, yuyingshiList,"yuyingshi", R.layout.activity_yuesao_item);
 				yysListview.setAdapter(adapter1);
 				
 				yysListview.setOnItemClickListener(new OnItemClickListener() {
@@ -165,16 +162,16 @@ public class OrderListActivity extends Activity {
 			}
 			
 			if (cuirushiList!=null&&cuirushiList.size()>0) {
-				OrderListAdapter<Order> adapter2=new OrderListAdapter<Order>(this, cuirushiList,"cuirushi", R.layout.activity_yuesao_item);
+				OrderListAdapter<OrderListBean> adapter2=new OrderListAdapter<OrderListBean>(this, cuirushiList,"cuirushi", R.layout.activity_yuesao_item);
 				crsListview.setAdapter(adapter2);
 				crsListview.setOnItemClickListener(new OnItemClickListener() {
 
 					@Override
 					public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 						@SuppressWarnings("unchecked")
-						OrderListAdapter<Order> ysAdapter=(OrderListAdapter<Order>) arg0.getAdapter();
-						List<Order> orders=ysAdapter.getList();
-						int id=orders.get(arg2).getId();
+						OrderListAdapter<OrderListBean> ysAdapter=(OrderListAdapter<OrderListBean>) arg0.getAdapter();
+						List<OrderListBean> orders=ysAdapter.getList();
+						int id=orders.get(arg2).getOrderId();
 						
 						Intent intent=new Intent(OrderListActivity.this,OrderDetailActivity.class);
 						//传递数据

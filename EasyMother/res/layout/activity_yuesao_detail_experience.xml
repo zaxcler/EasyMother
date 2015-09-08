@@ -24,15 +24,18 @@
             android:textSize="@dimen/sp_16" />
 
         <TextView
+            android:id="@+id/work_express_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:gravity="center"
-            android:text="   设置android textview行间有两种方式android:lineSpacingExtra设置行间距，如”6dip”。android:lineSpacingMultiplier设置行间距的倍数，如”2″。设置TextView组件内首字缩进String 中可用"
+            android:ellipsize="end"
+            android:lines="3"
             android:textColor="@color/boroblacktext"
             android:textSize="@dimen/sp_12" />
 
         <TextView
+            android:id="@+id/show_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_20"

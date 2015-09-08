@@ -228,7 +228,7 @@ public class CommonListActivity extends Activity {
 						startActivity(intent);
 				}
 				if ("SHORT_YYS".equals(baseBean.getJob())) {
-					Intent intent=new Intent(CommonListActivity.this,YuYingShiDetailActivity.class);
+					Intent intent=new Intent(CommonListActivity.this,YueSaoDetailActivity.class);
 					intent.putExtra("id", baseBean.getNurseId());
 //					intent.putExtra("id", 14);//测试
 					intent.putExtra("job", baseBean.getJob());

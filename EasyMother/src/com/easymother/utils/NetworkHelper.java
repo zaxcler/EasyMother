@@ -100,7 +100,7 @@ public class NetworkHelper{
 	public static void doGet(String url,RequestParams params,JsonHttpResponseHandler handler){
 		params.put("appToken", getAppToken());
 		httpClient.get(BaseInfo.BASE_URL+url,params, handler);
-		Log.e("注册地址是----》", BaseInfo.BASE_URL+url);
+		Log.e("访问地址是", BaseInfo.BASE_URL+url);
 //		httpClient.get(url,params, handler);
 	}
 	

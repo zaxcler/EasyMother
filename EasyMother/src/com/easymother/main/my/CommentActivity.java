@@ -196,7 +196,7 @@ public class CommentActivity extends Activity {
 					  bitmapOptions.inJustDecodeBounds = false;
 					Bitmap  bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri), null , bitmapOptions);
 					//上传图片
-					EasyMotherUtils.uploadPhoto(bitmap,BaseInfo.BASE_PICTURE , null);
+					EasyMotherUtils.uploadPhoto(bitmap,BaseInfo.UPLOADPHTO , null);
 					images.add(bitmap);//将图片保存到一个集合，后面上传
 					if (adapter==null) {
 						adapter=new CommentImageAdapter(this, images, R.layout.comment_image);
@@ -234,7 +234,7 @@ public class CommentActivity extends Activity {
 		if (nursejob.getJob()!=null) {
 			params.put("job", nursejob.getJob());
 		}
-			params.put("score", stars+"");
+			params.put("score", (int)stars+"");
 		if (comment_content.getText().toString().trim()!=null) {
 			params.put("content", comment_content.getText().toString());
 		}

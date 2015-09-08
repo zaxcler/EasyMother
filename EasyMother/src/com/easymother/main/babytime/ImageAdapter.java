@@ -14,7 +14,7 @@ import android.widget.ImageView;
 
 public class ImageAdapter extends CommonAdapter<String> {
 
-	protected ImageAdapter(Context context, List<String> list, int resource) {
+	public ImageAdapter(Context context, List<String> list, int resource) {
 		super(context, list, resource);
 	}
 
