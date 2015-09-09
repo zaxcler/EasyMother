@@ -3,15 +3,24 @@ package com.easymother.main.community;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.Header;
+import org.json.JSONObject;
+
 import com.easymother.bean.TestBean;
+import com.easymother.bean.TopicItemBean;
+import com.easymother.configure.BaseInfo;
 import com.easymother.customview.MyListview;
 import com.easymother.main.R;
 import com.easymother.main.my.TopicListAdapter;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.JsonUtils;
+import com.easymother.utils.NetworkHelper;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -39,27 +48,33 @@ public class HuLiShiZoneListActivity extends Activity {
 		
 	}
 	private void init() {
-		//测试数据
-		TestBean bean=new TestBean();
-		List<TestBean> list=new ArrayList<TestBean>();
-		list.add(bean);
-		list.add(bean);
-		list.add(bean);
-		list.add(bean);
-		list.add(bean);
-		list.add(bean);
-		
-		
-		HuLiShiAdapter adapter=new HuLiShiAdapter(this, list, R.layout.activity_mypage_topic_item);
-		listview.setAdapter(adapter);
-		listview.setOnItemClickListener(new OnItemClickListener() {
-
+		loadData();
+	}
+	private void loadData() {
+		NetworkHelper.doGet(BaseInfo.NURSE_ZOME, new JsonHttpResponseHandler(){
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				EasyMotherUtils.goActivity(HuLiShiZoneListActivity.this, HuLiShiZoneDetailActivity.class);
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+				super.onSuccess(statusCode, headers, response);
+				if (JsonUtils.getRootResult(response).getIsSuccess()) {
+					List<TopicItemBean> list=JsonUtils.getResultList(response, TopicItemBean.class);
+					bindData(list);
+				}
 			}
 		});
-		
+	}
+	protected void bindData(List<TopicItemBean> list) {
+		if (list!=null) {
+			HuLiShiAdapter adapter=new HuLiShiAdapter(this, list, R.layout.activity_mypage_topic_item);
+			listview.setAdapter(adapter);
+//			listview.setOnItemClickListener(new OnItemClickListener() {
+//
+//				@Override
+//				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+//					Log.e("点击", arg2+"");
+//					EasyMotherUtils.goActivity(HuLiShiZoneListActivity.this, HuLiShiZoneDetailActivity.class);
+//				}
+//			});
+		}
 	}
 
 }

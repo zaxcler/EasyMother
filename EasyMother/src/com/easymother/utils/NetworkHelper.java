@@ -2,6 +2,7 @@ package com.easymother.utils;
 
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
+import com.easymother.main.R.drawable;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.BinaryHttpResponseHandler;
@@ -9,6 +10,10 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import android.graphics.drawable.Drawable;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.SpannedString;
 import android.util.Log;
 
 public class NetworkHelper{
@@ -22,7 +27,27 @@ public class NetworkHelper{
 		httpClient=new AsyncHttpClient();
 //		httpClient.setTimeout(5000);
 	}
-	
+	/*
+	 * 显示富文本的imageter
+	 */
+	public static Html.ImageGetter imageGetter =new Html.ImageGetter() {
+		
+		@Override
+		public Drawable getDrawable(String source) {
+			Drawable drawable=null;
+			drawable=Drawable.createFromPath(source);
+			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+			return drawable;
+		}
+	};
+	/**
+	 * 显示富文本
+	 * @param resource
+	 * @return
+	 */
+	public static Spanned showFWBText(String resource){
+		return Html.fromHtml(resource,NetworkHelper.imageGetter,null);
+	}
 	public  NetworkHelper(){
 		
 	}

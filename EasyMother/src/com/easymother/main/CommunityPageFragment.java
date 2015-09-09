@@ -1,58 +1,55 @@
 package com.easymother.main;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.http.Header;
+import org.json.JSONObject;
+
+import com.easymother.bean.Banners;
+import com.easymother.bean.Blocks;
+import com.easymother.bean.CommunityResult;
 import com.easymother.configure.BaseInfo;
 import com.easymother.customview.ImageCycleView;
 import com.easymother.customview.ImageCycleView.ImageCycleViewListener;
+import com.easymother.customview.MyListview;
+import com.easymother.main.community.CommunityAdapter;
 import com.easymother.main.community.HuLiShiZoneListActivity;
 import com.easymother.main.community.MessageContralActivity;
 import com.easymother.main.community.YSYQActicvity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
+import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class CommunityPageFragment extends Fragment implements OnClickListener {
 	private TextView hulishizoom;// 护理师空间
 	private TextView more;// 医食衣趣
-	private TextView babyfood_today;// 今天
-	private TextView babyfood_topic;// 话题
-	private TextView motherfood_today;// 今天
-	private TextView motherfood_topic;// 话题
-	private TextView motherhuli_today;//
-	private TextView motherhuli_topic;//
-	private TextView babyhuli_today;//
-	private TextView babyhuli_topic;//
-
-	private RelativeLayout babyfood;// 宝贝辅食
-	private RelativeLayout motherfood;// 月子餐
-	private RelativeLayout motherhuli;// 妈妈护理
-	private RelativeLayout babyhuli;// 宝贝护理
-
+	
+	private MyListview mylistview;
 	private ImageView message;//消息管理
 	// 测试数据
 	private ArrayList<String> mImageUrl = null;
-	private String imageUrl1 = "http://pic.nipic.com/2007-11-09/2007119122519868_2.jpg";
-	private String imageUrl2 = "http://pic1.nipic.com/2008-09-08/200898163242920_2.jpg";
-	private String imageUrl3 = "http://pic1.nipic.com/2008-09-08/200898163242920_2.jpg";
-	private String imageUrl4 = "http://pic1.nipic.com/2008-09-08/200898163242920_2.jpg";
-	private String imageUrl5 = "http://pic1.nipic.com/2008-09-08/200898163242920_2.jpg";
-	private String imageUrl6 = "http://pic1.nipic.com/2008-09-08/200898163242920_2.jpg";
-	private String imageUrl7 = "http://pic1.nipic.com/2008-09-08/200898163242920_2.jpg";
-
 	private ImageCycleView cycleView;// 广告栏
+	
+	private PullToRefreshScrollView pulltoreflash;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,52 +62,25 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 	}
 
 	private void findView(View view) {
+		pulltoreflash=(PullToRefreshScrollView) view.findViewById(R.id.pulltoreflash);
 		cycleView = (ImageCycleView) view.findViewById(R.id.imageCycleView2);
-		babyfood = (RelativeLayout) view.findViewById(R.id.babyfood);
-		motherfood = (RelativeLayout) view.findViewById(R.id.motherfood);
-		motherhuli = (RelativeLayout) view.findViewById(R.id.mmhuli);
-		babyhuli = (RelativeLayout) view.findViewById(R.id.babyhuli);
-
+		mylistview=(MyListview) view.findViewById(R.id.mylistview);
 		hulishizoom = (TextView) view.findViewById(R.id.hulishizone);
 		more = (TextView) view.findViewById(R.id.other);
-
-		babyfood_today = (TextView) view.findViewById(R.id.babyfood_today);
-		babyfood_topic = (TextView) view.findViewById(R.id.babyfood_topic);
-		motherfood_today = (TextView) view.findViewById(R.id.mother_food_today);
-		motherfood_topic = (TextView) view.findViewById(R.id.mother_food_topic);
-		motherhuli_today = (TextView) view.findViewById(R.id.mmyhuli_today);
-		motherhuli_topic = (TextView) view.findViewById(R.id.mmhuli_topic);
-		babyhuli_today = (TextView) view.findViewById(R.id.babyhuli_today);
-		babyhuli_topic = (TextView) view.findViewById(R.id.babyhuli_topic);
-		
 		message=(ImageView) view.findViewById(R.id.message);
 
 	}
 
 	private void init() {
-		// 测试
-		mImageUrl = new ArrayList<String>();
-		mImageUrl.add(imageUrl1);
-		mImageUrl.add(imageUrl2);
-		mImageUrl.add(imageUrl3);
-		mImageUrl.add(imageUrl4);
-		mImageUrl.add(imageUrl5);
-		mImageUrl.add(imageUrl6);
-		mImageUrl.add(imageUrl7);
-
-		cycleView.setImageResources(mImageUrl, new ImageCycleViewListener() {
+		loadData();
+		pulltoreflash.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
 
 			@Override
-			public void onImageClick(int position, View imageView) {
-				// TODO Auto-generated method stub
-
+			public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+				loadData();
+				refreshView.onRefreshComplete();
 			}
 		});
-
-		babyfood.setOnClickListener(this);
-		motherfood.setOnClickListener(this);
-		motherhuli.setOnClickListener(this);
-		babyhuli.setOnClickListener(this);
 		hulishizoom.setOnClickListener(this);
 		more.setOnClickListener(this);
 		message.setOnClickListener(this);
@@ -120,8 +90,51 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 	 */
 	private void loadData(){
 		NetworkHelper.doGet(BaseInfo.COMMNUTITY, new JsonHttpResponseHandler(){
-			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+				super.onSuccess(statusCode, headers, response);
+				if (JsonUtils.getRootResult(response).getIsSuccess()) {
+					CommunityResult result=JsonUtils.getResult(response, CommunityResult.class);
+					bindData(result);
+				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+				super.onFailure(statusCode, headers, responseString, throwable);
+				Log.e("社区", responseString);
+			}
 		});
+	}
+	/**
+	 * 绑定数据
+	 * @param result
+	 */
+	protected void bindData(CommunityResult result) {
+		/*
+		 * 绑定banner
+		 */
+		if (result.getBanners()!=null) {
+			mImageUrl = new ArrayList<String>();
+			for (Banners banner : result.getBanners()) {
+				mImageUrl.add(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+banner.getLogo());
+			}
+			cycleView.setImageResources(mImageUrl, new ImageCycleViewListener() {
+				@Override
+				public void onImageClick(int position, View imageView) {
+					
+				}
+			});
+		}
+		/**
+		 * 绑定社区下面的部分
+		 */
+		if (result.getBlocks()!=null) {
+			List<Blocks> list=result.getBlocks();
+			CommunityAdapter adapter=new CommunityAdapter(getActivity(), list, R.layout.community_item);
+			mylistview.setAdapter(adapter);
+		}
+		
+		
 	}
 
 	@Override
@@ -132,18 +145,6 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 			break;
 		case R.id.other:
 			EasyMotherUtils.goActivity(getActivity(), YSYQActicvity.class);
-			break;
-		case R.id.babyfood:
-
-			break;
-		case R.id.motherfood:
-
-			break;
-		case R.id.babyhuli:
-
-			break;
-		case R.id.mmhuli:
-
 			break;
 		case R.id.message:
 			EasyMotherUtils.goActivity(getActivity(), MessageContralActivity.class);

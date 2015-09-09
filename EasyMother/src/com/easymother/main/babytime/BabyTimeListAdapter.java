@@ -79,7 +79,7 @@ public class BabyTimeListAdapter extends CommonAdapter<BabyTimeBean> {
 		holder.getView(R.id.photo).setVisibility(View.VISIBLE);
 		
 		//图片先不管，因为返回的数据不是数组形式
-		if (t.getImages()!=null) {
+		if (t.getImages()!=null&&!"".equals(t.getImages())) {
 //			String json= "['150907112001easymother20150907_111958.jpg','150907112001easymother20150907_111958.jpg']";
 //			List<String> list=JSON.parseArray(json, String.class);
 			Log.e("tupian", t.getImages());

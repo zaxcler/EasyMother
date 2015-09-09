@@ -40,19 +40,19 @@ public class HuLiShiZoneDetailActivity extends Activity {
 		
 	}
 	private void init() {
-		//测试数据
-		TestBean bean=new TestBean();
-		List<TestBean> list=new ArrayList<TestBean>();
-		list.add(bean);
-		list.add(bean);
-		list.add(bean);
-		list.add(bean);
-		list.add(bean);
-		list.add(bean);
-		
-		
-		HuLiShiAdapter adapter=new HuLiShiAdapter(this, list, R.layout.activity_mypage_topic_item);
-		listview.setAdapter(adapter);
+//		//测试数据
+//		TestBean bean=new TestBean();
+//		List<TestBean> list=new ArrayList<TestBean>();
+//		list.add(bean);
+//		list.add(bean);
+//		list.add(bean);
+//		list.add(bean);
+//		list.add(bean);
+//		list.add(bean);
+//		
+//		
+//		HuLiShiAdapter adapter=new HuLiShiAdapter(this, list, R.layout.activity_mypage_topic_item);
+//		listview.setAdapter(adapter);
 		listview.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

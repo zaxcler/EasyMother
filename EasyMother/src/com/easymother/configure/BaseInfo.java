@@ -28,6 +28,14 @@ public class BaseInfo {
 	
 		public final static String CHCLK_LETTER="app/nursepushletter/findByNurseIdAndJob";//查看订单
 		public final static String CHCLK_ALL_COMMENTS="app/ordercomment/selectByNurseIdAndJob";//查看订单
+		
+		
+		public final static String YSYQ_INFO="app/newstype/toIndex";//医食衣趣
+		public final static String NURSE_ZOME="app/forumpost/spacelist";//护理师空间
+		public final static String STAR_NURSE="app/forumupdownlog/toPraise";//给护理师点赞
+		public final static String SAVE_COLLECTION="app/forumcollect/save";//收藏空间和话题
+		
+
 
 		
 		
