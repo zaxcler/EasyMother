@@ -31,9 +31,14 @@ public class BaseInfo {
 		
 		
 		public final static String YSYQ_INFO="app/newstype/toIndex";//医食衣趣
-		public final static String NURSE_ZOME="app/forumpost/spacelist";//护理师空间
+		public final static String YSYQ_TYPE_NEWS="app/newsinfo/toNewsInfos";//医食衣趣的某个type的列表
+		public final static String YSYQ_TYPE_NEWS_DETAIL="app/newsinfo/toDetail";//医食衣趣的里面详细的信息
+		public final static String NURSE_ZOME_LIST="app/forumpost/spacelist";//护理师空间
 		public final static String STAR_NURSE="app/forumupdownlog/toPraise";//给护理师点赞
 		public final static String SAVE_COLLECTION="app/forumcollect/save";//收藏空间和话题
+		public final static String NURSE_ZOME_DETAIL="app/forumpost/spaceDetail";//护理师空间详情
+		public final static String SAVE_YSYQ_TO_COLLECTION="app/newscollect/save";//收藏医食衣趣到
+		
 		
 
 

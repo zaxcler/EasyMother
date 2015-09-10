@@ -26,7 +26,7 @@ public class HuLiShiReplyListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_hulishi_zone_reply);
-		EasyMotherUtils.initTitle(this, "护理师空间列表", false);
+		EasyMotherUtils.initTitle(this, "护理师空间", false);
 		findView();
 		init();
 		

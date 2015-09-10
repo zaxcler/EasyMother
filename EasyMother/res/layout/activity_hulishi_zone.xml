@@ -26,7 +26,7 @@
                 <ImageView
                     android:id="@+id/imageView1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dp_150"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:scaleType="fitXY"
@@ -45,7 +45,7 @@
                     android:textSize="@dimen/sp_10" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/nurse_sx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/textView1"
@@ -55,21 +55,21 @@
                     android:textSize="@dimen/sp_10" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/star"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/textView2"
-                    android:layout_alignLeft="@+id/textView2"
+                    android:layout_above="@+id/nurse_sx"
+                    android:layout_alignLeft="@+id/nurse_sx"
                     android:text="星座：水平座"
                     android:textColor="@color/boroblacktext"
                     android:textSize="@dimen/sp_10" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/hometown"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/textView3"
-                    android:layout_alignLeft="@+id/textView3"
+                    android:layout_above="@+id/star"
+                    android:layout_alignLeft="@+id/star"
                     android:text="籍贯：浙江杭州"
                     android:textColor="@color/boroblacktext"
                     android:textSize="@dimen/sp_10" />
@@ -78,14 +78,14 @@
                     android:id="@+id/age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/textView4"
-                    android:layout_alignLeft="@+id/textView4"
+                    android:layout_above="@+id/hometown"
+                    android:layout_alignLeft="@+id/hometown"
                     android:text="年龄：45岁"
                     android:textColor="@color/boroblacktext"
                     android:textSize="@dimen/sp_10" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/work_experience"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/age"
@@ -95,11 +95,11 @@
                     android:textSize="@dimen/sp_10" />
 
                 <TextView
-                    android:id="@+id/ysname"
+                    android:id="@+id/nurse_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/textView6"
-                    android:layout_alignLeft="@+id/textView6"
+                    android:layout_above="@+id/work_experience"
+                    android:layout_alignLeft="@+id/work_experience"
                     android:text="郭大美" />
 
                 <TextView
@@ -113,7 +113,7 @@
                     android:textSize="@dimen/sp_10" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/worktime"
@@ -127,9 +127,9 @@
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
-                    android:layout_alignBaseline="@+id/textView9"
-                    android:layout_alignBottom="@+id/textView9"
-                    android:layout_toLeftOf="@+id/textView9"
+                    android:layout_alignBaseline="@+id/like"
+                    android:layout_alignBottom="@+id/like"
+                    android:layout_toLeftOf="@+id/like"
                     android:drawableLeft="@drawable/like_red_small"
                     android:gravity="center"
                     android:text="共有"

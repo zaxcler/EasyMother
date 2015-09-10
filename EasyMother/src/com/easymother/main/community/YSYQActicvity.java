@@ -20,10 +20,15 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
@@ -31,13 +36,9 @@ import android.widget.RelativeLayout;
 
 public class YSYQActicvity extends Activity {
 	
-	private RelativeLayout photos1;
-	private RelativeLayout photos2;
-	private RelativeLayout photos3;
-	private RelativeLayout photos4;
 	private GridView gridview;
 	private ListView listview;
-	
+	private List<YSYQItemBean> beans;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +52,13 @@ public class YSYQActicvity extends Activity {
 
 
 	private void findView() {
-		photos1=(RelativeLayout) findViewById(R.id.layout1);
-		photos2=(RelativeLayout) findViewById(R.id.layout2);
-		photos3=(RelativeLayout) findViewById(R.id.layout3);
-		photos4=(RelativeLayout) findViewById(R.id.layout4);
 		gridview=(GridView) findViewById(R.id.gridview);
 		listview=(ListView) findViewById(R.id.listview);
 	}
 
 
 	private void init() {
-		List<YSYQItemBean> beans=new ArrayList<>();
+		beans=new ArrayList<>();
 		YSYQItemBean bean1=new YSYQItemBean();
 		bean1.setImage(R.drawable.yi);
 		bean1.setTitle("医");
@@ -94,6 +91,28 @@ public class YSYQActicvity extends Activity {
 					YSYQResult result=JsonUtils.getResult(response, YSYQResult.class);
 					bindData(result);
 				}
+			}
+		});
+		gridview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				
+				Intent intent=new Intent();
+				intent.setClass(YSYQActicvity.this, ArticleListActivity.class);
+				if ("医".equals(beans.get(arg2).getTitle())) {
+					intent.putExtra("typeName", "A");
+				}
+				if ("食".equals(beans.get(arg2).getTitle())) {
+					intent.putExtra("typeName", "B");
+				}
+				if ("衣".equals(beans.get(arg2).getTitle())) {
+					intent.putExtra("typeName", "C");
+				}
+				if ("趣".equals(beans.get(arg2).getTitle())) {
+					intent.putExtra("typeName", "D");
+				}
+				startActivity(intent);
 			}
 		});
 		

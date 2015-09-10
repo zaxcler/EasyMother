@@ -17,6 +17,7 @@ import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -51,7 +52,9 @@ public class HuLiShiZoneListActivity extends Activity {
 		loadData();
 	}
 	private void loadData() {
-		NetworkHelper.doGet(BaseInfo.NURSE_ZOME, new JsonHttpResponseHandler(){
+		RequestParams params=new RequestParams();
+		params.put("type", "KJ");
+		NetworkHelper.doGet(BaseInfo.NURSE_ZOME_LIST,params, new JsonHttpResponseHandler(){
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);

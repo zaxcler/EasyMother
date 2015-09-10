@@ -2,30 +2,59 @@ package com.easymother.main.community;
 
 import java.util.List;
 
-import com.easymother.bean.TestBean;
-import com.easymother.customview.MyListview;
+import com.easymother.bean.NewsInfoBean;
+import com.easymother.configure.BaseInfo;
+import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
+import com.easymother.utils.NetworkHelper;
 import com.easymother.utils.ViewHolder;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
-import android.view.Window;
-import android.widget.ListView;
+import android.content.Intent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class ArticleListAdapter extends CommonAdapter<TestBean> {
-
-	protected ArticleListAdapter(Context context, List<TestBean> list, int resource) {
+public class ArticleListAdapter extends CommonAdapter<NewsInfoBean> {
+	private Context context;
+	protected ArticleListAdapter(Context context, List<NewsInfoBean> list, int resource) {
 		super(context, list, resource);
-		// TODO Auto-generated constructor stub
+		this.context=context;
 	}
 
 	@Override
-	public void setDataToItem(ViewHolder holder, TestBean t) {
-		// TODO Auto-generated method stub
+	public void setDataToItem(ViewHolder holder, final NewsInfoBean t) {
+		ImageView imageView1=holder.getView(R.id.imageView1);
+		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getLogo(), imageView1, MyApplication.options_image);
 		
+		TextView title=holder.getView(R.id.title);
+		if (t.getTitle()!=null) {
+			title.setText(t.getTitle());
+		}else {
+			title.setText("");
+		}
+		
+		TextView content=holder.getView(R.id.content);
+		if (t.getContent()!=null) {
+			content.setText(NetworkHelper.showFWBText(t.getContent()));
+		}else {
+			content.setText("");
+		}
+		TextView check_all=holder.getView(R.id.check_all);
+		check_all.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent=new Intent();
+				intent.setClass((Activity)context, ArticleActivity.class);
+				intent.putExtra("id", t.getId());
+				context.startActivity(intent);
+			}
+		});
 	}
 	
 }

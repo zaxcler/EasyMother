@@ -1,24 +1,7 @@
 package com.easymother.main.community;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-
-import android.app.Activity;
-import android.content.Context;
-import android.text.Html;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.alibaba.fastjson.JSON;
-import com.alipay.apmobilesecuritysdk.a.f;
-import com.easymother.bean.TestBean;
 import com.easymother.bean.TopicItemBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
@@ -34,23 +17,45 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.GridView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 
+	private Intent intent;
+	private String flag="";
 	protected HuLiShiAdapter(Context context, List<TopicItemBean> list, int resource) {
 		super(context, list, resource);
-		// TODO Auto-generated constructor stub
+		intent=new Intent();
+		if (context instanceof HuLiShiZoneDetailActivity) {
+			flag="detail";
+			intent.setClass((Activity)context, HuLiShiReplyListActivity.class);
+		}else {
+			intent.setClass((Activity)context, HuLiShiZoneDetailActivity.class);
+		}
 	}
 
 	@Override
 	public void setDataToItem(ViewHolder holder, final TopicItemBean t) {
-		holder.getConvertView().setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				EasyMotherUtils.goActivity((Activity)context, HuLiShiZoneDetailActivity.class);
-			}
-		});
+//		if (!"detail".equals(flag)) {
+			holder.getConvertView().setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					//userId实际上是nurseId 因为后台懒 返回的数据是这个所以。。你懂的
+					intent.putExtra("id", t.getUserId());
+					context.startActivity(intent);
+					
+				}
+			});
+//		}
+		
 		CircleImageView circleImageView=holder.getView(R.id.circleImageView1);
 		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getUserImae(), circleImageView,MyApplication.options_image);
 		TextView textView1=holder.getView(R.id.textView1);
@@ -66,9 +71,12 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 			if ("CRS".equals(t.getJob())) {
 				nurse_type.setText("催乳师");
 			}
+			if ("detail".equals(flag)) {
+				nurse_type.setVisibility(View.GONE);
+			}
 			
 		}else {
-			textView1.setText("");
+			nurse_type.setText("");
 		}
 
 		TextView name=holder.getView(R.id.name);
@@ -78,18 +86,24 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 			name.setText("");
 		}
 		TextView time=holder.getView(R.id.time);
-		if (t.getUpdateTime()!=null) {
-			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			try {
-				Date date=format.parse(t.getUpdateTime());
-				Calendar calendar=Calendar.getInstance();
-				calendar.setTime(date);
-				time.setText(calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DAY_OF_MONTH));
-				
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//		if (t.getUpdateTime()!=null) {
+//			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			try {
+//				Date date=format.parse(t.getUpdateTime());
+//				Calendar calendar=Calendar.getInstance();
+//				calendar.setTime(date);
+//				time.setText(calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DAY_OF_MONTH));
+//				
+//			} catch (ParseException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//		}else {
+//			time.setText("");
+//		}
+		if (t.getShowTime()!=null) {
+			time.setText(t.getShowTime());
 			
 		}else {
 			time.setText("");
