@@ -1,11 +1,8 @@
 package com.easymother.main;
 
-import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
-
 import org.apache.http.Header;
 import org.json.JSONObject;
-
 import com.easymother.bean.BabyTimeResult;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
@@ -22,12 +19,10 @@ import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -46,11 +41,19 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 	private TextView baby_name;
 	private TextView days;
 	
-	public final static int CHOOSE_PHOTO=1;//请求代码
-//	private TextView baby_name;
-//	private TextView baby_name;
+	public final static int CHOOSE_PHOTO=1;//请求选择照片代码
+	public final static int LOGIN_CODE=2;//请求登陆代码
 	
+	public  Handler handler=new Handler(){
+		public void handleMessage(Message msg) {
+			if (msg.what==1) {
+				loadData();
+			}
+		};
+	};
 	
+	public BabyTiemFragment() {
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -75,7 +78,12 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 		addbabytime.setOnClickListener(this);
 		circleImageView.setOnClickListener(this);
 		background.setOnClickListener(this);
-		
+		loadData();
+	}
+	/**
+	 * 加载数据
+	 */
+	public void loadData(){
 		NetworkHelper.doGet(BaseInfo.BABYTIME_INDEX, new JsonHttpResponseHandler(){
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -91,7 +99,6 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 				Log.e("baby_time失败", responseString);
 			}
 		});
-		
 	}
 	/**
 	 * b=绑定数据到界面
@@ -156,13 +163,13 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 			break;
 
 		case R.id.add_babytime:
+			if (MyApplication.preferences.getInt("id", 0)==0) {
+				EasyMotherUtils.goActivityForResult(getActivity(), LoginOrRegisterActivity.class, LOGIN_CODE);
+				return;
+			}
 			EasyMotherUtils.goActivity(getActivity(), BabyTimeEditActivity.class);
 			break;
 		case R.id.circleImageView1:
-			if (MyApplication.preferences.getInt("baby_id", 0)==0) {
-				EasyMotherUtils.goActivity(getActivity(), LoginOrRegisterActivity.class);
-				return;
-			}
 			EasyMotherUtils.goActivity(getActivity(), BabyTimeInfomationActivity.class);
 			break;
 		case R.id.baby_image:

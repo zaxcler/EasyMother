@@ -12,6 +12,7 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.utils.L;
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -90,11 +91,11 @@ public class MyApplication  extends Application{
 				.tasksProcessingOrder(QueueProcessingType.LIFO)
 				.writeDebugLogs() // Remove for release app
 				.build();
+		
 		L.disableLogging();
 		ImageLoader.getInstance().init(config);
-		options_image=new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.default_image).showImageOnFail(R.drawable.default_image).build();
-		options_photo=new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.default_photo).showImageOnFail(R.drawable.default_photo).build();
-		
+		options_image=new DisplayImageOptions.Builder().imageScaleType(ImageScaleType.EXACTLY_STRETCHED).showImageOnLoading(R.drawable.default_image).showImageOnFail(R.drawable.default_image).build();
+		options_photo=new DisplayImageOptions.Builder().imageScaleType(ImageScaleType.EXACTLY_STRETCHED).showImageOnLoading(R.drawable.default_photo).showImageOnFail(R.drawable.default_photo).build();
 	}
 	
 	public static int getScreen_width() {

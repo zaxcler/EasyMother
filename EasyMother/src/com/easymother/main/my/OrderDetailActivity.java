@@ -10,6 +10,7 @@ import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.Order;
 import com.easymother.bean.OrderDetailResult;
 import com.easymother.configure.BaseInfo;
+import com.easymother.configure.MyApplication;
 import com.easymother.customview.MyPopupWindow1;
 import com.easymother.customview.MyPopupWindow1.OnMyPopupWindowsClick;
 import com.easymother.main.R;
@@ -202,15 +203,16 @@ public class OrderDetailActivity extends Activity {
 			if (baseBean.getCurrentAddress() != null) {
 				nurse_address.setText(baseBean.getCurrentAddress());
 			}
-			if (baseBean.getShowPrice() != null) {
-				price.setText(baseBean.getShowPrice());
+			if (baseBean.getPrice() != null) {
+				price.setText(baseBean.getPrice()+"元/26天");
 			}
 			if (baseBean.getMarketPrice() != null) {
-				marketprice.setText(baseBean.getMarketPrice());
+				marketprice.setText("市场价："+baseBean.getMarketPrice());
+				marketprice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 			}
 			if (baseBean.getImage() != null) {
 				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + baseBean.getImage(),
-						nurse_image);
+						nurse_image,MyApplication.options_image);
 			}
 
 		}

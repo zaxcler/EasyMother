@@ -91,7 +91,7 @@ public class MyWishListAdapter<T> extends CommonAdapter<T> {
 			 * 设置之前先判断空
 			 */
 			if (bean.getSeniority()!=null) {
-				seniority.setText(bean.getSeniority()+"");
+				seniority.setText("从业"+bean.getSeniority()+"年");
 			}
 			
 			TextView age=holder.getView(R.id.textView4);
@@ -109,23 +109,28 @@ public class MyWishListAdapter<T> extends CommonAdapter<T> {
 			 * 设置之前先判断空
 			 */
 			if (bean.getCurrentAddress()!=null) {
-				currentAddress.setText(bean.getCurrentAddress());
+				currentAddress.setText("现居于："+bean.getCurrentAddress());
 			}
 			
 			TextView showPrice=holder.getView(R.id.textView7);
 			/*
 			 * 设置之前先判断空
 			 */
-			if (bean.getShowPrice()!=null) {
-				showPrice.setText(bean.getShowPrice());
+			if (bean.getPrice()!=null) {
+				showPrice.setText(bean.getPrice()+"/26天");
 			}
-			
+			TextView level=holder.getView(R.id.textView9);
+			if (bean.getJobTitle()!=null) {
+				level.setText(bean.getJobTitle());
+			}else {
+				level.setText("");
+			}
 			TextView marketPrice=holder.getView(R.id.textView8);
 			/*
 			 * 设置之前先判断空
 			 */
 			if (bean.getMarketPrice()!=null) {
-				marketPrice.setText(bean.getMarketPrice());
+				marketPrice.setText("市场价："+bean.getMarketPrice());
 				marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 			}
 			ImageView photo=holder.getView(R.id.image);

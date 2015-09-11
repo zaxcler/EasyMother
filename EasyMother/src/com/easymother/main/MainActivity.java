@@ -229,6 +229,11 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 					e.printStackTrace();
 				}
 				break;
+			
+				//如果登陆成功 则刷新一下BabyTiemFragment的数据
+			case BabyTiemFragment.LOGIN_CODE:
+				babyTiemFragment.handler.sendEmptyMessage(1);
+				break;
 			}
 		}
 	}

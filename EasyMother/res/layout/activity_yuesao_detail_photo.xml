@@ -26,7 +26,7 @@
             android:id="@+id/background_photo"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_200"
-            android:background="@drawable/home_banner"
+            android:src="@drawable/home_banner"
             android:scaleType="fitXY" />
 
         <com.easymother.customview.CircleImageView
@@ -107,6 +107,7 @@
 
         <LinearLayout
             android:id="@+id/ysoryys"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -144,6 +145,7 @@
                 android:textSize="@dimen/dp_12" />
         </LinearLayout>
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -166,7 +168,6 @@
                 android:numStars="5"
                 android:rating="3.5"
                 style="?android:attr/ratingBarStyleSmall"
-                
                 android:id="@+id/ratingBar1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

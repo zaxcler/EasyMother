@@ -385,8 +385,8 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		
 		if (nurseJobBean!=null&& baseBean!=null) {
 			String image=nurseJobBean.getWorkImageArrays()[0];
-			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+image,backgroudPhoto);
-			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+image,nursePhoto);
+			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+image,backgroudPhoto,MyApplication.options_image);
+			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+image,nursePhoto,MyApplication.options_photo);
 //			if (nurseJobBean.getNurseName()!=null) {
 				nurseName.setText(baseBean.getRealName());
 //			}
@@ -395,23 +395,21 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 //			}
 			if (nurseJobBean.getJob()!=null) {
 				if ("YS".equals(nurseJobBean.getJob())||"SHORT_YS".equals(nurseJobBean.getJob())) {
-					ratingBar1.setVisibility(View.GONE);
-					cuishi_stars.setVisibility(View.GONE);
+					ysoryys.setVisibility(View.VISIBLE);
 					nurseType.setText("月嫂");
 					nurseLevel.setText(nurseJobBean.getJobTitle()+"");
 					nurseCurrentPrice.setText("￥"+nurseJobBean.getPrice()+"元/26天");
 					nurseMarketPrice.setText("市场价："+nurseJobBean.getMarketPrice()+"元/26天");
 				}
 				if ("YYS".equals(nurseJobBean.getJob())|| "SHORT_YYS".equals(nurseJobBean.getJob())) {
-					ratingBar1.setVisibility(View.GONE);
-					cuishi_stars.setVisibility(View.GONE);
+					ysoryys.setVisibility(View.VISIBLE);
 					nurseType.setText("育婴师");
 					nurseLevel.setText(nurseJobBean.getJobTitle()+"");
 					nurseCurrentPrice.setText("￥"+nurseJobBean.getPrice()+"元/26天");
 					nurseMarketPrice.setText("市场价："+nurseJobBean.getMarketPrice()+"元/26天");
 				}
 				if ("CRS".equals(nurseJobBean.getJob())) {
-					ysoryys.setVisibility(View.GONE);
+					cuishi_stars.setVisibility(View.VISIBLE);
 					nurseType.setText("催乳师");
 					if (nurseJobBean.getLevel()!=null) {
 						ratingBar1.setProgress(nurseJobBean.getLevelScore());

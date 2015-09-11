@@ -85,6 +85,8 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	private ArrayList<String> mImageUrl = null;
 	
 
+	public HomePageFragment() {
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

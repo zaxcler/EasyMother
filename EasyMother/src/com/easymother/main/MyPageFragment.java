@@ -52,6 +52,8 @@ public class MyPageFragment extends Fragment implements OnClickListener {
 
 	private boolean isOnLine = false;// 是否登录
 
+	public MyPageFragment() {
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View mypage = inflater.inflate(R.layout.fragment_mypage, null);

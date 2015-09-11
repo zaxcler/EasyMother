@@ -51,6 +51,7 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 				public void onClick(View v) {
 					//userId实际上是nurseId 因为后台懒 返回的数据是这个所以。。你懂的
 					intent.putExtra("id", t.getUserId());
+					intent.putExtra("type", t.getType());
 					context.startActivity(intent);
 					
 				}

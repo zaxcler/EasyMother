@@ -41,6 +41,7 @@ public class BaseInfo {
 		public final static String SAVE_YSYQ_TO_COLLECTION="app/newscollect/save";//收藏医食衣趣到
 		public final static String TOPIC_LIST="app/forumpost/applist";//话题列表
 		public final static String SUBMIT_TOPIC_HELP="app/forumpost/appsave";//发布话题和求助
+		public final static String CHECK_TOPIC_DETAIL="app/forumpost/listReply";//查看话题/求助详情
 		
 		
 

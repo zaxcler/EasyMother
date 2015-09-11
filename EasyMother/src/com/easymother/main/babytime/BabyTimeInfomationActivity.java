@@ -2,8 +2,11 @@ package com.easymother.main.babytime;
 
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.apache.http.Header;
+import org.apache.http.protocol.RequestUserAgent;
 import org.json.JSONObject;
 
 import com.easymother.bean.BabyInfoBean;
@@ -22,11 +25,14 @@ import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,6 +40,7 @@ import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BabyTimeInfomationActivity extends Activity implements OnClickListener {
 
@@ -86,14 +93,23 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 		nannan_sex.setOnClickListener(this);
 		nannan_birthday.setOnClickListener(this);
 		RequestParams params=new RequestParams();
-		params.put("id", MyApplication.preferences.getInt("baby_id", 0));
+		int id=MyApplication.preferences.getInt("baby_id", 0);
+		if (id==0) {
+			params.put("id", "");
+		}else {
+			params.put("id", id);
+		}
 		NetworkHelper.doGet(BaseInfo.BABYINFO_DETAIL, params, new JsonHttpResponseHandler(){
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
-					BabyInfoBean infoBean=JsonUtils.getResult(response, BabyInfoBean.class);
+					BabyInfoBean infoBean=null;
+					if (JsonUtils.getRootResult(response).getResult()!=null) {
+						infoBean=JsonUtils.getResult(response, BabyInfoBean.class);
+					}
 					bindData(infoBean);
+					
 				}
 			}
 		});
@@ -104,17 +120,24 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 	 */
 	protected void bindData(BabyInfoBean infoBean) {
 		if (infoBean!=null) {
+			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+infoBean.getBabyImage(), circleImageView, MyApplication.options_photo);
 			info=infoBean;
 			if (infoBean.getBabyName()!=null) {
 				nannan_name.setText(infoBean.getBabyName());
+			}else {
+				nannan_name.setText("");
 			}
 			if (infoBean.getGender()!=null) {
 				nannan_sex.setText(infoBean.getGender());
+			}else {
+				nannan_sex.setText("");
 			}
 			if (infoBean.getBirthday()!=null) {
 				SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 				String birthday=format.format(infoBean.getBirthday());
 				nannan_birthday.setText(birthday);
+			}else {
+				nannan_birthday.setText("");
 			}
 		}
 	}
@@ -154,10 +177,42 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 			intent.putExtra("type", "nannan_sex");
 			startActivity(intent);
 			break;
-//		case R.id.nannan_birthday:
-//			DatePicker picker=new DatePicker(this);
-//			picker.setOnClickListener(l);
-//			break;
+		case R.id.nannan_birthday:
+			Date currentdate=new Date(System.currentTimeMillis());
+			Calendar calendar=Calendar.getInstance();
+			calendar.setTime(currentdate);
+			DatePickerDialog picker=new DatePickerDialog(this, new OnDateSetListener() {
+				
+				@Override
+				public void onDateSet(DatePicker view, final int year, final int monthOfYear,final int dayOfMonth) {
+					RequestParams params=new RequestParams();
+					if (info!=null) {
+						params.put("id", info.getId());
+					}else {
+						params.put("id", "");
+					}
+					NetworkHelper.doGet(BaseInfo.BABYINFO_SAVEINFO, params, new JsonHttpResponseHandler(){
+						@Override
+						public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+							super.onSuccess(statusCode, headers, response);
+							if (JsonUtils.getRootResult(response).getIsSuccess()) {
+								nannan_birthday.setText(year+"年"+monthOfYear+"月"+dayOfMonth+"日");
+							}else {
+								Toast.makeText(BabyTimeInfomationActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+							}
+						}
+						@Override
+						public void onFailure(int statusCode, Header[] headers, String responseString,
+								Throwable throwable) {
+							super.onFailure(statusCode, headers, responseString, throwable);
+							Toast.makeText(BabyTimeInfomationActivity.this, "连接服务器失败", Toast.LENGTH_SHORT).show();
+							Log.e("连接服务器失败", responseString);
+						}
+					});
+				}
+			}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.DAY_OF_MONTH));
+			picker.show();
+			break;
 
 		}
 

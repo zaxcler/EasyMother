@@ -32,7 +32,7 @@
             android:layout_height="@dimen/dp_48"
             android:layout_alignBottom="@+id/nannan_photo"
             android:layout_alignRight="@+id/view1"
-            android:src="@drawable/baby" />
+            android:src="@drawable/default_photo" />
 
         <View
             android:id="@+id/view2"
@@ -66,7 +66,7 @@
             android:gravity="right"
             android:paddingBottom="@dimen/dp_10"
             android:paddingTop="@dimen/dp_10"
-            android:text="Angle" />
+             />
 
         <TextView
             android:id="@+id/textView3"
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/View01"
             android:layout_alignRight="@+id/View01"
-            android:text="男" />
+             />
 
         <TextView
             android:id="@+id/textView6"
@@ -131,7 +131,7 @@
             android:layout_alignBaseline="@+id/textView6"
             android:layout_alignBottom="@+id/textView6"
             android:layout_alignRight="@+id/View01"
-            android:text="2015-08-09" />
+            />
 
         <View
             android:id="@+id/View02"

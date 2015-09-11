@@ -54,6 +54,9 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 	private ImageCycleView cycleView;// 广告栏
 	
 	private PullToRefreshScrollView pulltoreflash;
+	
+	public CommunityPageFragment() {
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
