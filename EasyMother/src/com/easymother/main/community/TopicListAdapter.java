@@ -2,6 +2,7 @@ package com.easymother.main.community;
 
 import java.util.List;
 import com.alibaba.fastjson.JSON;
+import com.easymother.bean.ForumPostBean;
 import com.easymother.bean.TopicItemBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
@@ -27,25 +28,24 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
+public class TopicListAdapter extends CommonAdapter<TopicItemBean> {
 
 	private Intent intent;
 	private String flag="";
-	protected HuLiShiAdapter(Context context, List<TopicItemBean> list, int resource) {
+	protected TopicListAdapter(Context context, List<TopicItemBean> list, int resource) {
 		super(context, list, resource);
 		intent=new Intent();
 		if (context instanceof HuLiShiZoneDetailActivity) {
+			flag="detail";
 			intent.setClass((Activity)context, HuLiShiReplyListActivity.class);
-		}else if (context instanceof HuLiShiZoneListActivity) {
+		}else {
 			intent.setClass((Activity)context, HuLiShiZoneDetailActivity.class);
-		}else if (context instanceof TopicAndAskListActivity) {
-			flag="topic_help";
-			intent.setClass((Activity)context, HuLiShiReplyListActivity.class);
 		}
 	}
 
 	@Override
 	public void setDataToItem(ViewHolder holder, final TopicItemBean t) {
+//		if (!"detail".equals(flag)) {
 			holder.getConvertView().setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -55,29 +55,11 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 					
 				}
 			});
+//		}
 		
 		CircleImageView circleImageView=holder.getView(R.id.circleImageView1);
 		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getUserImae(), circleImageView,MyApplication.options_image);
 		
-		TextView nurse_type=holder.getView(R.id.nurse_type);
-		if (t.getJob()!=null && !"topic_help".equals(flag)) {
-			if ("YS".equals(t.getJob())) {
-				nurse_type.setText("月嫂");
-			}
-			if ("YYS".equals(t.getJob())) {
-				nurse_type.setText("育婴师");
-			}
-			if ("CRS".equals(t.getJob())) {
-				nurse_type.setText("催乳师");
-			}
-			if ("detail".equals(flag)) {
-				nurse_type.setVisibility(View.GONE);
-			}
-			
-		}else {
-			nurse_type.setVisibility(View.GONE);
-		}
-
 		TextView name=holder.getView(R.id.name);
 		if (t.getUserNickname()!=null) {
 			name.setText(t.getUserNickname());
@@ -85,7 +67,22 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 			name.setText("");
 		}
 		TextView time=holder.getView(R.id.time);
-//		
+//		if (t.getUpdateTime()!=null) {
+//			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			try {
+//				Date date=format.parse(t.getUpdateTime());
+//				Calendar calendar=Calendar.getInstance();
+//				calendar.setTime(date);
+//				time.setText(calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DAY_OF_MONTH));
+//				
+//			} catch (ParseException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//		}else {
+//			time.setText("");
+//		}
 		if (t.getShowTime()!=null) {
 			time.setText(t.getShowTime());
 			
@@ -101,6 +98,8 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 		}
 		GridView gridView=holder.getView(R.id.pictures);
 		if (t.getImages()!=null&&!"".equals(t.getImages())) {
+//			String json= "[\"150907112001easymother20150907_111958.\",\"150907112001easymother20150907_111958.jpg\"]";
+//			List<String> list=JSON.parseArray(t.getImages(), String.class);
 			Log.e("tupian", t.getImages());
 			List<String> list=JSON.parseArray(t.getImages().toString(), String.class);
 			if (list!=null) {

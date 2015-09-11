@@ -157,6 +157,10 @@
         <activity android:name="com.easymother.main.community.ArticleListActivity" ></activity>
         <!-- 文章详情 -->
         <activity android:name="com.easymother.main.community.ArticleActivity" ></activity>
+        <!-- 话题列表 -->
+        <activity android:name="com.easymother.main.community.TopicAndAskListActivity" ></activity>
+        <!-- 发布话题-->
+        <activity android:name="com.easymother.main.community.TopicOrHelpEditActivity" ></activity>
        
         
         <!-- 我的心愿单 -->

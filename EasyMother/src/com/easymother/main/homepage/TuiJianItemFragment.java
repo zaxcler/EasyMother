@@ -1,5 +1,6 @@
 package com.easymother.main.homepage;
 
+import com.alipay.apmobilesecuritysdk.a.e;
 import com.easymother.bean.CuiRuShi;
 import com.easymother.bean.YuYingShi;
 import com.easymother.bean.YueSao;
@@ -64,41 +65,62 @@ public class TuiJianItemFragment extends Fragment implements OnClickListener {
 	private void init(){
 		//type为月嫂的时候
 		if ("yuesao".equals(type)) {
-			if (yuesao.getImage()!=null) {
-				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+yuesao.getImage(), tuijian_photo);
-//				ImageLoader.getInstance().displayImage("http://zaxcler.oss-cn-beijing.aliyuncs.com/12.jpg", tuijian_photo);
-			}
+			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+yuesao.getImage(), tuijian_photo,MyApplication.options_image);
 			if (yuesao.getRealName()!=null) {
 				tuijian_name.setText(yuesao.getRealName());
+			}else {
+				tuijian_name.setText("");
 			}
-			if (yuesao.getMarketPrice()!=null) {
-				tuijian_price.setText(yuesao.getMarketPrice());
+			if (yuesao.getPrice()!=null) {
+				tuijian_price.setText("￥："+yuesao.getPrice());
+			}
+			else {
+				tuijian_price.setText("");
+			}
+			if (yuesao.getNums()!=null) {
+				tuijian_num.setText("共"+yuesao.getNums()+"位雇主喜欢");
+			}else {
+				tuijian_num.setText("共"+0+"位雇主喜欢");
 			}
 		}
 		//type为育婴师的时候
 		if ("yuyingshi".equals(type)) {
-			if (yuyingshi.getImage()!=null) {
-				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+yuyingshi.getImage(), tuijian_photo);
-//				ImageLoader.getInstance().displayImage("http://zaxcler.oss-cn-beijing.aliyuncs.com/13.jpg", tuijian_photo);
-			}
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+yuyingshi.getImage(), tuijian_photo,MyApplication.options_image);
 			if (yuyingshi.getRealName()!=null) {
 				tuijian_name.setText(yuyingshi.getRealName());
+			}else {
+				tuijian_name.setText("");
 			}
-			if (yuyingshi.getMarketPrice()!=null) {
-				tuijian_price.setText(yuyingshi.getMarketPrice());
+			
+			if (yuyingshi.getPrice()!=null) {
+				tuijian_price.setText("￥："+yuyingshi.getPrice());
+			}
+			else {
+				tuijian_price.setText("");
+			}
+			if (yuyingshi.getNums()!=null) {
+				tuijian_num.setText("共"+yuyingshi.getNums()+"位雇主喜欢");
+			}else {
+				tuijian_num.setText("共"+0+"位雇主喜欢");
 			}
 		}
 		//type为催乳师的时候
 		if ("cuirushi".equals(type)) {
-			if (cuirushi.getImage()!=null) {
-				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+cuirushi.getImage(), tuijian_photo);
-//				ImageLoader.getInstance().displayImage("http://zaxcler.oss-cn-beijing.aliyuncs.com/15.jpg", tuijian_photo);
-			}
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+cuirushi.getImage(), tuijian_photo,MyApplication.options_image);
 			if (cuirushi.getRealName()!=null) {
 				tuijian_name.setText(cuirushi.getRealName());
+			}else {
+				tuijian_name.setText("");
 			}
-			if (cuirushi.getMarketPrice()!=null) {
-				tuijian_price.setText(cuirushi.getMarketPrice());
+			if (cuirushi.getPrice()!=null) {
+				tuijian_price.setText("￥："+cuirushi.getPrice());
+			}else {
+				tuijian_price.setText("");
+			}
+			if (cuirushi.getNums()!=null) {
+				tuijian_num.setText("共"+cuirushi.getNums()+"位雇主喜欢");
+			}else {
+				tuijian_num.setText("共"+0+"位雇主喜欢");
 			}
 		}
 		

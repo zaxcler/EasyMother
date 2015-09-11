@@ -11,6 +11,7 @@
         android:padding="@dimen/dp_5" >
 
         <LinearLayout
+            android:padding="@dimen/dp_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -20,8 +21,9 @@
 
             <TextView
                 android:id="@+id/topic"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="话题"
                 android:background="@drawable/lightredwine_solid2"
                 android:padding="@dimen/dp_5"
@@ -30,9 +32,10 @@
 
             <TextView
                 android:id="@+id/ask"
+                android:layout_weight="1"
                 android:padding="@dimen/dp_5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="求助"
                 android:textColor="@color/blacktext"
                 android:textSize="@dimen/sp_16" />
@@ -40,12 +43,11 @@
 
         <ImageView
             android:id="@+id/more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_5"
-            android:src="@drawable/wish" />
+            android:src="@drawable/add1" />
 
         <ImageView
             android:id="@+id/back"
@@ -60,11 +62,16 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/line" />
-    <com.handmark.pulltorefresh.library.PullToRefreshListView 
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/pulltoreflash"
         >
-    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+        <com.easymother.customview.MyListview 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mylistview">
+        </com.easymother.customview.MyListview>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
 </LinearLayout>

@@ -92,10 +92,18 @@ public class NurseBaseBean implements Serializable{
     private String jobTitle;
     
     private  Double  weight;
+    
+    private Integer nums;
     // 家庭遗传病
     private String familyDisease;
     
-    public String getJobTitle() {
+    public Integer getNums() {
+		return nums;
+	}
+	public void setNums(Integer nums) {
+		this.nums = nums;
+	}
+	public String getJobTitle() {
 		return jobTitle;
 	}
 	public void setJobTitle(String jobTitle) {

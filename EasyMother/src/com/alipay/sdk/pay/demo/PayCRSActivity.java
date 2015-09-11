@@ -119,6 +119,9 @@ public class PayCRSActivity extends FragmentActivity {
 		user_name=(TextView) findViewById(R.id.user_name);
 		user_phone=(TextView) findViewById(R.id.user_phone);
 		user_address=(TextView) findViewById(R.id.user_address);
+		nurse_name=(TextView) findViewById(R.id.nurse_name);
+		type=(TextView) findViewById(R.id.type);
+		photo=(CircleImageView) findViewById(R.id.circleImageView1);
 		time=(TextView) findViewById(R.id.time);
 		type=(TextView) findViewById(R.id.type);
 		money=(TextView) findViewById(R.id.money);

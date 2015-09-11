@@ -258,18 +258,6 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 				}
 			}
 		});
-		//-------测试数据
-//		List<Certificate> beans=new ArrayList<Certificate>();
-		
-		//----------后期改为网络访问	
-//		List<Certificate> beans=new ArrayList<Certificate>();
-//		YueSaoGridViewAdapter adapter=new YueSaoGridViewAdapter(this, beans, R.layout.activity_yuesao_gridview_item);
-//		gridView.setAdapter(adapter);
-		//-------测试数据
-//				List<TestBean> beans1=new ArrayList<TestBean>();
-//				beans1.add(bean1);
-//				beans1.add(bean1);
-//		EmployerCommentAdapter commentAdapter=new EmployerCommentAdapter(this, beans1, R.layout.comment_item);
 //		mListview.setAdapter(commentAdapter);
 		
 		ordertext.setOnClickListener(this);
@@ -316,7 +304,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.check1:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/process1.html",R.drawable.pic1);
 				break;
 			case R.id.check2:
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
@@ -337,7 +325,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
 				break;
 			case R.id.text8:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/process1.html",R.drawable.pic1);
 				break;
 			case R.id.text10:
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this,"file:///android_asset/demo.html",R.drawable.pic1);

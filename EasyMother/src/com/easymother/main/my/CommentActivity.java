@@ -67,7 +67,7 @@ public class CommentActivity extends Activity {
 	private List<Bitmap> images;//图片集合
 	private CommentImageAdapter adapter;//图片适配器
 	
-	private float stars;//评论得分
+	private float stars=0;//评论得分
 	
 	
 	
@@ -227,6 +227,7 @@ public class CommentActivity extends Activity {
 		params.put("userId",MyApplication.preferences.getInt("id", 0) );
 		if (nursejob.getId()!=null) {
 			params.put("nurseId", nursejob.getId());
+			
 		}
 		if (nursejob.getNurseName()!=null) {
 			params.put("nurseName", nursejob.getNurseName());

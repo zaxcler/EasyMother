@@ -16,6 +16,7 @@ import com.easymother.customview.MyListview;
 import com.easymother.main.community.CommunityAdapter;
 import com.easymother.main.community.HuLiShiZoneListActivity;
 import com.easymother.main.community.MessageContralActivity;
+import com.easymother.main.community.TopicAndAskListActivity;
 import com.easymother.main.community.YSYQActicvity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
@@ -27,6 +28,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -34,6 +36,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -129,9 +133,19 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 		 * 绑定社区下面的部分
 		 */
 		if (result.getBlocks()!=null) {
-			List<Blocks> list=result.getBlocks();
+			final List<Blocks> list=result.getBlocks();
 			CommunityAdapter adapter=new CommunityAdapter(getActivity(), list, R.layout.community_item);
 			mylistview.setAdapter(adapter);
+			mylistview.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+					Intent intent=new Intent();
+					intent.setClass(getActivity(), TopicAndAskListActivity.class);
+					intent.putExtra("blockId", list.get(arg2).getId());
+					startActivity(intent);
+				}
+			});
 		}
 		
 		
