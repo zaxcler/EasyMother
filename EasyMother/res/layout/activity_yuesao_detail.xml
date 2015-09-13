@@ -97,6 +97,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_30"
                 android:background="@color/background" />
+            <include 
+                layout="@layout/calender"/>
 
             <include
                 android:id="@+id/yuesaoskills"
@@ -105,6 +107,7 @@
             <include
                 android:id="@+id/yuyingshiskills"
                 layout="@layout/activity_yuyingshi_detail_skills" />
+            
             <include 
                 android:id="@+id/cuirushiskills"
                 layout="@layout/activity_cuirushi_detail_skills" />

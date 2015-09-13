@@ -3,6 +3,7 @@ package com.easymother.main.homepage;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -20,6 +21,7 @@ import com.easymother.bean.TestBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
+import com.easymother.customview.MyGridView;
 import com.easymother.customview.MyListview;
 import com.easymother.main.MainActivity;
 import com.easymother.main.R;
@@ -41,6 +43,9 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -49,6 +54,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -132,6 +138,17 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 	
 	private boolean show_all=false;//是否显示全部的
 	private TextView work_express_content;//履历显示内容
+	
+	//日历部分
+	private TextView showdate;
+	private ImageView add_year;
+	private ImageView add_mouth;
+	private ImageView delete_mouth;
+	private ImageView delete_year;
+	private GridView week;
+	private MyGridView days;
+	private ViewPager content;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -238,8 +255,14 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		text12=(TextView) findViewById(R.id.text12);
 		text14=(TextView) findViewById(R.id.text14);
 		text16=(TextView) findViewById(R.id.text16);
-		
-		
+		//日历
+		content=(ViewPager)findViewById(R.id.content);
+		add_year=(ImageView) findViewById(R.id.add_year);
+		add_mouth=(ImageView) findViewById(R.id.add_mouth);
+		delete_mouth=(ImageView) findViewById(R.id.delete_mouth);
+		delete_year=(ImageView) findViewById(R.id.delete_year);
+		week=(GridView) findViewById(R.id.week);
+		days=(MyGridView) findViewById(R.id.days);
 	}
 	private void init() {
 		
@@ -497,6 +520,25 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		if (baseBean.getSeniority()!=null) {
 			message_time.setText("工作经验："+baseBean.getSeniority()+"年");
 		}
+		
+		//绑定calender
+		List<String> weeks=new ArrayList<>();
+		weeks.add("星期天");
+		weeks.add("星期一");
+		weeks.add("星期二");
+		weeks.add("星期三");
+		weeks.add("星期四");
+		weeks.add("星期五");
+		weeks.add("星期六");
+		WeekAdapter weekAdapter=new WeekAdapter(this, weeks, R.layout.crs_gridview_item2);
+		week.setAdapter(weekAdapter);
+		List<Integer> date=new ArrayList<>();
+		for (int i = 0; i < 42; i++) {
+			date.add(i);
+		}
+		CalenderAadpter aadpter=new CalenderAadpter(this, date, R.layout.crs_gridview_item);
+		aadpter.setOrders(orders);
+		days.setAdapter(aadpter);
 		
 	}
 
