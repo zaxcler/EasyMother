@@ -148,7 +148,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 	private GridView week;
 	private MyGridView days;
 	private ViewPager content;
-	
+	private CalenderAadpter aadpter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -257,12 +257,14 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		text16=(TextView) findViewById(R.id.text16);
 		//日历
 		content=(ViewPager)findViewById(R.id.content);
+		
 		add_year=(ImageView) findViewById(R.id.add_year);
 		add_mouth=(ImageView) findViewById(R.id.add_mouth);
 		delete_mouth=(ImageView) findViewById(R.id.delete_mouth);
 		delete_year=(ImageView) findViewById(R.id.delete_year);
 		week=(GridView) findViewById(R.id.week);
 		days=(MyGridView) findViewById(R.id.days);
+		showdate=(TextView) findViewById(R.id.showdate);
 	}
 	private void init() {
 		
@@ -289,6 +291,10 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		submit_comment.setOnClickListener(this);
 		allcomment.setOnClickListener(this);
 		check_all.setOnClickListener(this);
+		add_year.setOnClickListener(this);
+		add_mouth.setOnClickListener(this);
+		delete_mouth.setOnClickListener(this);
+		delete_year.setOnClickListener(this);
 		onSkillsClicklisener clickListener=new onSkillsClicklisener();
 		if ("SHORT_YS".equals(job)||"YS".equals(job)) {
 			yuyingshiskills.setVisibility(View.GONE);
@@ -536,7 +542,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 		for (int i = 0; i < 42; i++) {
 			date.add(i);
 		}
-		CalenderAadpter aadpter=new CalenderAadpter(this, date, R.layout.crs_gridview_item);
+		aadpter=new CalenderAadpter(this, date, R.layout.crs_gridview_item);
 		aadpter.setOrders(orders);
 		days.setAdapter(aadpter);
 		
@@ -545,6 +551,9 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View arg0) {
+		
+		
+		Calendar currentDate=null;
 		Intent intent=new Intent();
 		intent.putParcelableArrayListExtra("orders",  orders);
 		intent.putExtra("nursebase", baseBean);
@@ -627,7 +636,30 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 			});
 				
 				break;
+				
+		case R.id.add_year:
+			currentDate=aadpter.setCurrtentYear(1);
+			aadpter.notifyDataSetChanged();
+			showdate.setText(currentDate.get(Calendar.YEAR)+"年"+currentDate.get(Calendar.MONTH)+"月");
+			break;
+		case R.id.add_mouth:
+			currentDate=aadpter.setCurrtentMonth(1);
+			aadpter.notifyDataSetChanged();
+			showdate.setText(currentDate.get(Calendar.YEAR)+"年"+currentDate.get(Calendar.MONTH)+"月");
+			break;
+		case R.id.delete_mouth:
+			currentDate=aadpter.setCurrtentMonth(-1);
+			aadpter.notifyDataSetChanged();
+			showdate.setText(currentDate.get(Calendar.YEAR)+"年"+currentDate.get(Calendar.MONTH)+"月");
+			break;
+		case R.id.delete_year:
+			currentDate=aadpter.setCurrtentYear(-1);
+			aadpter.notifyDataSetChanged();
+			showdate.setText(currentDate.get(Calendar.YEAR)+"年"+currentDate.get(Calendar.MONTH)+"月");
+			break;
+		
 		}
+		
 		
 		
 	}

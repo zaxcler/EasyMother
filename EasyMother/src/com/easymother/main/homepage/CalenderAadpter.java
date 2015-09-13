@@ -23,7 +23,22 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 		currentDate=Calendar.getInstance();
 		currentDate.setTime(date);
 	}
-	
+	/**
+	 * 
+	 * @param p 为1就是月份加，p 为-1就是月份减
+	 */
+	public Calendar setCurrtentMonth(int p){
+		currentDate.roll(Calendar.MONTH, p);
+		return currentDate;
+	}
+	/**
+	 * 
+	 * @param p 为1就是年份加，p 为-1就是年份减
+	 */
+	public Calendar setCurrtentYear(int p){
+		currentDate.add(Calendar.YEAR, p);
+		return currentDate;
+	}
 	
 	@Override
 	public void setDataToItem(ViewHolder holder, Integer t) {
@@ -45,15 +60,38 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 						Calendar date2=Calendar.getInstance();
 						date1.setTime(result1);
 						date2.setTime(result2);
+						int start_month=date1.get(Calendar.MONTH);
+						int end_month=date2.get(Calendar.MONTH);
+						int current_month=currentDate.get(Calendar.MONTH);
 						//如果是同一年
-//						if (currentDate.get(Calendar.YEAR)==date1.get(Calendar.YEAR) && currentDate.get(Calendar.YEAR)==date2.get(Calendar.YEAR) ) {
-//							if (condition) {
-//								
-//							}
-//							if (t>=date1.get(Calendar.DAY_OF_MONTH)) {
-//								current_day.setBackgroundColor(context.getResources().getColor(R.color.boro));
-//							}
-//						}
+						if (currentDate.get(Calendar.YEAR)==date1.get(Calendar.YEAR) && currentDate.get(Calendar.YEAR)==date2.get(Calendar.YEAR) ) {
+							//如果开始月份和结束月份都是当前月份
+							if (start_month==end_month&& end_month== current_month) {
+								//在开始和结束的日子中间的都变灰色
+								if (t>=date1.get(Calendar.DAY_OF_MONTH)&& t<=date2.get(Calendar.DAY_OF_MONTH) ) {
+									current_day.setBackgroundColor(context.getResources().getColor(R.color.boro));
+								}
+							}
+							//如果开始的月份和结束的月份不同，并且开始月份小于当前月份，结束月份等于当前月份
+							else if (start_month!=end_month&&start_month<current_month&&end_month==current_month){
+								//小于结束的时间全部变成灰色
+								if ( t<=date2.get(Calendar.DAY_OF_MONTH) ) {
+									current_day.setBackgroundColor(context.getResources().getColor(R.color.boro));
+								}
+							}
+							//如果开始的月份和结束的月份不同，并且开始月份等于当前月份，结束月份大于当前月份
+							else if (start_month!=end_month&&start_month==current_month &&end_month>current_month){
+								//大于开始的时间全部变成灰色
+								if ( t>=date1.get(Calendar.DAY_OF_MONTH) ) {
+									current_day.setBackgroundColor(context.getResources().getColor(R.color.boro));
+								}
+							}
+							//如果开始的月份和结束的月份不同，并且开始月份小于当前月份，结束月份大于当前月份
+							else if (start_month!=end_month&&start_month<current_month &&end_month>current_month){
+								//全部变成灰色
+									current_day.setBackgroundColor(context.getResources().getColor(R.color.boro));
+							}
+						}
 						
 					}
 					
