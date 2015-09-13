@@ -207,14 +207,18 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 	@Override
 	public void onResume() {
 		super.onResume();
-//		String backgroundimgaename=MyApplication.preferences.getString("baby_background", "");
-//		Log.e("baby_background", backgroundimgaename);
-//		if (backgroundimgaename!=null&&!"".equals(backgroundimgaename)) {
-//			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+backgroundimgaename, background);
-//		}
+		String backgroundimgaename=MyApplication.preferences.getString("baby_background", "");
+		Log.e("baby_background", backgroundimgaename);
+		if (backgroundimgaename!=null&&!"".equals(backgroundimgaename)) {
+			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+backgroundimgaename, background);
+		}
 		String babyimgaename=MyApplication.preferences.getString("baby_image", "");
 		if (babyimgaename!=null&&!"".equals(babyimgaename)) {
 			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+babyimgaename, circleImageView);
+		}
+		String name=MyApplication.preferences.getString("nannan_name", "");
+		if (!"".equals(name)&&name!=null) {
+			baby_name.setText(name);
 		}
 		
 	}

@@ -12,7 +12,11 @@
         android:layout_height="match_parent"
         android:background="@color/background" >
 
-        <com.easymother.customview.MyListview
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            <com.easymother.customview.MyListview
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -20,6 +24,18 @@
             android:dividerHeight="@dimen/dp_10"
             android:background="@color/background" >
         </com.easymother.customview.MyListview>
+            
+             <com.easymother.customview.MyListview
+            android:id="@+id/listview1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/background"
+            android:dividerHeight="@dimen/dp_10"
+            android:background="@color/background" >
+        </com.easymother.customview.MyListview>
+        </LinearLayout>
+        
+        
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
 </LinearLayout>

@@ -9,6 +9,7 @@ import com.easymother.customview.CircleImageView;
 import com.easymother.main.R;
 import com.easymother.main.babytime.ImageAdapter;
 import com.easymother.main.my.LoginOrRegisterActivity;
+import com.easymother.main.my.TopicListActivity;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.NetworkHelper;
@@ -31,19 +32,27 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 
 	private Intent intent;
 	private String flag="";
-	protected HuLiShiAdapter(Context context, List<TopicItemBean> list, int resource) {
+	private List<TopicItemBean> list;
+	public HuLiShiAdapter(Context context, List<TopicItemBean> list, int resource) {
 		super(context, list, resource);
 		intent=new Intent();
+		this.list=list;
 		if (context instanceof HuLiShiZoneDetailActivity) {
 			intent.setClass((Activity)context, HuLiShiReplyListActivity.class);
 		}else if (context instanceof HuLiShiZoneListActivity) {
 			intent.setClass((Activity)context, HuLiShiZoneDetailActivity.class);
-		}else if (context instanceof TopicAndAskListActivity) {
+		}else if (context instanceof TopicAndAskListActivity  ) {
 			flag="topic_help";
+			intent.setClass((Activity)context, HuLiShiReplyListActivity.class);
+		}else if (context instanceof TopicListActivity) {
+			flag="user_topic";
 			intent.setClass((Activity)context, HuLiShiReplyListActivity.class);
 		}
 	}
-
+	
+	public void addList(List<TopicItemBean> list){
+		this.list.addAll(list);
+	}
 	@Override
 	public void setDataToItem(ViewHolder holder, final TopicItemBean t) {
 			holder.getConvertView().setOnClickListener(new OnClickListener() {
@@ -61,7 +70,7 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getUserImae(), circleImageView,MyApplication.options_image);
 		
 		TextView nurse_type=holder.getView(R.id.nurse_type);
-		if (t.getJob()!=null && !"topic_help".equals(flag)) {
+		if (t.getJob()!=null && !"topic_help".equals(flag)&&!"user_topic".equals(flag)) {
 			if ("YS".equals(t.getJob())) {
 				nurse_type.setText("月嫂");
 			}
@@ -113,6 +122,7 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 		}else {
 			gridView.setVisibility(View.GONE);
 		}
+		
 		final TextView msgAmoount=holder.getView(R.id.msgAmoount);
 		if (t.getCollectionAmount()!=null) {
 			msgAmoount.setText(t.getCollectionAmount()+"");
@@ -198,7 +208,14 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 		}else {
 			upAmount.setText("");
 		}
-
+		TextView share=holder.getView(R.id.share);
+		//如果是从我的话题打开的，就影藏收藏和点赞等功能
+		if ("user_topic".equals(flag)) {
+			msgAmoount.setVisibility(View.GONE);
+			upAmount.setVisibility(View.GONE);
+			share.setVisibility(View.GONE);
+			
+		}
 	}
 
 }

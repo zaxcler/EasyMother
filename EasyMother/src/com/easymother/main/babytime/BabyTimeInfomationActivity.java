@@ -297,7 +297,7 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 		}
 		String sex=MyApplication.preferences.getString("nannan_sex", "");
 		if (!"".equals(sex)&&sex!=null) {
-			nannan_name.setText(sex);
+			nannan_sex.setText(sex);
 		}
 
 	}

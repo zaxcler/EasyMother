@@ -47,9 +47,9 @@ public class TopicReplyListActivity extends Activity {
 		list.add(bean);
 		
 		
-		TopicListAdapter adapter=new TopicListAdapter(this, list, R.layout.activity_mypage_reply_item);
+//		TopicListAdapter adapter=new TopicListAdapter(this, list, R.layout.activity_mypage_reply_item);
 		LayoutAnimationController controller=new LayoutAnimationController(AnimationUtils.loadAnimation(this, R.anim.zoom_right_in));
-		listview.setAdapter(adapter);
+//		listview.setAdapter(adapter);
 		controller.setOrder(LayoutAnimationController.ORDER_NORMAL);
 		listview.setLayoutAnimation(controller);
 		listview.startLayoutAnimation();

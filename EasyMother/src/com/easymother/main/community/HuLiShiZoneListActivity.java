@@ -11,7 +11,7 @@ import com.easymother.bean.TopicItemBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.customview.MyListview;
 import com.easymother.main.R;
-import com.easymother.main.my.TopicListAdapter;
+import com.easymother.main.my.CollectionListAdapter;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;

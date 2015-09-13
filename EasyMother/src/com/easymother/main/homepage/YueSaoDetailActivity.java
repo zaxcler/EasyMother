@@ -638,22 +638,22 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener{
 				break;
 				
 		case R.id.add_year:
-			currentDate=aadpter.setCurrtentYear(1);
+			currentDate=aadpter.setCurrtentYear(-1);
 			aadpter.notifyDataSetChanged();
 			showdate.setText(currentDate.get(Calendar.YEAR)+"年"+currentDate.get(Calendar.MONTH)+"月");
 			break;
 		case R.id.add_mouth:
-			currentDate=aadpter.setCurrtentMonth(1);
-			aadpter.notifyDataSetChanged();
-			showdate.setText(currentDate.get(Calendar.YEAR)+"年"+currentDate.get(Calendar.MONTH)+"月");
-			break;
-		case R.id.delete_mouth:
 			currentDate=aadpter.setCurrtentMonth(-1);
 			aadpter.notifyDataSetChanged();
 			showdate.setText(currentDate.get(Calendar.YEAR)+"年"+currentDate.get(Calendar.MONTH)+"月");
 			break;
+		case R.id.delete_mouth:
+			currentDate=aadpter.setCurrtentMonth(1);
+			aadpter.notifyDataSetChanged();
+			showdate.setText(currentDate.get(Calendar.YEAR)+"年"+currentDate.get(Calendar.MONTH)+"月");
+			break;
 		case R.id.delete_year:
-			currentDate=aadpter.setCurrtentYear(-1);
+			currentDate=aadpter.setCurrtentYear(1);
 			aadpter.notifyDataSetChanged();
 			showdate.setText(currentDate.get(Calendar.YEAR)+"年"+currentDate.get(Calendar.MONTH)+"月");
 			break;

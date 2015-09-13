@@ -9,13 +9,13 @@
         android:id="@+id/pictures"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/circleImageView1"
+        android:layout_below="@+id/circlepicture"
         android:orientation="horizontal" >
 
     </LinearLayout>
 
     <com.easymother.customview.CircleImageView
-        android:id="@+id/circleImageView1"
+        android:id="@+id/circlepicture"
         android:layout_width="@dimen/dp_48"
         android:layout_height="@dimen/dp_48"
         android:layout_alignParentLeft="true"
@@ -25,50 +25,50 @@
         android:src="@drawable/baby" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/circleImageView1"
+        android:layout_alignTop="@+id/circlepicture"
         android:layout_marginLeft="16dp"
-        android:layout_toRightOf="@+id/circleImageView1"
+        android:layout_toRightOf="@+id/circlepicture"
         android:text="杨️烨"
         android:textColor="@color/blackgreen"
         android:textSize="@dimen/sp_20" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/picture"
         android:layout_width="@dimen/dp_72"
         android:layout_height="@dimen/dp_72"
         android:scaleType="fitXY"
         android:layout_marginTop="@dimen/dp_10"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/title"
+        android:layout_below="@+id/title"
         android:src="@drawable/test2" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/imageView1"
+        android:layout_toRightOf="@+id/picture"
         android:text="老婆给你生娃了，你怎么呢过看着不管？"
          />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView1"
-        android:layout_toRightOf="@+id/imageView1"
+        android:layout_alignBottom="@+id/picture"
+        android:layout_toRightOf="@+id/picture"
         android:text="交通91.8"
         android:textColor="@color/borotext" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/textView1"
+        android:layout_alignTop="@+id/title"
          android:layout_marginRight="@dimen/dp_10"
         android:text="15/5/31" />
 

@@ -59,8 +59,8 @@
             android:id="@+id/msgAmoount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView4"
-            android:layout_alignBottom="@+id/textView4"
+            android:layout_alignBaseline="@+id/share"
+            android:layout_alignBottom="@+id/share"
             android:layout_centerHorizontal="true"
             android:drawableLeft="@drawable/comment2"
             android:gravity="center"
@@ -87,7 +87,7 @@
             android:textColor="@color/borotext" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/content"

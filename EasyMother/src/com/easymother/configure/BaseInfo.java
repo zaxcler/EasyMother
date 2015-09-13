@@ -29,6 +29,7 @@ public class BaseInfo {
 	
 		public final static String CHCLK_LETTER="app/nursepushletter/findByNurseIdAndJob";//查看订单
 		public final static String CHCLK_ALL_COMMENTS="app/ordercomment/selectByNurseIdAndJob";//查看订单
+		public final static String COLLECTION_LIST="app/userinfo/loadCollect";//收藏列表
 		
 		
 		public final static String YSYQ_INFO="app/newstype/toIndex";//医食衣趣
