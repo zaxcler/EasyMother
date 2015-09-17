@@ -85,8 +85,10 @@ public class TuiJianFragment extends Fragment {
 		TuiJianYSAdapter	adapter=new TuiJianYSAdapter(getActivity(),getChildFragmentManager(), list);
 			tuijian_content.setAdapter(adapter);
 		}if ("cuirushi".equals(type)) {
-			adapter=new TuiJianAdapter(getActivity(),getChildFragmentManager(), list);
+			TuiJianYSAdapter	adapter=new TuiJianYSAdapter(getActivity(),getChildFragmentManager(), list);
 			tuijian_content.setAdapter(adapter);
+//			adapter=new TuiJianAdapter(getActivity(),getChildFragmentManager(), list);
+//			tuijian_content.setAdapter(adapter);
 		}
 		
 		

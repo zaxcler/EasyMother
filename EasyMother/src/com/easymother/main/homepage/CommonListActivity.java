@@ -1,5 +1,9 @@
 package com.easymother.main.homepage;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.Header;
@@ -16,6 +20,7 @@ import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
+import com.easymother.utils.TimeCounter;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -42,11 +47,14 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.EditText;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,6 +81,7 @@ public class CommonListActivity extends Activity {
 
 	private LinearLayout bottom_layout;// 弹出框显示在这个view的上方
 	private float y;//控制搜索框的显示与隐藏的关键
+	private RelativeLayout choose_date;//选择时间
 	
 	private Button loadMore;//加载更多按钮
 	private TextView notice;//没有数据的提示信息
@@ -87,6 +96,10 @@ public class CommonListActivity extends Activity {
 	protected int hieghtPrice;
 	protected int lowAge;
 	protected int hieghtAge;
+	private String starttime;//开始时间
+	private String endtime;//结束时间
+	private TextView start_time_tv;
+	private TextView end_time_tv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +121,7 @@ public class CommonListActivity extends Activity {
 			}
 		});
 		params=new RequestParams();
+		params.put("sorting", "A");
 		Intent intent=getIntent();
 		String job=intent.getStringExtra("job");
 		if ("YS".equals(job)) {
@@ -139,18 +153,28 @@ public class CommonListActivity extends Activity {
 
 		title = findViewById(R.id.title1);
 		bottom_layout = (LinearLayout) findViewById(R.id.bottom_layout);
+		
+		start_time_tv=(TextView) findViewById(R.id.starttime);
+		end_time_tv=(TextView) findViewById(R.id.endtime);
+		
 		listView = (ListView) findViewById(R.id.listview);
 		
 		search_layout=LayoutInflater.from(this).inflate(R.layout.search_item, null);
 		search1=(TextView) search_layout.findViewById(R.id.search);
 		search_layout1=findViewById(R.id.search_layout);
 		search2=(TextView) search_layout1.findViewById(R.id.search);
+		choose_date=(RelativeLayout) findViewById(R.id.choose_date);
 	}
 
 	private void init() {
 		
-		
-		
+		Date currentdate=new Date(System.currentTimeMillis());
+		Calendar calendar=Calendar.getInstance();
+		calendar.setTime(currentdate);
+		start_time_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
+		end_time_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
+		starttime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+		endtime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
 		//搜索的布局的点击时间
 		search1.setOnClickListener(new onSeachLayoutClickLisener());
 		search2.setOnClickListener(new onSeachLayoutClickLisener());
@@ -175,7 +199,7 @@ public class CommonListActivity extends Activity {
 			});
 		}
 		
-		listView.addFooterView(loadMore);
+//		listView.addFooterView(loadMore);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -193,8 +217,8 @@ public class CommonListActivity extends Activity {
 					Intent intent=new Intent(CommonListActivity.this,YueSaoDetailActivity.class);
 					intent.putExtra("id", baseBean.getNurseId());
 					intent.putExtra("job", baseBean.getJob());
-					intent.putExtra("startTime", "2015-08-30");
-					intent.putExtra("endTime", "2015-09-20");
+					intent.putExtra("startTime", starttime);
+					intent.putExtra("endTime", endtime);
 					startActivity(intent);
 				}
 				if ("YYS".equals(baseBean.getJob())) {
@@ -202,8 +226,8 @@ public class CommonListActivity extends Activity {
 					intent.putExtra("id", baseBean.getNurseId());
 //					intent.putExtra("id", 14);//测试
 					intent.putExtra("job", baseBean.getJob());
-					intent.putExtra("startTime", "2015-08-30");
-					intent.putExtra("endTime", "2015-09-20");
+					intent.putExtra("startTime", starttime);
+					intent.putExtra("endTime", endtime);
 					startActivity(intent);
 				}
 				if ("CRS".equals(baseBean.getJob())) {
@@ -211,8 +235,8 @@ public class CommonListActivity extends Activity {
 					intent.putExtra("id", baseBean.getNurseId());
 //					intent.putExtra("id", 14);//测试
 					intent.putExtra("job", baseBean.getJob());
-					intent.putExtra("startTime", "2015-08-30");
-					intent.putExtra("endTime", "2015-09-20");
+					intent.putExtra("startTime", starttime);
+					intent.putExtra("endTime", endtime);
 					intent.putExtra("id", baseBean.getNurseId());
 					startActivity(intent);
 				}
@@ -222,8 +246,8 @@ public class CommonListActivity extends Activity {
 						intent.putExtra("id", baseBean.getNurseId());
 //						intent.putExtra("id", 14);//测试
 						intent.putExtra("job", baseBean.getJob());
-						intent.putExtra("startTime", "2015-08-30");
-						intent.putExtra("endTime", "2015-09-20");
+						intent.putExtra("startTime", starttime);
+						intent.putExtra("endTime", endtime);
 						intent.putExtra("id", baseBean.getNurseId());
 						startActivity(intent);
 				}
@@ -232,8 +256,8 @@ public class CommonListActivity extends Activity {
 					intent.putExtra("id", baseBean.getNurseId());
 //					intent.putExtra("id", 14);//测试
 					intent.putExtra("job", baseBean.getJob());
-					intent.putExtra("startTime", "2015-08-30");
-					intent.putExtra("endTime", "2015-09-20");
+					intent.putExtra("startTime", starttime);
+					intent.putExtra("endTime", endtime);
 					intent.putExtra("id", baseBean.getNurseId());
 					startActivity(intent);
 			}
@@ -272,13 +296,93 @@ public class CommonListActivity extends Activity {
 			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 				//当滑到最下端的时候后显示加载更多按钮
 				if (firstVisibleItem+visibleItemCount==totalItemCount-1) {
+					if (totalItemCount>4) {
+						listView.addFooterView(loadMore);
+					}
+					
 				}
 			}
 			
 		});
+		choose_date.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showDateDialog(v);
+			}
+		});
 		doFilter(params);
 
 	}
+	/**
+	 * 显示时间选择框
+	 * @param v
+	 */
+	protected void showDateDialog(View v) {
+		final Dialog dialog=new Dialog(this);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		View view=LayoutInflater.from(this).inflate(R.layout.dialog_chosedate, null);
+		dialog.setContentView(view);
+		dialog.getWindow().setLayout(MyApplication.getScreen_width()/5*4, android.view.WindowManager.LayoutParams.WRAP_CONTENT);
+		DatePicker datePicker1=(DatePicker) view.findViewById(R.id.start_time);
+		DatePicker datePicker2=(DatePicker) view.findViewById(R.id.end_time);
+		final Date currentdate=new Date(System.currentTimeMillis());
+		final Calendar calendar=Calendar.getInstance();
+		calendar.setTime(currentdate);
+		starttime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+		endtime=starttime;
+		datePicker1.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new OnDateChangedListener() {
+			
+			@Override
+			public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+				starttime=year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+				start_time_tv.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
+				
+			}
+		});
+        datePicker2.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new OnDateChangedListener() {
+			
+			@Override
+			public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+		        endtime=year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+				end_time_tv.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
+				
+			}
+		});
+        
+		view.findViewById(R.id.comfire).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+				try {
+					Date startDate=dateFormat.parse(starttime);
+					Date endDate=dateFormat.parse(endtime);
+					
+					Date current=dateFormat.parse(calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH));
+					int a=TimeCounter.countTimeOfDay(startDate, endDate);
+					int b=TimeCounter.countTimeOfDay(current , startDate);
+					if (TimeCounter.countTimeOfDay(startDate, endDate)>0 && TimeCounter.countTimeOfDay(current , startDate)>=0) {
+						RequestParams params1=params;
+						params1.put("startTime", starttime);
+						params1.put("endTime", endtime);
+						
+						doFilter(params1);
+						dialog.dismiss();
+					}else {
+						Toast.makeText(CommonListActivity.this,"请检查时间选择是否正确", Toast.LENGTH_SHORT).show();
+					}
+					
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});
+		dialog.show();
+	}
+	
 	private class onSeachLayoutClickLisener implements View.OnClickListener{
 
 		@Override
@@ -319,7 +423,6 @@ public class CommonListActivity extends Activity {
 		//将传入的参数保存到本地params对象中
 		params.put("pageNo","1");
 		params.put("pageSize","10");
-		params.put("sorting", "A");
 		
 		NetworkHelper.doGet(BaseInfo.SEARCH_URL, params, new JsonHttpResponseHandler(){
 			@Override
@@ -428,7 +531,20 @@ public class CommonListActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				
+				if (lowAge==0 || hieghtAge==0) {
+					params.put("firstAge", 20);
+					params.put("secondAge", 60);
+				}else {
+					params.put("firstAge", lowAge);
+					params.put("secondAge", hieghtAge);
+				}
+				if (lowPrice==0 || hieghtPrice==0) {
+					params.put("firstPrice", 5000);
+					params.put("secondPrice", 15000);
+				}else {
+					params.put("firstPrice", lowPrice);
+					params.put("secondPrice", hieghtPrice);
+				}
 				doFilter(params);
 				dialog.dismiss();
 			}
@@ -535,6 +651,38 @@ public class CommonListActivity extends Activity {
 		}
 	}
 
+	/**
+	 *加载更多数据
+	 * @param pageNo 加载的第几页
+	 * @return
+	 */
+	public List<NurseBaseBean> loading(int pageNo){
+		params.put("pageNo", pageNo+"");
+		Log.e("pageNo+loading", pageNo+"");
+		NetworkHelper.doGet(BaseInfo.SEARCH_URL, params, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+				super.onSuccess(statusCode, headers, response);
+				if (JsonUtils.getRootResult(response).getIsSuccess()) {
+					List<NurseBaseBean> list=JsonUtils.getNurseBaseBeanList(response);
+					if (list.size()==0) {
+						CommonListActivity.this.pageNo=1;
+						loadMore.setVisibility(View.GONE);
+						Toast.makeText(CommonListActivity.this, "没有更多咯！", 0).show();
+					}
+					adapter.addAll(list);
+					adapter.notifyDataSetChanged();
+				}
+			}
+		});
+		
+		return null;
+		
+	}
+
+	
+	//-------------下面弃用-------
+
 	/*
 	 * 显示搜索框
 	 */
@@ -547,6 +695,8 @@ public class CommonListActivity extends Activity {
 		search_layout1.startAnimation(animation);
 		search_layout1.setVisibility(View.VISIBLE);
 	}
+	
+	
 
 	/*
 	 * 隐藏搜索框
@@ -580,60 +730,29 @@ public class CommonListActivity extends Activity {
 
 	}
 
-	@Override
-	public boolean dispatchTouchEvent(MotionEvent arg1) {
-		float dy;
-		Log.e("log大法", "-----" + y);
-		switch (arg1.getAction()) {
-		case MotionEvent.ACTION_DOWN:
-
-			y = arg1.getY();
-			break;
-
-		case MotionEvent.ACTION_UP:
-
-			break;
-		case MotionEvent.ACTION_MOVE:
-			dy = arg1.getY();
-			if (y > dy) {
-				hide();
-			} else {
-				show();
-			}
-			break;
-		}
-		return super.dispatchTouchEvent(arg1);
-	}
+//	@Override
+//	public boolean dispatchTouchEvent(MotionEvent arg1) {
+//		float dy;
+//		Log.e("log大法", "-----" + y);
+//		switch (arg1.getAction()) {
+//		case MotionEvent.ACTION_DOWN:
+//
+//			y = arg1.getY();
+//			break;
+//
+//		case MotionEvent.ACTION_UP:
+//
+//			break;
+//		case MotionEvent.ACTION_MOVE:
+//			dy = arg1.getY();
+//			if (y > dy) {
+//				hide();
+//			} else {
+//				show();
+//			}
+//			break;
+//		}
+//		return super.dispatchTouchEvent(arg1);
+//	}
 	
-	/**
-	 *加载更多数据
-	 * @param pageNo 加载的第几页
-	 * @return
-	 */
-	public List<NurseBaseBean> loading(int pageNo){
-		params.put("pageNo", pageNo+"");
-		Log.e("pageNo+loading", pageNo+"");
-		NetworkHelper.doGet(BaseInfo.SEARCH_URL, params, new JsonHttpResponseHandler(){
-			@Override
-			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-				super.onSuccess(statusCode, headers, response);
-				if (JsonUtils.getRootResult(response).getIsSuccess()) {
-					List<NurseBaseBean> list=JsonUtils.getNurseBaseBeanList(response);
-					if (list.size()==0) {
-						CommonListActivity.this.pageNo=1;
-						loadMore.setVisibility(View.GONE);
-						Toast.makeText(CommonListActivity.this, "没有更多咯！", 0).show();
-					}
-					adapter.addAll(list);
-					adapter.notifyDataSetChanged();
-				}
-			}
-		});
-		
-		return null;
-		
-	}
-
-	
-
 }

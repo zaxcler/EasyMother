@@ -13,6 +13,8 @@ import com.easymother.bean.TestBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.customview.MyListview;
 import com.easymother.main.R;
+import com.easymother.main.community.ArticleActivity;
+import com.easymother.main.community.HuLiShiReplyListActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
@@ -21,10 +23,14 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 public class CollectListActivity extends Activity {
@@ -79,19 +85,43 @@ public class CollectListActivity extends Activity {
 		});
 	}
 	protected void bindData(CollectionListResult result) {
+		if (result!=null) {
+			
+			final List<NewsBean> news=result.getNews();
+			final List<ForumBean> forumBeans=result.getForum();
+			CollectionListAdapter adapter=new CollectionListAdapter(this, news, R.layout.activity_mypage_collection_item);
+			CollectionListAdapter2 adapter2=new CollectionListAdapter2(this, forumBeans, R.layout.activity_mypage_collection_item);
+			LayoutAnimationController controller=new LayoutAnimationController(AnimationUtils.loadAnimation(this, R.anim.zoom_right_in));
+			listview.setAdapter(adapter);
+			listview1.setAdapter(adapter2);
+			listview.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+					Intent intent=new Intent();
+					intent.putExtra("id", news.get(arg2).getNewsId());
+					intent.setClass(CollectListActivity.this, ArticleActivity.class);
+					startActivity(intent);
+				}
+			});
+			listview1.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+					Intent intent=new Intent();
+					intent.putExtra("id", forumBeans.get(arg2).getPostId());
+					intent.setClass(CollectListActivity.this, HuLiShiReplyListActivity.class);
+					startActivity(intent);
+				}
+			});
+			controller.setOrder(LayoutAnimationController.ORDER_NORMAL);
+			listview.setLayoutAnimation(controller);
+			listview.startLayoutAnimation();
+			listview1.setLayoutAnimation(controller);
+			listview1.startLayoutAnimation();
+		}
 		
-		List<NewsBean> news=result.getNews();
-		List<ForumBean> forumBeans=result.getForum();
-		CollectionListAdapter adapter=new CollectionListAdapter(this, news, R.layout.activity_mypage_collection_item);
-		CollectionListAdapter2 adapter2=new CollectionListAdapter2(this, forumBeans, R.layout.activity_mypage_collection_item);
-		LayoutAnimationController controller=new LayoutAnimationController(AnimationUtils.loadAnimation(this, R.anim.zoom_right_in));
-		listview.setAdapter(adapter);
-		listview1.setAdapter(adapter2);
-		controller.setOrder(LayoutAnimationController.ORDER_NORMAL);
-		listview.setLayoutAnimation(controller);
-		listview.startLayoutAnimation();
-		listview1.setLayoutAnimation(controller);
-		listview1.startLayoutAnimation();
+		
 	}
 
 }

@@ -3,11 +3,21 @@ package com.easymother.main.my;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.Header;
+import org.json.JSONObject;
+
+import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.TestBean;
+import com.easymother.bean.TopicHelpDetailResult;
+import com.easymother.configure.BaseInfo;
 import com.easymother.customview.MyListview;
 import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.JsonUtils;
+import com.easymother.utils.NetworkHelper;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -36,6 +46,8 @@ public class TopicReplyListActivity extends Activity {
 		
 	}
 	private void init() {
+		
+		loadData();
 		//测试数据
 		TestBean bean=new TestBean();
 		List<TestBean> list=new ArrayList<TestBean>();
@@ -54,6 +66,29 @@ public class TopicReplyListActivity extends Activity {
 		listview.setLayoutAnimation(controller);
 		listview.startLayoutAnimation();
 		
+	}
+	private void loadData() {
+		RequestParams params=new RequestParams();
+		
+		NetworkHelper.doGet(BaseInfo.CHECK_TOPIC_DETAIL, params, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+				super.onSuccess(statusCode, headers, response);
+				if (JsonUtils.getRootResult(response).getIsSuccess()) {
+					TopicHelpDetailResult detailResult=JsonUtils.getResult(response, TopicHelpDetailResult.class);
+					bindData(detailResult);
+				}
+			}
+		});
+	}
+	
+	protected void bindData(TopicHelpDetailResult detailResult) {
+		if (detailResult!=null) {
+			NurseBaseBean baseBean=detailResult.getNurseinfo();
+			if (baseBean!=null) {
+				
+			}
+		}
 	}
 
 }

@@ -52,6 +52,8 @@ public class OrderYSandYYSProcess5 extends Activity {
 	private TextView user_phone;
 	private TextView card_id;
 	private TextView user_address;
+	private String startTime;
+	private String endTime;
 	
 	
 	@Override
@@ -62,6 +64,8 @@ public class OrderYSandYYSProcess5 extends Activity {
 		EasyMotherUtils.initTitle(this, "合同预览", false);
 		MyApplication.addActivityToMap(this, "YSprocess");
 		intent=getIntent();
+		startTime=intent.getStringExtra("startTime");
+		endTime=intent.getStringExtra("endTime");
 		nursebase=(NurseBaseBean) intent.getSerializableExtra("nursebase");
 		nursejob=(NurseJobBean) intent.getSerializableExtra("nursejob");
 		findView();
@@ -220,30 +224,30 @@ public class OrderYSandYYSProcess5 extends Activity {
 //			params.put("nurseAddress", nursebase.getCurrentAddress());
 //		}
 		//雇佣时间
-		if (nursebase.getEmploymentStartTime()!=null) {
-			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-			String startDate=format.format(nursebase.getEmploymentStartTime());
-			params.put("hireStartTime", startDate);
-			Log.e("OrderYSandYYSProcess5_starttime", nursebase.getEmploymentStartTime()+"");
+		if (startTime!=null) {
+//			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+//			String startDate=format.format(startTime);
+			params.put("hireStartTime", startTime);
+			Log.e("OrderYSandYYSProcess5_starttime", startTime);
 		}
 		//雇佣结束时间
-		if (nursebase.getEmploymentEndTime()!=null) {
-			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-			String endDate=format.format(nursebase.getEmploymentEndTime());
-			params.put("hireEndTime",endDate);
+		if (endTime!=null) {
+//			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+//			String endDate=format.format(endTime);
+			params.put("hireEndTime",endTime);
 		}
-		if (nursebase.getEmploymentStartTime()!=null) {
-			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-			String startDate=format.format(nursebase.getEmploymentStartTime());
-			params.put("realHireStartTime", startDate);
+		if (startTime!=null) {
+//			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+//			String startDate=format.format(startTime);
+			params.put("realHireStartTime", startTime);
 		}
 		//雇佣结束时间
-		if (nursebase.getEmploymentEndTime()!=null) {
-			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-			String endDate=format.format(nursebase.getEmploymentEndTime());
-			params.put("realHireEndTime", endDate);
+		if (endTime!=null) {
+//			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+//			String endDate=format.format(endTime);
+			params.put("realHireEndTime", endTime);
 		}
-			params.put("status","NOPAY");
+			params.put("status","10");
 			params.put("realAllAmount", 0);
 			params.put("nurseJobId", nursejob.getId());
 			params.put("isSee", intent.getByteExtra("isSee", (byte) 0));

@@ -9,7 +9,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="0dp"
+        android:layout_weight="1" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -154,5 +155,43 @@
             </com.easymother.customview.MyListview>
         </LinearLayout>
     </ScrollView>
+    <LinearLayout 
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/white">
 
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_2"
+            android:layout_marginLeft="@dimen/dp_2"
+            android:background="@drawable/borotext_border_and_soild"
+            android:layout_height="match_parent"
+            >
+        </EditText>
+
+        <TextView
+            android:id="@+id/send"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送"
+            android:textColor="@color/white"
+            android:padding="@dimen/dp_5"
+            android:background="@drawable/lightredwine_solid" />
+        
+    </LinearLayout>
 </LinearLayout>

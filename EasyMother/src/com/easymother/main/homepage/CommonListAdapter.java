@@ -145,6 +145,9 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo);
 //			}
 //		}
+		holder.getView(R.id.line1).setVisibility(View.GONE);
+		holder.getView(R.id.price_tv).setVisibility(View.GONE);
+		holder.getView(R.id.price_tv2).setVisibility(View.GONE);
 	}
 
 }

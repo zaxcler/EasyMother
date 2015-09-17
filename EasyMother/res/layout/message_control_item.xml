@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/borowhite" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="@dimen/dp_64"
+        android:layout_height="@dimen/dp_64"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:src="@drawable/baby" />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_toRightOf="@+id/imageView1"
+        android:text="我本善良"
+        android:textColor="@color/blackgreen" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignLeft="@+id/user_name"
+        android:textColor="@color/blackgreen"
+        android:text="回复：我" />
+
+    <TextView
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/create_time"
+        android:layout_alignBottom="@+id/create_time"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/create_time"
+        android:text="删除"
+        android:textColor="@color/blackgreen"
+        android:textSize="@dimen/sp_10" />
+
+    <ImageView
+        android:id="@+id/reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/delete"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="14dp"
+        android:src="@drawable/message" />
+
+    <TextView
+        android:id="@+id/create_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:paddingBottom="@dimen/dp_10"
+        android:text="5月15日 16：05"
+        android:textColor="@color/boroblacktext"
+        android:textSize="@dimen/sp_10" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_5"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="雪蛤" />
+
+</RelativeLayout>

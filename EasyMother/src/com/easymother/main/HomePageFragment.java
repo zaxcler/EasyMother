@@ -8,18 +8,25 @@ import org.json.JSONObject;
 
 import com.easymother.bean.BannerTexts;
 import com.easymother.bean.Banners;
+import com.easymother.bean.CuiRuShi;
 import com.easymother.bean.HomePageResult;
 import com.easymother.bean.Root;
+import com.easymother.bean.YuYingShi;
+import com.easymother.bean.YueSao;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.ImageCycleView;
+import com.easymother.customview.MyGridView;
 import com.easymother.customview.ImageCycleView.ImageCycleViewListener;
 import com.easymother.customview.MyViewPager;
 import com.easymother.main.homepage.CuiRuShiListActivity;
+import com.easymother.main.homepage.GridViewAdapter;
 import com.easymother.main.homepage.MyWishListActivity;
 import com.easymother.main.homepage.ShortOrderListActivity;
 import com.easymother.main.homepage.TuiJianFragment;
+import com.easymother.main.homepage.TuiJianFragment2;
 import com.easymother.main.homepage.YuYingShiListActivity;
+import com.easymother.main.homepage.YueSaoDetailActivity;
 import com.easymother.main.homepage.CommonListActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
@@ -43,6 +50,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -81,9 +90,15 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	//------网咯获取数据----
 	private String URL="app/index/toIndex";
 	
+	private MyGridView myGridView;
+	private String flag;
+	GridViewAdapter<YueSao> adapter;
+	GridViewAdapter<YuYingShi> adapter1;
+	GridViewAdapter<CuiRuShi> adapter2;
+	
 //	private String URL="http://zaxcler.oss-cn-beijing.aliyuncs.com/test.txt";
 	private ArrayList<String> mImageUrl = null;
-	
+	private List<Banners> banners;
 
 	public HomePageFragment() {
 	}
@@ -101,42 +116,11 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 	}
 
 	private void init() {
 
-		
-		
-		//获取网路数据
-		NetworkHelper.doGet(URL,new JsonHttpResponseHandler() {
-			
-			@Override
-			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-				super.onSuccess(statusCode, headers, response);
-				Log.e("response-------->", response.toString());
-				
-				Root root=JsonUtils.getRootResult(response);
-				
-				if (root.getIsSuccess()) {
-					HomePageResult pageResult=JsonUtils.getHomePageResult(response);
-					MyApplication.editor.putInt("wishcount", pageResult.getWishCount()).commit();//将心愿单数量进行本地保存
-					Log.e("pageResult-------->", pageResult.getBanners().toString());
-					BindData(pageResult);//绑定数据到界面
-				}else {
-					Toast.makeText(getActivity(), "请求失败", 0).show();
-				}
-				
-			}
-			@Override
-			public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-				super.onFailure(statusCode, headers, throwable, errorResponse);
-				Toast.makeText(getActivity(), "连接服务器失败", 0).show();
-			}
-		});
-
-
-		
+		loadData();
 		//初始化话水平的红色滑动条
 		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) scorllbar
 				.getLayoutParams();
@@ -153,7 +137,6 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		yuyingshi.setOnClickListener(this);
 		cuirushi.setOnClickListener(this);
 		duanqihuli.setOnClickListener(this);
-		
 		homepage_wish.setOnClickListener(this);
 		
 		
@@ -164,12 +147,41 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 
 			@Override
 			public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-				//在这里设置刷新最后要调用 onRefreshComplete()方法
+				loadData();
 				scrollView.onRefreshComplete();
 				
 			}
 		});
 
+	}
+	//获取网路数据
+	private void loadData() {
+		
+				NetworkHelper.doGet(URL,new JsonHttpResponseHandler() {
+					
+					@Override
+					public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+						super.onSuccess(statusCode, headers, response);
+						Log.e("response-------->", response.toString());
+						Root root=JsonUtils.getRootResult(response);
+						
+						if (root.getIsSuccess()) {
+							HomePageResult pageResult=JsonUtils.getHomePageResult(response);
+							MyApplication.editor.putInt("wishcount", pageResult.getWishCount()).commit();//将心愿单数量进行本地保存
+							Log.e("pageResult-------->", pageResult.getBanners().toString());
+							BindData(pageResult);//绑定数据到界面
+						}else {
+							Toast.makeText(getActivity(), "请求失败", 0).show();
+						}
+						
+					}
+					@Override
+					public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+						super.onFailure(statusCode, headers, throwable, errorResponse);
+						Toast.makeText(getActivity(), "连接服务器失败", 0).show();
+					}
+				});
+		
 	}
 	/**
 	 * 绑定数据到界面
@@ -179,7 +191,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		/*
 		 * 绑定banner数据
 		 */
-		List<Banners> banners=pageResult.getBanners();
+		banners=pageResult.getBanners();
 		
 		mImageUrl=new ArrayList<>();
 		for (int i = 0; i < banners.size(); i++) {
@@ -194,7 +206,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		 * 绑定bannertexts数据
 		 */
 		List<BannerTexts> bannerTexts=pageResult.getBannerTexts();
-		for (BannerTexts bannerText : bannerTexts) {
+		for (final BannerTexts bannerText : bannerTexts) {
 			TextView textView=new TextView(getActivity());
 			Log.e("textView", bannerText.getTitle());
 			textView.setText(bannerText.getTitle());
@@ -203,7 +215,9 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 				
 				@Override
 				public void onClick(View v) {
-					Toast.makeText(getActivity(), "打开外部链接", 0).show();
+					Intent intent=new Intent(getActivity(), WebViewActivity.class);
+					intent.putExtra("url", bannerText.getUrlValue());
+					startActivity(intent);
 				}
 			});
 			homepage_notic.addView(textView);
@@ -219,17 +233,64 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		 * 绑定推荐的数据
 		 */
 		
-		List<TuiJianFragment> fragments=new ArrayList<>();
+//		List<TuiJianFragment> fragments=new ArrayList<>();
+//		
+//		TuiJianFragment fragment=new TuiJianFragment("yuesao",pageResult.getYuesao());
+//		TuiJianFragment fragment1=new TuiJianFragment("yuyingshi",pageResult.getYuyingshi());
+//		TuiJianFragment fragment2=new TuiJianFragment("cuirushi",pageResult.getCuirushi());
+//		fragments.add(fragment);
+//		fragments.add(fragment1);
+//		fragments.add(fragment2);
 		
-		TuiJianFragment fragment=new TuiJianFragment("yuesao",pageResult.getYuesao());
-		TuiJianFragment fragment1=new TuiJianFragment("yuyingshi",pageResult.getYuyingshi());
-		TuiJianFragment fragment2=new TuiJianFragment("cuirushi",pageResult.getCuirushi());
-		fragments.add(fragment);
-		fragments.add(fragment1);
-		fragments.add(fragment2);
-		HomePageFragmentAdapter arg0=new HomePageFragmentAdapter(getFragmentManager(),fragments);
-		tuijian_content.setAdapter(arg0);
-		
+//        List<TuiJianFragment2> fragments=new ArrayList<>();
+//		
+//		TuiJianFragment2 fragment=new TuiJianFragment2("yuesao",pageResult.getYuesao());
+//		TuiJianFragment2 fragment1=new TuiJianFragment2("yuyingshi",pageResult.getYuyingshi());
+//		TuiJianFragment2 fragment2=new TuiJianFragment2("cuirushi",pageResult.getCuirushi());
+//		fragments.add(fragment);
+//		fragments.add(fragment1);
+//		fragments.add(fragment2);
+//		HomePageFragmentAdapter2 arg0=new HomePageFragmentAdapter2(getFragmentManager(),fragments);
+//		tuijian_content.setAdapter(arg0);
+		List<YueSao> ys=pageResult.getYuesao();
+		List<YuYingShi> yys=pageResult.getYuyingshi();
+		List<CuiRuShi> crs=pageResult.getCuirushi();
+		adapter=new GridViewAdapter<>(getActivity(), ys, R.layout.fragment_tuijian_item);
+		adapter1=new GridViewAdapter<>(getActivity(), yys, R.layout.fragment_tuijian_item);
+		adapter2=new GridViewAdapter<>(getActivity(), crs, R.layout.fragment_tuijian_item);
+		myGridView.setAdapter(adapter);
+		flag="ys";
+		myGridView.setOnItemClickListener(new OnItemClickListener() {
+
+			
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				Intent intent=new Intent();
+				intent.setClass(getActivity(), YueSaoDetailActivity.class);
+				GridViewAdapter gaAdapter=(GridViewAdapter) arg0.getAdapter();
+				if ("ys".equals(flag)) {
+					YueSao yueSaobean=(YueSao) gaAdapter.getItem(arg2);
+					intent.putExtra("id", yueSaobean.getNurseId());
+					intent.putExtra("job", yueSaobean.getJob());
+				}else if ("yys".equals(flag)) {
+					YuYingShi yueSaobean=(YuYingShi) gaAdapter.getItem(arg2);
+					intent.putExtra("id", yueSaobean.getNurseId());
+					intent.putExtra("job", yueSaobean.getJob());
+				}else if ("crs".equals(flag)) {
+					CuiRuShi yueSaobean=(CuiRuShi) gaAdapter.getItem(arg2);
+					intent.putExtra("id", yueSaobean.getNurseId());
+					intent.putExtra("job", yueSaobean.getJob());
+				}
+//				intent.putExtra("startTime", "2015-08-30");
+//				intent.putExtra("endTime", "2015-09-20");
+				startActivity(intent);
+				
+				gaAdapter.getItem(arg2);
+				
+				
+			}
+		});
 		
 		
 		
@@ -249,7 +310,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		tuijian_yuyingshi=(TextView) homepage.findViewById(R.id.tuijian_yuyingshi);
 		tuijian_cuirushi=(TextView) homepage.findViewById(R.id.tuijian_cuirushi);
 		
-		tuijian_content= (MyViewPager) homepage.findViewById(R.id.tuijian_content);
+//		tuijian_content= (MyViewPager) homepage.findViewById(R.id.tuijian_content);
 		
 		yuesao= (LinearLayout) homepage.findViewById(R.id.yuesao);
 		yuyingshi= (LinearLayout) homepage.findViewById(R.id.yuyingshi);
@@ -259,6 +320,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		
 		homepage_notic=(ViewFlipper) homepage.findViewById(R.id.homepage_notice);
 		scorllbar = homepage.findViewById(R.id.scorllbar);
+		myGridView = (MyGridView) homepage.findViewById(R.id.mygridview);
 
 	}
 	
@@ -295,9 +357,6 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		scorllbar.startAnimation(animation);
 		lastPosition=newPostion;
 		
-		
-		
-		
 	}
 
 
@@ -305,8 +364,9 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 
 		@Override
 		public void onImageClick(int position, View imageView) {
-			EasyMotherUtils.goActivity(getActivity(), WebViewActivity.class);
-			Toast.makeText(getActivity(), "打开外部链接", 0).show();
+			Intent intent=new Intent(getActivity(), WebViewActivity.class);
+			intent.putExtra("url", banners.get(position).getUrlValue());
+			startActivity(intent);
 
 		}
 
@@ -354,16 +414,22 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 
 		case R.id.tuijian_yuesao:
 			scrollbarMove(0);
-			tuijian_content.setCurrentItem(0);
+			flag="ys";
+			myGridView.setAdapter(adapter);
+//			tuijian_content.setCurrentItem(0);
 			break;
 
 		case R.id.tuijian_yuyingshi:
 			scrollbarMove(1);
-			tuijian_content.setCurrentItem(1);
+			flag="yys";
+//			tuijian_content.setCurrentItem(1);
+			myGridView.setAdapter(adapter1);
 			break;
 		case R.id.tuijian_cuirushi:
 			scrollbarMove(2);
-			tuijian_content.setCurrentItem(2);
+			flag="crs";
+//			tuijian_content.setCurrentItem(2);
+			myGridView.setAdapter(adapter2);
 			break;
 		}
 		transaction.commit();

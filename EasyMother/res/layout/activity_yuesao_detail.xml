@@ -98,7 +98,13 @@
                 android:layout_height="@dimen/dp_30"
                 android:background="@color/background" />
             <include 
+                android:id="@+id/calendar"
                 layout="@layout/calender"/>
+            <include 
+                android:id="@+id/crs_calendar"
+                layout="@layout/crs_calendar"
+                android:visibility="gone"
+                />
 
             <include
                 android:id="@+id/yuesaoskills"

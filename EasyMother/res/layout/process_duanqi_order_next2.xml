@@ -189,7 +189,7 @@
                 android:paddingRight="@dimen/dp_20" >
 
                 <LinearLayout
-                    android:id="@+id/layout1"
+                    android:id="@+id/layout12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
@@ -208,7 +208,6 @@
                         android:layout_weight="1" />
 
                     <TextView
-                        android:id="@+id/money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
@@ -217,20 +216,20 @@
                 </LinearLayout>
 
                 <View
-                    android:id="@+id/v1"
+                   android:id="@+id/vv1"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_alignLeft="@id/layout1"
-                    android:layout_below="@id/layout1"
+                    android:layout_alignLeft="@id/layout12"
+                    android:layout_below="@id/layout12"
                     android:layout_marginTop="@dimen/dp_10"
                     android:background="@color/line" />
 
                 <LinearLayout
-                    android:id="@+id/layout2"
+                    android:id="@+id/layout22"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/layout1"
-                    android:layout_below="@id/v1"
+                    android:layout_alignLeft="@id/layout12"
+                    android:layout_below="@id/vv1"
                     android:layout_marginTop="@dimen/dp_10"
                     android:orientation="horizontal" >
 

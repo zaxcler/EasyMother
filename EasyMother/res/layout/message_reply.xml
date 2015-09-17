@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dp_5"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="5"
+        android:background="@drawable/borotext_border_and_soild"
+         >
+
+        
+    </EditText>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:padding="@dimen/dp_5"
+            android:layout_weight="1"
+            android:id="@+id/dimss"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/lightredwine"
+            android:text="取消" />
+
+        <View 
+            android:layout_width="1dp"
+            android:paddingTop="2dp"
+            android:background="@color/line"
+            android:paddingBottom="2dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/send" 
+            android:textColor="@color/lightredwine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -99,7 +99,7 @@ public class HuLiShiZoneDetailActivity extends Activity {
 	 */
 	private void loadData() {
 		RequestParams params=new RequestParams();
-		params.put("nurseId", nurseId);
+		params.put("userId", nurseId);
 		params.put("type", "KJ");
 		NetworkHelper.doGet(BaseInfo.NURSE_ZOME_DETAIL, params, new JsonHttpResponseHandler(){
 			@Override
@@ -153,7 +153,6 @@ public class HuLiShiZoneDetailActivity extends Activity {
 		}
 		List<TopicItemBean> beans=detail.getPosts();
 		if (beans!=null) {
-			
 			HuLiShiAdapter adapter=new HuLiShiAdapter(this, beans, R.layout.activity_mypage_topic_item);
 			if (beans.size()==0) {
 				if (notice==null) {

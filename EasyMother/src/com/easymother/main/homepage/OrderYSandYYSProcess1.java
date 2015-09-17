@@ -22,10 +22,12 @@ import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -33,8 +35,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.DatePicker.OnDateChangedListener;
 
 public class OrderYSandYYSProcess1 extends Activity {
 	private Button begain_sign;// 开始签约
@@ -53,6 +57,7 @@ public class OrderYSandYYSProcess1 extends Activity {
 	private NurseJobBean nursejob;// 传入的bean
 	private String startTime;
 	private String endTime;
+	private RelativeLayout time;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,28 +80,50 @@ public class OrderYSandYYSProcess1 extends Activity {
 		meetlayout = (LinearLayout) findViewById(R.id.meet_layout);
 		meetImage = (ImageView) findViewById(R.id.meet);
 		meettime = (TextView) findViewById(R.id.meet_time);
+		time=(RelativeLayout) findViewById(R.id.time);
 	}
 
 	private void init() {
 		intent = getIntent();
 		nursebase = (NurseBaseBean) intent.getSerializableExtra("nursebase");
 		nursejob = (NurseJobBean) intent.getSerializableExtra("nursejob");
-		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
-		// 开始时间
-		Date startdate = nursebase.getEmploymentStartTime();
-		// 结束时间
-		Date enddate = nursebase.getEmploymentEndTime();
+		startTime=intent.getStringExtra("startTime");
+		endTime=intent.getStringExtra("endTime");
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+//		// 开始时间
+//		Date startdate = nursebase.getEmploymentStartTime();
+//		// 结束时间
+//		Date enddate = nursebase.getEmploymentEndTime();
 
-		if (startdate != null && enddate != null) {
+		time.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showDateDialog(v);
+			}
+		});
+		if (startTime != null && endTime != null) {
 			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
-			startTime=dateFormat.format(startdate);
-			endTime=dateFormat.format(enddate);
-			String start = format.format(startdate);
-			String end = format.format(enddate);
-			startTime_tv.setText(start);
-			endTime_tv.setText(end);
-			int countday = TimeCounter.countTimeOfDay(startdate, enddate);
-			countTime.setText("共计" + countday + "天");
+			Date startdate;
+			Date enddate;
+			try {
+				startdate = dateFormat.parse(startTime);
+				enddate = dateFormat.parse(endTime);
+				SimpleDateFormat format=new SimpleDateFormat("yyyy年MM月dd日");
+				String start=format.format(startdate);
+				String end=format.format(enddate);
+				startTime_tv.setText(start);
+				endTime_tv.setText(end);
+				int countday = TimeCounter.countTimeOfDay(startdate, enddate);
+				countTime.setText("共计" + countday + "天");
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+		}else {
+			startTime_tv.setText("");
+			endTime_tv.setText("");
+			countTime.setText("共计" + 0 + "天");
 		}
 		if (!isMeet) {
 			meetImage.setVisibility(View.GONE);
@@ -124,16 +151,19 @@ public class OrderYSandYYSProcess1 extends Activity {
 
 		//
 
-		if (nursejob.getPrice() != null) {
+		if (nursejob.getPrice()!= null) {
 			price.setText("￥" + nursejob.getPrice() + "元");
 		}
 		prePrice.setText("￥500元");
-
 		begain_sign.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				RequestParams params=new RequestParams();
+				if (startTime==null || endTime==null) {
+					Toast.makeText(OrderYSandYYSProcess1.this, "请选择时间", 0).show();
+					return;
+				}
 				params.put("realHireStartTime", startTime);
 				params.put("realHireEndTime", endTime);
 				params.put("nurseJobId", nursejob.getId());
@@ -162,6 +192,64 @@ public class OrderYSandYYSProcess1 extends Activity {
 
 			}
 		});
+	}
+	
+	/**
+	 * 显示时间选择框
+	 * @param v
+	 */
+	protected void showDateDialog(View v) {
+		final Dialog dialog=new Dialog(this);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		View view=LayoutInflater.from(this).inflate(R.layout.dialog_chosedate, null);
+		dialog.setContentView(view);
+		dialog.getWindow().setLayout(MyApplication.getScreen_width()/5*4, android.view.WindowManager.LayoutParams.WRAP_CONTENT);
+		DatePicker datePicker1=(DatePicker) view.findViewById(R.id.start_time);
+		DatePicker datePicker2=(DatePicker) view.findViewById(R.id.end_time);
+		final Date currentdate=new Date(System.currentTimeMillis());
+		final Calendar calendar=Calendar.getInstance();
+		calendar.setTime(currentdate);
+		startTime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+ calendar.get(Calendar.DAY_OF_MONTH);
+		startTime_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
+		datePicker1.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new OnDateChangedListener() {
+			@Override
+			public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+				startTime=year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+				startTime_tv.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
+			}
+		});
+        datePicker2.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new OnDateChangedListener() {
+			@Override
+			public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+				endTime=year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+		        endTime_tv.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
+			}
+		});
+        
+		view.findViewById(R.id.comfire).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				try {
+					SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+					Date startDate=dateFormat.parse(startTime);
+					Date endDate=dateFormat.parse(endTime);
+					Date current=dateFormat.parse(calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH));
+					if (TimeCounter.countTimeOfDay(startDate, endDate)>0 && TimeCounter.countTimeOfDay(current , startDate)>=0) {
+						intent.putExtra("startTime", startTime);
+						intent.putExtra("endTime", endTime);
+						int countday = TimeCounter.countTimeOfDay(startDate, endDate);
+						countTime.setText("共计" + countday + "天");
+						dialog.dismiss();
+					}else {
+						Toast.makeText(OrderYSandYYSProcess1.this,"请检查时间选择是否正确", Toast.LENGTH_SHORT).show();
+					}
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		dialog.show();
 	}
 
 }

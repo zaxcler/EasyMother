@@ -35,15 +35,14 @@ public class CollectionListAdapter2 extends CommonAdapter<ForumBean> {
 	@Override
 	public void setDataToItem(ViewHolder holder, ForumBean t) {
 		CircleImageView circlepicture=holder.getView(R.id.circlepicture);
-		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getUserImage(), circlepicture,MyApplication.options_image);
-		
+		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getUserImage(), circlepicture,MyApplication.options_photo);
 		ImageView picture=holder.getView(R.id.picture);
 		String photo="";
 		if (t.getPostImage()!=null&&!"".equals(t.getPostImage())) {
 			List<String> photos=JSON.parseArray(photo, String.class);
 			photo=photos.get(0);
 		}
-		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+photo, picture,MyApplication.options_photo);
+		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+photo, picture,MyApplication.options_image);
 		
 		TextView title=holder.getView(R.id.title);
 		if (t.getUserName()!=null) {

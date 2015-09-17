@@ -32,6 +32,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BabyTiemFragment extends Fragment implements OnClickListener{
 	private TextView move;//转到囡囡记列表
@@ -91,6 +92,8 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
 					BabyTimeResult result=JsonUtils.getResult(response, BabyTimeResult.class);
 					bindData(result);
+				}else {
+					Toast.makeText(getActivity(),JsonUtils.getRootResult(response).getMessage(), Toast.LENGTH_SHORT).show();
 				}
 			}
 			@Override
@@ -111,10 +114,20 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 		if (result.getBabyInfo()==null) {
 			if (MyApplication.preferences.getInt("id", 0)==0) {
 				baby_name.setText("请登录");
-			}else {
-				baby_name.setText("请完善囡囡记信息");
 			}
 			return;
+		}else {
+			int baby_id=MyApplication.preferences.getInt("baby_id", 0);
+			String baby_image=MyApplication.preferences.getString("baby_image", "");
+			String nannan_sex=MyApplication.preferences.getString("nannan_sex", "");
+			String nannan_name=MyApplication.preferences.getString("nannan_name", "");
+			String nannan_birthday=MyApplication.preferences.getString("nannan_birthday", "");
+			if ("".equals(baby_id)||"".equals(baby_image) || "".equals(nannan_sex)||"".equals(nannan_name)||"".equals(nannan_birthday)) {
+				baby_name.setText("请完善囡囡记信息");
+			}else {
+				baby_name.setText(nannan_name);
+			}
+				
 		}
 		if (result.getBabyInfo().getId()!=null) {
 			MyApplication.editor.putInt("baby_id",result.getBabyInfo().getId());
@@ -205,7 +218,7 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 	
 	
 	@Override
-	public void onResume() {
+	public void onResume(){
 		super.onResume();
 		String backgroundimgaename=MyApplication.preferences.getString("baby_background", "");
 		Log.e("baby_background", backgroundimgaename);

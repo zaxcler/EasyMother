@@ -50,12 +50,12 @@
                     android:textColor="@color/boroblacktext" />
 
                 <TextView
-                    android:layout_marginBottom="@dimen/dp_10"
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/imageView1"
                     android:layout_alignLeft="@+id/textView3"
+                    android:layout_marginBottom="@dimen/dp_10"
                     android:text="护理师等级："
                     android:textColor="@color/boroblacktext" />
 
@@ -89,16 +89,6 @@
                     android:textColor="@color/mudyellow"
                     android:textSize="@dimen/dp_18" />
 
-                <TextView
-                    android:paddingBottom="@dimen/dp_10"
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageView1"
-                    android:layout_marginTop="16dp"
-                    android:layout_toRightOf="@+id/imageView1"
-                    android:text="项目名称：" />
-
                 <RatingBar
                     android:id="@+id/ratingBar1"
                     style="?android:attr/ratingBarStyleSmall"
@@ -108,15 +98,6 @@
                     android:layout_toRightOf="@+id/textView5"
                     android:numStars="5"
                     android:rating="3.5" />
-
-                <TextView
-                    android:id="@+id/project_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/dp_10"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toRightOf="@+id/textView8"
-                    android:text="产前开奶" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -124,106 +105,6 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:paddingBottom="@dimen/dp_10" >
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:layout_toLeftOf="@+id/textView9"
-                    android:drawableLeft="@drawable/clock"
-                    android:gravity="center"
-                    android:text="项目时长:"
-                    android:textColor="@color/boroblacktext"
-                    android:textSize="@dimen/dp_10" />
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/textView10"
-                    android:layout_marginBottom="@dimen/dp_10"
-                    android:layout_marginLeft="@dimen/dp_22"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="服务类型" />
-
-                <View
-                    android:id="@+id/view1"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignLeft="@id/textView11"
-                    android:layout_below="@id/textView11"
-                    android:background="@color/line" />
-
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignLeft="@id/textView11"
-                    android:layout_below="@id/layout2"
-                    android:background="@color/line" />
-
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/view2"
-                    android:layout_below="@+id/view2"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="项目总费用" />
-
-                <LinearLayout
-                    android:id="@+id/layout2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignRight="@+id/view1"
-                    android:layout_below="@id/view1"
-                    android:layout_marginBottom="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/black_border"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:id="@+id/reduce"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/dp_5"
-                        android:layout_marginLeft="@dimen/dp_10"
-                        android:layout_marginRight="@dimen/dp_10"
-                        android:gravity="center"
-                        android:paddingTop="@dimen/dp_5"
-                        android:text="-" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/line" />
-
-                    <TextView
-                        android:id="@+id/num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
-                        android:text="1" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/line" />
-
-                    <TextView
-                        android:id="@+id/add"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/dp_5"
-                        android:layout_marginLeft="@dimen/dp_10"
-                        android:layout_marginRight="@dimen/dp_10"
-                        android:gravity="center"
-                        android:paddingTop="@dimen/dp_5"
-                        android:text="+" />
-                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textView9"
@@ -239,30 +120,6 @@
                     android:textSize="@dimen/dp_10" />
 
                 <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/view1"
-                    android:layout_below="@+id/view1"
-                    android:layout_marginTop="14dp"
-                    android:text="服务次数" />
-
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView11"
-                    android:layout_alignBottom="@+id/textView11"
-                    android:layout_alignLeft="@+id/textView10"
-                    android:background="@drawable/purple_solid"
-                    android:paddingBottom="@dimen/dp_3"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:paddingRight="@dimen/dp_10"
-                    android:paddingTop="@dimen/dp_3"
-                    android:text="单次"
-                    android:textColor="@color/white" />
-
-                <TextView
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -273,20 +130,69 @@
                     android:textColor="@color/mudyellow" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView12"
-                    android:layout_alignBottom="@+id/textView12"
-                    android:layout_toRightOf="@+id/textView10"
-                    android:background="@drawable/purple_border"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_22"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:text="项目名称：" />
+
+                <TextView
+                    android:id="@+id/project_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView8"
+                    android:layout_alignBottom="@+id/textView8"
+                    android:layout_marginLeft="14dp"
+                    android:layout_toRightOf="@+id/textView15"
+                    android:text="产前开奶" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout1"
+                    android:layout_margin="@dimen/dp_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView15"
+                    android:layout_below="@+id/textView8" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/textView2"
+                        android:layout_below="@+id/textView8"
+                         />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView2"
+                    android:layout_below="@+id/linearLayout1"
+                    android:text="项目总费用" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/linearLayout1"
+                    android:layout_alignLeft="@+id/textView8"
+                    android:text="套餐类型：" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView2"
+                    android:layout_toLeftOf="@+id/textView9"
+                    android:drawableLeft="@drawable/clock"
                     android:gravity="center"
-                    android:paddingBottom="@dimen/dp_3"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:paddingRight="@dimen/dp_10"
-                    android:paddingTop="@dimen/dp_3"
-                    android:text="多次"
-                    android:textColor="@color/purple" />
+                    android:text="项目时长:"
+                    android:textColor="@color/boroblacktext"
+                    android:textSize="@dimen/dp_10" />
+
             </RelativeLayout>
 
             <LinearLayout
@@ -305,12 +211,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:padding="@dimen/dp_5"
-                    android:gravity="center"
-                    android:textColor="@color/white" 
                     android:background="@color/lightredwine"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_5"
                     android:paddingTop="@dimen/dp_5"
-                    android:text="今天" />
+                    android:text="今天"
+                    android:textColor="@color/white" />
 
                 <View
                     android:layout_width="1dp"
@@ -323,8 +229,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:padding="@dimen/dp_5"
-                    android:text="明天"
-                    />
+                    android:text="明天" />
 
                 <View
                     android:layout_width="1dp"
@@ -336,8 +241,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                     android:padding="@dimen/dp_5"
                     android:gravity="center"
+                    android:padding="@dimen/dp_5"
                     android:paddingTop="@dimen/dp_5"
                     android:text="后天" />
 
@@ -351,8 +256,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                     android:padding="@dimen/dp_5"
                     android:gravity="center"
+                    android:padding="@dimen/dp_5"
                     android:paddingTop="@dimen/dp_5"
                     android:text="星期四" />
             </LinearLayout>
@@ -362,12 +267,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:horizontalSpacing="@dimen/dp_2"
-                android:verticalSpacing="@dimen/dp_2"
                 android:layout_marginRight="@dimen/dp_20"
                 android:background="@drawable/backgroup_solid"
                 android:gravity="@color/line"
-                android:numColumns="4" >
+                android:horizontalSpacing="@dimen/dp_2"
+                android:numColumns="4"
+                android:verticalSpacing="@dimen/dp_2" >
             </com.easymother.customview.MyGridView>
 
             <Button
@@ -382,6 +287,7 @@
                 android:text="开始签约"
                 android:textColor="@color/white" />
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

@@ -92,6 +92,7 @@ public class ImageCycleView extends LinearLayout {
 	public void setImageResources(ArrayList<String> imageUrlList, ImageCycleViewListener imageCycleViewListener) {
 		// 清除
 		mGroup.removeAllViews();
+		
 		// 图片广告数量
 		final int imageCount = imageUrlList.size();
 		mImageViews = new ImageView[imageCount];
@@ -112,6 +113,8 @@ public class ImageCycleView extends LinearLayout {
 		}
 
 		mAdvAdapter = new ImageCycleAdapter(mContext, imageUrlList, imageCycleViewListener);
+		//清除缓存
+		mAdvAdapter.mImageViewCacheList.clear();
 		mAdvPager.setAdapter(mAdvAdapter);
 		if (isFrist)
 		{
@@ -119,6 +122,8 @@ public class ImageCycleView extends LinearLayout {
 			isFrist =false;
 		}
 	}
+	
+	
 
 	/**
 	 * 自动滚动

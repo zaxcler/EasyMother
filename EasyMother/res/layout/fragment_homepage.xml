@@ -10,37 +10,33 @@
         android:layout_height="@dimen/fragment_title_height"
         android:background="@color/white"
         android:gravity="center_vertical|fill_horizontal" >
-        
 
         <TextView
             android:id="@+id/home_page_area"
-            android:gravity="left|center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:drawableLeft="@drawable/location1"
+            android:gravity="left|center_vertical"
             android:text="杭州" />
 
-        
-
         <TextView
-            android:layout_weight="1"
             android:id="@+id/home_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="轻松妈妈"
             android:textColor="@color/orange_red"
             android:textSize="@dimen/sp_20" />
 
-      
         <ImageView
-            android:gravity="right|center_vertical"
             android:id="@+id/home_page_wish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:gravity="right|center_vertical"
             android:src="@drawable/wish" />
     </LinearLayout>
 
@@ -111,8 +107,8 @@
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_20"
-                android:background="@color/background"
                 android:orientation="horizontal"
+                 android:background="@color/white"
                 android:padding="@dimen/dp_5" >
 
                 <LinearLayout
@@ -120,13 +116,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                   
                     android:gravity="center"
                     android:orientation="vertical" >
 
                     <ImageView
                         android:layout_width="@dimen/dp_64"
                         android:layout_height="@dimen/dp_64"
-                        android:src="@drawable/home_yuesao" />
+                        android:src="@drawable/yuesao" />
 
                     <TextView
                         android:id="@+id/yuesao_text"
@@ -147,7 +144,7 @@
                     <ImageView
                         android:layout_width="@dimen/dp_64"
                         android:layout_height="@dimen/dp_64"
-                        android:src="@drawable/home_yys" />
+                        android:src="@drawable/yuyingshi" />
 
                     <TextView
                         android:id="@+id/yuyingshi_text"
@@ -168,7 +165,7 @@
                     <ImageView
                         android:layout_width="@dimen/dp_64"
                         android:layout_height="@dimen/dp_64"
-                        android:src="@drawable/home_crs" />
+                        android:src="@drawable/cuirushi" />
 
                     <TextView
                         android:id="@+id/cuirushi_text"
@@ -184,12 +181,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="@dimen/dp_64"
                         android:layout_height="@dimen/dp_64"
-                        android:src="@drawable/home_hls" />
+                        android:src="@drawable/duanqi" />
 
                     <TextView
                         android:id="@+id/duanqihuli_text"
@@ -206,6 +203,7 @@
                 android:background="#eeeeee" />
 
             <LinearLayout
+                android:background="@color/background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
@@ -267,11 +265,25 @@
                     android:background="@color/deeppink" />
             </LinearLayout>
 
+            <com.easymother.customview.MyGridView
+                android:id="@+id/mygridview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:numColumns="2" >
+            </com.easymother.customview.MyGridView>
+
+            
+
+          
+            <!--
             <com.easymother.customview.MyViewPager
                 android:id="@+id/tuijian_content"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_420" >
+                android:layout_height="wrap_content">
             </com.easymother.customview.MyViewPager>
+            -->
+
 
             <!--
             <android.support.v4.view.ViewPager

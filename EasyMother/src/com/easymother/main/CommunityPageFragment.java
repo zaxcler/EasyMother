@@ -28,6 +28,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import android.R.integer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -164,7 +165,10 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 			EasyMotherUtils.goActivity(getActivity(), YSYQActicvity.class);
 			break;
 		case R.id.message:
-			EasyMotherUtils.goActivity(getActivity(), MessageContralActivity.class);
+			Intent intent=new Intent();
+			intent.putExtra("flag", "unread");
+			intent.setClass(getActivity(), MessageContralActivity.class);
+			getActivity().startActivity(intent);
 
 			break;
 

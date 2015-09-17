@@ -113,7 +113,6 @@ public class TopicAndAskListActivity extends Activity implements OnClickListener
 		}else if ("help".equals(flag)){
 			list=result1.getHelps();
 		}
-		
 		if (list!=null && list.size()>0) {
 			adapter=new HuLiShiAdapter(this, list, R.layout.activity_mypage_topic_item);
 			mylistview.setAdapter(adapter);

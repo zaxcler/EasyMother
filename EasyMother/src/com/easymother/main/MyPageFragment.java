@@ -3,6 +3,7 @@ package com.easymother.main;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
+import com.easymother.main.community.MessageContralActivity;
 import com.easymother.main.homepage.MyWishListActivity;
 import com.easymother.main.homepage.OrderListActivity;
 import com.easymother.main.my.CollectListActivity;
@@ -10,6 +11,7 @@ import com.easymother.main.my.ContactActivity;
 import com.easymother.main.my.InfomationActivity;
 import com.easymother.main.my.LoginOrRegisterActivity;
 import com.easymother.main.my.OrderDetailActivity;
+import com.easymother.main.my.PayListActivity;
 import com.easymother.main.my.SettingActivity;
 import com.easymother.main.my.TopicListActivity;
 import com.easymother.main.my.TopicReplyListActivity;
@@ -17,6 +19,7 @@ import com.easymother.main.my.VersionActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager.OnActivityResultListener;
@@ -70,7 +73,6 @@ public class MyPageFragment extends Fragment implements OnClickListener {
 		reply_num = (TextView) view.findViewById(R.id.topic_reply_num);
 		collection_num = (TextView) view.findViewById(R.id.collection_num);
 		pay = (TextView) view.findViewById(R.id.pay);
-		vip = (TextView) view.findViewById(R.id.vip);
 		order = (TextView) view.findViewById(R.id.order);
 		contact = (TextView) view.findViewById(R.id.contact);
 		wish = (TextView) view.findViewById(R.id.wish);
@@ -108,7 +110,6 @@ public class MyPageFragment extends Fragment implements OnClickListener {
 		topic_num.setOnClickListener(this);
 		reply_num.setOnClickListener(this);
 		pay.setOnClickListener(this);
-		vip.setOnClickListener(this);
 		order.setOnClickListener(this);
 		contact.setOnClickListener(this);
 		wish.setOnClickListener(this);
@@ -139,16 +140,16 @@ public class MyPageFragment extends Fragment implements OnClickListener {
 			EasyMotherUtils.goActivity(getActivity(), TopicListActivity.class);
 			break;
 		case R.id.topic_reply:
-			EasyMotherUtils.goActivity(getActivity(), TopicReplyListActivity.class);
+			Intent intent=new Intent();
+			intent.putExtra("flag", "reply_list");
+			intent.setClass(getActivity(), MessageContralActivity.class);
+			getActivity().startActivity(intent);
 			break;
 		case R.id.collection:
 			EasyMotherUtils.goActivity(getActivity(), CollectListActivity.class);
 			break;
 		case R.id.pay:
-			EasyMotherUtils.goActivity(getActivity(), CollectListActivity.class);
-			break;
-		case R.id.vip:
-
+			EasyMotherUtils.goActivity(getActivity(), PayListActivity.class);
 			break;
 		case R.id.order:
 			EasyMotherUtils.goActivity(getActivity(), OrderListActivity.class);

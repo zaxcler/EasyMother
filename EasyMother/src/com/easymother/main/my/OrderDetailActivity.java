@@ -107,7 +107,7 @@ public class OrderDetailActivity extends Activity {
 		nurse_age = (TextView) findViewById(R.id.nurse_age);
 		nurse_area = (TextView) findViewById(R.id.nurse_area);
 		price = (TextView) findViewById(R.id.price);
-		marketprice = (TextView) findViewById(R.id.market_price);
+		marketprice = (TextView) findViewById(R.id.marketprice);
 		startTime = (TextView) findViewById(R.id.startTime);
 		endTime = (TextView) findViewById(R.id.endTime);
 		paybyweek = (TextView) findViewById(R.id.paybyweek);
@@ -203,32 +203,36 @@ public class OrderDetailActivity extends Activity {
 			if (baseBean.getCurrentAddress() != null) {
 				nurse_address.setText(baseBean.getCurrentAddress());
 			}
-			if (baseBean.getPrice() != null) {
-				price.setText(baseBean.getPrice()+"元/26天");
-			}
-			if (baseBean.getMarketPrice() != null) {
-				marketprice.setText("市场价："+baseBean.getMarketPrice());
-				marketprice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-			}
+			
 			if (baseBean.getImage() != null) {
 				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + baseBean.getImage(),
 						nurse_image,MyApplication.options_image);
 			}
 
 		}
+		if (orderDetail.getNurseJob()!=null) {
+			if (orderDetail.getNurseJob().getPrice() != null) {
+				price.setText(baseBean.getPrice()+"元/26天");
+			}else {
+				price.setText("");
+			}
+			if (orderDetail.getNurseJob().getMarketPrice() != null) {
+				marketprice.setText("市场价："+baseBean.getMarketPrice());
+				marketprice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+			}else {
+				marketprice.setText("市场价：");
+			}
+		}
 
 		if (orderDetail.getOrder().getStatus() != null) {
-			if ("PAYOK".equals(orderDetail.getOrder().getStatus())) {
+			if ("20".equals(orderDetail.getOrder().getStatus())) {
 				pay_state.setText("等待服务");
-			}
-			if ("NOPAY".equals(orderDetail.getOrder().getStatus())) {
+			}else if ("10".equals(orderDetail.getOrder().getStatus())) {
 				pay_state.setText("等待付款");
-			}
-			if ("WORKING".equals(orderDetail.getOrder().getStatus())) {
-				pay_state.setText("服务中");
-			}
-			if ("END".equals(orderDetail.getOrder().getStatus())) {
+			}else if ("40".equals(orderDetail.getOrder().getStatus())) {
 				pay_state.setText("服务结束");
+			}else {
+				pay_state.setText("服务中");
 			}
 		}
 		

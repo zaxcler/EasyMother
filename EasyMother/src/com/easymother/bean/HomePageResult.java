@@ -7,56 +7,65 @@ public class HomePageResult {
 
 	private int wishCount;
 
-	private List<YueSao> yuesaos ;
+	private List<YueSao> yuesao ;
 
-	private List<CuiRuShi> cuirushis ;
+	private List<CuiRuShi> cuirushi ;
 
-	private List<YuYingShi> yuyingshis ;
+	private List<YuYingShi> yuyingshi ;
 
-	private List<BannerTexts> bannerTextss ;
+	private List<BannerTexts> bannerTexts ;
 
-	private List<Banners> bannerss ;
+	private List<Banners> banners ;
 
-	public void setWishCount(int wishCount){
-	this.wishCount = wishCount;
+	public int getWishCount() {
+		return wishCount;
 	}
-	public int getWishCount(){
-	return this.wishCount;
+
+	public void setWishCount(int wishCount) {
+		this.wishCount = wishCount;
 	}
-	public void setYuesao(List<YueSao> yuesao){
-	this.yuesaos = yuesao;
+
+	public List<YueSao> getYuesao() {
+		return yuesao;
 	}
-	public List<YueSao> getYuesao(){
-	return this.yuesaos;
+
+	public void setYuesao(List<YueSao> yuesao) {
+		this.yuesao = yuesao;
 	}
-	public void setCuirushi(List<CuiRuShi> cuirushi){
-	this.cuirushis = cuirushi;
+
+	public List<CuiRuShi> getCuirushi() {
+		return cuirushi;
 	}
-	public List<CuiRuShi> getCuirushi(){
-	return this.cuirushis;
+
+	public void setCuirushi(List<CuiRuShi> cuirushi) {
+		this.cuirushi = cuirushi;
 	}
-	public void setYuyingshi(List<YuYingShi> yuyingshi){
-	this.yuyingshis = yuyingshi;
+
+	public List<YuYingShi> getYuyingshi() {
+		return yuyingshi;
 	}
-	public List<YuYingShi> getYuyingshi(){
-	return this.yuyingshis;
+
+	public void setYuyingshi(List<YuYingShi> yuyingshi) {
+		this.yuyingshi = yuyingshi;
 	}
-	public void setBannerTexts(List<BannerTexts> bannerTexts){
-	this.bannerTextss = bannerTexts;
+
+	public List<BannerTexts> getBannerTexts() {
+		return bannerTexts;
 	}
-	public List<BannerTexts> getBannerTexts(){
-	return this.bannerTextss;
+
+	public void setBannerTexts(List<BannerTexts> bannerTexts) {
+		this.bannerTexts = bannerTexts;
 	}
-	public void setBanners(List<Banners> banners){
-	this.bannerss = banners;
+
+	public List<Banners> getBanners() {
+		return banners;
 	}
-	public List<Banners> getBanners(){
-	return this.bannerss;
+
+	public void setBanners(List<Banners> banners) {
+		this.banners = banners;
 	}
-	@Override
-	public String toString() {
-		return "HomePageResult [wishCount=" + wishCount + ", yuesaos=" + yuesaos + ", cuirushis=" + cuirushis
-				+ ", yuyingshis=" + yuyingshis + ", bannerTextss=" + bannerTextss + ", bannerss=" + bannerss + "]";
-	}
+
+
+	
 	
 }

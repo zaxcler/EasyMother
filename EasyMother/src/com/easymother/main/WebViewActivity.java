@@ -3,6 +3,7 @@ package com.easymother.main;
 import com.easymother.utils.EasyMotherUtils;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.webkit.WebSettings;
@@ -12,6 +13,7 @@ import android.webkit.WebViewClient;
 public class WebViewActivity extends Activity {
 	
 	private WebView webview;
+	private Intent intent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,8 @@ public class WebViewActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.webview_activity);
 		EasyMotherUtils.initTitle(this, "", false);
+		intent=getIntent();
+		String url=intent.getStringExtra("url");
 		webview=(WebView) findViewById(R.id.webview);
 		WebSettings settings=webview.getSettings();
 		settings.setJavaScriptEnabled(true);
@@ -35,7 +39,7 @@ public class WebViewActivity extends Activity {
 				return true;
 			}
 		});
-		webview.loadUrl("https://www.baidu.com");
+		webview.loadUrl(url);
 	}
 	
 

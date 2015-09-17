@@ -42,9 +42,31 @@ public class TimeCounter {
 	 * @return
 	 */
 	public static int countTimeOfDay(Date begaindate,Date endDate){
+		long a=begaindate.getTime();
+		long b=endDate.getTime();
 		long countday=(endDate.getTime()-begaindate.getTime());
-		int day=(int)countday/1000/3600/24;
+//		int day=new Long(countday/1000/3600/24).intValue();
+		int day=Integer.parseInt(String.valueOf(countday/1000/3600/24));
 		return day;
+		
+	}
+	
+	/**
+	 * 比较两个时间的大小
+	 * @param begaindate
+	 * @param endDate
+	 * @return
+	 */
+	public static int compareDate(Date begaindate,Date endDate){
+		
+		long countday=(endDate.getTime()-begaindate.getTime());
+		if (countday<0) {
+			return -1;
+		}else if (countday==0) {
+			return 0;
+		}else {
+			return 1;
+		} 
 		
 	}
 	

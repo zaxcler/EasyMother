@@ -16,7 +16,7 @@
     <application
         android:allowBackup="true"
         android:name="com.easymother.configure.MyApplication"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/app"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -140,6 +140,8 @@
         <activity android:name="com.easymother.main.my.ChangeDateActivity" ></activity>
         <!-- 更换或退订 -->
         <activity android:name="com.easymother.main.my.ChangeNurseActivity" ></activity>
+        <!--付款 -->
+        <activity android:name="com.easymother.main.my.PayListActivity" ></activity>
        
         
         <!-- 护理师空间列表 -->

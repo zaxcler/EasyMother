@@ -26,7 +26,6 @@ public class CollectionListAdapter extends CommonAdapter<NewsBean> {
 			int resource) {
 		super(context, list, resource);
 		this.list=list;
-		
 	}
 
 	@Override
@@ -35,7 +34,7 @@ public class CollectionListAdapter extends CommonAdapter<NewsBean> {
 		CircleImageView circleImageView1=holder.getView(R.id.circlepicture);
 		circleImageView1.setVisibility(View.GONE);
 		ImageView picture=holder.getView(R.id.picture);
-		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getImages(), picture,MyApplication.options_image);
+		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getImages(), picture,MyApplication.options_photo);
 		TextView title=holder.getView(R.id.title);
 		if (t.getNewsName()!=null) {
 			title.setText(t.getNewsName());

@@ -133,7 +133,8 @@ public class OrderListActivity extends Activity {
 						Intent intent=new Intent(OrderListActivity.this,OrderDetailActivity.class);
 						//传递数据
 						intent.putExtra("id", id);
-						intent.putExtra("order", orders.get(arg2));
+////						intent.putExtra("order", orders.get(arg2));
+//						intent.putExtra("", orders.get(arg2));
 						startActivity(intent);
 					}
 				});
@@ -176,7 +177,7 @@ public class OrderListActivity extends Activity {
 						Intent intent=new Intent(OrderListActivity.this,OrderDetailActivity.class);
 						//传递数据
 						intent.putExtra("id", id);
-						intent.putExtra("order", orders.get(arg2));
+//						intent.putExtra("order", orders.get(arg2));
 						startActivity(intent);
 					}
 				});

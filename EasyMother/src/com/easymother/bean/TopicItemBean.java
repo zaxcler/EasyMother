@@ -16,11 +16,20 @@ public class TopicItemBean {
 	private Integer collectionAmount;
 	private Integer msgAmount;
 	private Integer upAmount;
+	private Integer nurseId;
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public Integer getNurseId() {
+		return nurseId;
+	}
+	public void setNurseId(Integer nurseId) {
+		this.nurseId = nurseId;
 	}
 	public String getUpdateTime() {
 		return updateTime;

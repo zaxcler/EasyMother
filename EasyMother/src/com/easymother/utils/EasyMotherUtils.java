@@ -211,39 +211,14 @@ public class EasyMotherUtils {
 	 * @param day 0表示当天 1表示明天 2表示后天 3表示大后天
 	 * @return
 	 */
-	public static List<String> getTime(int day){
+	public static List<String> getTime(){
 //		Date currentDate=new Date(java.lang.System.currentTimeMillis());
-		Calendar calendar=Calendar.getInstance(Locale.CHINA);
-		String basetime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DAY_OF_MONTH)+1+day)+" ";
+		
 		list=new ArrayList<String>();
-		list.add(basetime+"8:00:00");
-		list.add(basetime+"8:30:00");
-		list.add(basetime+"9:00:00");
-		list.add(basetime+"9:30:00");
-		list.add(basetime+"10:00:00");
-		list.add(basetime+"10:30:00");
-		list.add(basetime+"11:00:00");
-		list.add(basetime+"11:30:00");
-		list.add(basetime+"12:00:00");
-		list.add(basetime+"12:30:00");
-		list.add(basetime+"13:00:00");
-		list.add(basetime+"13:30:00");
-		list.add(basetime+"14:00:00");
-		list.add(basetime+"14:30:00");
-		list.add(basetime+"15:00:00");
-		list.add(basetime+"15:30:00");
-		list.add(basetime+"16:00:00");
-		list.add(basetime+"16:30:00");
-		list.add(basetime+"17:00:00");
-		list.add(basetime+"17:30:00");
-		list.add(basetime+"18:00:00");
-		list.add(basetime+"18:30:00");
-		list.add(basetime+"19:00:00");
-		list.add(basetime+"19:30:00");
-		list.add(basetime+"20:00:00");
-		list.add(basetime+"20:30:00");
-		list.add(basetime+"21:00:00");
-		list.add(basetime+"20:30:00");
+		for (int i = 0; i < 14; i++) {
+			list.add(8+i+":00");
+			list.add(8+i+":30");
+		}
 		return list;
 	}
 

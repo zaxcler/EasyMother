@@ -179,6 +179,7 @@ public class OrderCRSProcess1 extends Activity {
 						public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 							if (JsonUtils.getRootResult(response).getIsSuccess()) {
 								Log.e("保存合同成功", response.toString());
+								
 							}else {
 								Log.e("保存合同失败", response.toString());
 							}
@@ -191,25 +192,30 @@ public class OrderCRSProcess1 extends Activity {
 					NetworkHelper.doGet(BaseInfo.SAVE_ORDER, params, new JsonHttpResponseHandler(){
 						public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 							if (JsonUtils.getRootResult(response).getIsSuccess()) {
-							Order order=JsonUtils.getResult(response, Order.class);
-							order.setPrice(0.01);
-							SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+								if (JsonUtils.getRootResult(response).getResult()==null) {
+									Toast.makeText(OrderCRSProcess1.this, "此时间短被占用！", Toast.LENGTH_SHORT).show();
+								}else {
+									Order order=JsonUtils.getResult(response, Order.class);
+									order.setPrice(0.01);
+									SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+									
+									try {
+										Date startdate= format.parse(startTime);
+										Date enddate=format.parse(endTime);
+										order.setRealHireStartTime(startdate);
+										order.setRealHireEndTime(enddate);
+									} catch (ParseException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									intent.putExtra("order",order);
+									intent.putExtra("userName",name );
+									intent.putExtra("mobile",phone );
+									intent.putExtra("address",address );
+									intent.setClass(OrderCRSProcess1.this, PayCRSActivity.class);
+									startActivity(intent);
+								}
 							
-							try {
-								Date startdate= format.parse(startTime);
-								Date enddate=format.parse(endTime);
-								order.setRealHireStartTime(startdate);
-								order.setRealHireEndTime(enddate);
-							} catch (ParseException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							intent.putExtra("order",order);
-							intent.putExtra("userName",name );
-							intent.putExtra("mobile",phone );
-							intent.putExtra("address",address );
-							intent.setClass(OrderCRSProcess1.this, PayCRSActivity.class);
-							startActivity(intent);
 							}else {
 								Log.e("保存订单失败", response.toString());
 							}

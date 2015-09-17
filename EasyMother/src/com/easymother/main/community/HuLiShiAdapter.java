@@ -38,8 +38,10 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 		intent=new Intent();
 		this.list=list;
 		if (context instanceof HuLiShiZoneDetailActivity) {
+			flag="hulishi_reply";
 			intent.setClass((Activity)context, HuLiShiReplyListActivity.class);
 		}else if (context instanceof HuLiShiZoneListActivity) {
+			flag="zone";
 			intent.setClass((Activity)context, HuLiShiZoneDetailActivity.class);
 		}else if (context instanceof TopicAndAskListActivity  ) {
 			flag="topic_help";
@@ -58,8 +60,13 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 			holder.getConvertView().setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					int s=t.getId();
 					//userId实际上是nurseId 因为后台懒 返回的数据是这个所以。。你懂的
-					intent.putExtra("id", t.getUserId());
+					if ("hulishi_reply".equals(flag)||"topic_help".equals(flag)||"user_topic".equals(flag)) {
+						intent.putExtra("id", t.getId());
+					}else {
+						intent.putExtra("id", t.getUserId());
+					}
 					intent.putExtra("type", t.getType());
 					context.startActivity(intent);
 					
@@ -138,7 +145,7 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 					if (MyApplication.preferences.getInt("id", 0)!=0) {
 						RequestParams params=new RequestParams();
 						params.put("userId", MyApplication.preferences.getInt("id", 0));
-						params.put("fromPostId", t.getId());
+						params.put("forumPostId", t.getId());
 						NetworkHelper.doGet(BaseInfo.SAVE_COLLECTION, params, new JsonHttpResponseHandler(){
 							public void onSuccess(int statusCode, org.apache.http.Header[] headers, org.json.JSONObject response) {
 								if (t.getCollectionAmount()!=null) {
@@ -146,7 +153,6 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 								}else {
 									msgAmoount.setText("1");
 								}
-								
 							};
 							public void onFailure(int statusCode, org.apache.http.Header[] headers, String responseString, Throwable throwable) {
 								Toast.makeText(context, "连接服务器失败", 0).show();

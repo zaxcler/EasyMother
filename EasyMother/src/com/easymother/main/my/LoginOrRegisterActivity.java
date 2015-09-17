@@ -1,9 +1,12 @@
 package com.easymother.main.my;
 
+import java.text.SimpleDateFormat;
+
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.easymother.bean.BabyTimeResult;
 import com.easymother.bean.LoginResult;
 import com.easymother.bean.UserInfo;
 import com.easymother.configure.BaseInfo;
@@ -108,6 +111,7 @@ public class LoginOrRegisterActivity extends Activity implements OnClickListener
 						Log.e("登录后的appToken", result.getAppToken());
 						//保存登录后的appToken
 						MyApplication.editor.putString("appToken", result.getAppToken()).commit();
+						loadBabyInfo();
 						LoginOrRegisterActivity.this.finish();
 						
 					}else {
@@ -126,6 +130,46 @@ public class LoginOrRegisterActivity extends Activity implements OnClickListener
 		}
 		
 		
+	}
+	//加载宝贝信息,并保存到本地
+	public void loadBabyInfo(){
+		NetworkHelper.doGet(BaseInfo.BABYTIME_INDEX, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+				super.onSuccess(statusCode, headers, response);
+				if (JsonUtils.getRootResult(response).getIsSuccess()) {
+					BabyTimeResult result=JsonUtils.getResult(response, BabyTimeResult.class);
+					if (result.getBabyInfo().getId()!=null) {
+						MyApplication.editor.putInt("baby_id",result.getBabyInfo().getId());
+					}
+					if (result.getBabyInfo().getBabyImage()!=null) {
+						MyApplication.editor.putString("baby_image",result.getBabyInfo().getBabyImage());
+					}
+					if (result.getBabyInfo().getBackground()!=null) {
+						MyApplication.editor.putString("baby_background",result.getBabyInfo().getBackground());
+					}
+					if (result.getBabyInfo().getGender()!=null) {
+						MyApplication.editor.putString("nannan_sex",result.getBabyInfo().getGender());
+					}
+					if (result.getBabyInfo().getBabyName()!=null) {
+						MyApplication.editor.putString("nannan_name",result.getBabyInfo().getBabyName());
+					}
+					if (result.getBabyInfo().getBirthday()!=null) {
+					SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String birthy=dateFormat.format(result.getBabyInfo().getBirthday());
+						MyApplication.editor.putString("nannan_birthday",birthy);
+					}
+					MyApplication.editor.commit();
+				}else {
+					Toast.makeText(LoginOrRegisterActivity.this,JsonUtils.getRootResult(response).getMessage(), Toast.LENGTH_SHORT).show();
+				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+				super.onFailure(statusCode, headers, responseString, throwable);
+				Log.e("baby_time失败", responseString);
+			}
+		});
 	}
 	
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class OrderListBean implements Serializable{
+public class OrderListBean  extends Order implements Serializable{
 	
 	private Integer nurseId;
 

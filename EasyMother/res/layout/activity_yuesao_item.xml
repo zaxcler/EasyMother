@@ -136,5 +136,32 @@
      android:layout_marginBottom="@dimen/dp_10"
      android:textColor="@color/blacktext"
      android:textSize="@dimen/sp_16" />
+ <View 
+     android:id="@+id/line1"
+     android:layout_width="match_parent"
+     android:layout_height="1dp"
+     android:background="@color/line"
+     android:layout_below="@id/image"
+     android:layout_marginLeft="@dimen/dp_5"
+     android:layout_marginRight="@dimen/dp_5"
+     />
+
+ <TextView
+     android:id="@+id/price_tv"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_alignLeft="@+id/image"
+     android:layout_below="@+id/line1"
+     android:layout_marginTop="16dp"
+     android:text="本次费用" />
+
+ <TextView
+     android:id="@+id/price_tv2"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_alignBottom="@+id/price_tv"
+     android:layout_alignRight="@+id/line1"
+     android:textColor="@color/lightredwine"
+     android:text="TextView" />
 
 </RelativeLayout>

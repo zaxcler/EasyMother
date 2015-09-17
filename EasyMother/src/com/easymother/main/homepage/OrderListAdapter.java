@@ -8,6 +8,7 @@ import com.easymother.bean.OrderListBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
+import com.easymother.main.my.PayListActivity;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.ViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -15,6 +16,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import android.content.Context;
 import android.graphics.Paint;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,13 +24,19 @@ public class OrderListAdapter<T> extends CommonAdapter<T> {
 	private List<T> list;
 	private Context context;
 	private String job;
+	private String flag;
 
-	protected OrderListAdapter(Context context, List<T> list,String job,
+	public OrderListAdapter(Context context, List<T> list,String job,
 			int resource) {
 		super(context, list, resource);
 		this.list=list;
 		this.context=context;
 		this.job=job;
+		if (context instanceof OrderListActivity) {
+			flag="allorder";
+		}else if (context instanceof PayListActivity) {
+			flag="payorder";
+		}
 	}
 	
 	public List<T> getList(){
@@ -43,9 +51,16 @@ public class OrderListAdapter<T> extends CommonAdapter<T> {
 			/*
 			 * 设置之前先判断空
 			 */
-			if (bean.getRealName()!=null) {
-				name.setText(bean.getRealName());
+			if ("payorder".equals(flag)) {
+				if (bean.getNurseName()!=null) {
+					name.setText(bean.getNurseName());
+				}
+			}else if ("allorder".equals(flag)) {
+				if (bean.getRealName()!=null) {
+					name.setText(bean.getRealName());
+				}
 			}
+			
 			TextView job=holder.getView(R.id.textView2);
 			/*
 			 * 设置之前先判断空
@@ -120,11 +135,42 @@ public class OrderListAdapter<T> extends CommonAdapter<T> {
 			if (bean.getImage()!=null) {
 				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo,MyApplication.options_image);
 			}
-			
 
 		holder.getView(R.id.delete).setVisibility(View.GONE);
 		holder.getView(R.id.pay).setVisibility(View.GONE);
-		
+		holder.getView(R.id.line1).setVisibility(View.GONE);
+		holder.getView(R.id.price_tv).setVisibility(View.GONE);
+		holder.getView(R.id.price_tv2).setVisibility(View.GONE);
+		TextView price_tv2=holder.getView(R.id.price_tv2);
+		if ("payorder".equals(flag)) {
+			holder.getView(R.id.line1).setVisibility(View.VISIBLE);
+			holder.getView(R.id.price_tv).setVisibility(View.VISIBLE);
+			price_tv2.setVisibility(View.VISIBLE);
+			if (bean.getRealAllAmount()!=null) {
+				price_tv2.setText("￥"+bean.getRealAllAmount()+"元");
+			}else {
+				price_tv2.setText("");
+			}
+		}
+		if (bean.getStatus()!=null) {
+			//如果是需要支付的状态则显示
+			if ("25".equals(bean.getStatus())){
+				TextView pay=holder.getView(R.id.pay);
+				pay.setText("待付服务款");
+				pay.setVisibility(View.VISIBLE);
+				if (bean.getRealAllAmount()!=null) {
+					price_tv2.setText("￥"+bean.getRealAllAmount()+"元");
+				}else {
+					price_tv2.setText("");
+				}
+			}
+			if ("10".equals(bean.getStatus())){
+				TextView pay=holder.getView(R.id.pay);
+				pay.setText("待付定金");
+				pay.setVisibility(View.VISIBLE);
+				price_tv2.setText("￥500元");
+			}
+		}
 		
 	}
 

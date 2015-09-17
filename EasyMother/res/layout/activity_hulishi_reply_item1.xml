@@ -22,11 +22,11 @@
         
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/floor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/textView3"
-            android:layout_alignLeft="@+id/textView1"
+            android:layout_alignLeft="@+id/user_name"
             android:text="1楼"
             android:textColor="@color/boroblacktext"
             android:textSize="@dimen/dp_12" />
@@ -42,20 +42,20 @@
             android:src="@drawable/baby" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/reply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/textView1"
+            android:layout_alignTop="@+id/user_name"
             android:drawableLeft="@drawable/reply"
             android:text="回复"
             android:textColor="@color/boro" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/textView2"
+            android:layout_above="@+id/floor"
             android:layout_marginLeft="19dp"
             android:layout_toRightOf="@+id/circleImageView1"
             android:text="杨烨"
@@ -63,7 +63,7 @@
             android:textSize="@dimen/sp_20" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/show_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView4"
@@ -77,8 +77,8 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView1"
-            android:layout_toRightOf="@+id/textView2"
+            android:layout_below="@+id/user_name"
+            android:layout_toRightOf="@+id/floor"
             android:text="丨"
             android:textColor="@color/boroblacktext"
             android:textSize="@dimen/dp_12" />
@@ -87,13 +87,13 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView2"
+            android:layout_alignLeft="@+id/floor"
             android:layout_below="@+id/circleImageView1"
             android:layout_marginTop="22dp"
             android:text="回复" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/parent_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView3"
@@ -102,11 +102,11 @@
             android:textColor="@color/blackgreen" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/child_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/pictures"
-            android:layout_toRightOf="@+id/textView6"
+            android:layout_toRightOf="@+id/parent_name"
             android:text="：瞎扯淡。。" />
 
         <LinearLayout
@@ -121,13 +121,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="郭泽" />
-
-            <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/parent_conten"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我还是到哪块快打死了阿斯顿空间啊啊很少肯定就按时发空间啊" />

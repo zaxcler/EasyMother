@@ -26,6 +26,7 @@
                 android:text="请确认信息" />
 
             <RelativeLayout
+                android:id="@+id/time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"

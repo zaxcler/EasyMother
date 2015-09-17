@@ -150,6 +150,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 				communityPageFragment=new CommunityPageFragment();
 				transaction.add(R.id.main_content, communityPageFragment);
 			}
+			
 			if (homePageFragment!=null) {
 				transaction.hide(homePageFragment);
 			}
@@ -180,6 +181,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			if (myPageFragment!=null) {
 				transaction.hide(myPageFragment);
 			}
+			babyTiemFragment.loadData();
 			transaction.show(babyTiemFragment);
 			transaction.commit();
 			break;

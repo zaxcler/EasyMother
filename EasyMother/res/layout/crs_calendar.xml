@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/layout3"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignRight="@+id/view1"
+        android:layout_below="@id/view1"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/white_solid"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/day1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/lightredwine"
+            android:gravity="center"
+            android:padding="@dimen/dp_5"
+            android:paddingTop="@dimen/dp_5"
+            android:text="今天"
+            android:textColor="@color/white" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/line" />
+
+        <TextView
+            android:id="@+id/day2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/dp_5"
+            android:text="明天" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/line" />
+
+        <TextView
+            android:id="@+id/day3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/dp_5"
+            android:paddingTop="@dimen/dp_5"
+            android:text="后天" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/line" />
+
+        <TextView
+            android:id="@+id/day4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/dp_5"
+            android:paddingTop="@dimen/dp_5"
+            android:text="星期四" />
+    </LinearLayout>
+
+    <com.easymother.customview.MyGridView
+        android:id="@+id/gridView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:background="@drawable/backgroup_solid"
+        android:gravity="@color/line"
+        android:horizontalSpacing="@dimen/dp_2"
+        android:numColumns="4"
+        android:verticalSpacing="@dimen/dp_2" >
+    </com.easymother.customview.MyGridView>
+
+</LinearLayout>

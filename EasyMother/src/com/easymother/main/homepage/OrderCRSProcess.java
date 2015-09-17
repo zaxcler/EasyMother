@@ -1,31 +1,44 @@
 package com.easymother.main.homepage;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
 
 import com.alipay.sdk.auth.h;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
+import com.easymother.bean.NurseService;
 import com.easymother.bean.Order;
+import com.easymother.bean.TaocanBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
 import com.easymother.customview.MyGridView;
 import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.JsonUtils;
+import com.easymother.utils.NetworkHelper;
 import com.easymother.utils.ViewHolder;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class OrderCRSProcess extends Activity implements OnClickListener {
 	private Button begain_sign;// 开始签约
@@ -47,11 +60,16 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 	
 	private int clicktimes=1;//点击次数
 	private boolean isChoose=false;//是否已选择
+	
+	private LinearLayout linearLayout1;//套餐
 
 	private RatingBar ratingBar1;
 	private CircleImageView imageView1;
 	OrderCRSPreocessGridViewAdapter adapter ;
+	private String projectname;
 	
+	private String startTime;
+	private String endTime;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +99,11 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 		day3 = (TextView) findViewById(R.id.day3);
 		day4 = (TextView) findViewById(R.id.day4);
 		ratingBar1 = (RatingBar) findViewById(R.id.ratingBar1);
-
+		linearLayout1=(LinearLayout) findViewById(R.id.linearLayout1);
 	}
 
 	private void init() {
-		
+		loadData();
 		if (nursebase.getRealName() != null) {
 			nurse_name.setText(nursebase.getRealName());
 		}
@@ -103,33 +121,38 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 		} else {
 			ratingBar1.setProgress(0);
 		}
-		if (nursebase.getImage() != null) {
-			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + nursebase.getImage(),
+			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + nursejob.getWorkImageArrays()[0],
 					imageView1, MyApplication.options_photo);
-		}
 		if (intent.getIntExtra("CRS_Project", 0) != 0) {
 			switch (intent.getIntExtra("CRS_Project", 0)) {
 			case 1:
 				project_name.setText("产前开奶");
+				projectname="产前开奶";
 				break;
 			case 2:
 				project_name.setText("产后无痛点穴开奶");
+				projectname="产后无痛点穴开奶";
 				break;
 			case 3:
 				project_name.setText("催乳");
+				projectname="催乳";
 				break;
 			case 4:
 				project_name.setText("消淤");
+				projectname="消淤";
 				break;
 			case 5:
 				project_name.setText("乳腺小叶增生养护");
+				projectname="乳腺小叶增生养护";
 				break;
 
 			case 6:
 				project_name.setText("产后满月汗蒸排毒");
+				projectname="产后满月汗蒸排毒";
 				break;
 			case 7:
 				project_name.setText("产后经络调理消月子病");
+				projectname="产后经络调理消月子病";
 				break;
 
 			}
@@ -138,45 +161,42 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 
 			@Override
 			public void onClick(View arg0) {
-				intent.putExtra("startTime", "2015-09-06 09:00:00");
-				intent.putExtra("endTime", "2015-09-10 09:00:00");
+				startTime=adapter.getStarttime();
+				endTime=adapter.getEndtime();
+				Log.e("startTime", startTime);
+				Log.e("endTime", endTime);
+				if ("".equals(startTime)||"".equals(endTime)||startTime==null||endTime==null) {
+					Toast.makeText(OrderCRSProcess.this, "请选择时间", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				intent.putExtra("startTime", startTime);
+				intent.putExtra("endTime", endTime);
 				intent.setClass(OrderCRSProcess.this, OrderCRSProcess1.class);
 				startActivity(intent);
 			}
 		});
 
-		adapter = new OrderCRSPreocessGridViewAdapter(this, EasyMotherUtils.getTime(0),
+		adapter = new OrderCRSPreocessGridViewAdapter(this, EasyMotherUtils.getTime(),
 				R.layout.crs_gridview_item,orders);
 		gridView.setAdapter(adapter);
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				OrderCRSPreocessGridViewAdapter adapter=(OrderCRSPreocessGridViewAdapter) arg0.getAdapter();
 				ViewHolder holder=(ViewHolder) arg1.getTag();
 				TextView textView=holder.getView(R.id.time);
 				if (isChoose) {
 					return;
 				}
-				if ("flag".equals(textView.getTag())) {
-					textView.setTag(null);
-					isChoose=false;
-					arg1.setBackgroundColor(getResources().getColor(R.color.white));
-					if (clicktimes%2==0) {
-						adapter.notifyDataSetChanged();
-					}
-					return;
-				}else {
-					if (!isChoose) {
-						textView.setTag("flag");
-						//如果不是选择状态并且点击了两次，那么选择状态变为true
-						if (!isChoose&&clicktimes%2==0) {
-							isChoose=true;
-						}
-					}
-					
-				}
 				arg1.setBackgroundColor(getResources().getColor(R.color.lightredwine));
+				String tag=textView.getTag().toString();
+				if (clicktimes%2==1) {
+					adapter.setStarttime(tag);
+				}
 				if (clicktimes%2==0) {
+					isChoose=true;
+					adapter.setEndtime(textView.getTag().toString());
 					adapter.notifyDataSetChanged();
 				}
 				clicktimes++;
@@ -189,39 +209,78 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 		day4.setOnClickListener(this);
 
 	}
+	/**
+	 * 加载套餐类型
+	 */
+	private void loadData() {
+		RequestParams params=new RequestParams();
+		params.put("name", projectname);
+		if (nursejob.getLevel()!=null) {
+			params.put("level", nursejob.getJobTitle());
+		}else {
+			params.put("level", "");
+		}
+		NetworkHelper.doGet(BaseInfo.GET_TAOCAN, params, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+				super.onSuccess(statusCode, headers, response);
+				if (JsonUtils.getRootResult(response).getIsSuccess()) {
+					TaocanBean taocan=JsonUtils.getResult(response, TaocanBean.class);
+					bindData(taocan);
+				}
+			}
+		});
+		
+		
+	}
+
+	protected void bindData(TaocanBean taocan) {
+		if (taocan!=null) {
+			List<NurseService> list=taocan.getNurseservice();
+			if (list!=null) {
+				for (int i = 0; i < list.size(); i++) {
+					TextView view=new TextView(this);
+					view.setText(list.get(i).getFixedPrice()+"元"+"/"+list.get(i).getNums()+"次");
+					view.setBackgroundDrawable(getResources().getDrawable(R.drawable.black_border));
+					linearLayout1.addView(view);
+				}
+			}
+		}
+		
+	}
 
 	@Override
 	public void onClick(View v) {
 		clearState();
 		switch (v.getId()) {
 		case R.id.day1:
+			isChoose=false;
 			day1.setTextColor(getResources().getColor(R.color.white));
 			day1.setBackgroundColor(getResources().getColor(R.color.lightredwine));
-			adapter = new OrderCRSPreocessGridViewAdapter(this, EasyMotherUtils.getTime(0),
-					R.layout.crs_gridview_item,orders);
-			gridView.setAdapter(adapter);
+			adapter.setCurrentDay();
+			adapter.notifyDataSetChanged();
 			break;
 
 		case R.id.day2:
+			isChoose=false;
 			day2.setTextColor(getResources().getColor(R.color.white));
 			day2.setBackgroundColor(getResources().getColor(R.color.lightredwine));
-			adapter = new OrderCRSPreocessGridViewAdapter(this, EasyMotherUtils.getTime(1),
-					R.layout.crs_gridview_item,orders);
-			gridView.setAdapter(adapter);
+			adapter.setTomorrow();
+			adapter.notifyDataSetChanged();
 			break;
 		case R.id.day3:
+			isChoose=false;
 			day3.setTextColor(getResources().getColor(R.color.white));
 			day3.setBackgroundColor(getResources().getColor(R.color.lightredwine));
-			adapter = new OrderCRSPreocessGridViewAdapter(this, EasyMotherUtils.getTime(3),
-					R.layout.crs_gridview_item,orders);
-			gridView.setAdapter(adapter);
+			adapter.setTheDayAffterTomorrow();
+			adapter.notifyDataSetChanged();
 			break;
 		case R.id.day4:
+			isChoose=false;
 			day4.setTextColor(getResources().getColor(R.color.white));
 			day4.setBackgroundColor(getResources().getColor(R.color.lightredwine));
-			adapter = new OrderCRSPreocessGridViewAdapter(this, EasyMotherUtils.getTime(4),
-					R.layout.crs_gridview_item,orders);
-			gridView.setAdapter(adapter);
+			adapter.setForthDay();
+			adapter.notifyDataSetChanged();
 			break;
 
 		}

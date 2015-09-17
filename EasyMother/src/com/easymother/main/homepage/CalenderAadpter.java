@@ -17,6 +17,7 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 	private Calendar currentDate;
 	private int day = 1;
 	private Date date;
+	private String isShowShadow="false";
 
 	protected CalenderAadpter(Context context, List<Integer> list, int resource) {
 		super(context, list, resource);
@@ -32,8 +33,10 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 	 *            为1就是月份加，p 为-1就是月份减
 	 */
 	public Calendar setCurrtentMonth(int p) {
-		currentDate.roll(Calendar.MONTH, p);
+		currentDate.add(Calendar.MONTH, p);
+		//初始化状态
 		day = 1;
+		isShowShadow="false";
 		Log.e("currentDate", currentDate.toString());
 		return currentDate;
 	}
@@ -45,7 +48,9 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 	 */
 	public Calendar setCurrtentYear(int p) {
 		currentDate.add(Calendar.YEAR, p);
+		//初始化状态
 		day = 1;
+		isShowShadow="false";
 		Log.e("currentDate", currentDate.toString());
 		return currentDate;
 	}
@@ -57,6 +62,7 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 		currentDate.set(Calendar.DAY_OF_MONTH, currentDate.getActualMaximum(Calendar.DAY_OF_MONTH));
 		int end_day = currentDate.getActualMaximum(Calendar.DAY_OF_MONTH);// 获取当前月的最后一天
 		TextView current_day = holder.getView(R.id.time);
+		current_day.setBackgroundColor(context.getResources().getColor(R.color.white));
 		// 初始化月份
 		if (t >= Start_day - 1 && t < end_day + Start_day-1) {
 			// 存在订单的就弄成灰色
@@ -110,10 +116,12 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 						else if (start_month != end_month && start_month < current_month && end_month > current_month) {
 							// 全部变成灰色
 							current_day.setBackgroundColor(context.getResources().getColor(R.color.boro));
-						}else {
-							current_day.setBackgroundColor(context.getResources().getColor(R.color.white));
 						}
-					}else {
+//						else {
+//							current_day.setBackgroundColor(context.getResources().getColor(R.color.white));
+//						}
+					}
+					else {
 						current_day.setBackgroundColor(context.getResources().getColor(R.color.white));
 					}
 

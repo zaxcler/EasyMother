@@ -11,6 +11,7 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/photo1" />
+        android:scaleType="fitXY"
+        android:src="@drawable/start_image" />
 
 </LinearLayout>

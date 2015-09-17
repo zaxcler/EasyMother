@@ -56,7 +56,7 @@
         android:id="@+id/seekbar2"
         app:type="money"
         app:startText="50"
-        app:endText="120"
+        app:endText="150"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_20"

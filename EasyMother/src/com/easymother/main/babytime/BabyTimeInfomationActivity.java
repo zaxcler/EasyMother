@@ -65,16 +65,8 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_babytime_infomation);
-		EasyMotherUtils.setRightButton(new RightButtonLisenter() {
-
-			@Override
-			public void addRightButton(ImageView imageView) {
-
-				imageView.setImageDrawable(getResources().getDrawable(R.drawable.save));
-			}
-
-		});
-		EasyMotherUtils.initTitle(this, "囡囡信息", true);
+		
+		EasyMotherUtils.initTitle(this, "囡囡信息", false);
 		findView();
 		inti();
 
@@ -191,6 +183,7 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 					}else {
 						params.put("id", "");
 					}
+					params.put("birthday", year+"-"+monthOfYear+"-"+dayOfMonth);
 					NetworkHelper.doGet(BaseInfo.BABYINFO_SAVEINFO, params, new JsonHttpResponseHandler(){
 						@Override
 						public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

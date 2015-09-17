@@ -39,7 +39,8 @@ public class MyApplication  extends Application{
 	private static Map<String,Set<Activity>> activityMAP;
 	
 	
-	public static final String APP_ID="wxcacf2de19303ba3";//微信的id
+//	public static final String APP_ID="wxcacf2de19303ba3";//微信的id
+	public static final String APP_ID="wx65cc3cea8ede40f9";//微信的id
 	public static IWXAPI WX_API;//微信的api根，所有微信api根据 WX_API 调用；
 	@Override
 	public void onCreate() {

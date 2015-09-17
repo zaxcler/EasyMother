@@ -17,6 +17,18 @@ public class ForumBean {
 	private Integer bolckId;
 	
 	private String postType;
+	
+	private String content;
+
+	
+	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 
 	public Integer getUserId() {
 		return userId;
