@@ -8,9 +8,12 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,25 +35,28 @@ import com.easymother.utils.ViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class BabyTimeListAdapter extends CommonAdapter<BabyTimeBean> {
+	private Context context;
 	
 	protected BabyTimeListAdapter(Context context, List<BabyTimeBean> list,
 			int resource) {
 		super(context, list, resource);
+		this.context=context;
 	}
 
 	@Override
-	public void setDataToItem(ViewHolder holder, BabyTimeBean t) {
+	public void setDataToItem(ViewHolder holder, final BabyTimeBean t) {
 		TextView days=holder.getView(R.id.days);
 		String birthdayString=MyApplication.preferences.getString("nannan_birthday", "");
 		
-		if (!"".equals(birthdayString)||birthdayString!=null) {
-			Date currentdate=new Date(System.currentTimeMillis());
+		if (!"".equals(birthdayString)&&birthdayString!=null &&!"".equals(t.getCreateTime())&&t.getCreateTime()!=null) {
+//			Date currentdate=new Date(System.currentTimeMillis());
 			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			try {
 				Date birthday=format.parse(birthdayString);
-				Log.e("birthday", birthday.toString());
-				Log.e("currentdate", currentdate.toString());
-				int day=TimeCounter.countTimeOfDay(birthday, currentdate);
+				
+//				Log.e("birthday", birthday.toString());
+//				Log.e("currentdate", currentdate.toString());
+				int day=TimeCounter.countTimeOfDay(birthday, t.getCreateTime());
 				days.setText(""+day);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -113,6 +119,16 @@ public class BabyTimeListAdapter extends CommonAdapter<BabyTimeBean> {
 			
 			
 		}
+		holder.getConvertView().setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent=new Intent((Activity)context,BabyTimeDetail.class);
+				//arg2-1  因为加了头部view所以要减1
+				intent.putExtra("id", t.getId());
+				context.startActivity(intent);				
+			}
+		});
 		
 //		List<String> list=JSON.parseArray(t.getImages(), String.class);
 //		List<String> list=t.getBabyImages();

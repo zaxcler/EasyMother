@@ -114,7 +114,7 @@ public class OrderListAdapter<T> extends CommonAdapter<T> {
 			 * 设置之前先判断空
 			 */
 			if (bean.getPrice()!=null) {
-				showPrice.setText(bean.getPrice()+"元/26天");
+				showPrice.setText(bean.getPrice()+"");
 			}
 			TextView dengji=holder.getView(R.id.textView9);
 			/*

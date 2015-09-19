@@ -56,19 +56,11 @@ public class CommentListActivity extends Activity {
 	}
 
 	private void init() {
-		// 测试数据
-		TestBean bean = new TestBean();
-		List<TestBean> list = new ArrayList<TestBean>();
-		list.add(bean);
-		list.add(bean);
-		list.add(bean);
-		list.add(bean);
-		list.add(bean);
-		list.add(bean);
+		
 
 		RequestParams params = new RequestParams();
-		if (nursebase.getId()!= null) {
-			params.put("nurseId", nursebase.getId());
+		if (nursejob.getId()!= null) {
+			params.put("jobId", nursejob.getId());
 		}
 		if (nursebase.getId()!= null) {
 			params.put("job", nursejob.getJob());

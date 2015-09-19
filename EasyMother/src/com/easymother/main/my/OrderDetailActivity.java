@@ -64,6 +64,7 @@ public class OrderDetailActivity extends Activity {
 
 	private Intent intent;
 	private int id;
+	private String job;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -169,26 +170,31 @@ public class OrderDetailActivity extends Activity {
 			if (baseBean.getJob() != null) {
 				if ("YS".equals(baseBean.getJob())) {
 					nurse_name.setText("月嫂");
+					job="YS";
 				}
 			}
 			if (baseBean.getJob() != null) {
 				if ("YYS".equals(baseBean.getJob())) {
 					nurse_name.setText("育婴师");
+					job="YYS";
 				}
 			}
 			if (baseBean.getJob() != null) {
 				if ("CRS".equals(baseBean.getJob())) {
 					nurse_name.setText("催乳师");
+					job="CRS";
 				}
 			}
 			if (baseBean.getJob() != null) {
 				if ("SHORT_YS".equals(baseBean.getJob())) {
 					nurse_name.setText("短期月嫂");
+					job="SHORT_YS";
 				}
 			}
 			if (baseBean.getJob() != null) {
 				if ("SHORT_YYS".equals(baseBean.getJob())) {
 					nurse_name.setText("短期育婴师");
+					job="SHORT_YYS";
 				}
 			}
 			if (baseBean.getSeniority() != null) {
@@ -273,7 +279,7 @@ public class OrderDetailActivity extends Activity {
 		
 			popupWindow = new MyPopupWindow1(this, R.layout.mypage_order_status_menu);
 			popupWindow.setOnMyPopupClidk(new OnMyPopupWindowsClick() {
-
+				
 				@Override
 				public void onClick(View view) {
 					TextView changetime = (TextView) view.findViewById(R.id.chengetime);
@@ -281,9 +287,10 @@ public class OrderDetailActivity extends Activity {
 					TextView unorder = (TextView) view.findViewById(R.id.unorder);
 					TextView contact = (TextView) view.findViewById(R.id.contact);
 					OnClickListener listener = new OnClickListener() {
-
+						
 						@Override
 						public void onClick(View v) {
+							intent.putExtra("job", job);
 							switch (v.getId()) {
 							case R.id.chengetime:
 								intent.putExtra("id", id);

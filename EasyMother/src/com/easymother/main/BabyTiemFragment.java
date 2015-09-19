@@ -114,8 +114,9 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 		if (result.getBabyInfo()==null) {
 			if (MyApplication.preferences.getInt("id", 0)==0) {
 				baby_name.setText("请登录");
+				return;
 			}
-			return;
+			
 		}else {
 			int baby_id=MyApplication.preferences.getInt("baby_id", 0);
 			String baby_image=MyApplication.preferences.getString("baby_image", "");
@@ -127,43 +128,44 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 			}else {
 				baby_name.setText(nannan_name);
 			}
+			if (result.getBabyInfo().getId()!=null) {
+				MyApplication.editor.putInt("baby_id",result.getBabyInfo().getId());
+			}
+			if (result.getBabyInfo().getBabyImage()!=null) {
+				MyApplication.editor.putString("baby_image",result.getBabyInfo().getBabyImage());
+			}
+			if (result.getBabyInfo().getBackground()!=null) {
+				MyApplication.editor.putString("baby_background",result.getBabyInfo().getBackground());
+			}
+			if (result.getBabyInfo().getGender()!=null) {
+				MyApplication.editor.putString("nannan_sex",result.getBabyInfo().getGender());
+			}
+			if (result.getBabyInfo().getBabyName()!=null) {
+				MyApplication.editor.putString("nannan_name",result.getBabyInfo().getBabyName());
+			}
+			if (result.getBabyInfo().getBirthday()!=null) {
+			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String birthy=dateFormat.format(result.getBabyInfo().getBirthday());
+				MyApplication.editor.putString("nannan_birthday",birthy);
+			}
+			MyApplication.editor.commit();
+			String backgroundimage=result.getBabyInfo().getBackground();
+			if (backgroundimage!=null&&!"".equals(backgroundimage)) {
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+backgroundimage, background);
+			}
+			String babyimage=result.getBabyInfo().getBabyImage();
+			if (babyimage!=null&&!"".equals(babyimage)) {
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+babyimage, circleImageView);
+			}
+			if (result.getBabyInfo().getBabyName()!=null&&!"".equals(result.getBabyInfo().getBabyName())) {
+				baby_name.setText(result.getBabyInfo().getBabyName());
+			}
+			if (result.getDays()!=null) {
+				days.setText("出生"+result.getDays()+"天");
+			}
 				
 		}
-		if (result.getBabyInfo().getId()!=null) {
-			MyApplication.editor.putInt("baby_id",result.getBabyInfo().getId());
-		}
-		if (result.getBabyInfo().getBabyImage()!=null) {
-			MyApplication.editor.putString("baby_image",result.getBabyInfo().getBabyImage());
-		}
-		if (result.getBabyInfo().getBackground()!=null) {
-			MyApplication.editor.putString("baby_background",result.getBabyInfo().getBackground());
-		}
-		if (result.getBabyInfo().getGender()!=null) {
-			MyApplication.editor.putString("nannan_sex",result.getBabyInfo().getGender());
-		}
-		if (result.getBabyInfo().getBabyName()!=null) {
-			MyApplication.editor.putString("nannan_name",result.getBabyInfo().getBabyName());
-		}
-		if (result.getBabyInfo().getBirthday()!=null) {
-		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String birthy=dateFormat.format(result.getBabyInfo().getBirthday());
-			MyApplication.editor.putString("nannan_birthday",birthy);
-		}
-		MyApplication.editor.commit();
-		String backgroundimage=result.getBabyInfo().getBackground();
-		if (backgroundimage!=null&&!"".equals(backgroundimage)) {
-			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+backgroundimage, background);
-		}
-		String babyimage=result.getBabyInfo().getBabyImage();
-		if (babyimage!=null&&!"".equals(babyimage)) {
-			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+babyimage, circleImageView);
-		}
-		if (result.getBabyInfo().getBabyName()!=null&&!"".equals(result.getBabyInfo().getBabyName())) {
-			baby_name.setText(result.getBabyInfo().getBabyName());
-		}
-		if (result.getDays()!=null) {
-			days.setText("出生"+result.getDays()+"天");
-		}
+		
 		
 	}
 	@Override

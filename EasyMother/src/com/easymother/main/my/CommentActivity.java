@@ -66,7 +66,6 @@ public class CommentActivity extends Activity {
 	private int CHOOSE_PHOTO=1;//选择图片的请求码
 	private List<Bitmap> images;//图片集合
 	private CommentImageAdapter adapter;//图片适配器
-	
 	private float stars=0;//评论得分
 	
 	
@@ -104,12 +103,14 @@ public class CommentActivity extends Activity {
 	}
 
 	private void init() {
+		//清楚选中状态
+		comment_content.clearFocus();
 		images=new ArrayList<>();
-		if (nursebase.getImage()!=null) {
-			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+nursebase.getImage(), image);
-		}
+		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+nursebase.getImage(), image,MyApplication.options_photo);
 		if (nursebase.getRealName()!=null) {
 			nurse_name.setText(nursebase.getRealName());
+		}else {
+			nurse_name.setText("");
 		}
 		if (nursejob.getJob()!=null) {
 			if ("YS".equals(nursejob.getJob())) {
@@ -126,6 +127,9 @@ public class CommentActivity extends Activity {
 			}
 			if ("SHORT_YYS".equals(nursejob.getJob())) {
 				nurse_type.setText("短期育婴师");
+			}
+			if (nursejob.getLevelScore()!=null) {
+				ratingBar1.setProgress(nursejob.getLevelScore()/2);
 			}
 		}
 		if (nursebase.getSeniority()!=null) {
@@ -144,7 +148,7 @@ public class CommentActivity extends Activity {
 			price.setText(nursejob.getPrice()+"元/月");
 		}
 		if (nursejob.getMarketPrice()!=null) {
-			marketprice.setText("市场价："+nursejob.getMarketPrice());
+			marketprice.setText("市场价："+nursejob.getMarketPrice()+"元/月");
 			marketprice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 		}
 		
@@ -155,7 +159,7 @@ public class CommentActivity extends Activity {
 				
 				Toast.makeText(CommentActivity.this, "评论成功", 0).show();
 				saveComment();
-				CommentActivity.this.finish();
+//				CommentActivity.this.finish();
 			}
 		});
 		add_photo.setOnClickListener(new OnClickListener() {
@@ -235,7 +239,7 @@ public class CommentActivity extends Activity {
 		if (nursejob.getJob()!=null) {
 			params.put("job", nursejob.getJob());
 		}
-			params.put("score", (int)stars+"");
+			params.put("score", (int)stars*2+"");
 		if (comment_content.getText().toString().trim()!=null) {
 			params.put("content", comment_content.getText().toString());
 		}
@@ -252,6 +256,7 @@ public class CommentActivity extends Activity {
 				super.onSuccess(statusCode, headers, response);
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
 					Toast.makeText(CommentActivity.this, "评论成功", 0).show();
+					CommentActivity.this.finish();
 				}
 			}
 			@Override

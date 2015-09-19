@@ -120,6 +120,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		transaction=getSupportFragmentManager().beginTransaction();//开启fragment管理器
 		switch (view.getId()) {
 		case R.id.home_page:
+			
 			clearChooseStatus();
 			homeImageView.setImageDrawable(getResources().getDrawable(R.drawable.home_choose));
 			homeText.setTextColor(getResources().getColor(R.color.lightredwine));
@@ -137,6 +138,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			if (myPageFragment!=null) {
 				transaction.hide(myPageFragment);
 			}
+			
 			transaction.show(homePageFragment);
 			transaction.commit();
 			break;
@@ -150,7 +152,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 				communityPageFragment=new CommunityPageFragment();
 				transaction.add(R.id.main_content, communityPageFragment);
 			}
-			
 			if (homePageFragment!=null) {
 				transaction.hide(homePageFragment);
 			}
@@ -171,6 +172,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			if ( babyTiemFragment==null) {
 				babyTiemFragment=new BabyTiemFragment();
 				transaction.add(R.id.main_content, babyTiemFragment);
+			}else {
+				babyTiemFragment.loadData();
 			}
 			if (homePageFragment!=null) {
 				transaction.hide(homePageFragment);
@@ -181,7 +184,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			if (myPageFragment!=null) {
 				transaction.hide(myPageFragment);
 			}
-			babyTiemFragment.loadData();
 			transaction.show(babyTiemFragment);
 			transaction.commit();
 			break;

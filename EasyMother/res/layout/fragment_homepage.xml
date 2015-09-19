@@ -18,6 +18,7 @@
             android:layout_alignParentLeft="true"
             android:drawableLeft="@drawable/location1"
             android:gravity="left|center_vertical"
+            android:textColor="@color/boroblacktext"
             android:text="杭州" />
 
         <TextView
@@ -28,22 +29,24 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="轻松妈妈"
-            android:textColor="@color/orange_red"
+            android:textColor="@color/lightredwine"
             android:textSize="@dimen/sp_20" />
 
         <ImageView
             android:id="@+id/home_page_wish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_22"
+            android:layout_height="@dimen/dp_22"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_10"
             android:gravity="right|center_vertical"
-            android:src="@drawable/wish" />
+            android:scaleType="fitXY"
+            android:src="@drawable/wish11" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
-        android:background="#cfcfcf" />
+        android:background="@color/lightboro" />
 
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:id="@+id/pulltoreflashscrollview"
@@ -62,12 +65,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_200" />
 
-            <View
+            <!--
+                 <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_height_5"
                 android:background="@color/background" />
+            -->
 
-            <LinearLayout
+
+            <!--
+                 <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_30"
                 android:layout_marginLeft="@dimen/dp_10"
@@ -76,19 +83,38 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="horizontal" >
+            -->
 
-                <ImageView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_margin_left_10"
+                    android:layout_marginRight="@dimen/dp_margin_right_10"
+                    android:text="【轻松一条】"
+                    android:textColor="@color/lightredwine"
+                    android:textSize="16sp" />
+
+                <!--
+                     <ImageView
                     android:layout_width="@dimen/horn_width"
                     android:layout_height="@dimen/horn_height"
                     android:layout_marginLeft="@dimen/dp_margin_left_10"
                     android:layout_marginRight="@dimen/dp_margin_right_10"
                     android:src="@drawable/hron" />
+                -->
 
                 <View
                     android:layout_width="@dimen/dp_width_1"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="#ececec" />
 
                 <ViewFlipper
@@ -107,30 +133,33 @@
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_20"
+                android:background="@color/white"
                 android:orientation="horizontal"
-                 android:background="@color/white"
-                android:padding="@dimen/dp_5" >
+                android:paddingBottom="@dimen/dp_15"
+                android:paddingTop="@dimen/dp_15" >
 
                 <LinearLayout
                     android:id="@+id/yuesao"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                   
                     android:gravity="center"
                     android:orientation="vertical" >
 
                     <ImageView
                         android:layout_width="@dimen/dp_64"
                         android:layout_height="@dimen/dp_64"
+                        android:scaleType="fitXY"
                         android:src="@drawable/yuesao" />
 
                     <TextView
                         android:id="@+id/yuesao_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="月嫂"
-                        android:textColor="@color/boroblacktext" />
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="找月嫂"
+                        android:textColor="@color/boroblacktext"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -150,8 +179,10 @@
                         android:id="@+id/yuyingshi_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:text="育婴师"
-                        android:textColor="@color/boroblacktext" />
+                        android:textColor="@color/boroblacktext"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -171,8 +202,10 @@
                         android:id="@+id/cuirushi_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:text="催乳师"
-                        android:textColor="@color/boroblacktext" />
+                        android:textColor="@color/boroblacktext"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -181,7 +214,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical" >
 
                     <ImageView
                         android:layout_width="@dimen/dp_64"
@@ -192,20 +225,17 @@
                         android:id="@+id/duanqihuli_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:text="短期护理"
-                        android:textColor="@color/boroblacktext" />
+                        android:textColor="@color/boroblacktext"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_2"
-                android:background="#eeeeee" />
-
             <LinearLayout
-                android:background="@color/background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -222,7 +252,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="  推荐月嫂"
-                        android:textColor="@color/boroblacktext" />
+                        android:textColor="@color/boroblacktext"
+                        android:textSize="16sp" />
 
                     <View
                         android:layout_width="@dimen/dp_width_2"
@@ -238,7 +269,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="推荐育婴师"
-                        android:textColor="@color/boroblacktext" />
+                        android:textColor="@color/boroblacktext"
+                        android:textSize="16sp" />
 
                     <View
                         android:layout_width="@dimen/dp_width_2"
@@ -254,7 +286,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="推荐催乳师"
-                        android:textColor="@color/boroblacktext" />
+                        android:textColor="@color/boroblacktext"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <View
@@ -269,13 +302,10 @@
                 android:id="@+id/mygridview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/background"
+                android:background="@color/white"
                 android:numColumns="2" >
             </com.easymother.customview.MyGridView>
 
-            
-
-          
             <!--
             <com.easymother.customview.MyViewPager
                 android:id="@+id/tuijian_content"

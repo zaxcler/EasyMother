@@ -56,6 +56,7 @@ public class NetworkHelper{
 	 */
 	public static String getAppToken(){
 		Log.e("appToken", MyApplication.preferences.getString("appToken", APP_TOKEN));
+		
 		return MyApplication.preferences.getString("appToken", APP_TOKEN);
 	}
 	

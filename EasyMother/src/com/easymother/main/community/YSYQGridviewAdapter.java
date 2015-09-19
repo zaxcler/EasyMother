@@ -24,7 +24,7 @@ public class YSYQGridviewAdapter extends CommonAdapter<YSYQItemBean> {
 
 	@Override
 	public void setDataToItem(ViewHolder holder, YSYQItemBean t) {
-		int height= MyApplication.getScreen_width()/2-10;
+		int height= MyApplication.getScreen_width()/2-40;
 		AbsListView.LayoutParams params=new AbsListView.LayoutParams(height, height);
 		View view=holder.getConvertView();
 		view.setLayoutParams(params);
@@ -34,6 +34,8 @@ public class YSYQGridviewAdapter extends CommonAdapter<YSYQItemBean> {
 		TextView textView2=holder.getView(R.id.textView2);
 		textView1.setText(t.getTitle());
 		textView2.setText(t.getDesc());
+		textView1.setVisibility(View.GONE);
+		textView2.setVisibility(View.GONE);
 	}
 	
 	

@@ -41,6 +41,8 @@ public class ForumPost {
 	    private Integer parentUserId;
 	    private String  parentUserNickname;
 	    
+	    private String parentCountent;
+	    
 //	    private String  ;
 
 	    private Byte parentUserSee;
@@ -183,7 +185,20 @@ public class ForumPost {
 	        this.blockId = blockId;
 	    }
 
-	    public Integer getParentId() {
+	    
+	    public String getParentCountent() {
+			return parentCountent;
+		}
+
+		public void setParentCountent(String parentCountent) {
+			this.parentCountent = parentCountent;
+		}
+
+		public void setGrade(int grade) {
+			this.grade = grade;
+		}
+
+		public Integer getParentId() {
 	        return parentId;
 	    }
 

@@ -32,8 +32,8 @@ public class OrderCRSPreocessGridViewAdapter extends CommonAdapter<String> {
 	private int flagshowtime=0;//flag出现次数
 	private Date currentdate;
 	private Calendar currentCalendar;//
-	private String starttime;//开始时间
-	private String endtime;//结束时间
+	private String starttime="";//开始时间
+	private String endtime="";//结束时间
 	public OrderCRSPreocessGridViewAdapter(Context context, List<String> list, int resource, ArrayList<Order> orders) {
 		super(context, list, resource);
 		this.orders = orders;
@@ -49,6 +49,26 @@ public class OrderCRSPreocessGridViewAdapter extends CommonAdapter<String> {
 		//清空选择的时间
 		starttime="";
 		endtime="";
+	}
+	/*
+	 * 天数加
+	 */
+	public String addTime(){
+		currentCalendar.add(Calendar.DATE,1);
+		//清空选择的时间
+		starttime="";
+		endtime="";
+		return ""+currentCalendar.get(Calendar.YEAR)+"年"+(currentCalendar.get(Calendar.MONTH)+1)+"月"+currentCalendar.get(Calendar.DAY_OF_MONTH)+"日";
+	}
+	/*
+	 * 天数减
+	 */
+	public String deleteTime(){
+		currentCalendar.add(Calendar.DATE,-1);
+		//清空选择的时间
+		starttime="";
+		endtime="";
+		return ""+currentCalendar.get(Calendar.YEAR)+"年"+(currentCalendar.get(Calendar.MONTH)+1)+"月"+currentCalendar.get(Calendar.DAY_OF_MONTH)+"日";
 	}
 	/*
 	 * 设置明天天数
@@ -84,6 +104,9 @@ public class OrderCRSPreocessGridViewAdapter extends CommonAdapter<String> {
 	
 	public String getStarttime() {
 		try {
+			if ("".equals(starttime)) {
+				return null;
+			}
 			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date startDate=dateFormat.parse(starttime);
 			Date endDate=dateFormat.parse(endtime);
@@ -106,6 +129,9 @@ public class OrderCRSPreocessGridViewAdapter extends CommonAdapter<String> {
 	}
 	public String getEndtime() {
 		try {
+			if ("".equals(endtime)) {
+				return null;
+			}
 			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date startDate=dateFormat.parse(starttime);
 			Date endDate=dateFormat.parse(endtime);
@@ -146,15 +172,18 @@ public class OrderCRSPreocessGridViewAdapter extends CommonAdapter<String> {
 			}
 			textView.setText(calendar.get(Calendar.HOUR_OF_DAY) + ":" + minute);
 			textView.setTag(temptime);
-			for (Order order : orders) {
-				if (order.getRealHireStartTime()!=null&&order.getRealHireEndTime()!=null) {
-					long result1=order.getRealHireStartTime().getTime()-date.getTime();
-					long result2=order.getRealHireEndTime().getTime()-date.getTime();
-					if (result1<=0&&result2>=0) {
-						view.setBackgroundColor(context.getResources().getColor(R.color.boro));
-						view.setClickable(false);
+			if (orders!=null) {
+				for (Order order : orders) {
+					if (order.getRealHireStartTime()!=null&&order.getRealHireEndTime()!=null) {
+						long result1=order.getRealHireStartTime().getTime()-date.getTime();
+						long result2=order.getRealHireEndTime().getTime()-date.getTime();
+						if (result1<=0&&result2>=0) {
+							view.setBackgroundColor(context.getResources().getColor(R.color.boro));
+							view.setClickable(false);
+						}
 					}
-				}
+			}
+			
 				
 			}
 			

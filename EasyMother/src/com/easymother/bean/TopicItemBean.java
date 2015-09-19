@@ -17,6 +17,10 @@ public class TopicItemBean {
 	private Integer msgAmount;
 	private Integer upAmount;
 	private Integer nurseId;
+	private int int2;//收藏次数
+	private String more1;//收藏状态
+	private String more2;//点赞次数
+	private String more3;//点赞状态
 	
 	public int getId() {
 		return id;
@@ -66,6 +70,30 @@ public class TopicItemBean {
 	}
 	public void setUserNickname(String userNickname) {
 		this.userNickname = userNickname;
+	}
+	public int getInt2() {
+		return int2;
+	}
+	public void setInt2(int int2) {
+		this.int2 = int2;
+	}
+	public String getMore1() {
+		return more1;
+	}
+	public void setMore1(String more1) {
+		this.more1 = more1;
+	}
+	public String getMore2() {
+		return more2;
+	}
+	public void setMore2(String more2) {
+		this.more2 = more2;
+	}
+	public String getMore3() {
+		return more3;
+	}
+	public void setMore3(String more3) {
+		this.more3 = more3;
 	}
 	public String getUserImae() {
 		return userImae;

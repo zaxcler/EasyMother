@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/dp_150"
         android:scaleType="fitXY"
         android:src="@drawable/baby_image3" />
@@ -36,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_10"
         android:background="@drawable/lightredwine_border"
         android:textColor="@color/lightredwine"
         android:text="点击阅读全文" />

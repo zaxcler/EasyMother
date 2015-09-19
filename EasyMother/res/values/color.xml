@@ -7,6 +7,12 @@
     
     <!--灰色  -->
     <color name="boro">#afafaf</color>
+    <!--很灰色  -->
+    <color name="henboro">#f4f4f4</color>
+    <!--亮灰色  -->
+    <color name="liangboro">#727272</color>
+    <!--浅灰色  -->
+    <color name="lightboro">#dcdcdc</color>
     <!--灰白色  -->
     <color name="borowhite">#FAFAFB</color>
      <!--透明  -->
@@ -17,7 +23,9 @@
     <!--灰色字体 -->
     <color name="borotext">#cdcdcd</color>
     <!--灰黑色字体 -->
-    <color name="boroblacktext">#979797</color>
+    <color name="boroblacktext">#727272</color>
+    <!--高级灰灰字体 -->
+    <color name="borobheighttext">#404040</color>
     
     <!-- 背景色 灰 -->
     <color name="background">#f6f6f6</color>

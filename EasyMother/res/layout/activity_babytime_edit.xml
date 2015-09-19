@@ -23,13 +23,13 @@
         android:orientation="vertical"
         android:background="@color/white">
         <GridView 
+            android:padding="2dp"
             android:id="@+id/gridview"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numColumns="3"
             android:horizontalSpacing="@dimen/dp_2"
             android:verticalSpacing="@dimen/dp_2">
-            
         </GridView>
         <ImageView 
             android:layout_width="wrap_content"

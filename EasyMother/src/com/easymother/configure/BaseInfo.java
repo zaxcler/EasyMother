@@ -24,13 +24,15 @@ public class BaseInfo {
 		public final static String SAVE_COMMENT="app/ordercomment/toComment";//提交评价
 		public final static String CHECK_VIDEO="app/nursejobmedia/findMediaByJobId";//查看视频
 		public final static String ORDER_LIST="app/order/selectOrdersByUserId";//订单列表
-		public final static String CHANGE_ORDER_MSG="app/orderask/save";//修改订单
+//		public final static String CHANGE_ORDER_MSG="app/orderask/save";//修改订单
+		public final static String CHANGE_ORDER_MSG="app/orderask/changeOrder";//修改订单
 		public final static String CHECK_TIME="app/order/toCheckOrder";//检查时间是否被占用
 //		public final static String PAY_ORDER="app/order/toPayOrder";//支付订单
 		public final static String PAY_ORDER="app/order/selectNoPayOrders";//支付订单
 		public final static String GET_TAOCAN="app/nurseservice/findByNameAndLevel";//获取套餐
 	
 		public final static String CHCLK_LETTER="app/nursepushletter/findByNurseIdAndJob";//查看订单
+		public final static String CHCLK_ZHENGSHU="app/nursejobcertificate/findByJobId";//查看证书
 		public final static String CHCLK_ALL_COMMENTS="app/ordercomment/selectByNurseIdAndJob";//查看订单
 		public final static String COLLECTION_LIST="app/userinfo/loadCollect";//收藏列表
 		
@@ -58,11 +60,17 @@ public class BaseInfo {
 		public final static String BABYINFO_DETAIL="app/babyinfo/toDetail";//囡囡信息
 		public final static String BABYINFO_SAVEINFO="app/babyinfo/save";//囡囡记保存囡囡记信息
 		public final static String BABYTIME_SAVEINFO="app/babytime/save";//囡囡记保存囡囡日志
+		public final static String BABYTIME_TODETAIL="app/babytime/toDetail";//囡囡记保囡囡日志详细信息
 		public final static String BABYTIME_LIST="app/babytime/findByUserId";//查看囡囡记列表
 		
 		
 		public final static String COMMNUTITY="app/forumpost/index";//社区首页
 		public final static String CHECK_VERSION="app/checkVersion";//检查版本更新
+	
+		
+		
+		
+		public final static String DOWNLOAD_URL="www.qsmam.com";//分享下载url
 		
 		
 		//打开activity需要返回结果时的requestCode

@@ -89,16 +89,20 @@ public class MyWishListActivity extends Activity {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
-				
-				 WishListResult listResult=JsonUtils.getWishListResult(response);
-				 Log.e("WishListResult", listResult.toString());
-				 bindData(listResult);//绑定数据
+				if (JsonUtils.getRootResult(response).getIsSuccess()) {
+					WishListResult listResult=JsonUtils.getWishListResult(response);
+					 Log.e("WishListResult", listResult.toString());
+					 bindData(listResult);//绑定数据
+				}else {
+					Toast.makeText(MyWishListActivity.this, "访问失败", Toast.LENGTH_SHORT).show();
+				}
+				 
 			}
 			@Override
 			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 				super.onFailure(statusCode, headers, responseString, throwable);
 				Log.e("获取心愿单列表失败", responseString);
-				Toast.makeText(MyWishListActivity.this, "请登录", 0).show();
+				Toast.makeText(MyWishListActivity.this, "连接服务器失败", 0).show();
 			}
 		});
 		
@@ -148,7 +152,9 @@ public class MyWishListActivity extends Activity {
 					
 					Intent intent=new Intent(MyWishListActivity.this,YueSaoDetailActivity.class);
 					//传递数据
-					
+					intent.putExtra("id", id);
+					intent.putExtra("job", baseBeans.get(arg2).getJob());
+					intent.putExtra("type", "wish");//打开详情时判断是从哪儿打开的
 					startActivity(intent);
 				}
 			});

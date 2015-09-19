@@ -1,12 +1,17 @@
 package com.easymother.main.babytime;
 
+import java.text.SimpleDateFormat;
+
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.easymother.bean.BabyInfoBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.main.my.InfomationChangeTextActivity;
+import com.easymother.main.my.LoginOrRegisterActivity;
+import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -73,7 +78,11 @@ public class ChanegBabyInfo extends Activity  {
 					}else {
 						params.put("id", "");
 					}
-					
+					if (MyApplication.preferences.getInt("id", 0)!=0) {
+						params.put("userId", MyApplication.preferences.getInt("id", 0));
+					}else {
+						EasyMotherUtils.goActivity(ChanegBabyInfo.this, LoginOrRegisterActivity.class);
+					}
 					if ("nannan_name".equals(intent.getStringExtra("type"))){
 						params.put("babyName", text.getText().toString().trim());
 					}
@@ -87,11 +96,29 @@ public class ChanegBabyInfo extends Activity  {
 							super.onSuccess(statusCode, headers, response);
 							Log.e("修改信息response---->", response.toString());
 							if (JsonUtils.getRootResult(response).getIsSuccess()) {
-								if ("nannan_name".equals(intent.getStringExtra("type"))) {
-									MyApplication.editor.putString("nannan_name", text.getText().toString().trim());
-								}
-								if ("nannan_sex".equals(intent.getStringExtra("type"))) {
-									MyApplication.editor.putString("nannan_sex", text.getText().toString().trim());
+								BabyInfoBean babyinfo=JsonUtils.getResult(response, BabyInfoBean.class);
+								if (babyinfo!=null) {
+									if (babyinfo.getId()!=null) {
+										MyApplication.editor.putInt("baby_id",babyinfo.getId());
+									}
+									if (babyinfo.getBabyImage()!=null) {
+										MyApplication.editor.putString("baby_image",babyinfo.getBabyImage());
+									}
+									if (babyinfo.getBackground()!=null) {
+										MyApplication.editor.putString("baby_background",babyinfo.getBackground());
+									}
+									if (babyinfo.getGender()!=null) {
+										MyApplication.editor.putString("nannan_sex",babyinfo.getGender());
+									}
+									if (babyinfo.getBabyName()!=null) {
+										MyApplication.editor.putString("nannan_name",babyinfo.getBabyName());
+									}
+									if (babyinfo.getBirthday()!=null) {
+									SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+									String birthy=dateFormat.format(babyinfo.getBirthday());
+										MyApplication.editor.putString("nannan_birthday",birthy);
+									}
+									MyApplication.editor.commit();
 								}
 								MyApplication.editor.commit();
 								Toast.makeText(ChanegBabyInfo.this, "信息修改成功", 0).show();

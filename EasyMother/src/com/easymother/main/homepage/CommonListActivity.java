@@ -15,7 +15,9 @@ import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.DoubleSeekBar;
 import com.easymother.customview.DoubleSeekBar.OnSeekBarChangeListener;
+import com.easymother.customview.MyListview;
 import com.easymother.main.R;
+import com.easymother.main.R.layout;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
@@ -60,7 +62,8 @@ import android.widget.Toast;
 
 public class CommonListActivity extends Activity {
 
-	private ListView listView;// 下拉刷新控件
+//	private ListView listView;// 下拉刷新控件
+	private MyListview listView;// 下拉刷新控件
 	private View search_layout;// 搜索布局
 	private View search_layout1;// 搜索布局
 	// private TextView title;// 标题
@@ -100,6 +103,9 @@ public class CommonListActivity extends Activity {
 	private String endtime;//结束时间
 	private TextView start_time_tv;
 	private TextView end_time_tv;
+	protected boolean isInit=true;//是否是初始化过程
+	protected int state;
+	private TextView counttime;//共多少天
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -157,8 +163,8 @@ public class CommonListActivity extends Activity {
 		start_time_tv=(TextView) findViewById(R.id.starttime);
 		end_time_tv=(TextView) findViewById(R.id.endtime);
 		
-		listView = (ListView) findViewById(R.id.listview);
-		
+		listView = (MyListview) findViewById(R.id.listview);
+		counttime=(TextView) findViewById(R.id.counttime);
 		search_layout=LayoutInflater.from(this).inflate(R.layout.search_item, null);
 		search1=(TextView) search_layout.findViewById(R.id.search);
 		search_layout1=findViewById(R.id.search_layout);
@@ -178,13 +184,14 @@ public class CommonListActivity extends Activity {
 		//搜索的布局的点击时间
 		search1.setOnClickListener(new onSeachLayoutClickLisener());
 		search2.setOnClickListener(new onSeachLayoutClickLisener());
-	
+		search_layout1.setVisibility(View.GONE);
 		listView.addHeaderView(search_layout);
 		/*
 		 * 初始化加载更多按钮
 		 */
 		if(loadMore==null){
 			loadMore=new Button(CommonListActivity.this);
+			loadMore.setBackgroundColor(getResources().getColor(R.color.lightredwine));
 			loadMore.setText("加载更多");
 			loadMore.setPadding(10, 10, 10, 10);
 			loadMore.setOnClickListener(new OnClickListener() {
@@ -289,15 +296,32 @@ public class CommonListActivity extends Activity {
 			
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				
+				state=scrollState;
 			}
 			
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 				//当滑到最下端的时候后显示加载更多按钮
 				if (firstVisibleItem+visibleItemCount==totalItemCount-1) {
-					if (totalItemCount>4) {
-						listView.addFooterView(loadMore);
+					if (isInit) {
+						return;
+					}
+					switch (state) {
+					//手指滚动状态
+					case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+						Log.e("加载", "加载更多");
+						++pageNo;//加载之前先自增1
+				        loading(pageNo);
+						break;
+					//手指抬起状态，屏幕还在滚动
+					case OnScrollListener.SCROLL_STATE_FLING:
+						
+						break;
+					//静止状态
+					case OnScrollListener.SCROLL_STATE_IDLE:
+						
+						break;
+
 					}
 					
 				}
@@ -312,6 +336,7 @@ public class CommonListActivity extends Activity {
 			}
 		});
 		doFilter(params);
+		isInit=false;
 
 	}
 	/**
@@ -323,7 +348,7 @@ public class CommonListActivity extends Activity {
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		View view=LayoutInflater.from(this).inflate(R.layout.dialog_chosedate, null);
 		dialog.setContentView(view);
-		dialog.getWindow().setLayout(MyApplication.getScreen_width()/5*4, android.view.WindowManager.LayoutParams.WRAP_CONTENT);
+		dialog.getWindow().setLayout(MyApplication.getScreen_width()/20*19, android.view.WindowManager.LayoutParams.WRAP_CONTENT);
 		DatePicker datePicker1=(DatePicker) view.findViewById(R.id.start_time);
 		DatePicker datePicker2=(DatePicker) view.findViewById(R.id.end_time);
 		final Date currentdate=new Date(System.currentTimeMillis());
@@ -349,7 +374,14 @@ public class CommonListActivity extends Activity {
 				
 			}
 		});
-        
+        Button dismisse=(Button) view.findViewById(R.id.dismisse);
+		dismisse.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
 		view.findViewById(R.id.comfire).setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -366,7 +398,7 @@ public class CommonListActivity extends Activity {
 						RequestParams params1=params;
 						params1.put("startTime", starttime);
 						params1.put("endTime", endtime);
-						
+						counttime.setText("共"+TimeCounter.countTimeOfDay(startDate, endDate)+"天");
 						doFilter(params1);
 						dialog.dismiss();
 					}else {
@@ -440,8 +472,10 @@ public class CommonListActivity extends Activity {
 						notice.setBackgroundColor(getResources().getColor(R.color.background));
 						notice.setTextColor(getResources().getColor(R.color.boroblacktext));
 						listView.addFooterView(notice);
-						
 					}
+//					if (list.size()>9) {
+//						listView.addFooterView(loadMore);
+//					}
 					/*
 					 * 如果list不为空，则显示加载更多，隐藏没有匹配结果
 					 * 如果list为空，则显示没有匹配的结果，不显示加载更多
@@ -489,11 +523,12 @@ public class CommonListActivity extends Activity {
 		final Dialog dialog = new Dialog(this);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(R.layout.dialog_filter);
-		dialog.getWindow().setLayout(MyApplication.getScreen_width()/5*4, LayoutParams.WRAP_CONTENT);
+		dialog.getWindow().setLayout(MyApplication.getScreen_width()/20*19, LayoutParams.WRAP_CONTENT);
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.getWindow().setBackgroundDrawableResource(R.drawable.alpha_solid);
 		DoubleSeekBar seekBar1=(DoubleSeekBar) dialog.findViewById(R.id.seekbar1);
 		DoubleSeekBar seekBar2=(DoubleSeekBar) dialog.findViewById(R.id.seekbar2);
+		
 		seekBar1.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
 			@Override
@@ -527,6 +562,7 @@ public class CommonListActivity extends Activity {
 			}
 		});
 		Button submit=(Button) dialog.findViewById(R.id.submit);
+		
 		submit.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -542,8 +578,8 @@ public class CommonListActivity extends Activity {
 					params.put("firstPrice", 5000);
 					params.put("secondPrice", 15000);
 				}else {
-					params.put("firstPrice", lowPrice);
-					params.put("secondPrice", hieghtPrice);
+					params.put("firstPrice", lowPrice*100);
+					params.put("secondPrice", hieghtPrice*100);
 				}
 				doFilter(params);
 				dialog.dismiss();
@@ -560,7 +596,7 @@ public class CommonListActivity extends Activity {
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(R.layout.dialog_sort);
 		dialog.setCanceledOnTouchOutside(true);
-		dialog.getWindow().setLayout(MyApplication.getScreen_width()/5*4, LayoutParams.WRAP_CONTENT);
+		dialog.getWindow().setLayout(MyApplication.getScreen_width()/20*19, LayoutParams.WRAP_CONTENT);
 		dialog.getWindow().setBackgroundDrawableResource(R.drawable.alpha_solid);
 		sort1 = (TextView) dialog.findViewById(R.id.sort1);
 		sort2 = (TextView) dialog.findViewById(R.id.sort2);
@@ -667,7 +703,7 @@ public class CommonListActivity extends Activity {
 					List<NurseBaseBean> list=JsonUtils.getNurseBaseBeanList(response);
 					if (list.size()==0) {
 						CommonListActivity.this.pageNo=1;
-						loadMore.setVisibility(View.GONE);
+//						loadMore.setVisibility(View.GONE);
 						Toast.makeText(CommonListActivity.this, "没有更多咯！", 0).show();
 					}
 					adapter.addAll(list);
@@ -712,7 +748,6 @@ public class CommonListActivity extends Activity {
 		animationSet.setDuration(300);
 		animationSet.setFillAfter(false);
 		animationSet.setAnimationListener(new AnimationListener() {
-
 			@Override
 			public void onAnimationStart(Animation arg0) {
 			}

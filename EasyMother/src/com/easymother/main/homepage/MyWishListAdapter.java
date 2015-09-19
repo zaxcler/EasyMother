@@ -55,7 +55,9 @@ public class MyWishListAdapter<T> extends CommonAdapter<T> {
 	public void setDataToItem(final ViewHolder holder, final T t) {
 		final View convertview=holder.getConvertView();
 		
-			
+			holder.getView(R.id.price_tv).setVisibility(View.GONE);
+			holder.getView(R.id.price_tv2).setVisibility(View.GONE);
+			holder.getView(R.id.line1).setVisibility(View.GONE);
 			final NurseBaseBean bean=(NurseBaseBean) t;
 			TextView name=holder.getView(R.id.textView1);
 			/*
@@ -117,7 +119,7 @@ public class MyWishListAdapter<T> extends CommonAdapter<T> {
 			 * 设置之前先判断空
 			 */
 			if (bean.getPrice()!=null) {
-				showPrice.setText(bean.getPrice()+"/26天");
+				showPrice.setText(bean.getPrice()*26+"");
 			}
 			TextView level=holder.getView(R.id.textView9);
 			if (bean.getJobTitle()!=null) {
@@ -130,7 +132,7 @@ public class MyWishListAdapter<T> extends CommonAdapter<T> {
 			 * 设置之前先判断空
 			 */
 			if (bean.getMarketPrice()!=null) {
-				marketPrice.setText("市场价："+bean.getMarketPrice());
+				marketPrice.setText("市场价："+bean.getMarketPrice()+"/26天");
 				marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 			}
 			ImageView photo=holder.getView(R.id.image);

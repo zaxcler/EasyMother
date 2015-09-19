@@ -121,9 +121,13 @@ public class OrderYSandYYSProcess1 extends Activity {
 			}
 			
 		}else {
-			startTime_tv.setText("");
-			endTime_tv.setText("");
-			countTime.setText("共计" + 0 + "天");
+			Date currentdate=new Date(System.currentTimeMillis());
+			Calendar calendar=Calendar.getInstance();
+			calendar.setTime(currentdate);
+			startTime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+ calendar.get(Calendar.DAY_OF_MONTH);
+			startTime_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
+			endTime_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
+			countTime.setText("共计" + 1 + "天");
 		}
 		if (!isMeet) {
 			meetImage.setVisibility(View.GONE);
@@ -209,7 +213,9 @@ public class OrderYSandYYSProcess1 extends Activity {
 		final Date currentdate=new Date(System.currentTimeMillis());
 		final Calendar calendar=Calendar.getInstance();
 		calendar.setTime(currentdate);
+		//设置时间 防止未选择时间时，出现空指针异常
 		startTime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+ calendar.get(Calendar.DAY_OF_MONTH);
+		endTime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+ calendar.get(Calendar.DAY_OF_MONTH);
 		startTime_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
 		datePicker1.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new OnDateChangedListener() {
 			@Override

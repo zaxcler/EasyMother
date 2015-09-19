@@ -54,7 +54,7 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 	private ArrayList<String> mImageUrl = null;
 	private ImageCycleView cycleView;// 广告栏
 	
-	private PullToRefreshScrollView pulltoreflash;
+	public PullToRefreshScrollView pulltoreflash;
 	
 	public CommunityPageFragment() {
 	}
@@ -80,6 +80,7 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 	}
 
 	private void init() {
+//		pulltoreflash.scrollTo(0, 0);
 		loadData();
 		pulltoreflash.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
 

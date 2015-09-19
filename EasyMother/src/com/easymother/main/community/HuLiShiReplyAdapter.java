@@ -7,7 +7,10 @@ import java.util.List;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -58,7 +61,7 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ForumPost forumPost=(ForumPost) getItem(position);
+		final ForumPost forumPost=(ForumPost) getItem(position);
 		ViewHolder holder=null;
 		ViewHolder holder1=null;
 		if (forumPost!=null) {
@@ -97,6 +100,24 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 				}else {
 					pictures.setVisibility(View.GONE);
 				}
+				TextView reply=holder.getView(R.id.reply);
+				reply.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						HuLiShiReplyListActivity  activity=	(HuLiShiReplyListActivity)context;
+						activity.id=forumPost.getId();
+//						activity.editText1.setFocusable(true);
+//						activity.editText1.setFocusableInTouchMode(true);
+						activity.editText1.requestFocus();
+						//调用输入法
+						InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE); 
+//						imm.showSoftInput(m_receiverView(接受软键盘输入的视图(View)),InputMethodManager.SHOW_FORCED(提供当前操作的标记，SHOW_FORCED表示强制显示)); 
+						imm.showSoftInput(activity.editText1,InputMethodManager.SHOW_FORCED); 
+						
+						activity.parentContent=forumPost.getParentCountent();
+					}
+				});
 				convertView=holder.getConvertView();
 			}
 			//如果是2级及以上的回复
@@ -113,7 +134,6 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 					ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+forumPost.getUserImage(), circleImageView1, MyApplication.options_photo);
 					TextView floor=holder1.getView(R.id.floor);
 					floor.setText((position+1)+"楼");
-					
 					TextView show_time=holder1.getView(R.id.show_time);
 					if (forumPost.getCreateTime()!=null) {
 						
@@ -138,11 +158,26 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 					}
 					//要后台添加父文本
 					TextView parent_conten=holder1.getView(R.id.parent_conten);
-					if (forumPost.getContent()!=null) {
-						parent_conten.setText(":"+forumPost.getContent());
+					if (forumPost.getParentCountent()!=null) {
+						parent_conten.setText(":"+forumPost.getParentCountent());
 					}else {
 						parent_conten.setText("");
 					}
+					TextView reply=holder1.getView(R.id.reply);
+					reply.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							HuLiShiReplyListActivity  activity=	(HuLiShiReplyListActivity)context;
+							activity.id=forumPost.getId();
+//							activity.editText1.setFocusable(true);
+//							activity.editText1.setFocusableInTouchMode(true);
+							activity.editText1.requestFocus();
+							activity.parentContent=forumPost.getParentCountent();
+							InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE); 
+//							imm.showSoftInput(m_receiverView(接受软键盘输入的视图(View)),InputMethodManager.SHOW_FORCED(提供当前操作的标记，SHOW_FORCED表示强制显示)); 
+							imm.showSoftInput(activity.editText1,InputMethodManager.SHOW_FORCED); 
+						}
+					});
 					convertView=holder1.getConvertView();
 					//2级回复及以上暂时不要图片
 //					MyGridView pictures=holder.getView(R.id.pictures);

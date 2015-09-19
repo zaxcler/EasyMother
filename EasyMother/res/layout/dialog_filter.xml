@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp_20"
-        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_50"
         android:layout_marginTop="@dimen/dp_20"
         android:text="筛选"
         android:textColor="@color/lightredwine"
@@ -26,11 +26,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp_20"
-        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_50"
         android:layout_marginTop="@dimen/dp_20"
         android:text="年龄区间"
-        android:textColor="@color/blacktext"
-        android:textSize="16sp" />
+        android:textColor="@color/liangboro"
+         />
  <com.easymother.customview.DoubleSeekBar
         android:id="@+id/seekbar1"
         app:type="age"
@@ -38,8 +38,8 @@
         app:endText="60"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_marginRight="@dimen/dp_20" >
+        android:layout_marginLeft="@dimen/dp_50"
+        android:layout_marginRight="@dimen/dp_50" >
     </com.easymother.customview.DoubleSeekBar>
    
 
@@ -48,9 +48,9 @@
         android:layout_height="wrap_content"
         android:text="价钱区间"
          android:layout_marginBottom="@dimen/dp_20"
-        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_50"
         android:layout_marginTop="@dimen/dp_20"
-        android:textColor="@color/blacktext" />
+        android:textColor="@color/liangboro" />
 
      <com.easymother.customview.DoubleSeekBar
         android:id="@+id/seekbar2"
@@ -59,8 +59,8 @@
         app:endText="150"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_marginRight="@dimen/dp_20" >
+        android:layout_marginLeft="@dimen/dp_50"
+        android:layout_marginRight="@dimen/dp_50" >
     </com.easymother.customview.DoubleSeekBar>
     <Button
         android:id="@+id/submit"

@@ -23,4 +23,7 @@
         <item >护理师不够专业</item>
         <item >其他</item>
     </string-array>
+    <declare-styleable name="CustomHorizontalScrollView">
+        <attr name="bounceEnabled" format="boolean" />
+    </declare-styleable>
 </resources>

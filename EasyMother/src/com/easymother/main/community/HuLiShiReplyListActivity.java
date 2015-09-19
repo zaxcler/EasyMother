@@ -55,10 +55,11 @@ public class HuLiShiReplyListActivity extends Activity {
 	private TextView send;
 	private CircleImageView circleImageView1;
 	private MyGridView pictures;
-	private EditText editText1;
+	public EditText editText1;
+	public String parentContent;
 	
 	private Intent intent;
-	private int id;
+	public int id;
 	private String type;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +107,7 @@ public class HuLiShiReplyListActivity extends Activity {
 				params.put("content", text);
 			}
 			params.put("parentId", id);
+			params.put("parentContent", parentContent);
 			
 			//回复
 			NetworkHelper.doGet(BaseInfo.REPLY, params, new JsonHttpResponseHandler(){
@@ -184,6 +186,11 @@ public class HuLiShiReplyListActivity extends Activity {
 					user_name.setText("");
 				}
 			}
+			if (postInfo.getParentCountent()!=null) {
+				parentContent=postInfo.getParentCountent();
+			}else {
+				parentContent="";
+			}
 			if (postInfo!=null) {
 				if (postInfo.getCreateTime()!=null) {
 					SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
@@ -195,7 +202,7 @@ public class HuLiShiReplyListActivity extends Activity {
 			}
 			if (postInfo!=null) {
 				if (postInfo.getContent()!=null) {
-					content.setText(postInfo.getContent());
+					content.setText(NetworkHelper.showFWBText(postInfo.getContent()));
 				}else {
 					content.setText("");
 				}

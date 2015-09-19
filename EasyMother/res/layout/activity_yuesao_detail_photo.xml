@@ -25,8 +25,8 @@
         <ImageView
             android:id="@+id/background_photo"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_200"
-            android:src="@drawable/home_banner"
+            android:layout_height="@dimen/dp_210"
+            android:src="@drawable/picture"
             android:scaleType="fitXY" />
 
         <com.easymother.customview.CircleImageView
@@ -36,7 +36,7 @@
             android:layout_alignBottom="@id/view1"
             android:layout_alignRight="@id/view2"
             android:padding="@dimen/dp_5"
-            android:src="@drawable/home_banner" >
+            android:src="@drawable/photo" >
         </com.easymother.customview.CircleImageView>
 
         <LinearLayout
@@ -374,7 +374,7 @@
         </com.easymother.customview.MyGridView>
 
         <TextView
-            android:id="@+id/button1"
+            android:id="@+id/check_zhengshu"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginBottom="@dimen/dp_20"

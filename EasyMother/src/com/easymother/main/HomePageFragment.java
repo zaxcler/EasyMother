@@ -66,7 +66,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	private ImageCycleView homepage_ad;// 广告栏
 	private int stype = 0;// 0轮播图下面的是小圆点
 	private View scorllbar;// 滑动条
-	private PullToRefreshScrollView scrollView;//下拉刷新的scrollview
+	public PullToRefreshScrollView scrollView;//下拉刷新的scrollview
 
 	private ViewFlipper homepage_notic;//公告
 	private LinearLayout yuesao;
@@ -210,6 +210,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 			TextView textView=new TextView(getActivity());
 			Log.e("textView", bannerText.getTitle());
 			textView.setText(bannerText.getTitle());
+			textView.setTextColor(getResources().getColor(R.color.boroblacktext));
 			textView.setSingleLine();
 			textView.setOnClickListener(new OnClickListener() {
 				
@@ -287,16 +288,8 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 				startActivity(intent);
 				
 				gaAdapter.getItem(arg2);
-				
-				
 			}
 		});
-		
-		
-		
-				
-		
-		
 	}
 
 	private void findView() {

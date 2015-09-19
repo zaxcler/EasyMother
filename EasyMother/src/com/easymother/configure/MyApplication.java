@@ -95,8 +95,8 @@ public class MyApplication  extends Application{
 		
 		L.disableLogging();
 		ImageLoader.getInstance().init(config);
-		options_image=new DisplayImageOptions.Builder().imageScaleType(ImageScaleType.EXACTLY_STRETCHED).showImageOnLoading(R.drawable.default_image).showImageOnFail(R.drawable.default_image).build();
-		options_photo=new DisplayImageOptions.Builder().imageScaleType(ImageScaleType.EXACTLY_STRETCHED).showImageOnLoading(R.drawable.default_photo).showImageOnFail(R.drawable.default_photo).build();
+		options_image=new DisplayImageOptions.Builder().imageScaleType(ImageScaleType.IN_SAMPLE_INT).showImageOnLoading(R.drawable.picture).showImageOnFail(R.drawable.picture).build();
+		options_photo=new DisplayImageOptions.Builder().imageScaleType(ImageScaleType.IN_SAMPLE_INT).showImageOnLoading(R.drawable.photo).showImageOnFail(R.drawable.photo).build();
 	}
 	
 	public static int getScreen_width() {

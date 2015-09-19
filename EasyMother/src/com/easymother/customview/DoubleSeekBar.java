@@ -43,7 +43,7 @@ public class DoubleSeekBar extends View {
 	private double mOffsetHigh = 0; // 后滑块中心坐标
 	private int mDistance = 0; // 总刻度是固定距离 两边各去掉半个滑块距离
 
-	private int mThumbMarginTop = 30; // 滑动块顶部距离上边框距离，也就是距离字体顶部的距离
+	private int mThumbMarginTop = 35; // 滑动块顶部距离上边框距离，也就是距离字体顶部的距离
 
 	private int mFlag = CLICK_INVAILD;
 	private OnSeekBarChangeListener mBarChangeListener;
@@ -81,13 +81,14 @@ public class DoubleSeekBar extends View {
 		Resources resources = getResources();
 		notScrollBarBg = resources.getDrawable(R.drawable.seekbar1);
 		hasScrollBarBg = resources.getDrawable(R.drawable.seekbar);
-		mThumbLow = resources.getDrawable(R.drawable.white_dian);
-		mThumbHigh = resources.getDrawable(R.drawable.white_dian);
+		mThumbLow = resources.getDrawable(R.drawable.red_border_dian);
+		mThumbHigh = resources.getDrawable(R.drawable.red_border_dian);
 
 		mThumbLow.setState(STATE_NORMAL);
 		mThumbHigh.setState(STATE_NORMAL);
 
 		mScollBarWidth = notScrollBarBg.getIntrinsicWidth();
+//		mScollBarHeight = notScrollBarBg.getIntrinsicHeight();
 		mScollBarHeight = notScrollBarBg.getIntrinsicHeight();
 
 		mThumbWidth = mThumbLow.getIntrinsicWidth();

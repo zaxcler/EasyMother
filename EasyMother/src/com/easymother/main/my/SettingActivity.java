@@ -11,6 +11,7 @@ import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 import android.app.Activity;
@@ -66,13 +67,13 @@ public class SettingActivity extends Activity implements OnClickListener {
 
 			break;
 		case R.id.share:
-			WeiXinUtils.shareDownloadUrl(this, "www.qsmam.com", R.drawable.babytime_share, SendMessageToWX.Req.WXSceneSession);
+			WeiXinUtils.shareDownloadUrl(this, "www.qsmam.com", R.drawable.app, SendMessageToWX.Req.WXSceneSession);
 			break;
 		case R.id.suggestion:
 			EasyMotherUtils.goActivity(this, SettingSueegstionActivity.class);
 			break;
 		case R.id.delete_cache:
-
+			ImageLoader.getInstance().clearMemoryCache();
 			break;
 		case R.id.exit:
 			NetworkHelper.doGet(BaseInfo.LOGOUT, new JsonHttpResponseHandler(){
@@ -82,8 +83,9 @@ public class SettingActivity extends Activity implements OnClickListener {
 					if (JsonUtils.getRootResult(response).getIsSuccess()) {
 						Toast.makeText(SettingActivity.this, "成功退出", 0).show();
 						MyApplication.editor.clear().commit();
+						ImageLoader.getInstance().clearMemoryCache();
 					}else {
-						Toast.makeText(SettingActivity.this, JsonUtils.getRootResult(response).getResult().toString(), 0).show();
+						Toast.makeText(SettingActivity.this, "未登录！", 0).show();
 					}
 					
 				}

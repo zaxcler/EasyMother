@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.alipay.sdk.auth.h;
+import com.alibaba.fastjson.JSON;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
 import com.easymother.bean.NurseService;
 import com.easymother.bean.Order;
-import com.easymother.bean.TaocanBean;
+import com.easymother.bean.Root;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
@@ -87,6 +89,7 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 	}
 
 	private void findView() {
+		CircleImageView imageView1=(CircleImageView) findViewById(R.id.imageView1);
 		begain_sign = (Button) findViewById(R.id.begain_sign);
 		gridView = (MyGridView) findViewById(R.id.gridView1);
 		nurse_name = (TextView) findViewById(R.id.nurse_name);
@@ -103,7 +106,7 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 	}
 
 	private void init() {
-		loadData();
+		
 		if (nursebase.getRealName() != null) {
 			nurse_name.setText(nursebase.getRealName());
 		}
@@ -121,7 +124,7 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 		} else {
 			ratingBar1.setProgress(0);
 		}
-			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + nursejob.getWorkImageArrays()[0],
+			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + nursebase.getImage(),
 					imageView1, MyApplication.options_photo);
 		if (intent.getIntExtra("CRS_Project", 0) != 0) {
 			switch (intent.getIntExtra("CRS_Project", 0)) {
@@ -157,6 +160,7 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 
 			}
 		}
+		loadData();
 		begain_sign.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -215,7 +219,7 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 	private void loadData() {
 		RequestParams params=new RequestParams();
 		params.put("name", projectname);
-		if (nursejob.getLevel()!=null) {
+		if (nursejob.getJobTitle()!=null) {
 			params.put("level", nursejob.getJobTitle());
 		}else {
 			params.put("level", "");
@@ -224,9 +228,17 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
-				if (JsonUtils.getRootResult(response).getIsSuccess()) {
-					TaocanBean taocan=JsonUtils.getResult(response, TaocanBean.class);
-					bindData(taocan);
+				if (JsonUtils.getRootResult(response).getIsSuccess()){
+					JSONObject jsonObject=(JSONObject)JsonUtils.getRootResult(response).getResult();
+					try {
+						JSONArray array=jsonObject.getJSONArray("nurseservices");
+						Log.e("JSONArray", array.toString());
+						List<NurseService> taocan=JSON.parseArray(array.toString(), NurseService.class);
+						bindData(taocan);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		});
@@ -234,16 +246,13 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 		
 	}
 
-	protected void bindData(TaocanBean taocan) {
+	protected void bindData(List<NurseService> taocan) {
 		if (taocan!=null) {
-			List<NurseService> list=taocan.getNurseservice();
-			if (list!=null) {
-				for (int i = 0; i < list.size(); i++) {
+				for (int i = 0; i < taocan.size(); i++) {
 					TextView view=new TextView(this);
-					view.setText(list.get(i).getFixedPrice()+"元"+"/"+list.get(i).getNums()+"次");
+					view.setText(taocan.get(i).getFixedPrice()+"元"+"/"+taocan.get(i).getNums()+"次");
 					view.setBackgroundDrawable(getResources().getDrawable(R.drawable.black_border));
 					linearLayout1.addView(view);
-				}
 			}
 		}
 		
@@ -282,7 +291,6 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 			adapter.setForthDay();
 			adapter.notifyDataSetChanged();
 			break;
-
 		}
 	}
 	private void clearState(){

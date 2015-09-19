@@ -138,6 +138,8 @@
                 android:paddingRight="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_10"
                 android:text="回复15条"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:textColor="@color/waterpink" />
             <View android:layout_width="match_parent"
                 android:layout_height="1dp"

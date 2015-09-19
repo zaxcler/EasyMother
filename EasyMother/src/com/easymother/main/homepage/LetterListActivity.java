@@ -60,7 +60,7 @@ public class LetterListActivity extends Activity {
 				super.onSuccess(statusCode, headers, response);
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
 					List<Letter> letters=JsonUtils.getResultList(response, Letter.class);
-					LetterListAdapter<Letter> adapter=new LetterListAdapter<>(LetterListActivity.this, letters, R.layout.letter_item);
+					LetterListAdapter adapter=new LetterListAdapter(LetterListActivity.this, letters, R.layout.letter_item);
 					listView.setAdapter(adapter);
 				}
 			}

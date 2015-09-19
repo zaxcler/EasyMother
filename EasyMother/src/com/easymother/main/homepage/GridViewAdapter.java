@@ -38,7 +38,7 @@ public class GridViewAdapter<T> extends CommonAdapter<T> {
 			
 			TextView tuijian_num=holder.getView(R.id.tuijian_num);
 			if (yuesao.getNums()!=null) {
-				tuijian_num.setText("共有"+yuesao.getNums()+"喜欢该月嫂");
+				tuijian_num.setText("共有"+yuesao.getNums()+"人喜欢该护理师");
 			}else {
 				tuijian_num.setText("");
 			}

@@ -20,6 +20,7 @@ import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.BabyTiemFragment;
 import com.easymother.main.R;
+import com.easymother.main.R.id;
 import com.easymother.main.homepage.CuiRuiShiProjectActivity;
 import com.easymother.main.homepage.OrderCRSProcess;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -314,6 +315,7 @@ public class EasyMotherUtils {
 							RequestParams params=new RequestParams();
 							params.put("background", photos.get(0));
 							params.put("userId", MyApplication.preferences.getInt("id", 0));
+							int id=MyApplication.preferences.getInt("baby_id", 0);
 							if ( MyApplication.preferences.getInt("baby_id", 0)==0) {
 								params.put("babyId","");
 							}else {

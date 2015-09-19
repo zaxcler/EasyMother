@@ -40,6 +40,7 @@
             android:id="@+id/pictures"
             android:numColumns="4"
             android:gravity="center"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/content"
@@ -57,12 +58,13 @@
 
         <TextView
             android:id="@+id/msgAmoount"
+            android:padding="@dimen/dp_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/share"
             android:layout_alignBottom="@+id/share"
             android:layout_centerHorizontal="true"
-            android:drawableLeft="@drawable/comment2"
+            android:drawableLeft="@drawable/collect1"
             android:gravity="center"
             android:text="20" />
 
@@ -71,10 +73,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/msgAmoount"
-            android:layout_alignBottom="@+id/msgAmoount"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="17dp"
-            android:drawableLeft="@drawable/star"
+            android:paddingRight="@dimen/dp_20"
+            android:paddingLeft="@dimen/dp_20"
+            android:drawableLeft="@drawable/start1"
             android:text="24" />
 
         <TextView
@@ -88,13 +90,14 @@
 
         <TextView
             android:id="@+id/share"
+            android:padding="@dimen/dp_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/content"
             android:layout_below="@+id/view1"
             android:layout_marginBottom="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_20"
-            android:drawableLeft="@drawable/babytime_share"
+            android:drawableLeft="@drawable/share"
+            android:layout_marginLeft="@dimen/dp_20"
             android:gravity="center"
             android:text="分享" />
 

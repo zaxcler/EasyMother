@@ -24,7 +24,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
-        android:background="#cfcfcf" />
+        android:background="@color/lightboro" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dp_5"
                 android:text="首页"
-                android:textColor="@color/boroblacktext" />
+                android:textColor="@color/liangboro" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:text="社区"
                 android:layout_marginBottom="@dimen/dp_5"
-                android:textColor="@color/boroblacktext" />
+                android:textColor="@color/liangboro" />
         </LinearLayout>
 
         <LinearLayout
@@ -105,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="囡囡记"
-                android:textColor="@color/boroblacktext" />
+                android:textColor="@color/liangboro" />
         </LinearLayout>
 
         <LinearLayout
@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="个人"
-                android:textColor="@color/boroblacktext" />
+                android:textColor="@color/liangboro" />
         </LinearLayout>
     </LinearLayout>
 

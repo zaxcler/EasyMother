@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical" 
@@ -15,38 +15,44 @@
         android:scaleType="fitXY"/>
     <RelativeLayout 
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:padding="@dimen/dp_5"
         android:background="@color/white"
         >
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+         <TextView
             android:id="@+id/tuijian_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:text="王阿芬"
-            android:textSize="@dimen/sp_12"
-            android:layout_alignParentLeft="true"
-            android:textColor="@color/boroblacktext"/>
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:textColor="@color/liangboro"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:layout_margin="@dimen/dp_2"
             android:id="@+id/tuijian_price"
-            android:text="￥6000"
-            android:textSize="@dimen/sp_12"
-            android:layout_below="@id/tuijian_name"
-            android:textColor="@color/deeppink"
-            android:layout_alignParentLeft="true"
-           />
-        <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tuijian_name"
+            android:layout_centerVertical="true"
+            android:text="￥6000"
+             android:layout_centerHorizontal="true"
+            android:textColor="@color/deeppink"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
             android:id="@+id/tuijian_num"
-            android:text="142242"
-            android:textSize="@dimen/sp_12"
-            android:drawableLeft="@drawable/like_deepyellow"
-            android:layout_alignParentRight="true"
-            android:textColor="@color/deeppink"/>
-        
+            android:layout_margin="@dimen/dp_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tuijian_price"
+            android:layout_centerHorizontal="true"
+            android:drawableLeft="@drawable/heart"
+            android:textColor="@color/boroblacktext"
+            android:textSize="@dimen/sp_12" />
+       
     </RelativeLayout>
     
 

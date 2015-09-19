@@ -36,9 +36,9 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-public class LetterListAdapter<T> extends CommonAdapter<Letter> {
+public class LetterListAdapter extends CommonAdapter<Letter> {
 
-	protected LetterListAdapter(Context context, List<Letter> list, int resource) {
+	public LetterListAdapter(Context context, List<Letter> list, int resource) {
 		super(context, list, resource);
 	}
 

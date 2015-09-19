@@ -55,6 +55,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.GridView;
@@ -79,6 +80,8 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 	private TextView submit_comment;// 评价
 	private int id;// 护理师id
 	private String job;// 护理师职务
+	private String type;// 护理师职务
+	
 
 	private ImageView backgroudPhoto;// 最上面的背景
 	private CircleImageView nursePhoto;// 护理师头像
@@ -130,6 +133,8 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 	private boolean hasVideo = false;// 是否有视频
 	private boolean hasKongjian = false;// 是否有空间
 	private Intent intent;
+	
+	private TextView check_zhengshu;//查看纸质证书
 
 	private RatingBar ratingBar1;// 催乳师的等级
 
@@ -165,6 +170,10 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_yuesao_detail);
+		intent = getIntent();
+		id = intent.getIntExtra("id", 0);
+		job = intent.getStringExtra("job");
+		type = intent.getStringExtra("type");
 		EasyMotherUtils.setRightButton(new RightButtonLisenter() {
 
 			@Override
@@ -173,15 +182,19 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 
 					@Override
 					public void onClick(View arg0) {
-						EasyMotherUtils.goActivity(YueSaoDetailActivity.this, MyWishListActivity.class);
+						if ("wish".equals(type)) {
+							YueSaoDetailActivity.this.finish();
+						}else {
+							EasyMotherUtils.goActivity(YueSaoDetailActivity.this, MyWishListActivity.class);
+						}
+						
 					}
 				});
 			}
 		});
 
-		intent = getIntent();
-		id = intent.getIntExtra("id", 0);
-		job = intent.getStringExtra("job");
+		
+		
 		if ("YS".equals(job)) {
 			EasyMotherUtils.initTitle(this, "月嫂详情", true);
 		}
@@ -250,7 +263,8 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		nurseAddress = (TextView) findViewById(R.id.adrress);
 		nurseMarketPrice = (TextView) findViewById(R.id.market_price);
 		comment_num = (TextView) findViewById(R.id.comment_num);
-
+		 check_zhengshu=(TextView) findViewById(R.id.check_zhengshu);
+		
 		yuesaoskills = (LinearLayout) findViewById(R.id.yuesaoskills);
 		yuyingshiskills = (LinearLayout) findViewById(R.id.yuyingshiskills);
 		cuirushiskills = (LinearLayout) findViewById(R.id.cuirushiskills);
@@ -316,6 +330,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		day2.setOnClickListener(this);
 		day3.setOnClickListener(this);
 		day4.setOnClickListener(this);
+		check_zhengshu.setOnClickListener(this);
 		
 		onSkillsClicklisener clickListener = new onSkillsClicklisener();
 		if ("SHORT_YS".equals(job) || "YS".equals(job)) {
@@ -451,8 +466,15 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 //		}
 
 		if (nurseJobBean != null && baseBean != null) {
-			String image = nurseJobBean.getWorkImageArrays()[0];
-			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + image, backgroudPhoto,
+			String backgroud=null;
+			if (nurseJobBean.getWorkImageArrays()!=null) {
+				String[] workimages=nurseJobBean.getWorkImageArrays();
+				if (workimages.length>0) {
+					backgroud=workimages[0];
+				}
+			}
+			String image=baseBean.getImage();
+			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + backgroud, backgroudPhoto,
 					MyApplication.options_image);
 			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + image, nursePhoto,
 					MyApplication.options_photo);
@@ -618,6 +640,11 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 			startActivity(intent);
 			break;
 
+		case R.id.check_zhengshu:
+			intent.putExtra("jobId", nurseJobBean.getId());
+			intent.setClass(this, ZhengshuListActivity.class);
+			startActivity(intent);
+			break;
 		case R.id.allcomment:
 			intent.setClass(this, CommentListActivity.class);
 			startActivity(intent);

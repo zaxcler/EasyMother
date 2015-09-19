@@ -64,10 +64,10 @@ public class ChangeNurseActivity extends Activity {
 				RequestParams params=new RequestParams();
 				params.put("orderId;", id);
 				if ("CHANGENURSE".equals(type)) {
-					params.put("type", "CHANGENURSE");
+					params.put("type", "申请更换");
 				}
 				if ("UNORDER".equals(type)) {
-					params.put("type", "UNORDER");
+					params.put("type", "申请退订");
 				}
 				params.put("descrition;", content);
 				NetworkHelper.doGet(BaseInfo.CHANGE_ORDER_MSG, params, new JsonHttpResponseHandler(){

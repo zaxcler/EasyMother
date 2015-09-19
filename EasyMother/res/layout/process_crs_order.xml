@@ -29,7 +29,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:src="@drawable/user_photo" />
+                    android:src="@drawable/photo" />
 
                 <TextView
                     android:id="@+id/nurse_name"
@@ -152,8 +152,9 @@
                 <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_margin="@dimen/dp_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
                     android:layout_alignLeft="@+id/textView15"
                     android:layout_below="@+id/textView8" >
 

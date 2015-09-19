@@ -16,6 +16,7 @@ import com.easymother.customview.CircleImageView;
 import com.easymother.customview.MyPopupWindow;
 import com.easymother.customview.MyPopupWindow.OnMyPopupWindowsClick;
 import com.easymother.main.R;
+import com.easymother.main.my.LoginOrRegisterActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
@@ -138,8 +139,17 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 	public void onClick(View arg0) {
 		int id = arg0.getId();
 		Intent intent=new Intent(this,ChanegBabyInfo.class);
+		//如果获取到数据就从数据中获取id
 		if (info!=null) {
 			intent.putExtra("id", info.getId());
+		}else {
+			//当还在这个页面的时候更改其他的信息，则不会再次获取数据，就从本地获取数据
+			if (MyApplication.preferences.getInt("baby_id", 0)!=0) {
+				intent.putExtra("id", MyApplication.preferences.getInt("baby_id", 0));
+			}else {
+				intent.putExtra("id", "");
+			}
+			
 		}
 		switch (id) {
 		case R.id.circleImageView1:
@@ -182,6 +192,11 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 						params.put("id", info.getId());
 					}else {
 						params.put("id", "");
+					}
+					if (MyApplication.preferences.getInt("id", 0)!=0) {
+						params.put("userId", MyApplication.preferences.getInt("id", 0));
+					}else {
+						EasyMotherUtils.goActivity(BabyTimeInfomationActivity.this, LoginOrRegisterActivity.class);
 					}
 					params.put("birthday", year+"-"+monthOfYear+"-"+dayOfMonth);
 					NetworkHelper.doGet(BaseInfo.BABYINFO_SAVEINFO, params, new JsonHttpResponseHandler(){

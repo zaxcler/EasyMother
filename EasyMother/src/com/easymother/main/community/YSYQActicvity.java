@@ -7,17 +7,16 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import com.easymother.bean.CommunityHotBean;
-import com.easymother.bean.TestBean;
 import com.easymother.bean.YSYQItemBean;
 import com.easymother.bean.YSYQResult;
 import com.easymother.configure.BaseInfo;
-import com.easymother.configure.MyApplication;
+import com.easymother.customview.MyGridView;
+import com.easymother.customview.MyListview;
 import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,19 +24,14 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 public class YSYQActicvity extends Activity {
 	
-	private GridView gridview;
-	private ListView listview;
+	private MyGridView gridview;
+	private MyListview listview;
 	private List<YSYQItemBean> beans;
 	
 	@Override
@@ -52,8 +46,8 @@ public class YSYQActicvity extends Activity {
 
 
 	private void findView() {
-		gridview=(GridView) findViewById(R.id.gridview);
-		listview=(ListView) findViewById(R.id.listview);
+		gridview=(MyGridView) findViewById(R.id.gridview);
+		listview=(MyListview) findViewById(R.id.listview);
 	}
 
 
@@ -128,9 +122,19 @@ public class YSYQActicvity extends Activity {
 		
 		if (result!=null) {
 			if (result.getNewsinfos()!=null) {
-				List<CommunityHotBean> beans=result.getNewsinfos();
+				final List<CommunityHotBean> beans=result.getNewsinfos();
 				YSYQAdapter adapter1=new YSYQAdapter(this, beans, R.layout.activity_commnuity_yishiyiqu_item);
 				listview.setAdapter(adapter1);
+				listview.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+						Intent intent=new Intent();
+						intent.setClass(YSYQActicvity.this, ArticleActivity.class);
+						intent.putExtra("id", beans.get(arg2).getId());
+						YSYQActicvity.this.startActivity(intent);
+					}
+				});
 			}
 		}
 		

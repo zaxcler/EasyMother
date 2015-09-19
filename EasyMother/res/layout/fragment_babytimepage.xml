@@ -72,7 +72,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/baby_image"
         android:textSize="@dimen/sp_16"
-        android:text="请登录"
         android:layout_toRightOf="@+id/circleImageView1"
          />
 

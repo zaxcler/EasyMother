@@ -139,30 +139,31 @@ public class LoginOrRegisterActivity extends Activity implements OnClickListener
 				super.onSuccess(statusCode, headers, response);
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
 					BabyTimeResult result=JsonUtils.getResult(response, BabyTimeResult.class);
-					if (result.getBabyInfo().getId()!=null) {
-						MyApplication.editor.putInt("baby_id",result.getBabyInfo().getId());
+					if (result.getBabyInfo()!=null) {
+						if (result.getBabyInfo().getId()!=null) {
+							MyApplication.editor.putInt("baby_id",result.getBabyInfo().getId());
+						}
+						if (result.getBabyInfo().getBabyImage()!=null) {
+							MyApplication.editor.putString("baby_image",result.getBabyInfo().getBabyImage());
+						}
+						if (result.getBabyInfo().getBackground()!=null) {
+							MyApplication.editor.putString("baby_background",result.getBabyInfo().getBackground());
+						}
+						if (result.getBabyInfo().getGender()!=null) {
+							MyApplication.editor.putString("nannan_sex",result.getBabyInfo().getGender());
+						}
+						if (result.getBabyInfo().getBabyName()!=null) {
+							MyApplication.editor.putString("nannan_name",result.getBabyInfo().getBabyName());
+						}
+						if (result.getBabyInfo().getBirthday()!=null) {
+						SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						String birthy=dateFormat.format(result.getBabyInfo().getBirthday());
+							MyApplication.editor.putString("nannan_birthday",birthy);
+						}
+						MyApplication.editor.commit();
 					}
-					if (result.getBabyInfo().getBabyImage()!=null) {
-						MyApplication.editor.putString("baby_image",result.getBabyInfo().getBabyImage());
 					}
-					if (result.getBabyInfo().getBackground()!=null) {
-						MyApplication.editor.putString("baby_background",result.getBabyInfo().getBackground());
-					}
-					if (result.getBabyInfo().getGender()!=null) {
-						MyApplication.editor.putString("nannan_sex",result.getBabyInfo().getGender());
-					}
-					if (result.getBabyInfo().getBabyName()!=null) {
-						MyApplication.editor.putString("nannan_name",result.getBabyInfo().getBabyName());
-					}
-					if (result.getBabyInfo().getBirthday()!=null) {
-					SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String birthy=dateFormat.format(result.getBabyInfo().getBirthday());
-						MyApplication.editor.putString("nannan_birthday",birthy);
-					}
-					MyApplication.editor.commit();
-				}else {
-					Toast.makeText(LoginOrRegisterActivity.this,JsonUtils.getRootResult(response).getMessage(), Toast.LENGTH_SHORT).show();
-				}
+					
 			}
 			@Override
 			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {

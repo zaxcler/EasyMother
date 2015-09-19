@@ -28,6 +28,71 @@
         android:layout_marginTop="@dimen/dp_10"
         android:text="请选择开始结束时间" />
 
+    <TextView
+        android:id="@+id/time1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="2015-12-2"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/time3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="2015-12-2"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/time2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/addtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:src="@drawable/back1" />
+
+        <TextView
+            android:id="@+id/currenttime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="2015-12-2" />
+
+        <ImageView
+            android:id="@+id/deletetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:src="@drawable/go" />
+    </LinearLayout>
+
+    <com.easymother.customview.MyGridView
+        android:id="@+id/gridView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:background="@drawable/backgroup_solid"
+        android:gravity="@color/line"
+        android:horizontalSpacing="@dimen/dp_2"
+        android:numColumns="4"
+        android:verticalSpacing="@dimen/dp_2"
+        android:visibility="gone" >
+    </com.easymother.customview.MyGridView>
 
     <Button
         android:id="@+id/complete"

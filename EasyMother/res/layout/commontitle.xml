@@ -22,17 +22,19 @@
 
         <ImageView
             android:id="@+id/more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_5"
-            android:src="@drawable/wish" />
+            android:src="@drawable/wish11" />
 
         <ImageView
             android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:background="@drawable/back" />
@@ -41,6 +43,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line" />
+        android:background="@color/lightboro" />
 
 </LinearLayout>

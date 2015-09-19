@@ -7,6 +7,7 @@ import java.util.Map;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.YueSao;
 import com.easymother.configure.BaseInfo;
+import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.ViewHolder;
@@ -61,7 +62,9 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 		holder.getView(R.id.delete).setVisibility(View.GONE);
 		holder.getView(R.id.pay).setVisibility(View.GONE);
 		
-		
+		if (holder.getConvertView()==null) {
+			
+		}
 		final NurseBaseBean bean=(NurseBaseBean) yuesao;
 		TextView name=holder.getView(R.id.textView1);
 		/*
@@ -95,7 +98,7 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 		/*
 		 * 设置之前先判断空
 		 */
-		if (bean.getSeniority()!=null) {
+		if (bean.getSeniority()!=null){
 			seniority.setText("从业"+bean.getSeniority()+"年");
 		}
 		
@@ -114,7 +117,7 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 		 * 设置之前先判断空
 		 */
 		if (bean.getCurrentAddress()!=null) {
-			currentAddress.setText(bean.getCurrentAddress());
+			currentAddress.setText("现居地："+bean.getCurrentAddress());
 		}
 		
 		TextView Price=holder.getView(R.id.textView7);
@@ -122,7 +125,7 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 		 * 设置之前先判断空
 		 */
 		if (bean.getPrice()!=null) {
-			Price.setText(bean.getPrice()+"元/26天");
+			Price.setText(bean.getPrice()*26+"元");
 		}
 		
 		TextView marketPrice=holder.getView(R.id.textView8);
@@ -135,14 +138,14 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 		}
 		TextView dengji=holder.getView(R.id.textView9);
 		if (bean.getJobTitle()!=null) {
-			dengji.setText("等级："+bean.getJobTitle());
+			dengji.setText(bean.getJobTitle());
 		}
 		
 		ImageView photo=holder.getView(R.id.image);
 //		if (bean.getImage()!=null) {
 //			if (photos.get(bean.getImage())==null) {
 //				photos.put(bean.getImage(), bean.getImage());
-				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo);
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo,MyApplication.options_image);
 //			}
 //		}
 		holder.getView(R.id.line1).setVisibility(View.GONE);

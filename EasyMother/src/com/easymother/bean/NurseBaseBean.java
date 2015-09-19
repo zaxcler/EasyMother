@@ -97,6 +97,11 @@ public class NurseBaseBean implements Serializable{
     // 家庭遗传病
     private String familyDisease;
     
+    private String lifeImages;
+    
+    private List<String> workImageArrays;
+    
+    
     public Integer getNums() {
 		return nums;
 	}
@@ -115,8 +120,13 @@ public class NurseBaseBean implements Serializable{
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	private List<String> workImageArrays;
-    
+	
+	public String getLifeImages() {
+		return lifeImages;
+	}
+	public void setLifeImages(String lifeImages) {
+		this.lifeImages = lifeImages;
+	}
 	public Integer getId() {
 		return id;
 	}
