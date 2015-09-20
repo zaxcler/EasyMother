@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@drawable/boro_border"
+    android:paddingBottom="@dimen/dp_20"
     android:orientation="vertical" >
 
     <TextView
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
-        android:paddingLeft="@dimen/dp_50"
+        android:paddingLeft="@dimen/dp_20"
         android:paddingRight="@dimen/dp_20"
         android:text="排序"
         android:textColor="@color/lightredwine"
@@ -28,7 +29,7 @@
         android:layout_marginTop="@dimen/dp_20"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/dp_50"
+        android:paddingLeft="@dimen/dp_20"
         android:paddingRight="@dimen/dp_10" >
 
         <TextView
@@ -36,15 +37,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/liangboro"
             android:gravity="center_vertical"
             android:text="从业经验从高到低"
-            android:textSize="@dimen/sp_16" />
+            android:textSize="@dimen/sp_14" />
 
         <ImageView
             android:id="@+id/imagesort1"
             android:layout_width="@dimen/dp_14"
             android:layout_height="@dimen/dp_14"
-            android:layout_marginRight="@dimen/dp_50"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
             android:background="@drawable/duigou" />
     </LinearLayout>
 
@@ -54,7 +57,7 @@
         android:layout_marginTop="@dimen/dp_20"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/dp_50"
+        android:paddingLeft="@dimen/dp_20"
         android:paddingRight="@dimen/dp_10" >
 
         <TextView
@@ -63,14 +66,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
+            android:textColor="@color/liangboro"
             android:text="从业经验从低到高"
-            android:textSize="@dimen/sp_16" />
+            android:textSize="@dimen/sp_14" />
 
         <ImageView
             android:id="@+id/imagesort2"
             android:layout_width="@dimen/dp_14"
             android:layout_height="@dimen/dp_14"
-            android:layout_marginRight="@dimen/dp_50"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
             android:background="@drawable/duigou" />
     </LinearLayout>
 
@@ -80,7 +85,7 @@
         android:layout_marginTop="@dimen/dp_20"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/dp_50"
+        android:paddingLeft="@dimen/dp_20"
         android:paddingRight="@dimen/dp_10" >
 
         <TextView
@@ -89,14 +94,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
+            android:textColor="@color/liangboro"
             android:text="价格从高到底"
-            android:textSize="@dimen/sp_16" />
+            android:textSize="@dimen/sp_14" />
 
         <ImageView
             android:id="@+id/imagesort3"
             android:layout_width="@dimen/dp_14"
             android:layout_height="@dimen/dp_14"
-            android:layout_marginRight="@dimen/dp_50"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
             android:background="@drawable/duigou" />
     </LinearLayout>
 
@@ -107,7 +114,7 @@
         android:layout_marginTop="@dimen/dp_20"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/dp_50"
+        android:paddingLeft="@dimen/dp_20"
         android:paddingRight="@dimen/dp_10" >
 
         <TextView
@@ -116,14 +123,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
+            android:textColor="@color/liangboro"
             android:text="价格从低到高"
-            android:textSize="@dimen/sp_16" />
+            android:textSize="@dimen/sp_14" />
 
         <ImageView
             android:id="@+id/imagesort4"
             android:layout_width="@dimen/dp_14"
             android:layout_height="@dimen/dp_14"
-            android:layout_marginRight="@dimen/dp_50"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
             android:background="@drawable/duigou" />
     </LinearLayout>
 

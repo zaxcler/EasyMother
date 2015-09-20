@@ -5,28 +5,41 @@
     android:background="@drawable/white_solid"
     android:orientation="vertical" >
 
-    <include layout="@layout/commontitle"/>
-    <ImageView
-        android:id="@+id/imageView1"
+    <include layout="@layout/commontitle" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_150"
-        android:scaleType="fitXY"
-        android:src="@drawable/baby_image3" />
+        android:layout_height="match_parent" >
 
-    <TextView
-        android:layout_marginLeft="@dimen/dp_10"
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="人的智力会遗传" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/white_solid"
+            android:orientation="vertical" >
 
-    <TextView
-        android:layout_marginLeft="@dimen/dp_10"
-        android:id="@+id/content"
-        android:textSize="@dimen/sp_12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/boroblacktext"
-        android:text="阿斯顿撒大奥斯卡的拉升阿森纳你代理商的拉伸法师撒了巨大是老大" />
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_150"
+                android:scaleType="fitXY"
+                android:src="@drawable/picture" />
+
+            <TextView
+                android:id="@+id/article_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:textSize="25sp"
+                />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:textColor="@color/boroblacktext"
+                android:textSize="@dimen/sp_12" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

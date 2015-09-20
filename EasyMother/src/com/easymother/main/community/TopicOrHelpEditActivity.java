@@ -83,9 +83,11 @@ public class TopicOrHelpEditActivity extends Activity {
 							params.put("content", desc);
 						}
 						imagesname=EasyMotherUtils.photosname;
-						if (imagesname!=null) {
+						if (imagesname!=null && imagesname.size()!=0) {
 							params.put("images", imagesname.toString());
 						}
+						//名字上传后清空
+						EasyMotherUtils.photosname.clear();
 						params.put("parentId", 0);
 						NetworkHelper.doGet(BaseInfo.SUBMIT_TOPIC_HELP, params, new JsonHttpResponseHandler(){
 							@Override

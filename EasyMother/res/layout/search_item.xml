@@ -37,8 +37,8 @@
             android:background="@color/white"
             android:hint="请输入护理师姓名"
             android:textSize="@dimen/sp_14"
-            android:textColorHint="@color/henboro"
-            android:textColor="@color/henboro"
+            android:textColorHint="@color/liangboro"
+            android:textColor="@color/liangboro"
             android:layout_marginLeft="@dimen/dp_10"
             android:singleLine="true" />
 

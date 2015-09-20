@@ -55,6 +55,7 @@
         android:layout_weight="1" >
 
         <LinearLayout
+            android:id="@+id/childview"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -252,7 +253,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="  推荐月嫂"
-                        android:textColor="@color/boroblacktext"
+                        android:textColor="@color/lightboro"
                         android:textSize="16sp" />
 
                     <View
@@ -269,7 +270,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="推荐育婴师"
-                        android:textColor="@color/boroblacktext"
+                        android:textColor="@color/lightboro"
                         android:textSize="16sp" />
 
                     <View
@@ -286,7 +287,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="推荐催乳师"
-                        android:textColor="@color/boroblacktext"
+                        android:textColor="@color/lightboro"
                         android:textSize="16sp" />
                 </LinearLayout>
 

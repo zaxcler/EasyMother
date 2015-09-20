@@ -6,8 +6,8 @@
     <dimen name="activity_tab_height">60dp</dimen>
     
     
-    <dimen name="activity_tab_image_height">26dp</dimen>
-    <dimen name="activity_tab_image_width">26dp</dimen>
+    <dimen name="activity_tab_image_height">24dp</dimen>
+    <dimen name="activity_tab_image_width">24dp</dimen>
     
     <!-- fragment的标题栏的宽高 -->
     <dimen name="fragment_title_width">50dp</dimen>
@@ -207,6 +207,8 @@
 <dimen name="dp_230">230dp</dimen>
 <dimen name="dp_240">240dp</dimen>
 <dimen name="dp_250">250dp</dimen>
+<dimen name="dp_260">260dp</dimen>
+<dimen name="dp_270">270dp</dimen>
 <dimen name="dp_300">300dp</dimen>
 <dimen name="dp_350">350dp</dimen>
 <dimen name="dp_400">400dp</dimen>

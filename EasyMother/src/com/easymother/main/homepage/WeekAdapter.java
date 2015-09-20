@@ -19,6 +19,7 @@ public class WeekAdapter extends CommonAdapter<String> {
 	public void setDataToItem(ViewHolder holder, String t) {
 		TextView week=holder.getView(R.id.time);
 		week.setTextSize(12);
+		week.setTextColor(context.getResources().getColor(R.color.lightboro));;
 		week.setText(t);
 	}
 

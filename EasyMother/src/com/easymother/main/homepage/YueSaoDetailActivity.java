@@ -11,6 +11,7 @@ import java.util.Locale;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alibaba.fastjson.JSON;
 import com.easymother.bean.Certificate;
 import com.easymother.bean.DetailResult;
 import com.easymother.bean.NurseBaseBean;
@@ -23,6 +24,7 @@ import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
 import com.easymother.customview.MyGridView;
 import com.easymother.customview.MyListview;
+import com.easymother.customview.MyLoadingProgress;
 import com.easymother.main.MainActivity;
 import com.easymother.main.R;
 import com.easymother.main.community.HuLiShiZoneDetailActivity;
@@ -37,9 +39,12 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -63,6 +68,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -215,6 +221,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 	}
 
 	private void findView() {
+		pullToRefreshScrollView=(PullToRefreshScrollView) findViewById(R.id.pulltoreflash);
 		gridView = (GridView) findViewById(R.id.gridView1);
 		mListview = (MyListview) findViewById(R.id.comment);
 		video = (RelativeLayout) findViewById(R.id.video);
@@ -251,7 +258,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		message_time = (TextView) findViewById(R.id.message_time);
 
 		backgroudPhoto = (ImageView) findViewById(R.id.background_photo);
-		nursePhoto = (CircleImageView) findViewById(R.id.photo);
+		nursePhoto = (CircleImageView) findViewById(R.id.photo2);
 		nurseName = (TextView) findViewById(R.id.name);
 		nurseJobNumber = (TextView) findViewById(R.id.num);
 		nurseType = (TextView) findViewById(R.id.label);
@@ -299,6 +306,10 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 
 	private void init() {
 
+		MyLoadingProgress.showLoadingDialog(this);//显示加载dialog
+		//强制获取焦点防止pulltoreflash滑动到listview的第一条
+		pullToRefreshScrollView.requestChildFocus(pullToRefreshScrollView.getChildAt(0), backgroudPhoto);
+		
 		
 		RequestParams params = new RequestParams();
 		params.put("job", job);
@@ -473,9 +484,20 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 					backgroud=workimages[0];
 				}
 			}
+			if (baseBean.getLifeImages()!=null&&!"".equals(baseBean.getLifeImages()) ) {
+				ArrayList<String> lifeimages=(ArrayList<String>) JSON.parseArray(baseBean.getLifeImages(), String.class);
+				if (lifeimages.size()>0) {
+					ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + lifeimages.get(0), backgroudPhoto,
+							MyApplication.options_image,new imageLoadingLisenter());
+				}else {
+					MyLoadingProgress.closeLoadingDialog();
+				}
+			}
+			else {
+				MyLoadingProgress.closeLoadingDialog();
+			}
+			
 			String image=baseBean.getImage();
-			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + backgroud, backgroudPhoto,
-					MyApplication.options_image);
 			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + image, nursePhoto,
 					MyApplication.options_photo);
 			// if (nurseJobBean.getNurseName()!=null) {
@@ -489,14 +511,14 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 					ysoryys.setVisibility(View.VISIBLE);
 					nurseType.setText("月嫂");
 					nurseLevel.setText(nurseJobBean.getJobTitle() + "");
-					nurseCurrentPrice.setText("￥" + nurseJobBean.getPrice() + "元/26天");
+					nurseCurrentPrice.setText("￥" + nurseJobBean.getPrice()*26 +"元/26天");
 					nurseMarketPrice.setText("市场价：" + nurseJobBean.getMarketPrice() + "元/26天");
 				}
 				if ("YYS".equals(nurseJobBean.getJob()) || "SHORT_YYS".equals(nurseJobBean.getJob())) {
 					ysoryys.setVisibility(View.VISIBLE);
 					nurseType.setText("育婴师");
 					nurseLevel.setText(nurseJobBean.getJobTitle() + "");
-					nurseCurrentPrice.setText("￥" + nurseJobBean.getPrice() + "元/26天");
+					nurseCurrentPrice.setText("￥" + nurseJobBean.getPrice()+ "/月");
 					nurseMarketPrice.setText("市场价：" + nurseJobBean.getMarketPrice() + "元/26天");
 				}
 				if ("CRS".equals(nurseJobBean.getJob())) {
@@ -575,8 +597,9 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		if (baseBean.getEducation() != null) {
 			message_edu.setText("文化程度：" + baseBean.getEducation());
 		}
-		if (baseBean.getWeight() != null) {
-			message_weight.setText("体重：" + baseBean.getWeight() + "kg");
+		if (baseBean.getPersionCharacter() != null) {
+			message_weight.setText("性格：" + baseBean.getPersionCharacter());
+			message_weight.setLines(1);
 		}
 		if (baseBean.getProficiency() != null) {
 			message_pth.setText("普通话水平：" + baseBean.getProficiency());
@@ -584,11 +607,15 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		if (baseBean.getYearLunar() != null) {
 			message_sx.setText("生肖：" + baseBean.getYearLunar());
 		}
-		// if (baseBean.get!=null) {
-		// message_xz.setText("现居地址："+baseBean.getCurrentAddress());
-		// }
-		if (baseBean.getSeniority() != null) {
-			message_time.setText("工作经验：" + baseBean.getSeniority() + "年");
+		 if (baseBean.getConstellation() !=null) {
+		 message_xz.setText("现居地址："+baseBean.getConstellation());
+		 }
+		if (nurseJobBean.getEmploymentDate()!= null) {
+			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+			message_time.setText("何时从业：" + dateFormat.format(nurseJobBean.getEmploymentDate()));
+		}
+		if (baseBean.getCurrentAddress() != null) {
+			message_address.setText("现居地址：" + baseBean.getCurrentAddress());
 		}
 		if ("CRS".equals(job)) {
 			calendar.setVisibility(View.GONE);
@@ -600,13 +627,13 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		} else {
 			// 绑定calender
 			List<String> weeks = new ArrayList<>();
-			weeks.add("星期天");
-			weeks.add("星期一");
-			weeks.add("星期二");
-			weeks.add("星期三");
-			weeks.add("星期四");
-			weeks.add("星期五");
-			weeks.add("星期六");
+			weeks.add("日");
+			weeks.add("一");
+			weeks.add("二");
+			weeks.add("三");
+			weeks.add("四");
+			weeks.add("五");
+			weeks.add("六");
 			WeekAdapter weekAdapter = new WeekAdapter(this, weeks, R.layout.crs_gridview_item2);
 			week.setAdapter(weekAdapter);
 			List<Integer> date = new ArrayList<>();
@@ -617,6 +644,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 			aadpter.setOrders(orders);
 			days.setAdapter(aadpter);
 		}
+		
 
 	}
 
@@ -700,7 +728,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 						Toast.makeText(YueSaoDetailActivity.this, "添加心愿单成功", 0).show();
 					} else {
 						Toast.makeText(YueSaoDetailActivity.this,
-								"添加心愿单失败," + JsonUtils.getRootResult(response).getMessage(), 0).show();
+								"添加心愿单失败" , 0).show();
 					}
 				}
 
@@ -774,6 +802,29 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		day3.setBackgroundColor(getResources().getColor(R.color.white));
 		day4.setBackgroundColor(getResources().getColor(R.color.white));
 
+	}
+	
+	/**
+	 * 图片加载完成取消dialog
+	 * @author asdfgh
+	 *
+	 */
+	private class imageLoadingLisenter extends SimpleImageLoadingListener{
+		@Override
+		public void onLoadingCancelled(String imageUri, View view) {
+			MyLoadingProgress.closeLoadingDialog();
+			super.onLoadingCancelled(imageUri, view);
+		}
+		@Override
+		public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+			MyLoadingProgress.closeLoadingDialog();
+			super.onLoadingComplete(imageUri, view, loadedImage);
+		}
+		@Override
+		public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+			MyLoadingProgress.closeLoadingDialog();
+			super.onLoadingFailed(imageUri, view, failReason);
+		}
 	}
 
 }

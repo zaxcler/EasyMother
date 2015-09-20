@@ -8,11 +8,11 @@
 
     <TextView
         android:id="@+id/letter_title"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="护理师推荐信"
-        android:textSize="@dimen/sp_16" />
+        android:textSize="@dimen/sp_14" />
 
     <TextView
         android:id="@+id/letter_content"
@@ -33,15 +33,17 @@
         android:textColor="@color/lightredwine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="查看全部信件"
         android:drawableLeft="@drawable/cleckall"
-        android:textSize="@dimen/sp_16" />
+        android:textSize="@dimen/sp_12" />
     
     <ImageView 
         android:scaleType="fitXY"
         android:id="@+id/letter_image"
         android:src="@drawable/home_banner"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_height="@dimen/dp_100"/>
 
 </LinearLayout>

@@ -2,6 +2,9 @@ package com.easymother.main.my;
 
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,9 +41,16 @@ public class CollectionListAdapter2 extends CommonAdapter<ForumBean> {
 		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getUserImage(), circlepicture,MyApplication.options_photo);
 		ImageView picture=holder.getView(R.id.picture);
 		String photo="";
-		if (t.getPostImage()!=null&&!"".equals(t.getPostImage())) {
-			List<String> photos=JSON.parseArray(photo, String.class);
-			photo=photos.get(0);
+		if (t.getPostImage()!=null&&!"".equals(t.getPostImage())&&!"[".equals(t.getPostImage())) {
+			try {
+				JSONArray array=new JSONArray(photo);
+				photo=array.getString(0);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//			List<String> photos=JSON.parseArray(photo.toString(), String.class);
+//			photo=photos.get(0);
 		}
 		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+photo, picture,MyApplication.options_image);
 		

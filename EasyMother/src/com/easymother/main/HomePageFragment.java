@@ -99,6 +99,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 //	private String URL="http://zaxcler.oss-cn-beijing.aliyuncs.com/test.txt";
 	private ArrayList<String> mImageUrl = null;
 	private List<Banners> banners;
+	private LinearLayout childview;//scroll的子view
 
 	public HomePageFragment() {
 	}
@@ -118,6 +119,30 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		super.onCreate(savedInstanceState);
 	}
 
+	private void findView() {
+
+		scrollView=(PullToRefreshScrollView) homepage.findViewById(R.id.pulltoreflashscrollview);
+		homepage_area = (TextView) homepage.findViewById(R.id.home_page_area);
+		homepage_wish =  (ImageView) homepage.findViewById(R.id.home_page_wish);
+		homepage_ad = (ImageCycleView) homepage.findViewById(R.id.home_page_ad);
+		
+		tuijian_yuesao=(TextView) homepage.findViewById(R.id.tuijian_yuesao);
+		tuijian_yuyingshi=(TextView) homepage.findViewById(R.id.tuijian_yuyingshi);
+		tuijian_cuirushi=(TextView) homepage.findViewById(R.id.tuijian_cuirushi);
+		
+//		tuijian_content= (MyViewPager) homepage.findViewById(R.id.tuijian_content);
+		childview=(LinearLayout) homepage.findViewById(R.id.childview);
+		yuesao= (LinearLayout) homepage.findViewById(R.id.yuesao);
+		yuyingshi= (LinearLayout) homepage.findViewById(R.id.yuyingshi);
+		cuirushi= (LinearLayout) homepage.findViewById(R.id.cuirushi);
+		duanqihuli= (LinearLayout) homepage.findViewById(R.id.duanqihuli);
+		
+		
+		homepage_notic=(ViewFlipper) homepage.findViewById(R.id.homepage_notice);
+		scorllbar = homepage.findViewById(R.id.scorllbar);
+		myGridView = (MyGridView) homepage.findViewById(R.id.mygridview);
+
+	}
 	private void init() {
 
 		loadData();
@@ -143,6 +168,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		
 		
 		scrollView.setMode(Mode.PULL_FROM_START);//设置只能下拉刷新
+		scrollView.requestChildFocus(childview, homepage_ad);
 		scrollView.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
 
 			@Override
@@ -292,30 +318,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		});
 	}
 
-	private void findView() {
-
-		scrollView=(PullToRefreshScrollView) homepage.findViewById(R.id.pulltoreflashscrollview);
-		homepage_area = (TextView) homepage.findViewById(R.id.home_page_area);
-		homepage_wish =  (ImageView) homepage.findViewById(R.id.home_page_wish);
-		homepage_ad = (ImageCycleView) homepage.findViewById(R.id.home_page_ad);
-		
-		tuijian_yuesao=(TextView) homepage.findViewById(R.id.tuijian_yuesao);
-		tuijian_yuyingshi=(TextView) homepage.findViewById(R.id.tuijian_yuyingshi);
-		tuijian_cuirushi=(TextView) homepage.findViewById(R.id.tuijian_cuirushi);
-		
-//		tuijian_content= (MyViewPager) homepage.findViewById(R.id.tuijian_content);
-		
-		yuesao= (LinearLayout) homepage.findViewById(R.id.yuesao);
-		yuyingshi= (LinearLayout) homepage.findViewById(R.id.yuyingshi);
-		cuirushi= (LinearLayout) homepage.findViewById(R.id.cuirushi);
-		duanqihuli= (LinearLayout) homepage.findViewById(R.id.duanqihuli);
-		
-		
-		homepage_notic=(ViewFlipper) homepage.findViewById(R.id.homepage_notice);
-		scorllbar = homepage.findViewById(R.id.scorllbar);
-		myGridView = (MyGridView) homepage.findViewById(R.id.mygridview);
-
-	}
+	
 	
 	
 /**

@@ -190,7 +190,7 @@ public class ForumPost {
 			return parentCountent;
 		}
 
-		public void setParentCountent(String parentCountent) {
+		public void setParentContent(String parentCountent) {
 			this.parentCountent = parentCountent;
 		}
 
@@ -311,4 +311,17 @@ public class ForumPost {
 		public void setParentUserNickname(String parentUserNickname) {
 			this.parentUserNickname = parentUserNickname;
 		}
+
+		@Override
+		public String toString() {
+			return "ForumPost [id=" + id + ", createUser=" + createUser + ", createTime=" + createTime + ", updateUser="
+					+ updateUser + ", updateTime=" + updateTime + ", more1=" + more1 + ", more2=" + more2 + ", more3="
+					+ more3 + ", floor=" + floor + ", int2=" + int2 + ", sorting=" + sorting + ", title=" + title
+					+ ", images=" + images + ", userId=" + userId + ", userNickname=" + userNickname + ", userImage="
+					+ userImage + ", blockId=" + blockId + ", parentId=" + parentId + ", parentUserId=" + parentUserId
+					+ ", parentUserNickname=" + parentUserNickname + ", parentCountent=" + parentCountent
+					+ ", parentUserSee=" + parentUserSee + ", treePath=" + treePath + ", grade=" + grade + ", isDelete="
+					+ isDelete + ", type=" + type + ", nurseId=" + nurseId + ", content=" + content + "]";
+		}
+		
 }

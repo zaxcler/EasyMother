@@ -2,54 +2,76 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="护理师档期"
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
-        android:gravity="center" 
-        android:background="@color/white">
+        android:background="@color/white"
+        android:gravity="center" >
 
         <ImageView
             android:id="@+id/delete_year"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:src="@drawable/back1" /> 
+            android:layout_marginRight="@dimen/dp_20"
+            android:src="@drawable/back1"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/delete_mouth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           android:paddingLeft="@dimen/dp_10"
+            android:layout_width="@dimen/dp_72"
+            android:layout_height="@dimen/dp_36"
+            android:paddingLeft="@dimen/dp_20"
             android:paddingRight="@dimen/dp_10"
-            android:src="@drawable/back1" />
+            android:src="@drawable/red_back1" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/showdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2015年9月12日" />
+            android:text="2015年9月12日"
+            android:textColor="@color/liangboro"
+            android:textSize="@dimen/sp_14" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/add_mouth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_72"
+            android:layout_height="@dimen/dp_36"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
-            android:src="@drawable/go" />
+            android:src="@drawable/red_go1" />
 
-       <ImageView
+        <ImageView
             android:id="@+id/add_year"
-             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:src="@drawable/go" /> 
+            android:layout_marginRight="@dimen/dp_20"
+            android:src="@drawable/go"
+            android:visibility="gone" />
     </LinearLayout>
 
     <GridView
@@ -59,19 +81,21 @@
         android:numColumns="7" >
     </GridView>
 
-    <com.easymother.customview.MyGridView 
-        android:background="@color/white"
+    <com.easymother.customview.MyGridView
+        android:id="@+id/days"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="7"
-        android:verticalSpacing="@dimen/dp_5"
+        android:background="@color/white"
         android:horizontalSpacing="@dimen/dp_5"
-        android:id="@+id/days">
+        android:numColumns="7"
+        android:verticalSpacing="@dimen/dp_5" >
     </com.easymother.customview.MyGridView>
-    <!-- <android.support.v4.view.ViewPager
+    <!--
+    <android.support.v4.view.ViewPager
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_420" >
     </android.support.v4.view.ViewPager>
- -->
+    -->
+
 </LinearLayout>

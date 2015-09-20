@@ -72,7 +72,6 @@ public class ArticleListActivity extends Activity {
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
 					List<NewsInfoBean> list=JsonUtils.getResultList(response, NewsInfoBean.class);
 					bindData(list);
-					
 				}
 			}
 			@Override

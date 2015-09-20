@@ -57,11 +57,13 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 
 	@Override
 	public void setDataToItem(ViewHolder holder, Integer t) {
+	
 		currentDate.set(Calendar.DAY_OF_MONTH, 1);// 设置为当前月的第一天
 		int Start_day = currentDate.get(Calendar.DAY_OF_WEEK);// 当前周的第几天
 		currentDate.set(Calendar.DAY_OF_MONTH, currentDate.getActualMaximum(Calendar.DAY_OF_MONTH));
 		int end_day = currentDate.getActualMaximum(Calendar.DAY_OF_MONTH);// 获取当前月的最后一天
 		TextView current_day = holder.getView(R.id.time);
+		current_day.setTextColor(context.getResources().getColor(R.color.lightboro));
 		current_day.setBackgroundColor(context.getResources().getColor(R.color.white));
 		// 初始化月份
 		if (t >= Start_day - 1 && t < end_day + Start_day-1) {

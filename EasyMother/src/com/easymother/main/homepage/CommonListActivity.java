@@ -9,6 +9,8 @@ import java.util.List;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.easymother.adapter.BaseAdapterHelper;
+import com.easymother.adapter.QuickAdapter;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
 import com.easymother.configure.BaseInfo;
@@ -16,6 +18,8 @@ import com.easymother.configure.MyApplication;
 import com.easymother.customview.DoubleSeekBar;
 import com.easymother.customview.DoubleSeekBar.OnSeekBarChangeListener;
 import com.easymother.customview.MyListview;
+import com.easymother.customview.MyScrollView;
+import com.easymother.customview.MyScrollView.onReflashLisenter;
 import com.easymother.main.R;
 import com.easymother.main.R.layout;
 import com.easymother.utils.EasyMotherUtils;
@@ -25,10 +29,12 @@ import com.easymother.utils.NetworkHelper;
 import com.easymother.utils.TimeCounter;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager.LayoutParams;
 import android.util.Log;
@@ -57,6 +63,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,6 +71,8 @@ public class CommonListActivity extends Activity {
 
 //	private ListView listView;// 下拉刷新控件
 	private MyListview listView;// 下拉刷新控件
+//	private ScrollView scrollview;
+//	private MyScrollView scrollview;
 	private View search_layout;// 搜索布局
 	private View search_layout1;// 搜索布局
 	// private TextView title;// 标题
@@ -93,7 +102,7 @@ public class CommonListActivity extends Activity {
 	
 	private TextView search1;//有两个searche，控制隐藏和显示
 	private TextView search2;
-	
+	private boolean loading=false;//数据是否在加载中
 	private int pageNo=1;
 	protected int lowPrice;
 	protected int hieghtPrice;
@@ -106,7 +115,8 @@ public class CommonListActivity extends Activity {
 	protected boolean isInit=true;//是否是初始化过程
 	protected int state;
 	private TextView counttime;//共多少天
-
+	private int lastItem;//listview最后一个item
+	private QuickAdapter<NurseBaseBean> adapter2;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -164,6 +174,8 @@ public class CommonListActivity extends Activity {
 		end_time_tv=(TextView) findViewById(R.id.endtime);
 		
 		listView = (MyListview) findViewById(R.id.listview);
+//		scrollview=(ScrollView) findViewById(R.id.scrollview);
+//		scrollview=(MyScrollView) findViewById(R.id.scrollview);
 		counttime=(TextView) findViewById(R.id.counttime);
 		search_layout=LayoutInflater.from(this).inflate(R.layout.search_item, null);
 		search1=(TextView) search_layout.findViewById(R.id.search);
@@ -173,7 +185,100 @@ public class CommonListActivity extends Activity {
 	}
 
 	private void init() {
-		
+//		adapter2 = new QuickAdapter<NurseBaseBean>(this, R.layout.activity_yuesao_item) {
+//			
+//			@Override
+//			protected void convert(BaseAdapterHelper holder, NurseBaseBean item) {
+//				holder.getView(R.id.delete).setVisibility(View.GONE);
+//				holder.getView(R.id.pay).setVisibility(View.GONE);
+//				
+//				
+//				final NurseBaseBean bean=(NurseBaseBean) item;
+//				/*
+//				 * 设置之前先判断空
+//				 */
+//				if (bean.getRealName()!=null) {
+//					holder.setText(R.id.textView1, bean.getRealName());
+//				}
+//				TextView job=holder.getView(R.id.textView2);
+//				/*
+//				 * 设置之前先判断空
+//				 */
+//				if (bean.getJob()!=null) {
+//					if ("YS".equals(bean.getJob())) {
+//						job.setText("月嫂");
+//						
+//					}
+//					if ("YYS".equals(bean.getJob())) {
+//						job.setText("育婴师");
+//					}
+//					if ("CRS".equals(bean.getJob())) {
+//						job.setText("催乳师");
+//					}
+//					if ("SHORT_YS".equals(bean.getJob())) {
+//						job.setText("短期月嫂");
+//					}
+//					if ("SHORT_YYS".equals(bean.getJob())) {
+//						job.setText("短期育婴师");
+//					}
+//				}
+//				
+//				/*
+//				 * 设置之前先判断空
+//				 */
+//				if (bean.getSeniority()!=null){
+//					holder.setText(R.id.textView3, "从业"+bean.getSeniority()+"年");
+//				}
+//				
+//				
+//				holder.setText(R.id.textView4, bean.getAge()+"岁");
+//				
+//				/*
+//				 * 设置之前先判断空
+//				 */
+//				if (bean.getHometown()!=null) {
+//					holder.setText(R.id.textView5,bean.getHometown());
+//				}
+//				/*
+//				 * 设置之前先判断空
+//				 */
+//				if (bean.getCurrentAddress()!=null) {
+//					holder.setText(R.id.textView6, "现居地："+bean.getCurrentAddress());
+//				}
+//				
+//				/*
+//				 * 设置之前先判断空
+//				 */
+//				if (bean.getPrice()!=null) {
+//					holder.setText(R.id.textView7, bean.getPrice()*26+"元");
+//					
+//				}
+//				
+//				TextView marketPrice=holder.getView(R.id.textView8);
+//				/*
+//				 * 设置之前先判断空
+//				 */
+//				if (bean.getMarketPrice()!=null) {
+//					holder.setText(R.id.textView8, "市场价："+bean.getMarketPrice()+"元/26天");
+//					marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+//				}
+//				if (bean.getJobTitle()!=null) {
+//					holder.setText(R.id.textView9, bean.getJobTitle());
+//				}
+//				
+//				ImageView photo=holder.getView(R.id.image);
+////				if (bean.getImage()!=null) {
+////					if (photos.get(bean.getImage())==null) {
+////						photos.put(bean.getImage(), bean.getImage());
+//						ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo,MyApplication.options_image);
+////					}
+////				}
+//				holder.getView(R.id.line1).setVisibility(View.GONE);
+//				holder.getView(R.id.price_tv).setVisibility(View.GONE);
+//				holder.getView(R.id.price_tv2).setVisibility(View.GONE);
+//			}
+//		};
+
 		Date currentdate=new Date(System.currentTimeMillis());
 		Calendar calendar=Calendar.getInstance();
 		calendar.setTime(currentdate);
@@ -291,27 +396,31 @@ public class CommonListActivity extends Activity {
 		controller.setOrder(LayoutAnimationController.ORDER_NORMAL);
 		listView.setLayoutAnimation(controller);
 		listView.startLayoutAnimation();
-
+//		scrollview.setOnReflashListener(new onReflashLisenter() {
+//			
+//			@Override
+//			public void onHeadReflash() {
+//				
+//			}
+//			
+//			@Override
+//			public void onFootReflash() {
+//				++pageNo;//加载之前先自增1
+//		        loading(pageNo);
+//		        Toast.makeText(CommonListActivity.this, "加载更多", Toast.LENGTH_SHORT).show();
+//				
+//			}
+//		});
 		listView.setOnScrollListener(new OnScrollListener() {
 			
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
 				state=scrollState;
-			}
-			
-			@Override
-			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-				//当滑到最下端的时候后显示加载更多按钮
-				if (firstVisibleItem+visibleItemCount==totalItemCount-1) {
-					if (isInit) {
-						return;
-					}
+				if (view.getLastVisiblePosition()==view.getCount()-1) {
 					switch (state) {
 					//手指滚动状态
 					case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-						Log.e("加载", "加载更多");
-						++pageNo;//加载之前先自增1
-				        loading(pageNo);
+						
 						break;
 					//手指抬起状态，屏幕还在滚动
 					case OnScrollListener.SCROLL_STATE_FLING:
@@ -319,12 +428,23 @@ public class CommonListActivity extends Activity {
 						break;
 					//静止状态
 					case OnScrollListener.SCROLL_STATE_IDLE:
+						//不在加载状态才能加载
+						if (!loading) {
+							++pageNo;//加载之前先自增1
+					        loading(pageNo);
+						}
 						
 						break;
 
 					}
 					
 				}
+			}
+			
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				lastItem=firstVisibleItem+visibleItemCount-1;
+				//当滑到最下端的时候后显示加载更多按钮
 			}
 			
 		});
@@ -496,6 +616,7 @@ public class CommonListActivity extends Activity {
 						adapter = new CommonListAdapter(
 								getApplicationContext(), list, R.layout.activity_yuesao_item);
 						listView.setAdapter(adapter);
+						
 					}else {
 						/*
 						 * 有adapter就刷新一下数据
@@ -504,6 +625,8 @@ public class CommonListActivity extends Activity {
 						Log.e("list-------->", list.toString());
 						adapter.notifyDataSetChanged();
 					}
+//					adapter.addAll(list);
+					listView.setAdapter(adapter);
 				}
 				
 			}
@@ -693,13 +816,17 @@ public class CommonListActivity extends Activity {
 	 * @return
 	 */
 	public List<NurseBaseBean> loading(int pageNo){
+		loading=true;
+		Log.e("加载数据", "---------");
 		params.put("pageNo", pageNo+"");
 		Log.e("pageNo+loading", pageNo+"");
+		Toast.makeText(CommonListActivity.this, "加载更多", Toast.LENGTH_SHORT).show();
 		NetworkHelper.doGet(BaseInfo.SEARCH_URL, params, new JsonHttpResponseHandler(){
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
+					
 					List<NurseBaseBean> list=JsonUtils.getNurseBaseBeanList(response);
 					if (list.size()==0) {
 						CommonListActivity.this.pageNo=1;
@@ -708,7 +835,14 @@ public class CommonListActivity extends Activity {
 					}
 					adapter.addAll(list);
 					adapter.notifyDataSetChanged();
+					loading=false;
 				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+				super.onFailure(statusCode, headers, responseString, throwable);
+				Toast.makeText(CommonListActivity.this, "连接服务器失败！", 0).show();
+				loading=false;
 			}
 		});
 		

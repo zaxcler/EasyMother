@@ -83,12 +83,12 @@
         <TextView
             android:id="@+id/filter"
             android:layout_width="0dp"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:drawableLeft="@drawable/choose"
             android:gravity="center"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
             android:text="筛选" />
 
         <View
@@ -101,27 +101,40 @@
         <TextView
             android:id="@+id/sort"
             android:layout_width="0dp"
-            android:paddingLeft="@dimen/dp_15"
-            android:paddingRight="@dimen/dp_15"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:drawableLeft="@drawable/sort"
             android:gravity="center"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
             android:text="排序" />
     </LinearLayout>
 
-    
+    <!--
+    <com.easymother.customview.MyScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom"
+        android:layout_below="@+id/title1"
+        android:layout_weight="1" >
+
+        <
+    </com.easymother.customview.MyScrollView>
+    -->
+
     <com.easymother.customview.MyListview
         android:id="@+id/listview"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_above="@+id/bottom"
         android:layout_below="@+id/title1"
-        android:layout_weight="1"
+        android:layout_weight="1" 
         android:divider="@color/background"
         android:dividerHeight="@dimen/dp_10" >
     </com.easymother.customview.MyListview>
-     <include
+
+    <include
         android:id="@+id/search_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

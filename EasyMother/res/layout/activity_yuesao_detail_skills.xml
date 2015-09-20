@@ -5,12 +5,6 @@
     android:background="@color/background"
     android:orientation="vertical" >
 
-    
-
-    
-    
-    
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,6 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/text1"
+            android:textSize="@dimen/dp_12"
+            android:textColor="@color/liangboro"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="在医院宝宝护理" />
 
@@ -41,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/text1"
+            android:textSize="@dimen/dp_12"
             android:layout_marginRight="@dimen/dp_10"
             android:text="查看"
             android:textColor="@color/lightredwine" />
@@ -50,10 +47,11 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/text2"
+            android:layout_marginTop="@dimen/dp_10"
             android:layout_marginBottom="@dimen/dp_20"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
-            android:background="@color/line" />
+            android:background="@color/lightboro" />
 
         <TextView
             android:id="@+id/text3"
@@ -61,6 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/view1"
+            android:textSize="@dimen/dp_12"
+            android:textColor="@color/liangboro"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="在医院产妇护理" />
 
@@ -70,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/view1"
+            android:textSize="@dimen/dp_12"
             android:layout_marginRight="@dimen/dp_10"
             android:text="查看"
             android:textColor="@color/lightredwine" />
@@ -79,10 +80,11 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/text3"
+             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginBottom="@dimen/dp_20"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
-            android:background="@color/line" />
+            android:background="@color/lightboro" />
 
         <TextView
             android:id="@+id/text5"
@@ -90,6 +92,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/view2"
+            android:textSize="@dimen/dp_12"
+            android:textColor="@color/liangboro"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="居家宝宝护理" />
 
@@ -101,6 +105,7 @@
             android:layout_below="@id/view2"
             android:layout_marginRight="@dimen/dp_10"
             android:text="查看"
+            android:textSize="@dimen/dp_12"
             android:textColor="@color/lightredwine" />
 
         <View
@@ -108,10 +113,11 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/text5"
+             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginBottom="@dimen/dp_20"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
-            android:background="@color/line" />
+            android:background="@color/lightboro" />
 
         <TextView
             android:id="@+id/text7"
@@ -119,11 +125,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/view3"
+            android:textSize="@dimen/dp_12"
+            android:textColor="@color/liangboro"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="居家产妇护理" />
 
         <TextView
             android:id="@+id/check4"
+            android:textSize="@dimen/dp_12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -137,10 +146,11 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/text7"
+             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginBottom="@dimen/dp_30"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
-            android:background="@color/line" />
+            android:background="@color/lightboro" />
     </RelativeLayout>
 
 </LinearLayout>

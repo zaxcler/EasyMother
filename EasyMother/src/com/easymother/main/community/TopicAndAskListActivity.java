@@ -92,6 +92,7 @@ public class TopicAndAskListActivity extends Activity implements OnClickListener
 		RequestParams params=new RequestParams();
 		params.put("blockId", blockId);
 		NetworkHelper.doGet(BaseInfo.TOPIC_LIST, params, new JsonHttpResponseHandler(){
+//			NetworkHelper.doGet(BaseInfo.TOPIC_LIST, params, new JsonHttpResponseHandler(){
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);

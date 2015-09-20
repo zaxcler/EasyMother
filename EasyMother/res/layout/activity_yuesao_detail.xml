@@ -19,6 +19,7 @@
         android:layout_height="@dimen/dp_50"
         android:layout_alignParentBottom="true"
         android:gravity="bottom"
+        android:background="@color/lightredwine"
         android:orientation="horizontal" >
 
         <TextView
@@ -26,30 +27,36 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/lightredwine"
-            android:drawableLeft="@drawable/like_white"
+            android:drawableLeft="@drawable/xinyuandan"
             android:gravity="center"
-            android:padding="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:text="加入星愿单"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16" />
 
         <View
             android:layout_width="1dp"
-            android:layout_height="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
             android:background="@color/white"
-            android:paddingBottom="@dimen/dp_5"
-            android:paddingTop="@dimen/dp_5" />
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10" />
 
         <TextView
             android:id="@+id/buy_now"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/lightredwine"
             android:drawableLeft="@drawable/yue_now"
             android:gravity="center"
             android:text="立即预约"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16" />
     </LinearLayout>
@@ -68,9 +75,7 @@
             android:background="@color/background"
             android:orientation="vertical" >
 
-            <include 
-                layout="@layout/activity_yuesao_detail_photo" />
-          
+            <include layout="@layout/activity_yuesao_detail_photo" />
 
             <View
                 android:layout_width="match_parent"
@@ -97,14 +102,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_30"
                 android:background="@color/background" />
-            <include 
+
+            <include
                 android:id="@+id/calendar"
-                layout="@layout/calender"/>
-            <include 
+                layout="@layout/calender" />
+
+            <include
                 android:id="@+id/crs_calendar"
                 layout="@layout/crs_calendar"
-                android:visibility="gone"
-                />
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:background="@color/background" />
 
             <include
                 android:id="@+id/yuesaoskills"
@@ -113,8 +124,8 @@
             <include
                 android:id="@+id/yuyingshiskills"
                 layout="@layout/activity_yuyingshi_detail_skills" />
-            
-            <include 
+
+            <include
                 android:id="@+id/cuirushiskills"
                 layout="@layout/activity_cuirushi_detail_skills" />
 

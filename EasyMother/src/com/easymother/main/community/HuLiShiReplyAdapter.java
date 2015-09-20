@@ -58,6 +58,9 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 	public long getItemId(int position) {
 		return position;
 	}
+	public void add(ForumPost forumPost){
+		list.add(forumPost);
+	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -80,7 +83,6 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 				floor.setText((position+1)+"楼");
 				TextView show_time=holder.getView(R.id.show_time);
 				if (forumPost.getCreateTime()!=null) {
-				
 					show_time.setText(TimeCounter.CountTime(forumPost.getCreateTime(), currentDate));
 				}else {
 					show_time.setText("");
@@ -100,7 +102,7 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 				}else {
 					pictures.setVisibility(View.GONE);
 				}
-				TextView reply=holder.getView(R.id.reply);
+				TextView reply=holder.getView(R.id.replay);
 				reply.setOnClickListener(new OnClickListener() {
 					
 					@Override
@@ -109,13 +111,17 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 						activity.id=forumPost.getId();
 //						activity.editText1.setFocusable(true);
 //						activity.editText1.setFocusableInTouchMode(true);
+						//强制获取焦点
 						activity.editText1.requestFocus();
+						activity.parentContent=forumPost.getContent();
+						activity.editText1.setHint("回复"+forumPost.getParentUserNickname());
+						activity.parentUserNickName=forumPost.getParentUserNickname();
 						//调用输入法
 						InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE); 
 //						imm.showSoftInput(m_receiverView(接受软键盘输入的视图(View)),InputMethodManager.SHOW_FORCED(提供当前操作的标记，SHOW_FORCED表示强制显示)); 
 						imm.showSoftInput(activity.editText1,InputMethodManager.SHOW_FORCED); 
 						
-						activity.parentContent=forumPost.getParentCountent();
+						
 					}
 				});
 				convertView=holder.getConvertView();
@@ -124,7 +130,7 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 			else {
 				 holder1 = ViewHolder.getInstance(context, position, convertView, parent, resources[1]);
 				 TextView user_name=holder1.getView(R.id.user_name);
-					if (forumPost.getUserNickname()!=null) {
+					if (forumPost.getUserNickname()!=null&&!"".equals(forumPost.getUserNickname())) {
 						user_name.setText(forumPost.getUserNickname());
 					}else {
 						user_name.setText("");
@@ -135,7 +141,7 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 					TextView floor=holder1.getView(R.id.floor);
 					floor.setText((position+1)+"楼");
 					TextView show_time=holder1.getView(R.id.show_time);
-					if (forumPost.getCreateTime()!=null) {
+					if (forumPost.getCreateTime()!=null&&!"".equals(forumPost.getCreateTime())) {
 						
 						show_time.setText(TimeCounter.CountTime(forumPost.getCreateTime(),currentDate));
 					}else {
@@ -143,7 +149,7 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 					}
 					
 					TextView parent_name=holder1.getView(R.id.parent_name);
-					if (forumPost.getParentUserNickname()!=null) {
+					if (forumPost.getParentUserNickname()!=null&&!"".equals(forumPost.getParentUserNickname())) {
 						parent_name.setText(forumPost.getParentUserNickname());
 					}else {
 						parent_name.setText("");
@@ -151,14 +157,14 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 					
 					
 					TextView child_content=holder1.getView(R.id.child_content);
-					if (forumPost.getContent()!=null) {
+					if (forumPost.getContent()!=null&&!"".equals(forumPost.getContent())) {
 						child_content.setText(":"+forumPost.getContent());
 					}else {
 						child_content.setText("");
 					}
 					//要后台添加父文本
 					TextView parent_conten=holder1.getView(R.id.parent_conten);
-					if (forumPost.getParentCountent()!=null) {
+					if (forumPost.getParentCountent()!=null&&!"".equals(forumPost.getParentCountent())) {
 						parent_conten.setText(":"+forumPost.getParentCountent());
 					}else {
 						parent_conten.setText("");
@@ -172,7 +178,15 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 //							activity.editText1.setFocusable(true);
 //							activity.editText1.setFocusableInTouchMode(true);
 							activity.editText1.requestFocus();
-							activity.parentContent=forumPost.getParentCountent();
+							if (forumPost.getParentUserNickname()!=null&&!"".equals(forumPost.getParentUserNickname())) {
+								activity.editText1.setHint("回复"+forumPost.getParentUserNickname());
+							}
+							if (forumPost.getContent()!=null&&!"".equals(forumPost.getContent())) {
+								activity.parentContent=forumPost.getContent();
+							}
+							if (forumPost.getUserNickname()!=null&&!"".equals(forumPost.getUserNickname())) {
+								activity.parentUserNickName=forumPost.getUserNickname();
+							}
 							InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE); 
 //							imm.showSoftInput(m_receiverView(接受软键盘输入的视图(View)),InputMethodManager.SHOW_FORCED(提供当前操作的标记，SHOW_FORCED表示强制显示)); 
 							imm.showSoftInput(activity.editText1,InputMethodManager.SHOW_FORCED); 

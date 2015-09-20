@@ -1,5 +1,6 @@
 package com.easymother.configure;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Set;
 import com.alidao.mama.WeiXinUtils;
 import com.easymother.bean.UserInfo;
 import com.easymother.main.R;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -17,14 +19,15 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.utils.L;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
+import android.graphics.Bitmap;;
 
 public class MyApplication  extends Application{
 	
@@ -37,6 +40,8 @@ public class MyApplication  extends Application{
 	public static DisplayImageOptions options_photo;//下载图片的默认配置
 	
 	private static Map<String,Set<Activity>> activityMAP;
+	
+	private static String cachedir;//imageloader
 	
 	
 //	public static final String APP_ID="wxcacf2de19303ba3";//微信的id
@@ -80,23 +85,29 @@ public class MyApplication  extends Application{
 	
 	public static void initImageLoader(Context context)
 	{
-		
+		//缓存地址
+		cachedir=Environment.getExternalStorageDirectory()+"/imageloader/";
+		File cacheDir=new File(cachedir);
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
 				context).threadPriority(Thread.NORM_PRIORITY - 2)
+				/**
+				2  *当同一个Uri获取不同大小的图片，缓存到内存时，只缓存一个。默认会缓存多个不同的大小的相同图片
+				3  */
 				.denyCacheImageMultipleSizesInMemory()
 				.discCacheFileNameGenerator(new Md5FileNameGenerator())
 				.discCacheSize(50 * 1024 * 1024)
 				// 50 Mb
-//				.discCache(new UnlimitedDiscCache(cacheDir))
+				.discCache(new UnlimitedDiscCache(cacheDir))//自定义缓存路径
 				//设置缓存路径
 				.tasksProcessingOrder(QueueProcessingType.LIFO)
-				.writeDebugLogs() // Remove for release app
+				.discCacheFileCount(100)//缓存file数量
+//				.writeDebugLogs() // Remove for release app
 				.build();
 		
 		L.disableLogging();
 		ImageLoader.getInstance().init(config);
-		options_image=new DisplayImageOptions.Builder().imageScaleType(ImageScaleType.IN_SAMPLE_INT).showImageOnLoading(R.drawable.picture).showImageOnFail(R.drawable.picture).build();
-		options_photo=new DisplayImageOptions.Builder().imageScaleType(ImageScaleType.IN_SAMPLE_INT).showImageOnLoading(R.drawable.photo).showImageOnFail(R.drawable.photo).build();
+		options_image=new DisplayImageOptions.Builder().bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.IN_SAMPLE_INT).showImageOnLoading(R.drawable.picture).showImageOnFail(R.drawable.picture).build();
+		options_photo=new DisplayImageOptions.Builder().bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.IN_SAMPLE_INT).showImageOnLoading(R.drawable.photo).showImageOnFail(R.drawable.photo).build();
 	}
 	
 	public static int getScreen_width() {

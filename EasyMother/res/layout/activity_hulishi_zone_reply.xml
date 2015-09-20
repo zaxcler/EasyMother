@@ -47,9 +47,11 @@
 
                 <com.easymother.customview.MyGridView 
                     android:id="@+id/pictures"
-                    android:numColumns="4"
+                    android:numColumns="3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:verticalSpacing="@dimen/dp_5"
+                    android:horizontalSpacing="@dimen/dp_5"
                     android:layout_below="@+id/content"
                     ></com.easymother.customview.MyGridView>
                
@@ -118,11 +120,13 @@
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/star"
                     android:layout_alignTop="@+id/circleImageView1"
-                    android:background="@drawable/lightredwine_solid"
-                    android:text="月嫂"
-                    android:textColor="@color/white" />
+                    android:text="回复"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:drawableLeft="@drawable/reply"
+                    android:textColor="@color/boroblacktext" />
             </RelativeLayout>
 
             <TextView

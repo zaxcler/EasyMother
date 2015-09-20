@@ -3,17 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <include layout="@layout/commontitle"
+
+    <include
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <com.handmark.pulltorefresh.library.PullToRefreshListView 
+        android:layout_height="wrap_content"
+        layout="@layout/commontitle" />
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/pulltoreflash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/pulltoreflash"
+        android:layout_marginTop="@dimen/dp_10"
         android:divider="@color/background"
-        android:dividerHeight="@dimen/dp_5"
-        android:layout_marginTop="@dimen/dp_10">
+        android:dividerHeight="@dimen/dp_5" >
     </com.handmark.pulltorefresh.library.PullToRefreshListView>
-    
 
 </LinearLayout>

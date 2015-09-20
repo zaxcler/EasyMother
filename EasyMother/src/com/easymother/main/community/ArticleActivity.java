@@ -67,7 +67,7 @@ public class ArticleActivity extends Activity {
 	}
 	private void findView() {
 		imageView1=(ImageView) findViewById(R.id.imageView1);
-		title=(TextView) findViewById(R.id.title);
+		title=(TextView) findViewById(R.id.article_title);
 		content=(TextView) findViewById(R.id.content);
 	}
 	private void init() {

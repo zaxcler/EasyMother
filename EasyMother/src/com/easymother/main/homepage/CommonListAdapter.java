@@ -10,6 +10,7 @@ import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
+import com.easymother.utils.ImageUtils;
 import com.easymother.utils.ViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -142,10 +143,17 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 		}
 		
 		ImageView photo=holder.getView(R.id.image);
+		if (bean.getImage()!=null) {
+			if (!bean.getImage().equals(photo.getTag())){
+				ImageUtils.setPhoto(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo);
+//				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo,MyApplication.options_image);
+			}
+		}
+		photo.setTag(bean.getImage());
 //		if (bean.getImage()!=null) {
 //			if (photos.get(bean.getImage())==null) {
 //				photos.put(bean.getImage(), bean.getImage());
-				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo,MyApplication.options_image);
+//				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo,MyApplication.options_image);
 //			}
 //		}
 		holder.getView(R.id.line1).setVisibility(View.GONE);

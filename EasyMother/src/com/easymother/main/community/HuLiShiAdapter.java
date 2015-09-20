@@ -155,12 +155,13 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 					if ("YES".equals(t.getMore1())) {
 						Toast.makeText(context, "你已经收藏过了", Toast.LENGTH_SHORT).show();
 					} else {
-						if (msgAmoount.getTag() != "true") {
+						if (msgAmoount.getTag() == "true") {
 							Toast.makeText(context, "你已经收藏过了", Toast.LENGTH_SHORT).show();
 						} else {
 							RequestParams params = new RequestParams();
 							params.put("userId", MyApplication.preferences.getInt("id", 0));
 							params.put("forumPostId", t.getId());
+							params.put("type", t.getType());
 							NetworkHelper.doGet(BaseInfo.SAVE_COLLECTION, params, new JsonHttpResponseHandler() {
 								public void onSuccess(int statusCode, org.apache.http.Header[] headers,
 										org.json.JSONObject response) {
@@ -172,7 +173,6 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 											msgAmoount.setText("1");
 										}
 									}
-
 								};
 
 								public void onFailure(int statusCode, org.apache.http.Header[] headers,
@@ -213,7 +213,7 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 						Toast.makeText(context, "请登录", Toast.LENGTH_SHORT).show();
 						return;
 					}
-					if (upAmount.getTag() != "true") {
+					if (upAmount.getTag() == "true") {
 						Toast.makeText(context, "你已经点过赞咯", Toast.LENGTH_SHORT).show();
 						return;
 					} else {
@@ -224,8 +224,9 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 						NetworkHelper.doGet(BaseInfo.STAR_NURSE, params, new JsonHttpResponseHandler() {
 							public void onSuccess(int statusCode, org.apache.http.Header[] headers,
 									org.json.JSONObject response) {
-								if (t.getUpAmount() != null) {
-									upAmount.setText((t.getUpAmount() + 1) + "");
+								if (t.getMore2() != null && !"".equals(t.getMore2())&& !"0".equals(t.getMore2())) {
+									
+									upAmount.setText((Integer.getInteger(t.getMore2())+1) + "");
 								} else {
 									upAmount.setText("1");
 								}

@@ -36,19 +36,19 @@ public class CollectionListAdapter extends CommonAdapter<NewsBean> {
 		ImageView picture=holder.getView(R.id.picture);
 		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getImages(), picture,MyApplication.options_photo);
 		TextView title=holder.getView(R.id.title);
-		if (t.getNewsName()!=null) {
+		if (t.getNewsName()!=null&&!"".equals(t.getNewsName())) {
 			title.setText(t.getNewsName());
 		}else {
 			title.setText("");
 		}
 		TextView content=holder.getView(R.id.content);
-		if (t.getContent()!=null) {
+		if (t.getContent()!=null&&!"".equals(t.getContent())) {
 			content.setText(t.getContent());
 		}else {
 			content.setText("");
 		}
 		TextView type=holder.getView(R.id.type);
-		if (t.getNewsType()!=null) {
+		if (t.getNewsType()!=null&&!"".equals(t.getNewsType())) {
 			if ("A".equals(type)) {
 					content.setText(t.getContent());
 			}

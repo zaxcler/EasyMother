@@ -14,6 +14,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -40,7 +41,8 @@ public class ArticleListAdapter extends CommonAdapter<NewsInfoBean> {
 		
 		TextView content=holder.getView(R.id.content);
 		if (t.getContent()!=null) {
-			content.setText(NetworkHelper.showFWBText(t.getContent()));
+			content.setText(Html.fromHtml(t.getContent()));
+//			content.setText(NetworkHelper.showFWBText(t.getContent()));
 		}else {
 			content.setText("");
 		}

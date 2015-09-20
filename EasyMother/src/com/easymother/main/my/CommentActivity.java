@@ -157,7 +157,7 @@ public class CommentActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				
-				Toast.makeText(CommentActivity.this, "评论成功", 0).show();
+//				Toast.makeText(CommentActivity.this, "评论成功", 0).show();
 				saveComment();
 //				CommentActivity.this.finish();
 			}
@@ -166,6 +166,7 @@ public class CommentActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				
 				EasyMotherUtils.chosePhoto(CommentActivity.this, CHOOSE_PHOTO, null);
 				
 				

@@ -1,5 +1,9 @@
 package com.easymother.utils;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R.drawable;
@@ -16,17 +20,18 @@ import android.text.Spanned;
 import android.text.SpannedString;
 import android.util.Log;
 
-public class NetworkHelper{
-	
-	public final static String APP_TOKEN="1";
-	
+public class NetworkHelper {
+
+	public final static String APP_TOKEN = "1";
+
 	private static AsyncHttpClient httpClient;
-	
-	//静态代码块优先于构造方法执行
+
+	// 静态代码块优先于构造方法执行
 	static {
-		httpClient=new AsyncHttpClient();
-//		httpClient.setTimeout(5000);
+		httpClient = new AsyncHttpClient();
+		// httpClient.setTimeout(5000);
 	}
+
 	/*
 	 * 显示富文本的imageter
 	 */
@@ -35,9 +40,17 @@ public class NetworkHelper{
 		@Override
 		public Drawable getDrawable(String source) {
 			Drawable drawable=null;
-			drawable=Drawable.createFromPath(source);
-			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-			return drawable;
+				
+				try {
+					URL url=new URL(source);
+					drawable=Drawable.createFromStream(url.openStream(), null);
+				drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+				return drawable;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return drawable;
 		}
 	};
 	/**

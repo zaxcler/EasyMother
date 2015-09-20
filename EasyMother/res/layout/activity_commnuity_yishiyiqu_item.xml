@@ -31,6 +31,7 @@
         android:layout_below="@id/textView1"
         android:layout_marginTop="@dimen/dp_10"
        android:layout_alignLeft="@id/textView1"
+       android:lines="3"
         android:text="啊实打实大师大师阿打算打算大的撒撒打算打算的" />
 
 </RelativeLayout>

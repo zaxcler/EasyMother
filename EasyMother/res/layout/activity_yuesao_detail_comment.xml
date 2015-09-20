@@ -12,7 +12,7 @@
         android:layout_marginBottom="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_20"
         android:text="雇主评价信息"
-        android:textSize="@dimen/sp_16" />
+        android:textSize="@dimen/sp_14" />
 
     <TextView
         android:id="@+id/comment_num"
@@ -47,9 +47,10 @@
             android:gravity="center"
             android:layout_marginRight="@dimen/dp_50"
             android:background="@drawable/lightredwine_border"
-            android:layout_width="0dp"
+            android:layout_width="80dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
             android:text="我要评价"
             android:padding="@dimen/dp_5"
             android:drawableLeft="@drawable/comment_write"
@@ -57,10 +58,11 @@
          <TextView
              android:id="@+id/allcomment"
             android:gravity="center"
+            android:textSize="12sp"
             android:background="@drawable/lightredwine_border"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="wrap_content"
             android:text="查看所有评价"
             android:padding="@dimen/dp_5"
             android:drawableLeft="@drawable/cleckall"

@@ -2,6 +2,8 @@
 <resources>
     <!--橘红色  -->
     <color name="orange_red">#FF3A1D</color>
+    <!--橘色  -->
+    <color name="orange">#d27b25</color>
     <!-- 白色-->
     <color name="white">#ffffff</color>
     
@@ -17,6 +19,8 @@
     <color name="borowhite">#FAFAFB</color>
      <!--透明  -->
     <color name="alpha">#00000000</color>
+     <!--半透明  -->
+    <color name="halfalpha">#e0000000</color>
     <!-- 红灰色 -->
     <color name="redboro">#f8f2f4</color>
     
