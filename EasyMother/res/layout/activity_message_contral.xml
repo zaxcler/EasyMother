@@ -14,8 +14,8 @@
         android:layout_height="match_parent"
         android:divider="@color/background"
         android:dividerHeight="@dimen/dp_2"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_10" >
+        android:paddingLeft="@dimen/dp_2"
+        android:paddingRight="@dimen/dp_2" >
     </ListView>
 
 </LinearLayout>

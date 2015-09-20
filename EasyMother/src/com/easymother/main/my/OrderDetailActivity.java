@@ -61,6 +61,8 @@ public class OrderDetailActivity extends Activity {
 	private TextView paybyweek;// 每次支付
 	private TextView order_time;// 下单时间
 	private ImageView nurse_image;// 护理师图片
+	
+	private Order order;
 
 	private Intent intent;
 	private int id;
@@ -149,132 +151,139 @@ public class OrderDetailActivity extends Activity {
 	 * 绑定数据到界面
 	 */
 	protected void bindData(OrderDetailResult orderDetail) {
-		if (orderDetail.getOrder().getOrderCode() != null) {
-			order_no.setText(orderDetail.getOrder().getOrderCode());
-		}
-		if (orderDetail.getOrder().getUserAddress() != null) {
-			user_address.setText(orderDetail.getOrder().getUserAddress());
-		}
-		if (orderDetail.getOrder().getUserName() != null) {
-			user_name.setText(orderDetail.getOrder().getUserName());
-		}
-		if (orderDetail.getOrder().getUserMobile() != null) {
-			user_phone.setText(orderDetail.getOrder().getUserMobile());
-		}
-
-		NurseBaseBean baseBean = orderDetail.getNurseInfo();
-		if (baseBean != null) {
-			if (baseBean.getRealName() != null) {
-				nurse_name.setText(baseBean.getRealName());
-			}
-			if (baseBean.getJob() != null) {
-				if ("YS".equals(baseBean.getJob())) {
-					nurse_name.setText("月嫂");
-					job="YS";
+		if (orderDetail!=null) {
+			if (orderDetail.getOrder()!=null) {
+				order=orderDetail.getOrder();
+				if (orderDetail.getOrder().getOrderCode() != null) {
+					order_no.setText(orderDetail.getOrder().getOrderCode());
 				}
-			}
-			if (baseBean.getJob() != null) {
-				if ("YYS".equals(baseBean.getJob())) {
-					nurse_name.setText("育婴师");
-					job="YYS";
+				if (orderDetail.getOrder().getUserAddress() != null) {
+					user_address.setText(orderDetail.getOrder().getUserAddress());
 				}
-			}
-			if (baseBean.getJob() != null) {
-				if ("CRS".equals(baseBean.getJob())) {
-					nurse_name.setText("催乳师");
-					job="CRS";
+				if (orderDetail.getOrder().getUserName() != null) {
+					user_name.setText(orderDetail.getOrder().getUserName());
 				}
-			}
-			if (baseBean.getJob() != null) {
-				if ("SHORT_YS".equals(baseBean.getJob())) {
-					nurse_name.setText("短期月嫂");
-					job="SHORT_YS";
+				if (orderDetail.getOrder().getUserMobile() != null) {
+					user_phone.setText(orderDetail.getOrder().getUserMobile());
 				}
-			}
-			if (baseBean.getJob() != null) {
-				if ("SHORT_YYS".equals(baseBean.getJob())) {
-					nurse_name.setText("短期育婴师");
-					job="SHORT_YYS";
-				}
-			}
-			if (baseBean.getSeniority() != null) {
-				work_express.setText("从业" + baseBean.getSeniority() + "年");
-			}
-			if (baseBean.getAge() != null) {
-				nurse_age.setText(+baseBean.getAge() + "岁");
-			}
-			if (baseBean.getHometown() != null) {
-				nurse_area.setText(baseBean.getHometown());
-			}
-			if (baseBean.getCurrentAddress() != null) {
-				nurse_address.setText(baseBean.getCurrentAddress());
 			}
 			
-			if (baseBean.getImage() != null) {
-				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + baseBean.getImage(),
-						nurse_image,MyApplication.options_image);
+
+			NurseBaseBean baseBean = orderDetail.getNurseInfo();
+			if (baseBean != null) {
+				if (baseBean.getRealName() != null) {
+					nurse_name.setText(baseBean.getRealName());
+				}
+				if (baseBean.getJob() != null) {
+					if ("YS".equals(baseBean.getJob())) {
+						nurse_name.setText("月嫂");
+						job="YS";
+					}
+				}
+				if (baseBean.getJob() != null) {
+					if ("YYS".equals(baseBean.getJob())) {
+						nurse_name.setText("育婴师");
+						job="YYS";
+					}
+				}
+				if (baseBean.getJob() != null) {
+					if ("CRS".equals(baseBean.getJob())) {
+						nurse_name.setText("催乳师");
+						job="CRS";
+					}
+				}
+				if (baseBean.getJob() != null) {
+					if ("SHORT_YS".equals(baseBean.getJob())) {
+						nurse_name.setText("短期月嫂");
+						job="SHORT_YS";
+					}
+				}
+				if (baseBean.getJob() != null) {
+					if ("SHORT_YYS".equals(baseBean.getJob())) {
+						nurse_name.setText("短期育婴师");
+						job="SHORT_YYS";
+					}
+				}
+				if (baseBean.getSeniority() != null) {
+					work_express.setText("从业" + baseBean.getSeniority() + "年");
+				}
+				if (baseBean.getAge() != null) {
+					nurse_age.setText(+baseBean.getAge() + "岁");
+				}
+				if (baseBean.getHometown() != null) {
+					nurse_area.setText(baseBean.getHometown());
+				}
+				if (baseBean.getCurrentAddress() != null) {
+					nurse_address.setText(baseBean.getCurrentAddress());
+				}
+				
+				if (baseBean.getImage() != null) {
+					ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + baseBean.getImage(),
+							nurse_image,MyApplication.options_image);
+				}
+
+			}
+			if (orderDetail.getNurseJob()!=null) {
+				if (orderDetail.getNurseJob().getPrice() != null) {
+					price.setText(baseBean.getPrice()+"元/26天");
+				}else {
+					price.setText("");
+				}
+				if (orderDetail.getNurseJob().getMarketPrice() != null) {
+					marketprice.setText("市场价："+baseBean.getMarketPrice());
+					marketprice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+				}else {
+					marketprice.setText("市场价：");
+				}
 			}
 
-		}
-		if (orderDetail.getNurseJob()!=null) {
-			if (orderDetail.getNurseJob().getPrice() != null) {
-				price.setText(baseBean.getPrice()+"元/26天");
-			}else {
-				price.setText("");
+			if (orderDetail.getOrder().getStatus() != null) {
+				if ("20".equals(orderDetail.getOrder().getStatus())) {
+					pay_state.setText("等待服务");
+				}else if ("10".equals(orderDetail.getOrder().getStatus())) {
+					pay_state.setText("等待付款");
+				}else if ("40".equals(orderDetail.getOrder().getStatus())) {
+					pay_state.setText("服务结束");
+				}else {
+					pay_state.setText("服务中");
+				}
 			}
-			if (orderDetail.getNurseJob().getMarketPrice() != null) {
-				marketprice.setText("市场价："+baseBean.getMarketPrice());
-				marketprice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-			}else {
-				marketprice.setText("市场价：");
-			}
-		}
+			
 
-		if (orderDetail.getOrder().getStatus() != null) {
-			if ("20".equals(orderDetail.getOrder().getStatus())) {
-				pay_state.setText("等待服务");
-			}else if ("10".equals(orderDetail.getOrder().getStatus())) {
-				pay_state.setText("等待付款");
-			}else if ("40".equals(orderDetail.getOrder().getStatus())) {
-				pay_state.setText("服务结束");
-			}else {
-				pay_state.setText("服务中");
+			if (orderDetail.getOrder().getRealHireStartTime() != null) {
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				String starttime = format.format(orderDetail.getOrder().getRealHireStartTime());
+				startTime.setText(starttime);
 			}
+			if (orderDetail.getOrder().getRealHireEndTime() != null) {
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				String endtime = format.format(orderDetail.getOrder().getRealHireEndTime());
+				endTime.setText(endtime);
+			}
+
+			if (orderDetail.getOrder().getCreateTime() != null) {
+				SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd HH:mm:ss");
+				String createtime = format.format(orderDetail.getOrder().getCreateTime());
+				order_time.setText("下单时间：" + createtime);
+			}
+			if (orderDetail.getOrder().getAllServerPrice() != null || orderDetail.getOrder().getRealHireStartTime() != null
+					|| orderDetail.getOrder().getRealHireEndTime() != null) {
+				Double allPrice = orderDetail.getOrder().getAllServerPrice();
+				int day = TimeCounter.countTimeOfDay(orderDetail.getOrder().getRealHireStartTime(),
+						orderDetail.getOrder().getRealHireEndTime());
+				// 转换成两位小数点
+				DecimalFormat format = new DecimalFormat(".##");
+				String pay_week = format.format((allPrice / day));
+				paybyweek.setText(pay_week + "元");
+			}
+			initPopupWindow(orderDetail.getOrder().getStatus(), orderDetail.getOrder());
+//			initPopupWindow("WORKING", orderDetail.getOrder());
 		}
 		
 
-		if (orderDetail.getOrder().getRealHireStartTime() != null) {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			String starttime = format.format(orderDetail.getOrder().getRealHireStartTime());
-			startTime.setText(starttime);
-		}
-		if (orderDetail.getOrder().getRealHireEndTime() != null) {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			String endtime = format.format(orderDetail.getOrder().getRealHireEndTime());
-			endTime.setText(endtime);
-		}
-
-		if (orderDetail.getOrder().getCreateTime() != null) {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd HH:mm:ss");
-			String createtime = format.format(orderDetail.getOrder().getCreateTime());
-			order_time.setText("下单时间：" + createtime);
-		}
-		if (orderDetail.getOrder().getAllServerPrice() != null || orderDetail.getOrder().getRealHireStartTime() != null
-				|| orderDetail.getOrder().getRealHireEndTime() != null) {
-			Double allPrice = orderDetail.getOrder().getAllServerPrice();
-			int day = TimeCounter.countTimeOfDay(orderDetail.getOrder().getRealHireStartTime(),
-					orderDetail.getOrder().getRealHireEndTime());
-			// 转换成两位小数点
-			DecimalFormat format = new DecimalFormat(".##");
-			String pay_week = format.format((allPrice / day));
-			paybyweek.setText(pay_week + "元");
-		}
-		initPopupWindow(orderDetail.getOrder().getStatus(), orderDetail.getOrder());
-//		initPopupWindow("WORKING", orderDetail.getOrder());
-
 	}
 
-	private void initPopupWindow(final String flag, Order order) {
+	private void initPopupWindow(final String flag, final Order order) {
 		// 根据flag判断resource
 		
 			popupWindow = new MyPopupWindow1(this, R.layout.mypage_order_status_menu);
@@ -294,6 +303,9 @@ public class OrderDetailActivity extends Activity {
 							switch (v.getId()) {
 							case R.id.chengetime:
 								intent.putExtra("id", id);
+								if (order.getJob()!=null) {
+									intent.putExtra("job",order.getJob());
+								}
 								intent.setClass(OrderDetailActivity.this, ChangeDateActivity.class);
 								startActivity(intent);
 								break;

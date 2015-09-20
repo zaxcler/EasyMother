@@ -1,7 +1,10 @@
 package com.easymother.main.my;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONArray;
 
 import android.content.Context;
 import android.view.View;
@@ -53,10 +56,23 @@ public class CommentListAdapter extends CommonAdapter<OrderComments> {
 			comment_time.setText(time);
 		}
 		if (t.getImages()!=null) {
-			gridView.setVisibility(View.VISIBLE);
-			List<String> iamges=JSON.parseArray(t.getImages(), String.class);
-			ImageAdapter adapter=new ImageAdapter(context, iamges, R.layout.comment_image);
-			gridView.setAdapter(adapter);
+			try {
+				gridView.setVisibility(View.VISIBLE);
+				List<String> iamges=new ArrayList<>();
+				JSONArray array=new JSONArray(t.getImages());
+				if (array.length()>0) {
+					for (int i = 0; i < array.length(); i++) {
+						iamges.add(array.getString(i));
+					}
+				}
+				
+//				List<String> iamges=JSON.parseArray(t.getImages(), String.class);
+				ImageAdapter adapter=new ImageAdapter(context, iamges, R.layout.comment_image);
+				gridView.setAdapter(adapter);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}else {
 			gridView.setVisibility(View.GONE);
 		}

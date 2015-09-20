@@ -3,6 +3,7 @@ package com.easymother.main.community;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.WeiXinUtils;
 import com.easymother.bean.NewsInfoBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
@@ -18,6 +19,7 @@ import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -102,6 +104,7 @@ public class ArticleActivity extends Activity {
 					
 					@Override
 					public void onClick(View v) {
+						WeiXinUtils.shareDownloadUrl(ArticleActivity.this, "www.qsmam.com", R.drawable.app, SendMessageToWX.Req.WXSceneSession);
 						popupwindow.dismiss();
 					}
 				});

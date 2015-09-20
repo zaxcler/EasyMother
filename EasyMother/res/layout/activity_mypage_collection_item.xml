@@ -22,7 +22,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/baby" />
+        android:src="@drawable/photo" />
 
     <TextView
         android:id="@+id/title"
@@ -43,25 +43,9 @@
         android:layout_marginTop="@dimen/dp_10"
         android:layout_alignLeft="@+id/title"
         android:layout_below="@+id/title"
-        android:src="@drawable/test2" />
+        android:src="@drawable/picture" />
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/picture"
-        android:text="老婆给你生娃了，你怎么呢过看着不管？"
-         />
-
-    <TextView
-        android:id="@+id/type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/picture"
-        android:layout_toRightOf="@+id/picture"
-        android:text="交通91.8"
-        android:textColor="@color/borotext" />
+    
 
     <TextView
         android:id="@+id/time"
@@ -71,5 +55,22 @@
         android:layout_alignTop="@+id/title"
          android:layout_marginRight="@dimen/dp_10"
         android:text="15/5/31" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/picture"
+        android:layout_alignTop="@id/picture"
+        android:text="老婆给你生娃了，你怎么呢过看着不管？" />
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content"
+        android:layout_toRightOf="@+id/picture"
+        android:text="交通91.8"
+        android:textColor="@color/borotext" />
 
 </RelativeLayout>

@@ -134,7 +134,7 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 			if (day > 9) {
 				current_day.setText("" + day++);
 			} else {
-				current_day.setText(" " + day++);
+				current_day.setText("  " + day++);
 			}
 
 		}else{

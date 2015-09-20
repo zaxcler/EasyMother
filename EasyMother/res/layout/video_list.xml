@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         layout="@layout/commontitle" />
 
+   
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/pulltoreflash"
         android:layout_width="match_parent"
@@ -17,5 +18,12 @@
         android:divider="@color/background"
         android:dividerHeight="@dimen/dp_5" >
     </com.handmark.pulltorefresh.library.PullToRefreshListView>
+    
+
+   <!--  <com.easymother.customview.MyReflashLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    </com.easymother.customview.MyReflashLayout> -->
 
 </LinearLayout>

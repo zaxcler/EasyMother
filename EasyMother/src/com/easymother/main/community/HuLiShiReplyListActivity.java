@@ -156,7 +156,7 @@ public class HuLiShiReplyListActivity extends Activity {
 								}
 							
 						} else {
-							Toast.makeText(HuLiShiReplyListActivity.this, "回复失败", Toast.LENGTH_SHORT).show();
+							Toast.makeText(HuLiShiReplyListActivity.this, JsonUtils.getRootResult(response).getMessage(), Toast.LENGTH_SHORT).show();
 						}
 					}
 

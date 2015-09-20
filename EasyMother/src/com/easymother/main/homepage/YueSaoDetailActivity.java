@@ -643,6 +643,9 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 			aadpter = new CalenderAadpter(this, date, R.layout.crs_gridview_item);
 			aadpter.setOrders(orders);
 			days.setAdapter(aadpter);
+			Calendar currentDate = aadpter.setCurrtentMonth(0);
+			aadpter.notifyDataSetChanged();
+			showdate.setText(currentDate.get(Calendar.YEAR) + "年" + (currentDate.get(Calendar.MONTH)+1 )+ "月");
 		}
 		
 
@@ -703,11 +706,9 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 			break;
 
 		case R.id.kongjian:
-			// if (hasKongjian) {
-			// EasyMotherUtils.goActivity(this, VideoListActivity.class);
-			// }
-			// 测试
-			EasyMotherUtils.goActivity(this, HuLiShiZoneDetailActivity.class);
+			intent.setClass(this, HuLiShiZoneDetailActivity.class);
+			intent.putExtra("id", baseBean.getNurseId());
+			startActivity(intent);
 			break;
 		case R.id.submit_comment:
 			intent.setClass(this, CommentActivity.class);
@@ -748,14 +749,14 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		// showdate.setText(currentDate.get(Calendar.YEAR)+"年"+currentDate.get(Calendar.MONTH)+"月");
 		// break;
 		case R.id.add_mouth:
-			currentDate = aadpter.setCurrtentMonth(-1);
-			aadpter.notifyDataSetChanged();
-			showdate.setText(currentDate.get(Calendar.YEAR) + "年" + currentDate.get(Calendar.MONTH) + "月");
-			break;
-		case R.id.delete_mouth:
 			currentDate = aadpter.setCurrtentMonth(1);
 			aadpter.notifyDataSetChanged();
-			showdate.setText(currentDate.get(Calendar.YEAR) + "年" + currentDate.get(Calendar.MONTH) + "月");
+			showdate.setText(currentDate.get(Calendar.YEAR) + "年" + (currentDate.get(Calendar.MONTH)+1 )+ "月");
+			break;
+		case R.id.delete_mouth:
+			currentDate = aadpter.setCurrtentMonth(-1);
+			aadpter.notifyDataSetChanged();
+			showdate.setText(currentDate.get(Calendar.YEAR) + "年" +(currentDate.get(Calendar.MONTH) +1)+ "月");
 			break;
 		// case R.id.delete_year:
 		// currentDate=aadpter.setCurrtentYear(1);

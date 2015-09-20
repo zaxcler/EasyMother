@@ -2,7 +2,11 @@ package com.easymother.main.my;
 
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.content.Context;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,7 +38,19 @@ public class CollectionListAdapter extends CommonAdapter<NewsBean> {
 		CircleImageView circleImageView1=holder.getView(R.id.circlepicture);
 		circleImageView1.setVisibility(View.GONE);
 		ImageView picture=holder.getView(R.id.picture);
-		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getImages(), picture,MyApplication.options_photo);
+		if (t.getImages()!=null&&!"".equals(t.getImages())) {
+			try {
+				JSONArray array=new JSONArray(t.getImages());
+				if (array.length()>0) {
+					ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+array.getInt(0), picture,MyApplication.options_photo);
+				}
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		TextView title=holder.getView(R.id.title);
 		if (t.getNewsName()!=null&&!"".equals(t.getNewsName())) {
 			title.setText(t.getNewsName());
@@ -42,28 +58,36 @@ public class CollectionListAdapter extends CommonAdapter<NewsBean> {
 			title.setText("");
 		}
 		TextView content=holder.getView(R.id.content);
-		if (t.getContent()!=null&&!"".equals(t.getContent())) {
-			content.setText(t.getContent());
+		if (t.getContent()!=null&&!"".equals(t.getContent())){
+			String temp=Html.fromHtml(t.getContent()).toString();
+			String msg;
+			if (temp.length()>15) {
+				msg=temp.substring(0, 15);
+			}else {
+				msg=temp;
+			}
+			content.setText(msg);
 		}else {
 			content.setText("");
 		}
-		TextView type=holder.getView(R.id.type);
-		if (t.getNewsType()!=null&&!"".equals(t.getNewsType())) {
+		TextView type_tv=holder.getView(R.id.type);
+		String type=t.getNewsType();
+		if (type!=null&&!"".equals(type)) {
 			if ("A".equals(type)) {
-					content.setText(t.getContent());
+				type_tv.setText("医");
 			}
 			if ("B".equals(type)) {
-				content.setText(t.getContent());
+				type_tv.setText("食");
 			}
 			if ("C".equals(type)) {
-				content.setText(t.getContent());
+				type_tv.setText("衣");
 			}
 			if ("D".equals(type)) {
-				content.setText(t.getContent());
+				type_tv.setText("趣");
 			}
 			
 		}else {
-			content.setText("");
+			type_tv.setText("");
 		}
 	}
 

@@ -176,25 +176,26 @@ public class HuLiShiZoneDetailActivity extends Activity {
 					images.addView(imageview, layoutParams);
 					imageview.setTag(i);
 					imageview.setScaleType(ScaleType.FIT_XY);
-					imageview.setOnClickListener(new OnClickListener() {
-						public void onClick(View arg0) {
-							Intent intent = new Intent(HuLiShiZoneDetailActivity.this,
-									GalleryUrlActivity.class);
-//							System.out.println(Integer.parseInt(arg0.getTag().toString())+"---Integer.parseInt(arg0.getTag().toString())");
-							intent.putExtra("tag", Integer.parseInt(arg0.getTag().toString()));
-							Bundle b = new Bundle();
-							b.putSerializable("list_img", picture);
-							intent.putExtras(b);
-//							int[] location = new int[2];
-//							imageview.getLocationOnScreen(location);
-//							intent.putExtra("locationX", location[0]);
-//							intent.putExtra("locationY", location[1]);
-//							intent.putExtra("width", imageview.getWidth());
-//							intent.putExtra("height", imageview.getHeight());
-							startActivity(intent);
-							overridePendingTransition(0, 0);
-						}
-					});
+					//点击放大 后面再做
+//					imageview.setOnClickListener(new OnClickListener() {
+//						public void onClick(View arg0) {
+//							Intent intent = new Intent(HuLiShiZoneDetailActivity.this,
+//									GalleryUrlActivity.class);
+////							System.out.println(Integer.parseInt(arg0.getTag().toString())+"---Integer.parseInt(arg0.getTag().toString())");
+//							intent.putExtra("tag", Integer.parseInt(arg0.getTag().toString()));
+//							Bundle b = new Bundle();
+//							b.putSerializable("list_img", picture);
+//							intent.putExtras(b);
+////							int[] location = new int[2];
+////							imageview.getLocationOnScreen(location);
+////							intent.putExtra("locationX", location[0]);
+////							intent.putExtra("locationY", location[1]);
+////							intent.putExtra("width", imageview.getWidth());
+////							intent.putExtra("height", imageview.getHeight());
+//							startActivity(intent);
+//							overridePendingTransition(0, 0);
+//						}
+//					});
 				}
 //			}
 			ArrayList<String> list=(ArrayList<String>) JSON.parseArray(nursebase.getLifeImages(), String.class);

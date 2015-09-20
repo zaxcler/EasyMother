@@ -231,6 +231,7 @@ public class CommentActivity extends Activity {
 		
 		params.put("userId",MyApplication.preferences.getInt("id", 0) );
 		if (nursejob.getId()!=null) {
+			params.put("nurseId", nursejob.getNurseId());
 			params.put("nurseId", nursejob.getId());
 			
 		}
@@ -258,12 +259,15 @@ public class CommentActivity extends Activity {
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
 					Toast.makeText(CommentActivity.this, "评论成功", 0).show();
 					CommentActivity.this.finish();
+				}else {
+					Toast.makeText(CommentActivity.this,"评论失败" , 0).show();
 				}
 			}
 			@Override
 			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 				super.onFailure(statusCode, headers, responseString, throwable);
 				Log.e("评论失败----", responseString);
+				Toast.makeText(CommentActivity.this,"连接服务器失败" , 0).show();
 			}
 		});
 		

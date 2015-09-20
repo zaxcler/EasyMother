@@ -29,14 +29,21 @@ public class YSYQAdapter extends CommonAdapter<CommunityHotBean> {
 		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getLogo(), imageView, MyApplication.options_image);
 		TextView textView1=holder.getView(R.id.textView1);
 		if (t.getTitle()!=null) {
+			
 			textView1.setText(Html.fromHtml(t.getTitle()));
 		}else {
 			textView1.setText("");
 		}
 		TextView textView2=holder.getView(R.id.textView2);
 		if (t.getContent()!=null) {
-			
-			textView2.setText(Html.fromHtml(t.getContent()));
+			String temp=Html.fromHtml(t.getContent()).toString();
+			String msg;
+			if (temp.length()>30) {
+				msg=temp.substring(0, 4);
+			}else {
+				msg=temp;
+			}
+			textView2.setText(msg);
 		}else {
 			textView2.setText("");
 		}

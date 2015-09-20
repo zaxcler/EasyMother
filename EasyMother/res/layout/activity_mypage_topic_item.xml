@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"
         android:background="@drawable/white_solid"
         android:paddingBottom="@dimen/dp_10" >
 
@@ -32,16 +31,16 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/circleImageView1"
             android:layout_below="@+id/circleImageView1"
-            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_20"
             android:text="第一次用了于嫂空间" />
 
         <GridView 
             android:id="@+id/pictures"
-            android:numColumns="4"
+            android:numColumns="3"
             android:gravity="center"
             android:visibility="gone"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/content"
             >
@@ -58,13 +57,16 @@
 
         <TextView
             android:id="@+id/msgAmoount"
-            android:padding="@dimen/dp_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/share"
             android:layout_alignBottom="@+id/share"
             android:layout_centerHorizontal="true"
             android:drawableLeft="@drawable/collect1"
+             android:paddingRight="@dimen/dp_20"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
             android:gravity="center"
             android:text="20" />
 
@@ -76,6 +78,9 @@
             android:layout_alignParentRight="true"
             android:paddingRight="@dimen/dp_20"
             android:paddingLeft="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            
             android:drawableLeft="@drawable/start1"
             android:text="24" />
 

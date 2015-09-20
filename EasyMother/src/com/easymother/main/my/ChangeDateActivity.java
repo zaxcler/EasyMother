@@ -62,6 +62,7 @@ public class ChangeDateActivity extends Activity implements View.OnClickListener
 	private String job;
 	protected String startTime;
 	protected String endTime;
+	private ImageView timedialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +88,7 @@ public class ChangeDateActivity extends Activity implements View.OnClickListener
 		time3 = (TextView) findViewById(R.id.time3);
 		time2 = (LinearLayout) findViewById(R.id.time2);
 		gridView=(MyGridView) findViewById(R.id.gridView1);
+		timedialog=(ImageView) findViewById(R.id.timedialog);
 	}
 
 	private void init() {
@@ -107,6 +109,14 @@ public class ChangeDateActivity extends Activity implements View.OnClickListener
 			endTime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+ calendar.get(Calendar.DAY_OF_MONTH);
 			time1.setText("开始时间"+calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
 			time3.setText("结束时间"+calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
+			timedialog.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					showDateDialog(v);
+				}
+			});
+			
 			
 		} else {
 			Date date=new Date(System.currentTimeMillis());

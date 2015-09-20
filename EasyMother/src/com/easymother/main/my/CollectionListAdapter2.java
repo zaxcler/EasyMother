@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.easymother.customview.CircleImageView;
 import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.JsonUtils;
+import com.easymother.utils.NetworkHelper;
 import com.easymother.utils.ViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -61,11 +63,19 @@ public class CollectionListAdapter2 extends CommonAdapter<ForumBean> {
 			title.setText("");
 		}
 		TextView content=holder.getView(R.id.content);
-		if (t.getPostTitle()!=null) {
-			content.setText(t.getPostTitle());
+		if (t.getContent()!=null) {
+			String temp=Html.fromHtml(t.getContent()).toString();
+			String msg;
+			if (temp.length()>15) {
+				msg=temp.substring(0, 15);
+			}else {
+				msg=temp;
+			}
+			content.setText(msg);
 		}else {
 			content.setText("");
 		}
+		
 		TextView type=holder.getView(R.id.type);
 		if (t.getPostType()!=null) {
 			type.setText(t.getPostType());
