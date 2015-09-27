@@ -95,13 +95,14 @@ public class BabyTimeEditActivity extends Activity {
 //						}
 						
 //						if (imagesname!=null && imagesname.size()>0) {
-							String name=EasyMotherUtils.photosname.toString();
-							if (name!=null&&!"".equals(name)) {
+							
+							if (EasyMotherUtils.photosname.size()>0) {
+								String name=EasyMotherUtils.photosname.toString();
 								params.put("images", name);
 							}
-							EasyMotherUtils.photosname.clear();
 							Log.e("上传的图片名字", "图片名字"+imagesname.toString());
 //						}
+						EasyMotherUtils.photosname.clear();
 						NetworkHelper.doGet(BaseInfo.BABYTIME_SAVEINFO, params, new JsonHttpResponseHandler(){
 							@Override
 							public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

@@ -63,6 +63,7 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 	private boolean uploadstatu;// 上传是否成功
 	private BabyInfoBean info;//宝贝信息
 	private String birthday;
+	private int  baby_id;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +141,7 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 
 	@Override
 	public void onClick(View arg0) {
-		int id = arg0.getId();
+		int view_id = arg0.getId();
 		Intent intent=new Intent(this,ChanegBabyInfo.class);
 		//如果获取到数据就从数据中获取id
 		if (info!=null) {
@@ -154,7 +155,7 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 			}
 			
 		}
-		switch (id) {
+		switch (view_id) {
 		case R.id.circleImageView1:
 			final MyPopupWindow popupWindow = new MyPopupWindow(this, R.layout.chenge_photo);
 			popupWindow.setOnMyPopupClidk(new OnMyPopupWindowsClick() {
@@ -216,17 +217,20 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 	 * 保存年龄信息
 	 */
 	public void save(){
+		
 		RequestParams params=new RequestParams();
+		if (MyApplication.preferences.getInt("id", 0)!=0) {
+			params.put("userId", MyApplication.preferences.getInt("id", 0));
+		}else {
+			EasyMotherUtils.goActivity(BabyTimeInfomationActivity.this, LoginOrRegisterActivity.class);
+			return;
+		}
 		if (info!=null) {
 			params.put("id", info.getId());
 		}else {
 			params.put("id", "");
 		}
-		if (MyApplication.preferences.getInt("id", 0)!=0) {
-			params.put("userId", MyApplication.preferences.getInt("id", 0));
-		}else {
-			EasyMotherUtils.goActivity(BabyTimeInfomationActivity.this, LoginOrRegisterActivity.class);
-		}
+		
 		params.put("birthday", birthday);
 		NetworkHelper.doGet(BaseInfo.BABYINFO_SAVEINFO, params, new JsonHttpResponseHandler(){
 			@Override

@@ -128,11 +128,11 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 		if (result.getBabyInfo()==null) {
 			if (MyApplication.preferences.getInt("id", 0)==0) {
 				baby_name.setText("请登录");
-				return;
+//				return;
 			}
 			//没有囡囡信息就加载一个错误的图片，会有默认图片
 			ImageLoader.getInstance().displayImage("", circleImageView,MyApplication.options_photo);
-			ImageLoader.getInstance().displayImage("", background,MyApplication.options_image);
+//			ImageLoader.getInstance().displayImage("", background,MyApplication.options_image);
 		}else {
 			int baby_id=MyApplication.preferences.getInt("baby_id", 0);
 			String baby_image=MyApplication.preferences.getString("baby_image", "");
@@ -196,12 +196,31 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 				EasyMotherUtils.goActivityForResult(getActivity(), LoginOrRegisterActivity.class, LOGIN_CODE);
 				return;
 			}
+			//如果宝贝信息没有就必须先去添加宝贝信息
+			if (MyApplication.preferences.getInt("baby_id", 0)==0) {
+				Toast.makeText(getActivity(), "请先添加宝贝信息", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			EasyMotherUtils.goActivity(getActivity(), BabyTimeEditActivity.class);
 			break;
 		case R.id.circleImageView1:
+			//没有登陆不能添加宝贝信息
+			if (MyApplication.preferences.getInt("id", 0)==0) {
+				EasyMotherUtils.goActivityForResult(getActivity(), LoginOrRegisterActivity.class, LOGIN_CODE);
+				return;
+			}
 			EasyMotherUtils.goActivity(getActivity(), BabyTimeInfomationActivity.class);
 			break;
 		case R.id.baby_image:
+			//没有登陆不能添加宝贝信息
+			if (MyApplication.preferences.getInt("id", 0)==0) {
+				EasyMotherUtils.goActivityForResult(getActivity(), LoginOrRegisterActivity.class, LOGIN_CODE);
+				return;
+			}
+			if (MyApplication.preferences.getInt("baby_id", 0)==0) {
+				Toast.makeText(getActivity(), "请先添加宝贝信息", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			final MyPopupWindow popupWindow=new MyPopupWindow(getActivity(), R.layout.chenge_background);
 			popupWindow.setOnMyPopupClidk(new OnMyPopupWindowsClick() {
 				

@@ -141,6 +141,7 @@
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
         android:hint="密码"
+        android:password="true"
         android:textColor="@color/boroblacktext"
         android:textSize="@dimen/dp_16" />
     

@@ -309,27 +309,29 @@ public class ImageCycleView1 extends LinearLayout {
 			break;
 		case MotionEvent.ACTION_MOVE:
 			
-//			Log.e("firstY", firstY+"");
-//			Log.e("firstX", firstX+"");
-//			
-//			lastX=getX();
-//			lastY=getY();
-//			Log.e("lastX", lastX+"");
-//			Log.e("lastY", lastY+"");
-//			if (Math.abs(lastX-firstX)<Math.abs(lastY-firstY)) {
-//				return true;
-//			}
+			Log.e("firstY", firstY+"");
+			Log.e("firstX", firstX+"");
+			
+			lastX=getX();
+			lastY=getY();
+			Log.e("lastX", lastX+"");
+			Log.e("lastY", lastY+"");
+			if (Math.abs(lastX-firstX)>Math.abs(lastY-firstY)) {
+				//阻止父组件截获事件
+				getParent().requestDisallowInterceptTouchEvent(true);
+			}
 			break;
 		case MotionEvent.ACTION_UP:
-//			if (Math.abs(lastX-firstX)<Math.abs(lastY-firstY)) {
-//				return true;
-//			}
+			if (Math.abs(lastX-firstX)>Math.abs(lastY-firstY)) {
+				//阻止父组件截获事件
+				getParent().requestDisallowInterceptTouchEvent(true);
+			}
 			break;
 
 		default:
 			break;
 		}
-		return isDragging;
+		return false;
 	}
 	
 	
