@@ -37,9 +37,14 @@ import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class LetterListAdapter extends CommonAdapter<Letter> {
+	private List<Letter> letters;
 
 	public LetterListAdapter(Context context, List<Letter> list, int resource) {
 		super(context, list, resource);
+		this.letters=list;
+	}
+	public void add(List<Letter> letters){
+		this.letters.addAll(letters);
 	}
 
 	@Override
@@ -54,7 +59,10 @@ public class LetterListAdapter extends CommonAdapter<Letter> {
 			letter_content.setText(Html.fromHtml(t.getContent()));
 		}
 		if (t.getImages()!=null) {
-			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getImages(), letter_image,MyApplication.options_image);
+			if (!letter_image.getTag().equals(t.getImages())) {
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getImages(), letter_image,MyApplication.options_image);
+			}
+			
 			Log.e("信件图片地址", BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getImages());
 		}
 		

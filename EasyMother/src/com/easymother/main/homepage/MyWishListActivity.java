@@ -94,7 +94,7 @@ public class MyWishListActivity extends Activity {
 					 Log.e("WishListResult", listResult.toString());
 					 bindData(listResult);//绑定数据
 				}else {
-					Toast.makeText(MyWishListActivity.this, "访问失败", Toast.LENGTH_SHORT).show();
+					Toast.makeText(MyWishListActivity.this, "未登录！", Toast.LENGTH_SHORT).show();
 				}
 				 
 			}

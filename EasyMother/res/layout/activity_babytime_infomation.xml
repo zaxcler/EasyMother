@@ -32,7 +32,7 @@
             android:layout_height="@dimen/dp_48"
             android:layout_alignBottom="@+id/nannan_photo"
             android:layout_alignRight="@+id/view1"
-            android:src="@drawable/default_photo" />
+            android:src="@drawable/photo" />
 
         <View
             android:id="@+id/view2"

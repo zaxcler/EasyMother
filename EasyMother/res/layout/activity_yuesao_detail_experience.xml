@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="工作履历"
-            android:textSize="@dimen/sp_16" />
+            android:textSize="@dimen/sp_14" />
 
         <TextView
             android:id="@+id/work_express_content"
@@ -31,6 +31,8 @@
             android:gravity="center"
             android:ellipsize="end"
             android:lines="3"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
             android:textColor="@color/boroblacktext"
             android:textSize="@dimen/sp_12" />
 

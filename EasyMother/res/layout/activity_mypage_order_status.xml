@@ -173,7 +173,7 @@
             android:layout_width="@dimen/dp_80"
             android:layout_height="@dimen/dp_120"
             android:layout_marginLeft="@dimen/dp_10"
-            android:background="@drawable/test2" />
+            android:src="@drawable/photo" />
 
         <TextView
             android:id="@+id/nurse_name"
@@ -244,7 +244,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
-            android:text="5800元/月"
+            android:text=""
             android:textColor="@color/lightredwine"
             android:textSize="@dimen/sp_16" />
 
@@ -372,7 +372,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginRight="@dimen/dp_20"
-                android:text="每次支付："
+                android:text="服务费用："
                 android:textColor="@color/boroblacktext" />
 
             <View
@@ -385,7 +385,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:text="1600元"
+                android:text=""
                 android:textColor="@color/orange_red" />
         </LinearLayout>
 

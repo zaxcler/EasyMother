@@ -37,6 +37,9 @@ public class MessageAdapter extends CommonAdapter<ForumPost> {
 		this.list=list;
 		this.context=context;
 	}
+	public void addList(List<ForumPost> list){
+		this.list=list;
+	}
 
 	@Override
 	public void setDataToItem(ViewHolder holder, final ForumPost t) {

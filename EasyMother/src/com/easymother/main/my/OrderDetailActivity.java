@@ -2,11 +2,13 @@ package com.easymother.main.my;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
 
 import com.easymother.bean.NurseBaseBean;
+import com.easymother.bean.NurseJobBean;
 import com.easymother.bean.Order;
 import com.easymother.bean.OrderDetailResult;
 import com.easymother.configure.BaseInfo;
@@ -115,6 +117,9 @@ public class OrderDetailActivity extends Activity {
 		endTime = (TextView) findViewById(R.id.endTime);
 		paybyweek = (TextView) findViewById(R.id.paybyweek);
 		order_time = (TextView) findViewById(R.id.order_time);
+		nurse_image=(ImageView) findViewById(R.id.image);
+		nurse_type=(TextView) findViewById(R.id.nurse_type);
+		
 
 	}
 
@@ -151,7 +156,9 @@ public class OrderDetailActivity extends Activity {
 	 * 绑定数据到界面
 	 */
 	protected void bindData(OrderDetailResult orderDetail) {
+		int day=1;
 		if (orderDetail!=null) {
+			day=TimeCounter.countTimeOfDay(orderDetail.getOrder().getRealHireStartTime(), orderDetail.getOrder().getRealHireEndTime());
 			if (orderDetail.getOrder()!=null) {
 				order=orderDetail.getOrder();
 				if (orderDetail.getOrder().getOrderCode() != null) {
@@ -166,75 +173,100 @@ public class OrderDetailActivity extends Activity {
 				if (orderDetail.getOrder().getUserMobile() != null) {
 					user_phone.setText(orderDetail.getOrder().getUserMobile());
 				}
+				if (order.getNurseName() != null) {
+					nurse_name.setText(order.getNurseName() );
+				}
 			}
 			
 
 			NurseBaseBean baseBean = orderDetail.getNurseInfo();
 			if (baseBean != null) {
-				if (baseBean.getRealName() != null) {
-					nurse_name.setText(baseBean.getRealName());
-				}
-				if (baseBean.getJob() != null) {
-					if ("YS".equals(baseBean.getJob())) {
-						nurse_name.setText("月嫂");
-						job="YS";
-					}
-				}
-				if (baseBean.getJob() != null) {
-					if ("YYS".equals(baseBean.getJob())) {
-						nurse_name.setText("育婴师");
-						job="YYS";
-					}
-				}
-				if (baseBean.getJob() != null) {
-					if ("CRS".equals(baseBean.getJob())) {
-						nurse_name.setText("催乳师");
-						job="CRS";
-					}
-				}
-				if (baseBean.getJob() != null) {
-					if ("SHORT_YS".equals(baseBean.getJob())) {
-						nurse_name.setText("短期月嫂");
-						job="SHORT_YS";
-					}
-				}
-				if (baseBean.getJob() != null) {
-					if ("SHORT_YYS".equals(baseBean.getJob())) {
-						nurse_name.setText("短期育婴师");
-						job="SHORT_YYS";
-					}
-				}
-				if (baseBean.getSeniority() != null) {
-					work_express.setText("从业" + baseBean.getSeniority() + "年");
-				}
-				if (baseBean.getAge() != null) {
-					nurse_age.setText(+baseBean.getAge() + "岁");
+				
+				if (baseBean.getBirthday() != null) {
+					
+					Date currentday=new Date(System.currentTimeMillis());
+					int age=currentday.getYear()-baseBean.getBirthday().getYear();
+					nurse_age.setText(age + "岁");
 				}
 				if (baseBean.getHometown() != null) {
 					nurse_area.setText(baseBean.getHometown());
 				}
 				if (baseBean.getCurrentAddress() != null) {
-					nurse_address.setText(baseBean.getCurrentAddress());
+					nurse_address.setText("现居地："+baseBean.getCurrentAddress());
 				}
-				
 				if (baseBean.getImage() != null) {
 					ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + baseBean.getImage(),
 							nurse_image,MyApplication.options_image);
 				}
+			}
+			
 
 			}
+			
+			NurseJobBean nurseJobBean=orderDetail.getNurseJob();
+			
 			if (orderDetail.getNurseJob()!=null) {
-				if (orderDetail.getNurseJob().getPrice() != null) {
-					price.setText(baseBean.getPrice()+"元/26天");
+				if (nurseJobBean.getShowPrice()!= null) {
+					price.setText(nurseJobBean.getShowPrice());
 				}else {
 					price.setText("");
 				}
-				if (orderDetail.getNurseJob().getMarketPrice() != null) {
-					marketprice.setText("市场价："+baseBean.getMarketPrice());
+				if (nurseJobBean.getMarketPrice() != null) {
+					marketprice.setText("市场价："+nurseJobBean.getMarketPrice()+"元/26天");
 					marketprice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 				}else {
 					marketprice.setText("市场价：");
 				}
+				if (nurseJobBean.getJob() != null) {
+					if ("YS".equals(nurseJobBean.getJob())) {
+						nurse_type.setText("月嫂");
+						job="YS";
+						if (nurseJobBean.getPrice()!=null) {
+							paybyweek.setText(nurseJobBean.getPrice() *day+ "元");
+						}
+						
+					}
+				}
+				if (nurseJobBean.getJob() != null) {
+					if ("YYS".equals(nurseJobBean.getJob())) {
+						nurse_type.setText("育婴师");
+						job="YYS";
+						if (nurseJobBean.getPrice()!=null) {
+							paybyweek.setText(nurseJobBean.getPrice() *day+ "元");
+						}
+					}
+				}
+				if (nurseJobBean.getJob() != null) {
+					if ("CRS".equals(nurseJobBean.getJob())) {
+						nurse_type.setText("催乳师");
+						job="CRS";
+						if (nurseJobBean.getPrice()!=null) {
+							paybyweek.setText(nurseJobBean.getPrice()*1 + "元");
+						}
+					}
+				}
+				if (nurseJobBean.getJob() != null) {
+					if ("SHORT_YS".equals(nurseJobBean.getJob())) {
+						nurse_type.setText("短期月嫂");
+						job="SHORT_YS";
+						if (nurseJobBean.getPrice()!=null) {
+							paybyweek.setText(nurseJobBean.getPrice() *7+ "元");
+						}
+					}
+				}
+				if (nurseJobBean.getJob() != null) {
+					if ("SHORT_YYS".equals(nurseJobBean.getJob())) {
+						nurse_type.setText("短期育婴师");
+						job="SHORT_YYS";
+						if (nurseJobBean.getPrice()!=null) {
+							paybyweek.setText(nurseJobBean.getPrice() *7+ "元");
+						}
+					}
+				}
+				if (nurseJobBean.getSeniority() != null) {
+					work_express.setText("从业" + nurseJobBean.getSeniority() + "年");
+				}
+				
 			}
 
 			if (orderDetail.getOrder().getStatus() != null) {
@@ -266,22 +298,22 @@ public class OrderDetailActivity extends Activity {
 				String createtime = format.format(orderDetail.getOrder().getCreateTime());
 				order_time.setText("下单时间：" + createtime);
 			}
-			if (orderDetail.getOrder().getAllServerPrice() != null || orderDetail.getOrder().getRealHireStartTime() != null
-					|| orderDetail.getOrder().getRealHireEndTime() != null) {
-				Double allPrice = orderDetail.getOrder().getAllServerPrice();
-				int day = TimeCounter.countTimeOfDay(orderDetail.getOrder().getRealHireStartTime(),
-						orderDetail.getOrder().getRealHireEndTime());
-				// 转换成两位小数点
-				DecimalFormat format = new DecimalFormat(".##");
-				String pay_week = format.format((allPrice / day));
-				paybyweek.setText(pay_week + "元");
-			}
+//			if (orderDetail.getOrder().getAllServerPrice() != null || orderDetail.getOrder().getRealHireStartTime() != null
+//					|| orderDetail.getOrder().getRealHireEndTime() != null) {
+//				Double allPrice = orderDetail.getOrder().getAllServerPrice();
+//				int day = TimeCounter.countTimeOfDay(orderDetail.getOrder().getRealHireStartTime(),
+//						orderDetail.getOrder().getRealHireEndTime());
+//				// 转换成两位小数点
+//				DecimalFormat format = new DecimalFormat(".##");
+//				String pay_week = format.format((allPrice / day*7));
+//				paybyweek.setText(pay_week + "元");
+//			}
 			initPopupWindow(orderDetail.getOrder().getStatus(), orderDetail.getOrder());
 //			initPopupWindow("WORKING", orderDetail.getOrder());
 		}
 		
 
-	}
+	
 
 	private void initPopupWindow(final String flag, final Order order) {
 		// 根据flag判断resource
@@ -308,6 +340,7 @@ public class OrderDetailActivity extends Activity {
 								}
 								intent.setClass(OrderDetailActivity.this, ChangeDateActivity.class);
 								startActivity(intent);
+								popupWindow.dismiss();
 								break;
 
 							case R.id.chenge:
@@ -315,15 +348,18 @@ public class OrderDetailActivity extends Activity {
 								intent.putExtra("type", "CHANGENURSE");
 								intent.setClass(OrderDetailActivity.this, ChangeNurseActivity.class);
 								startActivity(intent);
+								popupWindow.dismiss();
 								break;
 							case R.id.unorder:
 								intent.putExtra("id", id);
 								intent.putExtra("type", "UNORDER");
 								intent.setClass(OrderDetailActivity.this, ChangeNurseActivity.class);
 								startActivity(intent);
+								popupWindow.dismiss();
 								break;
 							case R.id.contact:
 								EasyMotherUtils.goActivity(OrderDetailActivity.this, ContactActivity.class);
+								popupWindow.dismiss();
 								break;
 							}
 						}

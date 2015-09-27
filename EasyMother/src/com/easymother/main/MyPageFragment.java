@@ -1,5 +1,9 @@
 package com.easymother.main;
 
+import org.apache.http.Header;
+import org.json.JSONObject;
+
+import com.easymother.bean.UserInfo;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
@@ -17,11 +21,16 @@ import com.easymother.main.my.TopicListActivity;
 import com.easymother.main.my.TopicReplyListActivity;
 import com.easymother.main.my.VersionActivity;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.JsonUtils;
+import com.easymother.utils.NetworkHelper;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager.OnActivityResultListener;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -32,6 +41,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MyPageFragment extends Fragment implements OnClickListener {
 	private CircleImageView circleImageView;// 用户头像点击登录（未登录状态）登录状态进入个人信息
@@ -54,6 +64,21 @@ public class MyPageFragment extends Fragment implements OnClickListener {
 	private TextView setting;// 设置
 
 	private boolean isOnLine = false;// 是否登录
+	
+	public  Handler handler=new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+//			退出登录后刷新
+			case 1:
+				loadData();
+				break;
+
+			default:
+				break;
+			}
+			
+		};
+	};
 
 	public MyPageFragment() {
 	}
@@ -103,7 +128,7 @@ public class MyPageFragment extends Fragment implements OnClickListener {
 //			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + image, circleImageView);
 //			user_name.setText(nickname);
 //		}
-		
+		loadData();
 		showUserMessage();
 		circleImageView.setOnClickListener(this);
 		user_name.setOnClickListener(this);
@@ -121,18 +146,64 @@ public class MyPageFragment extends Fragment implements OnClickListener {
 
 	}
 
+	public void loadData() {
+		RequestParams params=new RequestParams();
+		NetworkHelper.doGet(BaseInfo.TO_PERSONAL_CENT, params, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+				super.onSuccess(statusCode, headers, response);
+				
+					UserInfo info=JsonUtils.getResult(response, UserInfo.class);
+					bindData(info);
+				
+				
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+				super.onFailure(statusCode, headers, responseString, throwable);
+				topic_num.setText("0");
+				reply_num.setText("0");
+				collection_num.setText("0");
+//				Toast.makeText(getActivity(), "未登录！", Toast.LENGTH_SHORT).show();
+			}
+		});
+		
+	}
+	/**
+	 * 清除数据，供maintivity调用
+	 */
+	public void clearData(){
+		topic_num.setText("0");
+		reply_num.setText("0");
+		collection_num.setText("0");
+	}
+	/*
+	 * 绑定数据
+	 */
+	protected void bindData(UserInfo info) {
+		if (info!=null) {
+			topic_num.setText(info.getMore1());
+			reply_num.setText(info.getMore2());
+			collection_num.setText(info.getMore3());
+		}else {
+			topic_num.setText("");
+			reply_num.setText("");
+			collection_num.setText("");
+		}
+		
+	}
 	@Override
 	public void onClick(View arg0) {
 
 		switch (arg0.getId()) {
+		
+		
 		case R.id.user_photo:
 			if (isOnLine) {
 				EasyMotherUtils.goActivity(getActivity(), InfomationActivity.class);
 			} else {
 				EasyMotherUtils.goActivity(getActivity(), LoginOrRegisterActivity.class);
-
 			}
-
 			break;
 		case R.id.textView1:
 			break;
@@ -149,16 +220,31 @@ public class MyPageFragment extends Fragment implements OnClickListener {
 			EasyMotherUtils.goActivity(getActivity(), CollectListActivity.class);
 			break;
 		case R.id.pay:
-			EasyMotherUtils.goActivity(getActivity(), PayListActivity.class);
+			if (!isOnLine) {
+				EasyMotherUtils.goActivity(getActivity(), LoginOrRegisterActivity.class);
+			}else {
+				EasyMotherUtils.goActivity(getActivity(), PayListActivity.class);
+			}
+			
 			break;
 		case R.id.order:
-			EasyMotherUtils.goActivity(getActivity(), OrderListActivity.class);
+			if (!isOnLine) {
+				EasyMotherUtils.goActivity(getActivity(), LoginOrRegisterActivity.class);
+			}else {
+				EasyMotherUtils.goActivity(getActivity(), OrderListActivity.class);
+			}
+			
 			break;
 		case R.id.contact:
 			EasyMotherUtils.goActivity(getActivity(), ContactActivity.class);
 			break;
 		case R.id.wish:
-			EasyMotherUtils.goActivity(getActivity(), MyWishListActivity.class);
+			if (!isOnLine) {
+				EasyMotherUtils.goActivity(getActivity(), LoginOrRegisterActivity.class);
+			}else {
+				EasyMotherUtils.goActivity(getActivity(), MyWishListActivity.class);
+			}
+			
 			break;
 		case R.id.version:
 			EasyMotherUtils.goActivity(getActivity(), VersionActivity.class);
@@ -186,7 +272,7 @@ public class MyPageFragment extends Fragment implements OnClickListener {
 			
 		}else {
 			isOnLine = false;
-			circleImageView.setImageDrawable(getResources().getDrawable(R.drawable.user_defult));
+			circleImageView.setImageDrawable(getResources().getDrawable(R.drawable.photo));
 			user_name.setText("请登录");
 		}
 		
@@ -196,6 +282,8 @@ public class MyPageFragment extends Fragment implements OnClickListener {
 	public void onResume() {
 		super.onResume();
 		showUserMessage();
+		loadData();
+		Log.e("----", "--------");
 	}
 
 }

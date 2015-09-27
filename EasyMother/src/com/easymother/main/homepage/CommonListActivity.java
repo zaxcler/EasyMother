@@ -9,19 +9,12 @@ import java.util.List;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-import com.easymother.adapter.BaseAdapterHelper;
-import com.easymother.adapter.QuickAdapter;
 import com.easymother.bean.NurseBaseBean;
-import com.easymother.bean.NurseJobBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.DoubleSeekBar;
 import com.easymother.customview.DoubleSeekBar.OnSeekBarChangeListener;
-import com.easymother.customview.MyListview;
-import com.easymother.customview.MyScrollView;
-import com.easymother.customview.MyScrollView.onReflashLisenter;
 import com.easymother.main.R;
-import com.easymother.main.R.layout;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
@@ -29,18 +22,17 @@ import com.easymother.utils.NetworkHelper;
 import com.easymother.utils.TimeCounter;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager.LayoutParams;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -63,14 +55,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class CommonListActivity extends Activity {
 
-//	private ListView listView;// 下拉刷新控件
-	private MyListview listView;// 下拉刷新控件
+	private ListView listView;// 下拉刷新控件
+//	private MyListview listView;// 下拉刷新控件
 //	private ScrollView scrollview;
 //	private MyScrollView scrollview;
 	private View search_layout;// 搜索布局
@@ -80,11 +71,11 @@ public class CommonListActivity extends Activity {
 	private View title;// 标题栏
 	private TextView filter;// 筛选
 	private TextView sort;// 分类
-	private TextView sort1;// 方式一
+	private TextView sort1;// 方式一 
 	private TextView sort2;// 方式二
 	private TextView sort3;// 方式三
 	private TextView sort4;// 方式四
-	private String currentSort="A";//当前排序方式
+	private String currentSort="E";//当前排序方式
 	
 	private ImageView imgsort1;// 方式一
 	private ImageView imgsort2;// 方式二
@@ -116,7 +107,10 @@ public class CommonListActivity extends Activity {
 	protected int state;
 	private TextView counttime;//共多少天
 	private int lastItem;//listview最后一个item
-	private QuickAdapter<NurseBaseBean> adapter2;
+	
+	private EditText editText;
+	private boolean canReflash=true;//能否加载
+	private CharSequence search_name="";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -137,7 +131,7 @@ public class CommonListActivity extends Activity {
 			}
 		});
 		params=new RequestParams();
-		params.put("sorting", "A");
+		params.put("sorting", currentSort);
 		Intent intent=getIntent();
 		String job=intent.getStringExtra("job");
 		if ("YS".equals(job)) {
@@ -173,124 +167,55 @@ public class CommonListActivity extends Activity {
 		start_time_tv=(TextView) findViewById(R.id.starttime);
 		end_time_tv=(TextView) findViewById(R.id.endtime);
 		
-		listView = (MyListview) findViewById(R.id.listview);
+		listView = (ListView) findViewById(R.id.listview);
 //		scrollview=(ScrollView) findViewById(R.id.scrollview);
 //		scrollview=(MyScrollView) findViewById(R.id.scrollview);
 		counttime=(TextView) findViewById(R.id.counttime);
 		search_layout=LayoutInflater.from(this).inflate(R.layout.search_item, null);
 		search1=(TextView) search_layout.findViewById(R.id.search);
-		search_layout1=findViewById(R.id.search_layout);
-		search2=(TextView) search_layout1.findViewById(R.id.search);
 		choose_date=(RelativeLayout) findViewById(R.id.choose_date);
+		editText=(EditText)search_layout. findViewById(R.id.search_text);
 	}
 
 	private void init() {
-//		adapter2 = new QuickAdapter<NurseBaseBean>(this, R.layout.activity_yuesao_item) {
-//			
-//			@Override
-//			protected void convert(BaseAdapterHelper holder, NurseBaseBean item) {
-//				holder.getView(R.id.delete).setVisibility(View.GONE);
-//				holder.getView(R.id.pay).setVisibility(View.GONE);
-//				
-//				
-//				final NurseBaseBean bean=(NurseBaseBean) item;
-//				/*
-//				 * 设置之前先判断空
-//				 */
-//				if (bean.getRealName()!=null) {
-//					holder.setText(R.id.textView1, bean.getRealName());
-//				}
-//				TextView job=holder.getView(R.id.textView2);
-//				/*
-//				 * 设置之前先判断空
-//				 */
-//				if (bean.getJob()!=null) {
-//					if ("YS".equals(bean.getJob())) {
-//						job.setText("月嫂");
-//						
-//					}
-//					if ("YYS".equals(bean.getJob())) {
-//						job.setText("育婴师");
-//					}
-//					if ("CRS".equals(bean.getJob())) {
-//						job.setText("催乳师");
-//					}
-//					if ("SHORT_YS".equals(bean.getJob())) {
-//						job.setText("短期月嫂");
-//					}
-//					if ("SHORT_YYS".equals(bean.getJob())) {
-//						job.setText("短期育婴师");
-//					}
-//				}
-//				
-//				/*
-//				 * 设置之前先判断空
-//				 */
-//				if (bean.getSeniority()!=null){
-//					holder.setText(R.id.textView3, "从业"+bean.getSeniority()+"年");
-//				}
-//				
-//				
-//				holder.setText(R.id.textView4, bean.getAge()+"岁");
-//				
-//				/*
-//				 * 设置之前先判断空
-//				 */
-//				if (bean.getHometown()!=null) {
-//					holder.setText(R.id.textView5,bean.getHometown());
-//				}
-//				/*
-//				 * 设置之前先判断空
-//				 */
-//				if (bean.getCurrentAddress()!=null) {
-//					holder.setText(R.id.textView6, "现居地："+bean.getCurrentAddress());
-//				}
-//				
-//				/*
-//				 * 设置之前先判断空
-//				 */
-//				if (bean.getPrice()!=null) {
-//					holder.setText(R.id.textView7, bean.getPrice()*26+"元");
-//					
-//				}
-//				
-//				TextView marketPrice=holder.getView(R.id.textView8);
-//				/*
-//				 * 设置之前先判断空
-//				 */
-//				if (bean.getMarketPrice()!=null) {
-//					holder.setText(R.id.textView8, "市场价："+bean.getMarketPrice()+"元/26天");
-//					marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-//				}
-//				if (bean.getJobTitle()!=null) {
-//					holder.setText(R.id.textView9, bean.getJobTitle());
-//				}
-//				
-//				ImageView photo=holder.getView(R.id.image);
-////				if (bean.getImage()!=null) {
-////					if (photos.get(bean.getImage())==null) {
-////						photos.put(bean.getImage(), bean.getImage());
-//						ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo,MyApplication.options_image);
-////					}
-////				}
-//				holder.getView(R.id.line1).setVisibility(View.GONE);
-//				holder.getView(R.id.price_tv).setVisibility(View.GONE);
-//				holder.getView(R.id.price_tv2).setVisibility(View.GONE);
-//			}
-//		};
+//		;
 
 		Date currentdate=new Date(System.currentTimeMillis());
 		Calendar calendar=Calendar.getInstance();
 		calendar.setTime(currentdate);
 		start_time_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
 		end_time_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
+		
+		/**
+		 * 默认时间开始是当前时间 和结束时间是明天
+		 */
 		starttime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
-		endtime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+		endtime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DAY_OF_MONTH)+1);
 		//搜索的布局的点击时间
 		search1.setOnClickListener(new onSeachLayoutClickLisener());
-		search2.setOnClickListener(new onSeachLayoutClickLisener());
-		search_layout1.setVisibility(View.GONE);
 		listView.addHeaderView(search_layout);
+		
+		editText.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				search_name= s;
+				RequestParams params1=params;
+				params1.put("nurseName", s);
+				Log.e("----","1111111");
+				doFilter(params1);
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				Log.e("----","22222");
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				Log.e("----","33333");
+			}
+		});
 		/*
 		 * 初始化加载更多按钮
 		 */
@@ -312,6 +237,7 @@ public class CommonListActivity extends Activity {
 		}
 		
 //		listView.addFooterView(loadMore);
+//		listView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), true, true));
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -420,18 +346,20 @@ public class CommonListActivity extends Activity {
 					switch (state) {
 					//手指滚动状态
 					case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-						
+//						ImageLoader.getInstance().pause();
 						break;
 					//手指抬起状态，屏幕还在滚动
 					case OnScrollListener.SCROLL_STATE_FLING:
-						
+//						ImageLoader.getInstance().pause();
 						break;
 					//静止状态
 					case OnScrollListener.SCROLL_STATE_IDLE:
+//						ImageLoader.getInstance().resume();
 						//不在加载状态才能加载
-						if (!loading) {
+						if (!loading&& canReflash) {
 							++pageNo;//加载之前先自增1
 					        loading(pageNo);
+					        Log.e("=====", "-------------");
 						}
 						
 						break;
@@ -464,75 +392,103 @@ public class CommonListActivity extends Activity {
 	 * @param v
 	 */
 	protected void showDateDialog(View v) {
-		final Dialog dialog=new Dialog(this);
-		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		View view=LayoutInflater.from(this).inflate(R.layout.dialog_chosedate, null);
-		dialog.setContentView(view);
-		dialog.getWindow().setLayout(MyApplication.getScreen_width()/20*19, android.view.WindowManager.LayoutParams.WRAP_CONTENT);
-		DatePicker datePicker1=(DatePicker) view.findViewById(R.id.start_time);
-		DatePicker datePicker2=(DatePicker) view.findViewById(R.id.end_time);
-		final Date currentdate=new Date(System.currentTimeMillis());
-		final Calendar calendar=Calendar.getInstance();
-		calendar.setTime(currentdate);
-		starttime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
-		endtime=starttime;
-		datePicker1.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new OnDateChangedListener() {
+		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date startDate=dateFormat.parse(starttime);
+			Date endDate=dateFormat.parse(endtime);
+			final Dialog dialog=new Dialog(this);
+			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			View view=LayoutInflater.from(this).inflate(R.layout.dialog_chosedate, null);
+			dialog.setContentView(view);
+			dialog.getWindow().setLayout(MyApplication.getScreen_width()/20*19, android.view.WindowManager.LayoutParams.WRAP_CONTENT);
+			DatePicker datePicker1=(DatePicker) view.findViewById(R.id.start_time);
+			DatePicker datePicker2=(DatePicker) view.findViewById(R.id.end_time);
 			
-			@Override
-			public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				starttime=year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
-				start_time_tv.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
+			Date currentdate;
+			 Calendar calendar=Calendar.getInstance();
+			if (starttime==null&& "".equals(starttime)) {
+				currentdate=new Date(System.currentTimeMillis());
+				starttime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+ calendar.get(Calendar.DAY_OF_MONTH);
+			}else {
+				currentdate=dateFormat.parse(starttime);
+			}
+			calendar.setTime(currentdate);
+//			final Date currentdate=new Date(System.currentTimeMillis());
+//			final Calendar calendar=Calendar.getInstance();
+//			//开始时间
+//			calendar.setTime(startDate);
+//			starttime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+////			endtime=starttime;
+			datePicker1.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new OnDateChangedListener() {
 				
-			}
-		});
-        datePicker2.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new OnDateChangedListener() {
-			
-			@Override
-			public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-		        endtime=year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
-				end_time_tv.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
-				
-			}
-		});
-        Button dismisse=(Button) view.findViewById(R.id.dismisse);
-		dismisse.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				dialog.dismiss();
-			}
-		});
-		view.findViewById(R.id.comfire).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
-				try {
-					Date startDate=dateFormat.parse(starttime);
-					Date endDate=dateFormat.parse(endtime);
+				@Override
+				public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+					starttime=year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+					start_time_tv.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
 					
-					Date current=dateFormat.parse(calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH));
-					int a=TimeCounter.countTimeOfDay(startDate, endDate);
-					int b=TimeCounter.countTimeOfDay(current , startDate);
-					if (TimeCounter.countTimeOfDay(startDate, endDate)>0 && TimeCounter.countTimeOfDay(current , startDate)>=0) {
-						RequestParams params1=params;
-						params1.put("startTime", starttime);
-						params1.put("endTime", endtime);
-						counttime.setText("共"+TimeCounter.countTimeOfDay(startDate, endDate)+"天");
-						doFilter(params1);
-						dialog.dismiss();
-					}else {
-						Toast.makeText(CommonListActivity.this,"请检查时间选择是否正确", Toast.LENGTH_SHORT).show();
+				}
+			});
+//			final Calendar calendar1=Calendar.getInstance();
+//			//结束时间
+//			calendar1.setTime(endDate);
+			//初始化结束时间 ，记录上次选择的时间
+			 Calendar calendar1=Calendar.getInstance();
+			calendar1.setTime(endDate);
+	        datePicker2.init(calendar1.get(Calendar.YEAR), calendar1.get(Calendar.MONTH), calendar1.get(Calendar.DAY_OF_MONTH), new OnDateChangedListener() {
+				
+				@Override
+				public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+			        endtime=year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+					end_time_tv.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
+					
+				}
+			});
+	        Button dismisse=(Button) view.findViewById(R.id.dismisse);
+			dismisse.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+			view.findViewById(R.id.comfire).setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+					try {
+						Date startDate=dateFormat.parse(starttime);
+						Date endDate=dateFormat.parse(endtime);
+						Date currentdate=new Date(System.currentTimeMillis());
+						 Calendar calendar=Calendar.getInstance();
+						 calendar.setTime(currentdate);
+						Date current=dateFormat.parse(calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH));
+						int a=TimeCounter.countTimeOfDay(startDate, endDate);
+						int b=TimeCounter.countTimeOfDay(current , startDate);
+						if (TimeCounter.countTimeOfDay(startDate, endDate)>0 && TimeCounter.countTimeOfDay(current , startDate)>=0) {
+							RequestParams params1=params;
+							params1.put("startTime", starttime);
+							params1.put("endTime", endtime);
+							counttime.setText("共"+TimeCounter.countTimeOfDay(startDate, endDate)+"天");
+							doFilter(params1);
+							dialog.dismiss();
+						}else {
+							Toast.makeText(CommonListActivity.this,"请检查时间选择是否正确", Toast.LENGTH_SHORT).show();
+						}
+						
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 					
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
-				
-			}
-		});
-		dialog.show();
+			});
+			dialog.show();
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 	}
 	
 	private class onSeachLayoutClickLisener implements View.OnClickListener{
@@ -543,23 +499,13 @@ public class CommonListActivity extends Activity {
 			switch (v.getId()) {
 			case R.id.search:
 				//进行搜索网络请求
-				String name="";
 				Log.e("搜索----》", String.valueOf(v.getId()));
-				if (search_layout1.getVisibility()==View.VISIBLE) {
-					EditText editText=(EditText) search_layout1.findViewById(R.id.search_text);
-					name=editText.getText().toString().trim();
-				}else {
-					EditText editText=(EditText) search_layout.findViewById(R.id.search_text);
-					name=editText.getText().toString().trim();
-				}
-				
-				if ("".equals(name)||name.equals(null)) {
+				if ("".equals(search_name)||search_name.equals(null)) {
 					Toast.makeText(CommonListActivity.this, "请输入搜索内容", Toast.LENGTH_SHORT).show();
 					return;
 				}
 				RequestParams params1=params;
-				params1.put("nurseName", name);
-//				params.put("nurseName", name);
+				params1.put("nurseName", search_name);
 				doFilter(params1);
 				break;
 
@@ -733,16 +679,16 @@ public class CommonListActivity extends Activity {
 		
 		sortClickListener listener = new sortClickListener(dialog);
 		listener.clearStatus();
-		if ("A".equals(currentSort)){
+		if ("D".equals(currentSort)){
 			imgsort1.setVisibility(View.VISIBLE);
 		}
-		if ("B".equals(currentSort)){
+		if ("C".equals(currentSort)){
 			imgsort2.setVisibility(View.VISIBLE);
 		}
-		if ("C".equals(currentSort)){
+		if ("B".equals(currentSort)){
 			imgsort3.setVisibility(View.VISIBLE);
 		}
-		if ("D".equals(currentSort)){
+		if ("A".equals(currentSort)){
 			imgsort4.setVisibility(View.VISIBLE);
 		}
 		sort1.setOnClickListener(listener);
@@ -771,30 +717,31 @@ public class CommonListActivity extends Activity {
 			switch (id) {
 			case R.id.sort1:
 				imgsort1.setVisibility(View.VISIBLE);
-				params.put("sorting", "A");
-				currentSort="A";
+				params.put("sorting", "D");//d工龄减
+				currentSort="D";
 				doFilter(params);
 				dialog.dismiss();
 				break;
 
 			case R.id.sort2:
 				imgsort2.setVisibility(View.VISIBLE);
-				params.put("sorting", "B");
-				currentSort="B";
+				params.put("sorting", "C");//c 工龄升
+				currentSort="C";
 				doFilter(params);
 				dialog.dismiss();
 				break;
 			case R.id.sort3:
 				imgsort3.setVisibility(View.VISIBLE);
-				params.put("sorting", "C");
-				currentSort="C";
+				params.put("sorting", "B");//B价格减
+				currentSort="B";
 				doFilter(params);
 				dialog.dismiss();
 				break;
 			case R.id.sort4:
 				imgsort4.setVisibility(View.VISIBLE);
-				params.put("sorting", "D");
-				currentSort="D";
+				
+				params.put("sorting", "A"); //A价格升
+				currentSort="A";
 				doFilter(params);
 				dialog.dismiss();
 				break;
@@ -831,11 +778,15 @@ public class CommonListActivity extends Activity {
 					if (list.size()==0) {
 						CommonListActivity.this.pageNo=1;
 //						loadMore.setVisibility(View.GONE);
+						canReflash=false;
 						Toast.makeText(CommonListActivity.this, "没有更多咯！", 0).show();
+					}else {
+						canReflash=true;
 					}
 					adapter.addAll(list);
 					adapter.notifyDataSetChanged();
 					loading=false;
+					
 				}
 			}
 			@Override
@@ -843,6 +794,7 @@ public class CommonListActivity extends Activity {
 				super.onFailure(statusCode, headers, responseString, throwable);
 				Toast.makeText(CommonListActivity.this, "连接服务器失败！", 0).show();
 				loading=false;
+				canReflash=false;
 			}
 		});
 		

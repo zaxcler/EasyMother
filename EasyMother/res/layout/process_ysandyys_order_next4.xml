@@ -28,11 +28,11 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
                 android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
                 android:paddingLeft="@dimen/dp_20"
-                android:paddingRight="@dimen/dp_20"
-                android:orientation="vertical" >
+                android:paddingRight="@dimen/dp_20" >
 
                 <LinearLayout
                     android:id="@+id/layout1"
@@ -46,7 +46,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/dp_20"
-                        android:text="丙   方："
+                        android:text="丙       方："
                         android:textColor="@color/boroblacktext" />
 
                     <TextView
@@ -78,14 +78,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/dp_20"
-                        android:text="经办人："
+                        android:text="经  办 人："
                         android:textColor="@color/boroblacktext" />
 
                     <TextView
                         android:id="@+id/phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="杭州创桥信息技术有限公司"
+                        android:text="杭州创乔信息技术有限公司"
                         android:textColor="@color/boroblacktext" />
                 </LinearLayout>
 
@@ -118,14 +118,13 @@
                         android:id="@+id/type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="月嫂合同"
+                        android:text="400-8068-222"
                         android:textColor="@color/boroblacktext" />
 
                     <View
                         android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_weight="1" />
-
                 </LinearLayout>
 
                 <View
@@ -135,7 +134,8 @@
                     android:layout_alignLeft="@id/layout3"
                     android:layout_below="@id/layout3"
                     android:background="@color/line" />
-                 <LinearLayout
+
+                <LinearLayout
                     android:id="@+id/layout4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -155,16 +155,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="浙江省杭州市江干区"
+                        android:text="浙江省杭州市滨江区亚科中心"
                         android:textColor="@color/boroblacktext" />
 
                     <View
                         android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_weight="1" />
-
                 </LinearLayout>
-<View
+
+                <View
                     android:id="@+id/v4"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -172,15 +172,15 @@
                     android:layout_below="@id/layout4"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:background="@color/line" />
+
                 <ImageView
                     android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignTop="@+id/layout2"
                     android:layout_marginBottom="@dimen/dp_10"
-                    android:src="@drawable/zhang" />
-
+                    android:src="@drawable/hetong" />
             </RelativeLayout>
 
             <Button

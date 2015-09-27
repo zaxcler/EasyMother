@@ -56,7 +56,8 @@ public class EasyMotherUtils {
 	
 	private static List<String> list;//时间表
 	public static List<String> photosname=new ArrayList<>();//上传的图片名字
-	
+	public static String EDU[]=new String[]{"","小学","初中","高中","大学"};
+	public static String PTH[]=new String[]{"","初级","中级","高级"};
 	
 	/**
 	 * 跳转activity 不带数据直接跳转
@@ -153,7 +154,7 @@ public class EasyMotherUtils {
 		Intent intent=new Intent("com.android.camera.action.CROP");
 		intent.setDataAndType(path, "image/*");//设置数据path（地址） 和类型
 		intent.putExtra("crop", "true");
-		intent.putExtra("aspectX", 2);//X方向上的比例
+		intent.putExtra("aspectX", 1);//X方向上的比例
 		intent.putExtra("aspectY", 1);//Y方向上的比例
 		intent.putExtra("outputX", outputX);//宽
 		intent.putExtra("outputY", outputY);//高
@@ -170,25 +171,22 @@ public class EasyMotherUtils {
 	 * 显示弹窗（详细信息）
 	 * @param resource
 	 */
-	public static void showDialog( final Activity activity,String path,int resource){
+	public static void showDialog( final Activity activity,String path,int resource,String name){
 
 		View view=LayoutInflater.from(activity).inflate(R.layout.cuiruishi_project1_detail, null);
 		WebView content=(WebView) view.findViewById(R.id.contents);
 		ImageView imageView=(ImageView) view.findViewById(R.id.imageView1);
+		TextView textView=(TextView) view.findViewById(R.id.textView2);
+		textView.setText(name);
 		imageView.setBackgroundResource(resource);
 		
 		content.loadUrl(path);
 		
-	    final Dialog dialog=new Dialog(activity);
+	    final Dialog dialog=new Dialog(activity,R.style.Transparent);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		dialog.getWindow().setLayout(250, 250);
+		dialog.getWindow().setLayout(MyApplication.getScreen_width(), MyApplication.getScreen_height());
 		view.findViewById(R.id.cancle).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				dialog.dismiss();
-			}
-		});
-		view.findViewById(R.id.yes).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
@@ -317,9 +315,9 @@ public class EasyMotherUtils {
 							params.put("userId", MyApplication.preferences.getInt("id", 0));
 							int id=MyApplication.preferences.getInt("baby_id", 0);
 							if ( MyApplication.preferences.getInt("baby_id", 0)==0) {
-								params.put("babyId","");
+								params.put("id","");
 							}else {
-								params.put("babyId",MyApplication.preferences.getInt("baby_id", 0));
+								params.put("id",id);
 							}
 							
 							NetworkHelper.doGet(BaseInfo.BABYINFO_SAVEINFO, params, new JsonHttpResponseHandler(){
@@ -355,16 +353,16 @@ public class EasyMotherUtils {
 						Log.e("onFailure——response", responseString);
 					}
 						
-					
-					@Override
-					public void onRetry(int retryNo) {
-						super.onRetry(retryNo);
-						Log.e("onRetry——uploadstatu", uploadstatu+"");
-						if (!uploadstatu) {
-							
-							uploadPhoto(bitmap, url,type);
-						}
-					}
+//					
+//					@Override
+//					public void onRetry(int retryNo) {
+//						super.onRetry(retryNo);
+//						Log.e("onRetry——uploadstatu", uploadstatu+"");
+//						if (!uploadstatu) {
+//							
+//							uploadPhoto(bitmap, url,type);
+//						}
+//					}
 				});
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -372,7 +370,9 @@ public class EasyMotherUtils {
 			}
 		}
 		return true;
-		
-		
 	}
+	
+	
+
+	
 }

@@ -43,7 +43,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_10"
-            android:src="@drawable/back" />
+            android:src="@drawable/back1" />
         <View
             android:layout_alignParentBottom="true"
              android:layout_width="match_parent"
@@ -85,7 +85,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:phoneNumber="true"
-                android:text="18006582457"
                 android:background="@color/white" />
         </LinearLayout>
 

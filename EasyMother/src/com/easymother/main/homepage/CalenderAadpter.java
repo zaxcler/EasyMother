@@ -3,15 +3,17 @@ package com.easymother.main.homepage;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 import com.easymother.bean.Order;
 import com.easymother.main.R;
-import com.easymother.utils.CommonAdapter;
+import com.easymother.utils.CommonAdapter2;
 import com.easymother.utils.ViewHolder;
+
 import android.content.Context;
 import android.util.Log;
 import android.widget.TextView;
 
-public class CalenderAadpter extends CommonAdapter<Integer> {
+public class CalenderAadpter extends CommonAdapter2<Integer> {
 
 	private List<Order> orders;
 	private Calendar currentDate;
@@ -57,7 +59,8 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 
 	@Override
 	public void setDataToItem(ViewHolder holder, Integer t) {
-	
+
+		
 		currentDate.set(Calendar.DAY_OF_MONTH, 1);// 设置为当前月的第一天
 		int Start_day = currentDate.get(Calendar.DAY_OF_WEEK);// 当前周的第几天
 		currentDate.set(Calendar.DAY_OF_MONTH, currentDate.getActualMaximum(Calendar.DAY_OF_MONTH));
@@ -86,7 +89,7 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 						if (start_month == end_month&& start_month == current_month && end_month == current_month) {
 							// 在开始和结束的日子中间的都变灰色
 							if (t >= date1.get(Calendar.DAY_OF_MONTH)+Start_day-2&& t <= date2.get(Calendar.DAY_OF_MONTH)+1) {
-								current_day.setBackgroundColor(context.getResources().getColor(R.color.boro));
+								current_day.setBackgroundColor(context.getResources().getColor(R.color.lightlightboro));
 							}
 //							else {
 //								current_day.setBackgroundColor(context.getResources().getColor(R.color.white));
@@ -97,7 +100,7 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 								&& end_month == current_month) {
 							// 小于结束的时间全部变成灰色
 							if (t <= date2.get(Calendar.DAY_OF_MONTH)+1) {
-								current_day.setBackgroundColor(context.getResources().getColor(R.color.boro));
+								current_day.setBackgroundColor(context.getResources().getColor(R.color.lightlightboro));
 							} 
 //							else {
 //								current_day.setBackgroundColor(context.getResources().getColor(R.color.white));
@@ -108,7 +111,7 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 								&& end_month > current_month) {
 							// 大于开始的时间全部变成灰色
 							if (t >= date1.get(Calendar.DAY_OF_MONTH)+Start_day-2){
-								current_day.setBackgroundColor(context.getResources().getColor(R.color.boro));
+								current_day.setBackgroundColor(context.getResources().getColor(R.color.lightlightboro));
 							} 
 //							else {
 //								current_day.setBackgroundColor(context.getResources().getColor(R.color.white));
@@ -117,7 +120,7 @@ public class CalenderAadpter extends CommonAdapter<Integer> {
 						// 如果开始的月份和结束的月份不同，并且开始月份小于当前月份，结束月份大于当前月份
 						else if (start_month != end_month && start_month < current_month && end_month > current_month) {
 							// 全部变成灰色
-							current_day.setBackgroundColor(context.getResources().getColor(R.color.boro));
+							current_day.setBackgroundColor(context.getResources().getColor(R.color.lightlightboro));
 						}
 //						else {
 //							current_day.setBackgroundColor(context.getResources().getColor(R.color.white));

@@ -8,8 +8,8 @@ import org.w3c.dom.ls.LSInput;
 
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.AutoTextView;
-import com.easymother.customview.ImageCycleView;
-import com.easymother.customview.ImageCycleView.ImageCycleViewListener;
+import com.easymother.customview.ImageCycleView1;
+import com.easymother.customview.ImageCycleView1.ImageCycleViewListener;
 import com.easymother.customview.MyLinearlayout;
 import com.easymother.main.R;
 import com.easymother.main.R.id;

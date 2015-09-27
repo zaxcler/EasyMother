@@ -10,6 +10,7 @@ import com.easymother.bean.TestBean;
 import com.easymother.bean.TopicItemBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.customview.MyListview;
+import com.easymother.customview.MyLoadingProgress;
 import com.easymother.main.R;
 import com.easymother.main.my.CollectionListAdapter;
 import com.easymother.utils.EasyMotherUtils;
@@ -52,6 +53,7 @@ public class HuLiShiZoneListActivity extends Activity {
 		loadData();
 	}
 	private void loadData() {
+		MyLoadingProgress.showLoadingDialog(this);
 		RequestParams params=new RequestParams();
 		params.put("type", "KJ");
 		NetworkHelper.doGet(BaseInfo.NURSE_ZOME_LIST,params, new JsonHttpResponseHandler(){
@@ -61,6 +63,7 @@ public class HuLiShiZoneListActivity extends Activity {
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
 					List<TopicItemBean> list=JsonUtils.getResultList(response, TopicItemBean.class);
 					bindData(list);
+					MyLoadingProgress.closeLoadingDialog();
 				}
 			}
 		});

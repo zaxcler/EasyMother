@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@color/background">
 
     <include layout="@layout/commontitle" />
 
@@ -10,16 +11,16 @@
         android:id="@+id/pulltoreflash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_10"
         android:background="@color/background" >
 
         <com.easymother.customview.MyListview
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:divider="@color/background"
-            android:dividerHeight="@dimen/dp_10"
+            android:dividerHeight="@dimen/dp_20"
             android:layout_height="match_parent"
             android:background="@color/background" >
-            
         </com.easymother.customview.MyListview>
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 

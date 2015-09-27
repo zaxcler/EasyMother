@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingBottom="@dimen/dp_10" >
+         >
 
         <LinearLayout
             android:id="@+id/pictures"
@@ -28,17 +28,17 @@
             android:layout_above="@+id/textView3"
             android:layout_alignLeft="@+id/user_name"
             android:text="1楼"
-            android:textColor="@color/boroblacktext"
+            android:textColor="@color/lightredwine"
             android:textSize="@dimen/dp_12" />
 
         <com.easymother.customview.CircleImageView
             android:id="@+id/circleImageView1"
-            android:layout_width="@dimen/dp_32"
-            android:layout_height="@dimen/dp_32"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/baby" />
 
         <TextView
@@ -47,8 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/user_name"
-            android:drawableLeft="@drawable/reply"
-            android:text="回复"
+            android:drawableLeft="@drawable/huifu_1"
+            android:layout_marginRight="@dimen/dp_10"
             android:textColor="@color/boro" />
 
         <TextView
@@ -59,8 +59,7 @@
             android:layout_marginLeft="19dp"
             android:layout_toRightOf="@+id/circleImageView1"
             android:text="杨烨"
-            android:textColor="@color/blackgreen"
-            android:textSize="@dimen/sp_20" />
+            android:textSize="@dimen/sp_14" />
 
         <TextView
             android:id="@+id/show_time"
@@ -89,7 +88,8 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/floor"
             android:layout_below="@+id/circleImageView1"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/liangboro"
             android:text="回复" />
 
         <TextView
@@ -99,13 +99,14 @@
             android:layout_alignBottom="@+id/textView3"
             android:layout_toRightOf="@+id/textView3"
             android:text="郭泽"
-            android:textColor="@color/blackgreen" />
+            android:textColor="@color/lightredwine" />
 
         <TextView
             android:id="@+id/child_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/pictures"
+             android:textColor="@color/liangboro"
             android:layout_toRightOf="@+id/parent_name"
             android:text="：瞎扯淡。。" />
 
@@ -124,6 +125,7 @@
                 android:id="@+id/parent_conten"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                 android:textColor="@color/liangboro"
                 android:text="我还是到哪块快打死了阿斯顿空间啊啊很少肯定就按时发空间啊" />
 
         </LinearLayout>
@@ -134,7 +136,7 @@
             android:layout_alignLeft="@+id/textView3"
             android:layout_below="@id/linearlayout"
             android:layout_marginTop="@dimen/dp_10"
-            android:background="@color/line" />
+            android:background="@color/lightlightboro" />
     </RelativeLayout>
 
 </LinearLayout>

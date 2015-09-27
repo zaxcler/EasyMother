@@ -1,6 +1,8 @@
 package com.easymother.main.homepage;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.Header;
@@ -23,6 +25,7 @@ import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.easymother.utils.ViewHolder;
+import com.example.demobyimage.CustomHorizontalScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -64,6 +67,7 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 	private boolean isChoose=false;//是否已选择
 	
 	private LinearLayout linearLayout1;//套餐
+//	private CustomHorizontalScrollView linearLayout1;//套餐
 
 	private RatingBar ratingBar1;
 	private CircleImageView imageView1;
@@ -72,7 +76,13 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 	
 	private String startTime;
 	private String endTime;
-
+	private List<String> weeks ;
+	private TextView jobtitle;
+	private boolean taocanchose=false;//选择
+	private double payMoney=0;//选择的套餐
+	private int j=-1;//表示第几个套餐
+	List<View> views=new ArrayList<>();
+	List<NurseService> TaoCan;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -101,29 +111,26 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 		day2 = (TextView) findViewById(R.id.day2);
 		day3 = (TextView) findViewById(R.id.day3);
 		day4 = (TextView) findViewById(R.id.day4);
-		ratingBar1 = (RatingBar) findViewById(R.id.ratingBar1);
-		linearLayout1=(LinearLayout) findViewById(R.id.linearLayout1);
+		linearLayout1=(LinearLayout) findViewById(R.id.linearLayout);
+//		linearLayout1=(LinearLayout) findViewById(R.id.linearLayout1);
+		jobtitle=(TextView) findViewById(R.id.jobtitle);
 	}
 
 	private void init() {
-		
+		nurse_name.requestFocus();
 		if (nursebase.getRealName() != null) {
 			nurse_name.setText(nursebase.getRealName());
 		}
-		if (nursebase.getMobile() != null) {
-			nurse_phone.setText(nursebase.getMobile());
+		if (nursebase.getJobTitle() != null) {
+			jobtitle.setText(nursebase.getJobTitle());
 		}
-		if (nursejob.getPrice() != null) {
-			nurse_price.setText("¥" + nursejob.getPrice() + "/次");
-		}
-		if (nursejob.getPrice() != null) {
-			price.setText("¥" + nursejob.getPrice() + "/次");
-		}
-		if (nursejob.getLevel() != null) {
-			ratingBar1.setProgress(nursejob.getLevel());
-		} else {
-			ratingBar1.setProgress(0);
-		}
+//		if (nursejob.getPrice() != null) {
+//			nurse_price.setText("¥" + nursejob.getPrice() + "/次");
+//		}
+//		if (nursejob.getPrice() != null) {
+//			price.setText("¥" + nursejob.getPrice() + "/次");
+//		}
+		
 			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + nursebase.getImage(),
 					imageView1, MyApplication.options_photo);
 		if (intent.getIntExtra("CRS_Project", 0) != 0) {
@@ -167,14 +174,17 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 			public void onClick(View arg0) {
 				startTime=adapter.getStarttime();
 				endTime=adapter.getEndtime();
-				Log.e("startTime", startTime);
-				Log.e("endTime", endTime);
+				if (payMoney==0) {
+					Toast.makeText(OrderCRSProcess.this, "请选择套餐！", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				if ("".equals(startTime)||"".equals(endTime)||startTime==null||endTime==null) {
 					Toast.makeText(OrderCRSProcess.this, "请选择时间", Toast.LENGTH_SHORT).show();
 					return;
 				}
 				intent.putExtra("startTime", startTime);
 				intent.putExtra("endTime", endTime);
+				intent.putExtra("payMoney", payMoney);
 				intent.setClass(OrderCRSProcess.this, OrderCRSProcess1.class);
 				startActivity(intent);
 			}
@@ -191,6 +201,9 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 				ViewHolder holder=(ViewHolder) arg1.getTag();
 				TextView textView=holder.getView(R.id.time);
 				if (isChoose) {
+					return;
+				}
+				if ("canNotClick".equals(holder.getConvertView().getTag(R.id.CRS_ORDER_CAN_CLICK))) {
 					return;
 				}
 				arg1.setBackgroundColor(getResources().getColor(R.color.lightredwine));
@@ -229,33 +242,82 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
 				if (JsonUtils.getRootResult(response).getIsSuccess()){
-					JSONObject jsonObject=(JSONObject)JsonUtils.getRootResult(response).getResult();
+					Root root=JsonUtils.getRootResult(response);
+					JSONObject jsonObject;
 					try {
+						jsonObject = new JSONObject(root.getResult().toString());
 						JSONArray array=jsonObject.getJSONArray("nurseservices");
 						Log.e("JSONArray", array.toString());
 						List<NurseService> taocan=JSON.parseArray(array.toString(), NurseService.class);
 						bindData(taocan);
-					} catch (JSONException e) {
+					} catch (JSONException e1) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						e1.printStackTrace();
 					}
 				}
 			}
 		});
 		
-		
 	}
 
-	protected void bindData(List<NurseService> taocan) {
+	protected void bindData(final List<NurseService> taocan) {
+		TaoCan=taocan;
+		weeks= new ArrayList<>();
+		weeks.add("日");
+		weeks.add("一");
+		weeks.add("二");
+		weeks.add("三");
+		weeks.add("四");
+		weeks.add("五");
+		weeks.add("六");
+		
+		Date today=new Date(System.currentTimeMillis());
+		Calendar today_c=Calendar.getInstance();
+		today_c.setTime(today);
+		int day=today_c.get(Calendar.DAY_OF_WEEK);
+		int disitian=(day+3)%7;
+		day4.setText("星期"+weeks.get(disitian-1));
+		
+		
 		if (taocan!=null) {
 				for (int i = 0; i < taocan.size(); i++) {
-					TextView view=new TextView(this);
+//					j=i;//
+					final TextView view=new TextView(this);
+					view.setTextColor(getResources().getColor(R.color.boro));
 					view.setText(taocan.get(i).getFixedPrice()+"元"+"/"+taocan.get(i).getNums()+"次");
-					view.setBackgroundDrawable(getResources().getDrawable(R.drawable.black_border));
+					view.setBackgroundDrawable(getResources().getDrawable(R.drawable.boro_border));
+					view.setPadding(20, 20, 20, 20);
+					LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+					lp.setMargins(10, 20, 30, 40);
+					view.setLayoutParams(lp);
+					view.setTag(i);
+					view.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							
+							views.add(v);
+							getmoney(v,views);
+						}
+					});
 					linearLayout1.addView(view);
 			}
 		}
 		
+	}
+
+	/*
+	 * 得到套餐,并处理
+	 */
+	protected void getmoney(View v ,List<View> views) {
+		int i=(int) v.getTag();
+		for (int a = 0; a< views.size(); a++) {
+			views.get(a).setBackgroundDrawable(getResources().getDrawable(R.drawable.boro_border));
+		}
+		v.setBackgroundDrawable(getResources().getDrawable(R.drawable.lightredwine_solid));
+		price.setText(TaoCan.get(i).getFixedPrice()+"元"+"/"+TaoCan.get(i).getNums()+"次");
+//		nurse_price.setText(TaoCan.get(j).getFixedPrice()+"元"+"/"+TaoCan.get(j).getNums()+"次");
+		payMoney=TaoCan.get(i).getFixedPrice();
 	}
 
 	@Override

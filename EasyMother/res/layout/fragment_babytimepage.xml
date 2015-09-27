@@ -23,7 +23,7 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="囡囡记"
-            android:textColor="@color/orange_red"
+            android:textColor="@color/lightredwine"
             android:textSize="@dimen/sp_20" />
     </RelativeLayout>
 
@@ -52,7 +52,7 @@
         android:layout_height="@dimen/dp_150"
         android:layout_alignParentRight="true"
         android:layout_below="@id/title1"
-        android:background="@drawable/baby_image3"
+        android:src="@drawable/baby_image3"
         android:scaleType="fitXY" />
 
     <com.easymother.customview.CircleImageView
@@ -63,10 +63,11 @@
         android:layout_below="@+id/view1"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="128dp"
-        android:src="@drawable/user_photo" />
+        android:src="@drawable/photo" />
 
     <TextView
         android:id="@+id/baby_name"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/baby_name"
         android:layout_alignLeft="@id/baby_name"
+        android:textColor="@color/lightboro"
         android:layout_toRightOf="@+id/circleImageView1"
          />
 

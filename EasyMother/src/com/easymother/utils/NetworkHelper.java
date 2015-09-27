@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.http.Header;
+import org.json.JSONObject;
+
+import com.easymother.bean.ServerConfig;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R.drawable;
@@ -14,6 +18,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import android.content.SharedPreferences.Editor;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.text.Spanned;
@@ -42,7 +47,8 @@ public class NetworkHelper {
 			Drawable drawable=null;
 				
 				try {
-					URL url=new URL(source);
+				
+					URL url=new URL(source.toString());
 					drawable=Drawable.createFromStream(url.openStream(), null);
 				drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 				return drawable;
@@ -106,7 +112,7 @@ public class NetworkHelper {
 		RequestParams params=new RequestParams();
 		params.put("appToken", getAppToken());
 		httpClient.get(BaseInfo.BASE_URL+url, params,handler);
-		Log.e("地址是------", BaseInfo.BASE_URL+url);
+//		Log.e("地址是------", BaseInfo.BASE_URL+url);
 //		httpClient.get(url, params,handler);
 	}
 	
@@ -139,7 +145,7 @@ public class NetworkHelper {
 	public static void doGet(String url,RequestParams params,JsonHttpResponseHandler handler){
 		params.put("appToken", getAppToken());
 		httpClient.get(BaseInfo.BASE_URL+url,params, handler);
-		Log.e("访问地址是", BaseInfo.BASE_URL+url);
+//		Log.e("访问地址是", BaseInfo.BASE_URL+url);
 //		httpClient.get(url,params, handler);
 	}
 	
@@ -230,7 +236,7 @@ public class NetworkHelper {
 	 */
 	public static void doGetNoToken(String url,RequestParams params,JsonHttpResponseHandler handler){
 		httpClient.get(BaseInfo.BASE_URL+url,params, handler);
-		Log.e("注册地址是----》", BaseInfo.BASE_URL+url);
+//		Log.e("注册地址是----》", BaseInfo.BASE_URL+url);
 	}
 	
 	
@@ -288,6 +294,36 @@ public class NetworkHelper {
 	public static void doPsotNoToken(String url,RequestParams params,JsonHttpResponseHandler handler){
 		httpClient.post(BaseInfo.BASE_URL+url,params, handler);
 		Log.e("注册地址是----》", BaseInfo.BASE_URL+url);
+	}
+	
+	/*
+	 * 获取服务中基本配置信息
+	 */
+	public static void  getServerInfo(){
+		doGet(BaseInfo.LOAD_SERVER_INFO, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+				super.onSuccess(statusCode, headers, response);
+				if (JsonUtils.getRootResult(response).getIsSuccess()) {
+					ServerConfig config=JsonUtils.getResult(response, ServerConfig.class);
+					
+					if (config!=null) {
+						if (config.getOrder_bzj()!=null) {
+//							MyApplication.editor.putString("prePrice",config.getOrder_bzj().getSysValue());//定金
+							MyApplication.editor.putInt("prePrice",Integer.valueOf(config.getOrder_bzj().getSysValue()));//定金
+							
+						}
+						
+					}
+					
+				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+				super.onFailure(statusCode, headers, responseString, throwable);
+				
+			}
+		});
 	}
 	
 	

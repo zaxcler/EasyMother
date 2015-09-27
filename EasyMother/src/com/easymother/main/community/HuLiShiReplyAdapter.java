@@ -175,7 +175,7 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 					
 					TextView child_content=holder.getView(R.id.child_content);
 					if (forumPost.getContent()!=null&&!"".equals(forumPost.getContent())) {
-						child_content.setText(":"+NetworkHelper.showFWBText(forumPost.getParentCountent()));
+						child_content.setText(":"+NetworkHelper.showFWBText(forumPost.getContent()));
 					}else {
 						child_content.setText("");
 					}

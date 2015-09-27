@@ -1,5 +1,6 @@
 package com.easymother.main.community;
 
+import java.util.Date;
 import java.util.List;
 import com.alibaba.fastjson.JSON;
 import com.alidao.mama.WeiXinUtils;
@@ -7,6 +8,8 @@ import com.easymother.bean.TopicItemBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
+import com.easymother.customview.ImageZoom;
+import com.easymother.customview.MyGridView;
 import com.easymother.main.R;
 import com.easymother.main.babytime.ImageAdapter;
 import com.easymother.main.my.LoginOrRegisterActivity;
@@ -15,6 +18,7 @@ import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
+import com.easymother.utils.TimeCounter;
 import com.easymother.utils.ViewHolder;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -28,7 +32,12 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +69,10 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 	public void addList(List<TopicItemBean> list) {
 		this.list.addAll(list);
 	}
+	public void clearList(){
+		this.list.clear();
+	}
+	
 
 	@Override
 	public void setDataToItem(ViewHolder holder, final TopicItemBean t) {
@@ -80,7 +93,7 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 		});
 
 		CircleImageView circleImageView = holder.getView(R.id.circleImageView1);
-		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + t.getUserImae(),
+		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + t.getUserImage(),
 				circleImageView, MyApplication.options_image);
 
 		TextView nurse_type = holder.getView(R.id.nurse_type);
@@ -110,8 +123,10 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 		}
 		TextView time = holder.getView(R.id.time);
 		//
-		if (t.getShowTime() != null) {
-			time.setText(t.getShowTime());
+		if (t.getCreateTime() != null) {
+
+			String showTime = TimeCounter.CountTime(t.getCreateTime(), new Date(System.currentTimeMillis()));
+			time.setText(showTime);
 
 		} else {
 			time.setText("");
@@ -123,28 +138,44 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 		} else {
 			content.setText("");
 		}
-		GridView gridView = holder.getView(R.id.pictures);
+		MyGridView gridView = holder.getView(R.id.pictures);
 		if (t.getImages() != null && !"".equals(t.getImages())) {
-			Log.e("tupian", t.getImages());
+//			Log.e("tupian", t.getImages());
 			List<String> list = JSON.parseArray(t.getImages().toString(), String.class);
 			if (list != null) {
 				gridView.setVisibility(View.VISIBLE);
+				// RelativeLayout.LayoutParams params=new
+				// RelativeLayout.LayoutParams(MyApplication.getScreen_width(),ViewGroup.LayoutParams.WRAP_CONTENT);
+				// gridView.setLayoutParams(params);
 				ImageAdapter adapter = new ImageAdapter(context, list, R.layout.comment_image);
 				gridView.setAdapter(adapter);
 			}
+			gridView.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+					ImageZoom.showBigImgaes(context, t.getImages());
+				}
+			});
 
 		} else {
 			gridView.setVisibility(View.GONE);
 		}
 
 		final TextView msgAmoount = holder.getView(R.id.msgAmoount);
-		if ("zone_list".equals(flag) || "topic_help".equals(flag) || "user_topic".equals(flag)) {
+		// if ("zone_list".equals(flag) || "topic_help".equals(flag) ||
+		// "user_topic".equals(flag)) {
+		if ("zone_list".equals(flag)) {
+
+			if ("YES".equals(t.getMore1())) {
+				Drawable img = context.getResources().getDrawable(R.drawable.collection_2);
+				img.setBounds(0, 0, img.getMinimumWidth(), img.getMinimumHeight());
+				msgAmoount.setCompoundDrawables(img, null, null, null);
+			}
 			if (t.getInt2() != 0) {
 				msgAmoount.setText(t.getInt2() + "");
 			} else {
-				msgAmoount.setText("");
+				msgAmoount.setText("收藏");
 			}
-
 			msgAmoount.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -172,6 +203,9 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 										} else {
 											msgAmoount.setText("1");
 										}
+										Drawable img = context.getResources().getDrawable(R.drawable.collection_2);
+										img.setBounds(0, 0, img.getMinimumWidth(), img.getMinimumHeight());
+										msgAmoount.setCompoundDrawables(img, null, null, null);
 									}
 								};
 
@@ -187,8 +221,12 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 			});
 
 		} else {
-			msgAmoount.setText("回复");
-			Drawable img = context.getResources().getDrawable(R.drawable.message2);
+			if (t.getInt2() != 0) {
+				msgAmoount.setText(t.getInt2() + "");
+			} else {
+				msgAmoount.setText("回复");
+			}
+			Drawable img = context.getResources().getDrawable(R.drawable.huifu_1);
 			img.setBounds(0, 0, img.getMinimumWidth(), img.getMinimumHeight());
 			msgAmoount.setCompoundDrawables(img, null, null, null);
 		}
@@ -196,12 +234,17 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 		 * 点赞功能
 		 */
 		final TextView upAmount = holder.getView(R.id.upAmount);
+
+		if ("YES".equals(t.getMore3())) {
+			Drawable img = context.getResources().getDrawable(R.drawable.xin_2);
+			img.setBounds(0, 0, img.getMinimumWidth(), img.getMinimumHeight());
+			upAmount.setCompoundDrawables(img, null, null, null);
+		}
 		if (t.getMore2() != null) {
 			upAmount.setText(t.getMore2());
 		} else {
 			upAmount.setText("");
 		}
-
 		upAmount.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -224,13 +267,16 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 						NetworkHelper.doGet(BaseInfo.STAR_NURSE, params, new JsonHttpResponseHandler() {
 							public void onSuccess(int statusCode, org.apache.http.Header[] headers,
 									org.json.JSONObject response) {
-								if (t.getMore2() != null && !"".equals(t.getMore2())&& !"0".equals(t.getMore2())) {
-									
-									upAmount.setText((Integer.getInteger(t.getMore2())+1) + "");
+								if (t.getMore2() != null && !"".equals(t.getMore2()) && !"0".equals(t.getMore2())) {
+									String s = t.getMore2();
+									upAmount.setText((Integer.valueOf(t.getMore2()) + 1) + "");
 								} else {
 									upAmount.setText("1");
 								}
 								upAmount.setTag("true");
+								Drawable img = context.getResources().getDrawable(R.drawable.xin_2);
+								img.setBounds(0, 0, img.getMinimumWidth(), img.getMinimumHeight());
+								upAmount.setCompoundDrawables(img, null, null, null);
 							}
 						});
 					}
@@ -243,8 +289,7 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 
 			@Override
 			public void onClick(View v) {
-				WeiXinUtils.shareDownloadUrl((Activity) context, BaseInfo.DOWNLOAD_URL, R.drawable.app,
-						SendMessageToWX.Req.WXSceneSession);
+				WeiXinUtils.shareDownloadUrl((Activity) context);
 			}
 		});
 		// 如果是从我的话题打开的，就影藏收藏和点赞等功能

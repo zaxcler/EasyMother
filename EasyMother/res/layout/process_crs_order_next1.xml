@@ -21,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:layout_marginTop="@dimen/dp_10"
                 android:padding="@dimen/dp_10" >
 
                 <TextView
@@ -31,10 +32,12 @@
                     android:layout_alignParentTop="true"
                     android:paddingBottom="@dimen/dp_5"
                     android:paddingTop="@dimen/dp_5"
+                    android:textSize="@dimen/sp_16"
                     android:text="雇主信息" />
 
                 <TextView
                     android:id="@+id/textView1"
+                    android:layout_marginTop="@dimen/dp_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -164,8 +167,8 @@
 
                 <ImageView
                     android:id="@+id/calender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
                     android:layout_alignBottom="@+id/textView6"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/textView6"
@@ -202,7 +205,7 @@
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:textColor="@color/boroblacktext"
-                    android:text="注：护理师上门期间罗飞需要用户承担" />
+                    android:text="注：护理师上门期产生路费线下解决" />
 
             </RelativeLayout>
 

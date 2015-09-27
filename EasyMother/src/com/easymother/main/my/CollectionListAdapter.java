@@ -1,5 +1,6 @@
 package com.easymother.main.my;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -50,7 +51,14 @@ public class CollectionListAdapter extends CommonAdapter<NewsBean> {
 				e.printStackTrace();
 			}
 		}
-		
+		TextView time_tv=holder.getView(R.id.time);
+		if (t.getCreateTime()!=null) {
+			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy/MM/dd");
+			String time=dateFormat.format(t.getCreateTime());
+			time_tv.setText(time);
+		}else {
+			time_tv.setText("");
+		}
 		TextView title=holder.getView(R.id.title);
 		if (t.getNewsName()!=null&&!"".equals(t.getNewsName())) {
 			title.setText(t.getNewsName());

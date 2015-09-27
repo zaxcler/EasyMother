@@ -11,7 +11,9 @@ import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
 import com.easymother.customview.MyListview;
 import com.easymother.main.R;
+import com.easymother.main.my.LoginOrRegisterActivity;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -29,8 +31,10 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AbsListView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -48,7 +52,7 @@ public class BabyTimeActivity extends Activity {
 	private Intent intent;
 	private boolean isFirstTime=true;
 	private int pageNo=1;
-	
+	public final static int LOGIN_CODE=2;//请求登陆代码
 	
 	
 	@Override
@@ -56,6 +60,26 @@ public class BabyTimeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_babytime);
+		EasyMotherUtils.setRightButton(new RightButtonLisenter() {
+			
+			@Override
+			public void addRightButton(ImageView imageView) {
+				imageView.setImageDrawable(getResources().getDrawable(R.drawable.add_yuan));
+				imageView.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						
+						if (MyApplication.preferences.getInt("id", 0)==0) {
+							EasyMotherUtils.goActivityForResult(BabyTimeActivity.this, LoginOrRegisterActivity.class, LOGIN_CODE);
+							return;
+						}
+						EasyMotherUtils.goActivity(BabyTimeActivity.this, BabyTimeEditActivity.class);
+					}
+				});
+				
+			}
+		});
 		EasyMotherUtils.initTitle(this, "囡囡记", false);
 		findView();
 		init();

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alidao.mama.WeiXinUtils;
 import com.alipay.sdk.app.l;
 import com.easymother.bean.BabyTimeBean;
 import com.easymother.bean.TestBean;
@@ -66,6 +67,13 @@ public class BabyTimeListAdapter extends CommonAdapter<BabyTimeBean> {
 		}else {
 			days.setText("0");
 		}
+		holder.getView(R.id.share).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				WeiXinUtils.shareDownloadUrl((Activity)context);
+			}
+		});
 			
 		TextView createdate=holder.getView(R.id.createdate);
 		if (t.getCreateTime()!=null) {
@@ -82,43 +90,50 @@ public class BabyTimeListAdapter extends CommonAdapter<BabyTimeBean> {
 		}
 		
 		holder.getView(R.id.photos).setVisibility(View.VISIBLE);
-		holder.getView(R.id.photo).setVisibility(View.VISIBLE);
 		
 		//图片先不管，因为返回的数据不是数组形式
+//		if (t.getImages()!=null&&!"".equals(t.getImages())) {
+////			String json= "['150907112001easymother20150907_111958.jpg','150907112001easymother20150907_111958.jpg']";
+////			List<String> list=JSON.parseArray(json, String.class);
+//			Log.e("tupian", t.getImages());
+//			List<String> list=JSON.parseArray(t.getImages(), String.class);
+//			
+//				Log.e("图片数组", list.toString());
+//				if (list==null) {
+//					holder.getView(R.id.photos).setVisibility(View.GONE);
+//					holder.getView(R.id.photo).setVisibility(View.GONE);
+//				}else if (list.size()==1) {
+//					holder.getView(R.id.photos).setVisibility(View.GONE);
+//					ImageView imageView=holder.getView(R.id.photo);
+////					if (imageView.getTag()!=String.valueOf(t.hashCode())) {
+//						ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+list.get(0), imageView,MyApplication.options_image);
+////						imageView.setTag(String.valueOf(t.hashCode()));
+////					}
+//				}else if(list.size()>1){
+//					holder.getView(R.id.photo).setVisibility(View.GONE);
+//					MyGridView gridView=holder.getView(R.id.photos);
+////					if (gridView.getTag()!=String.valueOf(t.hashCode())) {
+//						ImageAdapter adapter=new ImageAdapter(context, list, R.layout.comment_image);
+//						gridView.setAdapter(adapter);
+////						gridView.setTag(String.valueOf(t.hashCode()));
+////					}
+//					
+//				
+//			}else {
+//				holder.getView(R.id.photos).setVisibility(View.GONE);
+//				holder.getView(R.id.photo).setVisibility(View.GONE);
+//			}
+//		}
+//		
+		
+//		holder.getView(R.id.photo).setVisibility(View.GONE);
 		if (t.getImages()!=null&&!"".equals(t.getImages())) {
-//			String json= "['150907112001easymother20150907_111958.jpg','150907112001easymother20150907_111958.jpg']";
-//			List<String> list=JSON.parseArray(json, String.class);
-			Log.e("tupian", t.getImages());
-			List<String> list=JSON.parseArray(t.getImages(), String.class);
-			
-				Log.e("图片数组", list.toString());
-				if (list==null) {
-					holder.getView(R.id.photos).setVisibility(View.GONE);
-					holder.getView(R.id.photo).setVisibility(View.GONE);
-				}else if (list.size()==1) {
-					holder.getView(R.id.photos).setVisibility(View.GONE);
-					ImageView imageView=holder.getView(R.id.photo);
-//					if (imageView.getTag()!=String.valueOf(t.hashCode())) {
-						ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+list.get(0), imageView,MyApplication.options_image);
-//						imageView.setTag(String.valueOf(t.hashCode()));
-//					}
-				}else if(list.size()>1){
-					holder.getView(R.id.photo).setVisibility(View.GONE);
-					MyGridView gridView=holder.getView(R.id.photos);
-//					if (gridView.getTag()!=String.valueOf(t.hashCode())) {
-						ImageAdapter adapter=new ImageAdapter(context, list, R.layout.comment_image);
-						gridView.setAdapter(adapter);
-//						gridView.setTag(String.valueOf(t.hashCode()));
-//					}
-					
-				
-			}else {
-				holder.getView(R.id.photos).setVisibility(View.GONE);
-				holder.getView(R.id.photo).setVisibility(View.GONE);
-			}
-			
-			
+		List<String> list=JSON.parseArray(t.getImages(), String.class);
+		MyGridView gridView=holder.getView(R.id.photos);
+			ImageAdapter adapter=new ImageAdapter(context, list, R.layout.comment_image);
+			gridView.setAdapter(adapter);
 		}
+			
 		holder.getConvertView().setOnClickListener(new OnClickListener() {
 			
 			@Override

@@ -8,6 +8,7 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import com.alibaba.fastjson.JSON;
+import com.alidao.mama.WeiXinUtils;
 import com.easymother.bean.ForumPost;
 import com.easymother.bean.ForumPostBean;
 import com.easymother.bean.NurseBaseBean;
@@ -18,16 +19,21 @@ import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
 import com.easymother.customview.MyGridView;
 import com.easymother.customview.MyListview;
+import com.easymother.customview.MyPopupWindow1;
+import com.easymother.customview.MyPopupWindow1.OnMyPopupWindowsClick;
 import com.easymother.main.R;
 import com.easymother.main.babytime.ImageAdapter;
 import com.easymother.main.my.CollectionListAdapter;
+import com.easymother.main.my.LoginOrRegisterActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
+import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 import android.app.Activity;
 import android.content.Context;
@@ -42,6 +48,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,20 +71,37 @@ public class HuLiShiReplyListActivity extends Activity {
 	public String parentContent;
 	public String parentUserNickName;
 	public HuLiShiReplyAdapter adapter;
-	private ForumPost postInfo ;
+	private ForumPost postInfo;
+	private MyPopupWindow1 popupwindow;
 
 	private Intent intent;
 	public int id;
+	private int parentId;//本条空间的固定id
 	private String type;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_hulishi_zone_reply);
-		EasyMotherUtils.initTitle(this, "话题详情", false);
+		EasyMotherUtils.setRightButton(new RightButtonLisenter() {
+
+			@Override
+			public void addRightButton(ImageView imageView) {
+				imageView.setImageDrawable(getResources().getDrawable(R.drawable.meun));
+				imageView.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						popupwindow.showAsDropDown(v);
+					}
+				});
+			}
+		});
+		EasyMotherUtils.initTitle(this, "话题详情", true);
 		intent = getIntent();
-		id = intent.getIntExtra("id", 0);
+		parentId=id = intent.getIntExtra("id", 0);
 		type = intent.getStringExtra("type");
 		findView();
 		init();
@@ -110,7 +134,7 @@ public class HuLiShiReplyListActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				id=postInfo.getId();
+				id = postInfo.getId();
 				editText1.requestFocus();
 				editText1.setHint("回复" + postInfo.getUserNickname());
 				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -122,15 +146,22 @@ public class HuLiShiReplyListActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				if (postInfo==null) {
+					return;
+				}
 				RequestParams params = new RequestParams();
 				String text = editText1.getText().toString().trim();
+				
 				if (text != null && !"".equals(text)) {
-					params.put("content", text);
+					params.put("content", NetworkHelper.showFWBText(text));
 				}
 				params.put("parentId", id);
-				parentContent=Html.fromHtml(postInfo.getContent()).toString();
-				params.put("parentContent", parentContent);
-
+				if (postInfo.getContent()!=null) {
+					parentContent = Html.fromHtml(postInfo.getContent()).toString();
+					params.put("parentContent", parentContent);
+				}else {
+					params.put("parentContent", "");
+				}
 				// 回复
 				NetworkHelper.doGet(BaseInfo.REPLY, params, new JsonHttpResponseHandler() {
 					@Override
@@ -138,25 +169,17 @@ public class HuLiShiReplyListActivity extends Activity {
 						super.onSuccess(statusCode, headers, response);
 						if (JsonUtils.getRootResult(response).getIsSuccess()) {
 							Log.e("回复", response.toString());
-							ForumPost forumPost = JsonUtils.getResult(response, ForumPost.class);
+							ForumPost forumPost= JsonUtils.getResult(response, ForumPost.class);
 							Log.e("回复父内容", forumPost.toString());
 							Toast.makeText(HuLiShiReplyListActivity.this, "回复成功", Toast.LENGTH_SHORT).show();
 							reply_nums.setText("回复" + adapter.getCount() + "条");
 							adapter.add(forumPost);
-							editText1.setText("");
+							id=parentId;
+							editText1.setHint("回复"+postInfo.getUserNickname());
 							adapter.notifyDataSetChanged();
-
-							// 隐藏输入法
-							InputMethodManager imm = (InputMethodManager) getSystemService(
-									Context.INPUT_METHOD_SERVICE);
-							if (imm.isActive()) {
-								//如果开启
-								imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
-								//关闭软键盘，开启方法相同，这个方法是切换开启与关闭状态的
-								}
-							
 						} else {
-							Toast.makeText(HuLiShiReplyListActivity.this, JsonUtils.getRootResult(response).getMessage(), Toast.LENGTH_SHORT).show();
+							Toast.makeText(HuLiShiReplyListActivity.this,
+									JsonUtils.getRootResult(response).getMessage(), Toast.LENGTH_SHORT).show();
 						}
 					}
 
@@ -167,22 +190,77 @@ public class HuLiShiReplyListActivity extends Activity {
 						Log.e("回复失败", responseString);
 					}
 				});
+				editText1.setText("");
+				// 隐藏输入法
+				InputMethodManager imm = (InputMethodManager) getSystemService(
+						Context.INPUT_METHOD_SERVICE);
+//				if (imm.isActive()) {
+					// 如果开启
+					imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,
+							InputMethodManager.HIDE_NOT_ALWAYS);
+					// 关闭软键盘，开启方法相同，这个方法是切换开启与关闭状态的
+//				}
 
 			}
+			
 		});
-
-		//
-		// listview.setOnItemClickListener(new OnItemClickListener() {
-		//
-		// @Override
-		// public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-		// long arg3) {
-		// EasyMotherUtils.goActivity(HuLiShiReplyListActivity.this,
-		// HuLiShiZoneDetailActivity.class);
-		// }
-		// });
-
+		
+		popupwindow=new MyPopupWindow1(HuLiShiReplyListActivity.this, R.layout.popupwindow_community3);
+		popupwindow.setOnMyPopupClidk(new OnMyPopupWindowsClick() {
+			
+			@Override
+			public void onClick(View view) {
+				/*
+				 * 打开分享
+				 */
+				view.findViewById(R.id.share).setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Intent intent=new Intent();
+						intent.putExtra("flag", "unread");
+						intent.setClass(HuLiShiReplyListActivity.this, MessageContralActivity.class);
+						startActivity(intent);
+						popupwindow.dismiss();
+					}
+				});
+				view.findViewById(R.id.collection).setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						RequestParams params=new RequestParams();
+						params.put("newsId", id);
+						int userId=MyApplication.preferences.getInt("id", 0);
+						if (userId!=0) {
+							params.put("userId", userId);
+							params.put("forumPostId", postInfo.getId());
+							params.put("type", postInfo.getType());
+							NetworkHelper.doGet(BaseInfo.SAVE_COLLECTION, params, new JsonHttpResponseHandler(){
+								public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+									if (JsonUtils.getRootResult(response).getIsSuccess()) {
+										popupwindow.dismiss();
+										Toast.makeText(HuLiShiReplyListActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+									}else {
+										Toast.makeText(HuLiShiReplyListActivity.this, "收藏失败 ", Toast.LENGTH_SHORT).show();
+										Log.e("收藏失败", response.toString());
+									}
+								};
+								public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+									Toast.makeText(HuLiShiReplyListActivity.this, "连接服务器失败", Toast.LENGTH_SHORT).show();
+									Log.e("连接服务器失败", responseString);
+								};
+							});
+						}else {
+							EasyMotherUtils.goActivity(HuLiShiReplyListActivity.this, LoginOrRegisterActivity.class);
+						}
+					}
+				});
+			}
+			
+		});
+		
 	}
+
 
 	/*
 	 * 加载数据
@@ -219,7 +297,7 @@ public class HuLiShiReplyListActivity extends Activity {
 	protected void bindData(TopicHelpDetailResult detailResult) {
 
 		if (detailResult != null) {
-			postInfo= detailResult.getPostInfo();
+			postInfo = detailResult.getPostInfo();
 			NurseBaseBean baseBean = detailResult.getNurseinfo();
 			List<ForumPost> list = detailResult.getReplys();
 			if (baseBean != null) {
@@ -260,9 +338,10 @@ public class HuLiShiReplyListActivity extends Activity {
 					user_name.setText("");
 				}
 			}
-			if (postInfo.getImages()!=null&&!"".equals(postInfo.getImages()) &&!"[]".equals(postInfo.getImages())) {
-				ArrayList<String> images=(ArrayList<String>) JSON.parseArray(postInfo.getImages(), String.class);
-				ImageAdapter adapter=new ImageAdapter(HuLiShiReplyListActivity.this, images, R.layout.comment_image);
+			if (postInfo.getImages() != null && !"".equals(postInfo.getImages())
+					&& !"[]".equals(postInfo.getImages())) {
+				ArrayList<String> images = (ArrayList<String>) JSON.parseArray(postInfo.getImages(), String.class);
+				ImageAdapter adapter = new ImageAdapter(HuLiShiReplyListActivity.this, images, R.layout.comment_image);
 				pictures.setAdapter(adapter);
 			}
 			if (list != null) {

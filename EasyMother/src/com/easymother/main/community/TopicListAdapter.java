@@ -58,7 +58,7 @@ public class TopicListAdapter extends CommonAdapter<TopicItemBean> {
 //		}
 		
 		CircleImageView circleImageView=holder.getView(R.id.circleImageView1);
-		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getUserImae(), circleImageView,MyApplication.options_image);
+		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getUserImage(), circleImageView,MyApplication.options_image);
 		
 		TextView name=holder.getView(R.id.name);
 		if (t.getUserNickname()!=null) {

@@ -11,6 +11,7 @@ import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.ImageUtils;
+import com.easymother.utils.UILUtils;
 import com.easymother.utils.ViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -63,9 +64,6 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 		holder.getView(R.id.delete).setVisibility(View.GONE);
 		holder.getView(R.id.pay).setVisibility(View.GONE);
 		
-		if (holder.getConvertView()==null) {
-			
-		}
 		final NurseBaseBean bean=(NurseBaseBean) yuesao;
 		TextView name=holder.getView(R.id.textView1);
 		/*
@@ -125,10 +123,14 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 		/*
 		 * 设置之前先判断空
 		 */
-		if (bean.getPrice()!=null) {
-			Price.setText(bean.getPrice()*26+"元");
+//		if (bean.getPrice()!=null) {
+//			Price.setText(bean.getPrice()*26+"元");
+//		}
+		TextView textView=holder.getView(R.id.textView10);
+		textView.setVisibility(View.GONE);
+		if (bean.getShowPrice()!=null) {
+			Price.setText(bean.getShowPrice());
 		}
-		
 		TextView marketPrice=holder.getView(R.id.textView8);
 		/*
 		 * 设置之前先判断空
@@ -143,13 +145,16 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 		}
 		
 		ImageView photo=holder.getView(R.id.image);
-		if (bean.getImage()!=null) {
-			if (!bean.getImage().equals(photo.getTag())){
-				ImageUtils.setPhoto(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo);
-//				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo,MyApplication.options_image);
-			}
-		}
-		photo.setTag(bean.getImage());
+//		UILUtils.downSet(photo, BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage());
+		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo, MyApplication.options_photo);
+//		ImageUtils.setPhoto(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo);
+//		if (bean.getImage()!=null) {
+//			if (!bean.getImage().equals(photo.getTag())){
+//				ImageUtils.setPhoto(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo);
+////				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo,MyApplication.options_image);
+//			}
+//		}
+//		photo.setTag(bean.getImage());
 //		if (bean.getImage()!=null) {
 //			if (photos.get(bean.getImage())==null) {
 //				photos.put(bean.getImage(), bean.getImage());

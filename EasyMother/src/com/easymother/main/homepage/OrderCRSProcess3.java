@@ -23,7 +23,7 @@ public class OrderCRSProcess3 extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.process_crs_order_success);
 		EasyMotherUtils.initTitle(this, "付款成功", false);
-		MyApplication.addActivityToMap(this, "CRSprocess");
+		MyApplication.addActivityToMap(this, "CRSprocess1");
 		findView();
 		init();
 	}

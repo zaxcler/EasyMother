@@ -77,6 +77,7 @@ private Integer id;
     private String jobTitle;
 	
 	private String[] workImageArrays;
+	
 
 	public Integer getId() {
 		return id;

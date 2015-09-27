@@ -1,5 +1,7 @@
 package com.easymother.main.my;
 
+import java.io.File;
+
 import org.apache.http.Header;
 import org.json.JSONObject;
 
@@ -7,20 +9,24 @@ import com.alidao.mama.WeiXinUtils;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
+import com.easymother.utils.ConuntSize;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SettingActivity extends Activity implements OnClickListener {
@@ -30,6 +36,7 @@ public class SettingActivity extends Activity implements OnClickListener {
 	private LinearLayout delete_cache;
 	private Button exit;
 
+	private TextView size;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,11 +53,14 @@ public class SettingActivity extends Activity implements OnClickListener {
 		suggestion = (LinearLayout) findViewById(R.id.suggestion);
 		delete_cache = (LinearLayout) findViewById(R.id.delete_cache);
 		exit = (Button) findViewById(R.id.exit);
+		size=(TextView) findViewById(R.id.size);
 	}
 
 	private void init() {
+		File file=StorageUtils.getOwnCacheDirectory(this, "imageloader/Cache");
+		String sizeString=ConuntSize.getFormatSize(ConuntSize.getFolderSize(file));
 		
-
+		size.setText(sizeString);
 		about.setOnClickListener(this);
 		share.setOnClickListener(this);
 		suggestion.setOnClickListener(this);
@@ -67,15 +77,24 @@ public class SettingActivity extends Activity implements OnClickListener {
 
 			break;
 		case R.id.share:
-			WeiXinUtils.shareDownloadUrl(this, "www.qsmam.com", R.drawable.app, SendMessageToWX.Req.WXSceneSession);
+			WeiXinUtils.shareDownloadUrl(this);
 			break;
 		case R.id.suggestion:
 			EasyMotherUtils.goActivity(this, SettingSueegstionActivity.class);
 			break;
 		case R.id.delete_cache:
+			ConuntSize conuntSize=ConuntSize.getInstance();
+			conuntSize.deleteFolderFile(Environment.getExternalStorageDirectory() + "/imageloader/Cache", true);
 			ImageLoader.getInstance().clearMemoryCache();
+			File file=StorageUtils.getOwnCacheDirectory(this, "imageloader/Cache");
+			String sizeString=ConuntSize.getFormatSize(ConuntSize.getFolderSize(file));
+			size.setText(sizeString);
+			Toast.makeText(this, "缓存清除成功！", Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.exit:
+			Toast.makeText(SettingActivity.this, "成功退出", 0).show();
+			MyApplication.editor.clear().commit();
+			ImageLoader.getInstance().clearMemoryCache();
 			NetworkHelper.doGet(BaseInfo.LOGOUT, new JsonHttpResponseHandler(){
 				@Override
 				public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

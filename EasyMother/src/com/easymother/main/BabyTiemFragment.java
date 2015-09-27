@@ -1,5 +1,6 @@
 package com.easymother.main;
 
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -19,7 +20,11 @@ import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -47,9 +52,18 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 	
 	public  Handler handler=new Handler(){
 		public void handleMessage(Message msg) {
-			if (msg.what==1) {
+			switch (msg.what) {
+			case 1:
 				loadData();
+				break;
+			case 2:
+				Bitmap bitmap=(Bitmap) msg.obj;
+				background.setImageBitmap(bitmap);
+				break;
+
+			
 			}
+			
 		};
 	};
 	
@@ -93,7 +107,7 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 					BabyTimeResult result=JsonUtils.getResult(response, BabyTimeResult.class);
 					bindData(result);
 				}else {
-					Toast.makeText(getActivity(),JsonUtils.getRootResult(response).getMessage(), Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(),"未登录！", Toast.LENGTH_SHORT).show();
 				}
 			}
 			@Override
@@ -116,7 +130,9 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 				baby_name.setText("请登录");
 				return;
 			}
-			
+			//没有囡囡信息就加载一个错误的图片，会有默认图片
+			ImageLoader.getInstance().displayImage("", circleImageView,MyApplication.options_photo);
+			ImageLoader.getInstance().displayImage("", background,MyApplication.options_image);
 		}else {
 			int baby_id=MyApplication.preferences.getInt("baby_id", 0);
 			String baby_image=MyApplication.preferences.getString("baby_image", "");
@@ -151,12 +167,10 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 			MyApplication.editor.commit();
 			String backgroundimage=result.getBabyInfo().getBackground();
 			if (backgroundimage!=null&&!"".equals(backgroundimage)) {
-				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+backgroundimage, background);
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+backgroundimage, background,MyApplication.options_image);
 			}
 			String babyimage=result.getBabyInfo().getBabyImage();
-			if (babyimage!=null&&!"".equals(babyimage)) {
-				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+babyimage, circleImageView);
-			}
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+babyimage, circleImageView,MyApplication.options_photo);
 			if (result.getBabyInfo().getBabyName()!=null&&!"".equals(result.getBabyInfo().getBabyName())) {
 				baby_name.setText(result.getBabyInfo().getBabyName());
 			}
@@ -235,8 +249,39 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 		if (!"".equals(name)&&name!=null) {
 			baby_name.setText(name);
 		}
+		Log.e("onresume", "=+++++++++++++++++++=====");
 		
 	}
 	
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode==Activity.RESULT_OK) {
+			Log.e("调用", "-----------");
+			switch (requestCode) {
+			case BabyTiemFragment.CHOOSE_PHOTO:
+				try {
+					Uri uri=data.getData();
+					BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();  
+					bitmapOptions.inJustDecodeBounds = true;
+					  bitmapOptions.inSampleSize = 4;  
+					  bitmapOptions.inJustDecodeBounds = false;
+					Bitmap  bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(uri), null , bitmapOptions);
+					EasyMotherUtils.uploadPhoto(bitmap,BaseInfo.UPLOADPHTO, "baby_background");
+					background.setImageBitmap(bitmap);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			
+				//如果登陆成功 则刷新一下BabyTiemFragment的数据
+			case BabyTiemFragment.LOGIN_CODE:
+				handler.sendEmptyMessage(1);
+				break;
+			}
+		}
+	}
 	
 }

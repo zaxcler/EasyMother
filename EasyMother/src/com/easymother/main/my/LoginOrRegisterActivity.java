@@ -19,6 +19,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +40,7 @@ public class LoginOrRegisterActivity extends Activity implements OnClickListener
 	private EditText password;//密码
 	
 	private Button login;//登录
+	Intent intent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,11 @@ public class LoginOrRegisterActivity extends Activity implements OnClickListener
 				break;
 			}
 			params.put("mobile", phone_num.getText().toString().trim());
-			params.put("password", password.getText().toString().trim());
+			params.put("password",password.getText().toString().trim() );
+			
+			if (password.getText().toString().trim()!= null && !"".equals(password.getText().toString().trim())) {
+				MyApplication.editor.putString("password", password.getText().toString().trim()).commit();
+			}
 			
 			NetworkHelper.doGet(BaseInfo.LOGIN, params, new JsonHttpResponseHandler(){
 				@Override
@@ -131,6 +137,7 @@ public class LoginOrRegisterActivity extends Activity implements OnClickListener
 		
 		
 	}
+	
 	//加载宝贝信息,并保存到本地
 	public void loadBabyInfo(){
 		NetworkHelper.doGet(BaseInfo.BABYTIME_INDEX, new JsonHttpResponseHandler(){

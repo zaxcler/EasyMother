@@ -11,26 +11,7 @@
         android:layout_height="wrap_content"
         layout="@layout/commontitle" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/include1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:src="@drawable/photo1" />
-
-    <TextView
-        android:id="@+id/version"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dp_10"
-        android:text="轻松妈妈2.0版本"
-        android:textSize="@dimen/dp_16" />
-
-    <LinearLayout
+    <!-- <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,37 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_20"
             android:src="@drawable/go" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/linearLayout1"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/dp_20"
-        android:paddingTop="@dimen/dp_20" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:text="欢迎页"
-            android:textSize="@dimen/dp_16" />
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_20"
-            android:src="@drawable/go" />
-    </LinearLayout>
+    </LinearLayout> -->
 
     <LinearLayout
         android:id="@+id/about"
@@ -137,11 +88,37 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/linearLayout2"
-        android:background="@color/line" />
-    <View
+        android:background="@color/lightlightboro" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/about"
-        android:background="@color/line" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/include1"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_20" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="欢迎页"
+            android:textSize="@dimen/dp_16" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_20"
+            android:src="@drawable/go" />
+    </LinearLayout>
 
 </RelativeLayout>

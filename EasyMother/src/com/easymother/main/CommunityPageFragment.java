@@ -10,8 +10,8 @@ import com.easymother.bean.Banners;
 import com.easymother.bean.Blocks;
 import com.easymother.bean.CommunityResult;
 import com.easymother.configure.BaseInfo;
-import com.easymother.customview.ImageCycleView;
-import com.easymother.customview.ImageCycleView.ImageCycleViewListener;
+import com.easymother.customview.ImageCycleView1;
+import com.easymother.customview.ImageCycleView1.ImageCycleViewListener;
 import com.easymother.customview.MyListview;
 import com.easymother.main.community.CommunityAdapter;
 import com.easymother.main.community.HuLiShiZoneListActivity;
@@ -52,7 +52,7 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 	private ImageView message;//消息管理
 	// 测试数据
 	private ArrayList<String> mImageUrl = null;
-	private ImageCycleView cycleView;// 广告栏
+	private ImageCycleView1 cycleView;// 广告栏
 	
 	public PullToRefreshScrollView pulltoreflash;
 	
@@ -71,7 +71,7 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 
 	private void findView(View view) {
 		pulltoreflash=(PullToRefreshScrollView) view.findViewById(R.id.pulltoreflash);
-		cycleView = (ImageCycleView) view.findViewById(R.id.imageCycleView2);
+		cycleView = (ImageCycleView1) view.findViewById(R.id.imageCycleView2);
 		mylistview=(MyListview) view.findViewById(R.id.mylistview);
 		hulishizoom = (TextView) view.findViewById(R.id.hulishizone);
 		more = (TextView) view.findViewById(R.id.other);
@@ -118,19 +118,24 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 	 * 绑定数据
 	 * @param result
 	 */
-	protected void bindData(CommunityResult result) {
+	protected void bindData(final CommunityResult result) {
 		/*
 		 * 绑定banner
 		 */
 		if (result.getBanners()!=null) {
 			mImageUrl = new ArrayList<String>();
-			for (Banners banner : result.getBanners()) {
-				mImageUrl.add(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+banner.getLogo());
+			for (int i = 0; i < result.getBanners().size(); i++) {
+				mImageUrl.add(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+result.getBanners().get(i).getLogo());
 			}
+//			for (Banners banner : result.getBanners()) {
+//				mImageUrl.add(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+banner.getLogo());
+//			}
 			cycleView.setImageResources(mImageUrl, new ImageCycleViewListener() {
 				@Override
 				public void onImageClick(int position, View imageView) {
-					
+					Intent intent=new Intent(getActivity(), WebViewActivity.class);
+					intent.putExtra("url", result.getBanners().get(position).getUrlValue());
+					startActivity(intent);
 				}
 			});
 		}

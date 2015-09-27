@@ -13,8 +13,11 @@
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginBottom="@dimen/dp_10"
         android:layout_width="match_parent"
-        android:hint="new day new begaining..."
+        android:hint="记录宝宝新鲜事儿..."
+        android:textColor="@color/lightlightboro"
         android:gravity="top"
+        android:textSize="@dimen/dp_16"
+        android:padding="@dimen/dp_5"
         android:layout_height="@dimen/dp_150"/>
     
     <LinearLayout 

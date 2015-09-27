@@ -63,6 +63,7 @@ public class PayCRSActivity extends FragmentActivity {
 					Toast.makeText(PayCRSActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
 					intent.setClass(PayCRSActivity.this, OrderCRSProcess3.class);
 					startActivity(intent);
+					PayCRSActivity.this.finish();
 				} else {
 					// 判断resultStatus 为非“9000”则代表可能支付失败
 					// “8000”代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
@@ -104,12 +105,14 @@ public class PayCRSActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.process_duanqi_order_next3);
-		EasyMotherUtils.initTitle(this, "支付定金", false);
-		MyApplication.addActivityToMap(this, "YSprocess");
+		EasyMotherUtils.initTitle(this, "支付费用", false);
+		MyApplication.destoryActivity("YSprocess");
+		MyApplication.addActivityToMap(this, "YSprocess1");
 		intent=getIntent();
 		nursebase=(NurseBaseBean) intent.getSerializableExtra("nursebase");
 		nursejob=(NurseJobBean) intent.getSerializableExtra("nursejob");
 		order=(Order) intent.getParcelableExtra("order");
+		
 		findView();
 		init();
 	}
@@ -261,7 +264,7 @@ public class PayCRSActivity extends FragmentActivity {
 		orderInfo += "&total_fee=" + "\"" + price + "\"";
 
 		// 服务器异步通知页面路径
-		orderInfo += "&notify_url=" + "\"" + "http://zhonglv.hzlianhai.com/easyMother/app/ordernotifyurl" + "\"";
+		orderInfo += "&notify_url=" + "\"" + BaseInfo.BASE_URL+"app/ordernotifyurl"+ "\"";
 
 		// 服务接口名称， 固定值
 		orderInfo += "&service=\"mobile.securitypay.pay\"";

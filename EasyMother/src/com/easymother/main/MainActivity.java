@@ -2,9 +2,12 @@ package com.easymother.main;
 
 
 import java.io.FileNotFoundException;
+import java.util.Date;
 
 import com.easymother.configure.BaseInfo;
+import com.easymother.configure.MyApplication;
 import com.easymother.utils.EasyMotherUtils;
+import com.shelwee.update.UpdateHelper;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,10 +15,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -23,6 +28,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements OnClickListener{
 
@@ -49,6 +55,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	private FragmentTransaction transaction;
 	
 	private FrameLayout frameLayout;//主容器
+	private Date Date1;//第一点击退出的时间
+	private int i=1;//点击次数
 	
 	
 	
@@ -78,6 +86,11 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		community_page.setOnClickListener(this);
 		babytime_page.setOnClickListener(this);
 		my_page.setOnClickListener(this);
+		//检查版本更新
+		String url=BaseInfo.BASE_URL+"/resources/images/update.json";
+		UpdateHelper updateHelper = new UpdateHelper.Builder(this).checkUrl(url).isAutoInstall(true) // 设为false需在下载完手动点击安装;默认为true，下载后自动安装。
+				.build();
+		updateHelper.check();
 	}
 
 	private void findView() {
@@ -173,7 +186,11 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 				babyTiemFragment=new BabyTiemFragment();
 				transaction.add(R.id.main_content, babyTiemFragment);
 			}else {
-				babyTiemFragment.loadData();
+				//没有囡囡信息则刷新
+				if (MyApplication.preferences.getInt("baby_id", 0)==0) {
+					babyTiemFragment.loadData();
+				}
+				
 			}
 			if (homePageFragment!=null) {
 				transaction.hide(homePageFragment);
@@ -195,6 +212,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			if ( myPageFragment ==null) {
 				myPageFragment=new MyPageFragment();
 				transaction.add(R.id.main_content, myPageFragment);
+			}else {
+				myPageFragment.loadData();
 			}
 			if (homePageFragment!=null) {
 				transaction.hide(homePageFragment);
@@ -217,6 +236,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode==Activity.RESULT_OK) {
+			Log.e("调用", "-----------");
 			switch (requestCode) {
 			case BabyTiemFragment.CHOOSE_PHOTO:
 				try {
@@ -227,7 +247,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 					  bitmapOptions.inJustDecodeBounds = false;
 					Bitmap  bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri), null , bitmapOptions);
 					EasyMotherUtils.uploadPhoto(bitmap,BaseInfo.UPLOADPHTO, "baby_background");
-					BabyTiemFragment.background.setImageBitmap(bitmap);
+					
+					Message message=Message.obtain();
+					message.what=2;
+					message.obj=bitmap;
+					babyTiemFragment.handler.sendMessage(message);
+//					BabyTiemFragment.background.setImageBitmap(bitmap);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -238,10 +263,43 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			case BabyTiemFragment.LOGIN_CODE:
 				babyTiemFragment.handler.sendEmptyMessage(1);
 				break;
+			
 			}
 		}
 	}
 	
+	@Override
+	public void onBackPressed() {
+		Date now=new Date(System.currentTimeMillis());
+		if (i%2==1) {
+			Date1=now;
+			i++;
+			Toast.makeText(this, "真的要退出吗！再次点击退出", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		if (i%2==0) {
+			long t=now.getTime()-Date1.getTime();
+			if (t>3000) {
+				this.finish();
+				MyApplication.destoryAllActivity();
+			}
+		}
+		
+		super.onBackPressed();
+		
+	}
 	
+	@Override
+	protected void onResume() {
+		if (myPageFragment!=null) {
+			myPageFragment.loadData();
+			if (MyApplication.preferences.getInt("id", 0)==0) {
+				myPageFragment.clearData();
+			}
+		}
+		Log.e("hahhhaah", "-----------------");
+		
+		super.onResume();
+	}
 
 }

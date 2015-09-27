@@ -14,6 +14,7 @@ import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.provider.DocumentsContract.Root;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -62,10 +63,19 @@ public class InfomationChangePasswordActivity extends Activity {
 					public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 						super.onSuccess(statusCode, headers, response);
 						if (JsonUtils.getRootResult(response).getIsSuccess()) {
-							Toast.makeText(InfomationChangePasswordActivity.this, "密码修改成功", 0).show();
-							InfomationChangePasswordActivity.this.finish();
+							com.easymother.bean.Root root1=JsonUtils.getResult(response, com.easymother.bean.Root.class);
+							if (root1.getIsSuccess()) {
+								MyApplication.destoryActivity("infomationactivity");
+								MyApplication.preferences.edit().clear().commit();
+								EasyMotherUtils.goActivity(InfomationChangePasswordActivity.this, LoginOrRegisterActivity.class);
+								InfomationChangePasswordActivity.this.finish();
+								
+								
+							}
+							Toast.makeText(InfomationChangePasswordActivity.this, root1.getMessage(), 0).show();
+							
 						}else {
-							Toast.makeText(InfomationChangePasswordActivity.this, JsonUtils.getRootResult(response).getMessage(), 0).show();
+							Toast.makeText(InfomationChangePasswordActivity.this, "修改密码失败！", 0).show();
 						}
 					}
 					@Override

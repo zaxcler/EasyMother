@@ -12,14 +12,15 @@
     <TextView
         android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_60"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="@color/lightredwine"
         android:gravity="center"
         android:paddingBottom="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
-        android:text="生成电子合同"
+        android:text="确定生成合同"
+        android:textSize="@dimen/sp_18"
         android:textColor="@color/white" />
 
     <ScrollView
@@ -317,7 +318,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/dp_20"
-                            android:text="丙   方："
+                            android:text="丙      方："
                             android:textColor="@color/boroblacktext" />
 
                         <TextView
@@ -349,7 +350,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/dp_20"
-                            android:text="经办人："
+                            android:text="经 办 人："
                             android:textColor="@color/boroblacktext" />
 
                         <TextView
@@ -445,12 +446,12 @@
                         android:background="@color/line" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignTop="@+id/layouta2"
                         android:layout_marginBottom="@dimen/dp_10"
-                        android:src="@drawable/zhang" />
+                        android:src="@drawable/hetong" />
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

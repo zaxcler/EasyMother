@@ -1,10 +1,10 @@
 package com.easymother.bean;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class OrderListBean  extends Order implements Serializable{
+public class OrderListBean  extends Order  {
+//	public class OrderListBean  extends Order implements Serializable{
 	
 	private Integer nurseId;
 
@@ -45,6 +45,19 @@ public class OrderListBean  extends Order implements Serializable{
     private Integer orderId;//订单ID
     
     private String status;//订单状态
+    
+    private String showPrice;
+    
+    
+    
+
+	public String getShowPrice() {
+		return showPrice;
+	}
+
+	public void setShowPrice(String showPrice) {
+		this.showPrice = showPrice;
+	}
 
 	public Integer getNurseId() {
 		return nurseId;

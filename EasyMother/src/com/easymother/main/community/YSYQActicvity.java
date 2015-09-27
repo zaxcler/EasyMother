@@ -71,7 +71,7 @@ public class YSYQActicvity extends Activity {
 		bean4.setDesc("宝贝健康随我来");
 		beans.add(bean1);
 		beans.add(bean2);
-		beans.add(bean3);
+		beans.add(bean3);    
 		beans.add(bean4);
 		YSYQGridviewAdapter adapter=new YSYQGridviewAdapter(this, beans, R.layout.yishiyiqu_item);
 		gridview.setAdapter(adapter);

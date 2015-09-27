@@ -19,7 +19,10 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/dp_10" >
 
                 <com.easymother.customview.CircleImageView
                     android:id="@+id/imageView1"
@@ -28,6 +31,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_20"
                     android:src="@drawable/photo" />
 
@@ -37,7 +41,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/textView1"
                     android:layout_toRightOf="@+id/textView1"
-                    android:text="李四" />
+                    android:text="李四"
+                    android:textColor="@color/boroblacktext" />
 
                 <TextView
                     android:id="@+id/nurse_phone"
@@ -46,7 +51,7 @@
                     android:layout_alignBaseline="@+id/textView3"
                     android:layout_alignBottom="@+id/textView3"
                     android:layout_alignLeft="@+id/nurse_name"
-                    android:text="400-231-2132"
+                    android:text="400-8068-222"
                     android:textColor="@color/boroblacktext" />
 
                 <TextView
@@ -56,7 +61,7 @@
                     android:layout_alignBottom="@+id/imageView1"
                     android:layout_alignLeft="@+id/textView3"
                     android:layout_marginBottom="@dimen/dp_10"
-                    android:text="护理师等级："
+                    android:text="等级："
                     android:textColor="@color/boroblacktext" />
 
                 <TextView
@@ -75,59 +80,37 @@
                     android:layout_above="@+id/nurse_phone"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:layout_toRightOf="@+id/imageView1"
-                    android:text="姓名：" />
+                    android:text="姓名："
+                    android:textColor="@color/boroblacktext" />
 
                 <TextView
                     android:id="@+id/nurse_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/nurse_phone"
-                    android:layout_alignBottom="@+id/nurse_phone"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_alignBaseline="@+id/textView5"
+                    android:layout_alignBottom="@+id/textView5"
+                    android:layout_toRightOf="@+id/nurse_phone"
                     android:text="￥480/次"
                     android:textColor="@color/mudyellow"
-                    android:textSize="@dimen/dp_18" />
+                    android:textSize="@dimen/dp_18"
+                    android:visibility="gone" />
 
-                <RatingBar
-                    android:id="@+id/ratingBar1"
-                    style="?android:attr/ratingBarStyleSmall"
+                <TextView
+                    android:id="@+id/jobtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/textView5"
-                    android:layout_toRightOf="@+id/textView5"
-                    android:numStars="5"
-                    android:rating="3.5" />
+                    android:layout_alignBottom="@+id/nurse_price"
+                    android:layout_alignLeft="@+id/nurse_phone"
+                    android:text="金牌"
+                    android:textColor="@color/liangboro" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/white"
                 android:paddingBottom="@dimen/dp_10" >
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView10"
-                    android:layout_alignBottom="@+id/textView10"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:gravity="center"
-                    android:text="120分钟起"
-                    android:textColor="@color/boroblacktext"
-                    android:textSize="@dimen/dp_10" />
-
-                <TextView
-                    android:id="@+id/price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView15"
-                    android:layout_alignBottom="@+id/textView15"
-                    android:layout_alignRight="@+id/textView9"
-                    android:text="￥480元"
-                    android:textColor="@color/mudyellow" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -147,32 +130,35 @@
                     android:layout_alignBottom="@+id/textView8"
                     android:layout_marginLeft="14dp"
                     android:layout_toRightOf="@+id/textView15"
-                    android:text="产前开奶" />
+                    android:text="产前开奶"
+                    android:textColor="@color/lightredwine" />
 
-                <LinearLayout
+                <com.example.demobyimage.CustomHorizontalScrollView
                     android:id="@+id/linearLayout1"
-                    android:layout_margin="@dimen/dp_5"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal"
-                    android:layout_alignLeft="@+id/textView15"
-                    android:layout_below="@+id/textView8" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/textView2"
-                        android:layout_below="@+id/textView8"
-                         />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView2"
-                    android:layout_below="@+id/linearLayout1"
-                    android:text="项目总费用" />
+                    android:layout_alignLeft="@+id/textView15"
+                    android:layout_below="@+id/textView8"
+                    android:orientation="horizontal"
+                     >
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/textView15"
+                        android:layout_below="@+id/textView8"
+                        android:layout_margin="@dimen/dp_5"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/dp_10" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/textView2"
+                            android:layout_below="@+id/textView8" />
+                    </LinearLayout>
+                </com.example.demobyimage.CustomHorizontalScrollView>
 
                 <TextView
                     android:id="@+id/textView2"
@@ -180,20 +166,67 @@
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/linearLayout1"
                     android:layout_alignLeft="@+id/textView8"
+                    android:layout_alignParentRight="true"
                     android:text="套餐类型：" />
 
-                <TextView
+                <LinearLayout
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/textView2"
-                    android:layout_toLeftOf="@+id/textView9"
-                    android:drawableLeft="@drawable/clock"
-                    android:gravity="center"
-                    android:text="项目时长:"
-                    android:textColor="@color/boroblacktext"
-                    android:textSize="@dimen/dp_10" />
+                    android:layout_alignRight="@+id/linearLayout1"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="horizontal" >
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/textView9"
+                        android:drawableLeft="@drawable/clock"
+                        android:gravity="center"
+                        android:text="项目时长:"
+                        android:textColor="@color/boroblacktext"
+                        android:textSize="@dimen/dp_10" />
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/linearLayout1"
+                        android:layout_alignTop="@+id/project_name"
+                        android:gravity="center"
+                        android:text="120分钟起"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:textColor="@color/boroblacktext"
+                        android:textSize="@dimen/dp_10" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView15"
+                    android:layout_alignBottom="@+id/textView15"
+                    android:layout_alignRight="@+id/linearLayout1"
+                    android:layout_marginRight="18dp"
+                    android:text="￥0元"
+                    android:textColor="@color/mudyellow" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/linearLayout1"
+                    android:background="@color/lightlightboro" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView2"
+                    android:layout_below="@+id/view1"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="项目总费用" />
             </RelativeLayout>
 
             <LinearLayout
@@ -204,7 +237,7 @@
                 android:layout_below="@id/view1"
                 android:layout_marginBottom="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@drawable/white_solid"
+                android:background="@color/white"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -222,7 +255,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/line" />
+                    android:background="@color/lightlightboro" />
 
                 <TextView
                     android:id="@+id/day2"
@@ -235,7 +268,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/line" />
+                    android:background="@color/lightlightboro" />
 
                 <TextView
                     android:id="@+id/day3"
@@ -250,7 +283,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/line" />
+                    android:background="@color/lightlightboro" />
 
                 <TextView
                     android:id="@+id/day4"
@@ -281,6 +314,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_20"
                 android:background="@drawable/lightredwine_solid"
                 android:paddingBottom="@dimen/dp_10"
@@ -288,7 +322,6 @@
                 android:text="开始签约"
                 android:textColor="@color/white" />
         </LinearLayout>
-
     </ScrollView>
 
 </LinearLayout>

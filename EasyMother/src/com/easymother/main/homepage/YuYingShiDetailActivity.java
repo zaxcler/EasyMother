@@ -270,16 +270,16 @@ public class YuYingShiDetailActivity extends Activity implements OnClickListener
 		Intent intent=new Intent();
 		switch (arg0.getId()) {
 		case R.id.check1:
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1,"");
 			break;
 		case R.id.check2:
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1,"");
 			break;
 		case R.id.check3:
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1,"");
 			break;
 		case R.id.check4:
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1,"");
 			break;
 		case R.id.buy_now:
 			intent.setClass(this, OrderYSandYYSProcess.class);

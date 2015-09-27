@@ -29,6 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:gravity="center_vertical"
                 android:padding="@dimen/dp_10" >
 
                 <View
@@ -38,69 +39,78 @@
 
                 <ImageView
                     android:id="@+id/nurseimage"
-                    android:layout_width="@dimen/dp_60"
+                    android:layout_width="@dimen/dp_100"
                     android:layout_height="@dimen/dp_100"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_margin="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
                     android:scaleType="fitXY"
-                    android:src="@drawable/test2" />
+                    android:src="@drawable/photo" />
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/v1"
+                <RelativeLayout
+                    android:layout_marginTop="@dimen/dp_20"
                     android:layout_toRightOf="@+id/nurseimage"
-                    android:text="乙方"
-                    android:textColor="@color/boroblacktext" />
-
-                <TextView
-                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/textView2"
-                    android:layout_toRightOf="@+id/nurseimage"
-                    android:text="电话"
-                    android:textColor="@color/boroblacktext" />
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dp_10"
+                     >
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView3"
-                    android:layout_below="@+id/textView3"
-                    android:text="地址"
-                    android:textColor="@color/boroblacktext" />
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView2"
+                        
+                        android:text="电话"
+                        android:textColor="@color/boroblacktext" />
 
-                <TextView
-                    android:id="@+id/nursename"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/textView2"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:layout_toRightOf="@+id/textView2"
-                    android:text="王阿芬"
-                    android:textColor="@color/boroblacktext" />
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/textView3"
+                        android:layout_below="@+id/textView3"
+                        android:text="地址"
+                        android:textColor="@color/boroblacktext" />
 
-                <TextView
-                    android:id="@+id/nursephone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView3"
-                    android:layout_alignBottom="@+id/textView3"
-                    android:layout_alignLeft="@+id/nursename"
-                    android:text="400-6414-389"
-                    android:textColor="@color/boroblacktext" />
+                    <TextView
+                        android:id="@+id/nursename"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/textView2"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_toRightOf="@+id/textView2"
+                        android:text="王阿芬"
+                        android:textColor="@color/boroblacktext" />
 
-                <TextView
-                    android:id="@+id/nurseaddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/nursephone"
-                    android:layout_below="@+id/nursephone"
-                    android:text="浙江省杭州市西湖区XX街道XX小区"
-                    android:textColor="@color/boroblacktext" />
+                    <TextView
+                        android:id="@+id/nursephone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/textView3"
+                        android:layout_alignBottom="@+id/textView3"
+                        android:layout_alignLeft="@+id/nursename"
+                        android:text="400-8068-222"
+                        android:textColor="@color/boroblacktext" />
+
+                    <TextView
+                        android:id="@+id/nurseaddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/nursephone"
+                        android:layout_below="@+id/nursephone"
+                        android:text="浙江省杭"
+                        android:textColor="@color/boroblacktext" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="乙方"
+                        android:textColor="@color/boroblacktext" />
+                </RelativeLayout>
             </RelativeLayout>
 
             <TextView
@@ -117,6 +127,7 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:paddingBottom="@dimen/dp_20"
                 android:paddingLeft="@dimen/dp_20"
                 android:paddingRight="@dimen/dp_20" >
 
@@ -131,14 +142,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/dp_20"
-                        android:text="姓     名："
+                        android:text="姓       名："
                         android:textColor="@color/boroblacktext" />
 
                     <EditText
-                        android:layout_weight="1"
                         android:id="@+id/user_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@color/white"
                         android:textColor="@color/boroblacktext" />
                 </LinearLayout>
@@ -164,16 +175,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/dp_20"
-                        android:text="电      话："
+                        android:text="电        话："
                         android:textColor="@color/boroblacktext" />
 
                     <EditText
                         android:id="@+id/user_phone"
-                        android:layout_weight="1"
-                        android:phoneNumber="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@color/white"
+                        android:phoneNumber="true"
                         android:textColor="@color/boroblacktext" />
                 </LinearLayout>
 
@@ -209,8 +220,6 @@
                         android:layout_weight="1"
                         android:background="@color/white"
                         android:textColor="@color/boroblacktext" />
-
-                   
                 </LinearLayout>
 
                 <View
@@ -246,8 +255,6 @@
                         android:layout_weight="1"
                         android:background="@color/white"
                         android:textColor="@color/boroblacktext" />
-
-                  
                 </LinearLayout>
 
                 <View
@@ -266,9 +273,9 @@
                 android:layout_marginBottom="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_20"
-                android:textSize="@dimen/sp_12"
+                android:text="注：雇佣护理师上门路费线下解决"
                 android:textColor="@color/boroblacktext"
-                android:text="注：如果甲方雇佣护理师上门路费超出100元，甲方应承担护理师额外路费" />
+                android:textSize="@dimen/sp_12" />
 
             <Button
                 android:id="@+id/begain_next2"
@@ -285,12 +292,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:layout_marginTop="@dimen/dp_20"
-                android:textColor="@color/boroblacktext"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/dp_30"
-                android:text="----电子合同同具有纸质合同相同的法律效应----" />
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="----电子合同具有纸质合同相同的法律效应----"
+                android:textColor="@color/boroblacktext"
+                android:textSize="@dimen/sp_10" />
         </LinearLayout>
     </ScrollView>
 

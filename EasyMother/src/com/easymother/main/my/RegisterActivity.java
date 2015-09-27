@@ -41,7 +41,7 @@ public class RegisterActivity extends Activity implements OnClickListener{
 	private boolean canGetIdentityCode=true;//能否获取验证码
 	private TimerTask timerTask;//短信可以重新获取倒计时
 	private Timer timer;//计时器
-	private int time=60;//重新获取验证码的时间
+	private int time=180;//重新获取验证码的时间
 	private String appTokenId;//注册时获得的tokenid
 	
 	//倒计时，通过handler显示在界面上
@@ -57,7 +57,7 @@ public class RegisterActivity extends Activity implements OnClickListener{
 				timer.cancel();
 				identity_code.setTextColor(getResources().getColor(R.color.boroblacktext));
 				identity_code.setBackgroundDrawable(getResources().getDrawable(R.drawable.boro_border));
-				time=60;
+				time=180;
 			}
 			
 		};
@@ -113,6 +113,7 @@ public class RegisterActivity extends Activity implements OnClickListener{
     				return;
     			}
         		params.put("mobile", phone);
+        		params.put("type", "regist");
         		NetworkHelper.doGetNoToken(BaseInfo.SEND_SMS_CODE, params, new JsonHttpResponseHandler(){
         			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
         				if (JsonUtils.getRootResult(response).getIsSuccess()) {
@@ -178,6 +179,8 @@ public class RegisterActivity extends Activity implements OnClickListener{
         			Log.e("注册信息", response.toString());
         			if (JsonUtils.getRootResult(response).getIsSuccess()) {
         				Toast.makeText(RegisterActivity.this, "注册成功", 0).show();
+//        				EasyMotherUtils.goActivity(RegisterActivity.this, InfomationActivity.class);
+        				Toast.makeText(RegisterActivity.this, "请前往完善信息", Toast.LENGTH_SHORT).show();
             			RegisterActivity.this.finish();
 					}else {
 						Toast.makeText(RegisterActivity.this, JsonUtils.getRootResult(response).getMessage(), 0).show();

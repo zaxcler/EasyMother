@@ -143,11 +143,10 @@
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="20"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/boroblacktext"
             android:textSize="@dimen/sp_10"
-            android:text="护理师上户期间产生的交通费超过100元，余姚用户承担额外费用，支付方式用户与护理师线下解决"/>
+            android:text="护理师上户期间产生的交通费线下解决"/>
             
         </LinearLayout>
         

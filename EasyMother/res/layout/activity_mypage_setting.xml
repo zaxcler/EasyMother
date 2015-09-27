@@ -10,14 +10,9 @@
         android:layout_height="wrap_content"
         layout="@layout/commontitle" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/dp_10"
-        android:background="@color/line" />
-
     <LinearLayout
         android:id="@+id/about"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -47,7 +42,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line" />
+        android:background="@color/lightlightboro" />
 
     <LinearLayout
         android:id="@+id/share"
@@ -80,7 +75,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line" />
+        android:background="@color/lightlightboro" />
 
     <LinearLayout
         android:id="@+id/suggestion"
@@ -113,7 +108,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line" />
+        android:background="@color/lightlightboro" />
 
     <LinearLayout
         android:id="@+id/delete_cache"
@@ -137,6 +132,7 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_10"
@@ -147,7 +143,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line" />
+        android:background="@color/lightlightboro" />
 
     <Button
         android:id="@+id/exit"
@@ -160,6 +156,7 @@
         android:paddingBottom="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
         android:text="退出登录"
+        android:visibility="gone"
         android:textColor="@color/white" />
 
 </LinearLayout>

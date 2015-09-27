@@ -12,45 +12,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp_10"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_30"
-        android:background="@drawable/white_solid2"
+        android:background="@color/white"
+        android:padding="@dimen/dp_20"
         android:gravity="start"
-        android:hint="备注"
+        android:hint="请填写申请原因"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/boroblacktext"
         android:lines="4"
-        android:padding="@dimen/dp_2" />
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:textSize="@dimen/sp_14"
         android:text="请选择开始结束时间" />
-    <ImageView
-        android:id="@+id/timedialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_30"
-        android:layout_marginTop="@dimen/dp_10"
-        android:src="@drawable/zone"/>
 
-    <TextView
-        android:id="@+id/time1"
-        android:layout_width="wrap_content"
+    
+
+    <LinearLayout
+        android:id="@+id/timedialog"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_30"
-        android:layout_marginTop="@dimen/dp_10"
-        android:text="2015-12-2"
-        android:visibility="gone" />
-    <TextView
-        android:id="@+id/time3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_30"
-        android:layout_marginTop="@dimen/dp_10"
-        android:text="2015-12-2"
-        android:visibility="gone" />
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_30"
+        android:visibility="gone"
+        android:background="@color/white" >
+        
+        <TextView
+            android:id="@+id/time1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="2015-12-2"
+            android:textSize="@dimen/sp_14"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/time3"
+             android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:textSize="@dimen/sp_14"
+            android:layout_marginTop="@dimen/dp_20"
+             android:layout_marginLeft="@dimen/dp_20"
+            android:text="2015-12-2"
+            android:visibility="visible" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/time2"

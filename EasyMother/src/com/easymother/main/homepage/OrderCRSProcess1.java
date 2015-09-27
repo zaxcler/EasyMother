@@ -59,6 +59,7 @@ public class OrderCRSProcess1 extends Activity {
 	private Intent intent;
 	private NurseJobBean nursejob;
 	private NurseBaseBean nursebase;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -108,10 +109,16 @@ public class OrderCRSProcess1 extends Activity {
 		});
 		String datestring=MyApplication.preferences.getString("preDate", "");
 		if (datestring!=null&&!"".equals(datestring)) {
-//			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-//			Date date=format.parse(datestring);
-			predate.setText(datestring);
-		}
+			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				Date showdate=format.parse(datestring);
+				predate.setText(format.format(showdate));
+			
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}	
 		
 		radiogroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
@@ -162,8 +169,13 @@ public class OrderCRSProcess1 extends Activity {
 					int id=MyApplication.preferences.getInt("id", 0);
 					params.put("userId", id);
 					params.put("userName", name);
-					params.put("mobile", phone);
-					params.put("address", address);
+					params.put("userMobile", phone);
+					params.put("userAddress", address);
+					params.put("job", "CRS");
+					if (intent.getDoubleExtra("payMoney", 0)!=0) {
+						params.put("price",intent.getDoubleExtra("payMoney", 0));
+					}
+//					params.put("price", address);
 					final String startTime=intent.getStringExtra("startTime");
 					final String endTime=intent.getStringExtra("endTime");
 					if (startTime!=null&&!"".equals(startTime)) {
@@ -196,7 +208,10 @@ public class OrderCRSProcess1 extends Activity {
 									Toast.makeText(OrderCRSProcess1.this, "此时间短被占用！", Toast.LENGTH_SHORT).show();
 								}else {
 									Order order=JsonUtils.getResult(response, Order.class);
-									order.setPrice(0.01);
+//									if (intent.getDoubleExtra("payMoney", 0)!=0) {
+//										order.setPrice(intent.getDoubleExtra("payMoney", 0));
+//									}
+									
 									SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 									
 									try {
@@ -214,6 +229,8 @@ public class OrderCRSProcess1 extends Activity {
 									intent.putExtra("address",address );
 									intent.setClass(OrderCRSProcess1.this, PayCRSActivity.class);
 									startActivity(intent);
+									MyApplication.destoryActivity("CRSprocess");
+									OrderCRSProcess1.this.finish();
 								}
 							
 							}else {
@@ -266,6 +283,13 @@ public class OrderCRSProcess1 extends Activity {
 			}
 		});
 		return true;
+	}
+	
+	@Override
+	protected void onDestroy() {
+		
+		super.onDestroy();
+		
 	}
 
 }

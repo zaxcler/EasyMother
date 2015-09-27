@@ -11,8 +11,11 @@ import org.json.JSONObject;
 
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
+import com.easymother.bean.OrderListBean;
+import com.easymother.bean.OrderPayBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
+import com.easymother.customview.ImageZoom;
 import com.easymother.customview.MyGridView;
 import com.easymother.main.R;
 import com.easymother.main.homepage.CommentImageAdapter;
@@ -67,10 +70,12 @@ public class CommentActivity extends Activity {
 	private List<Bitmap> images;//图片集合
 	private CommentImageAdapter adapter;//图片适配器
 	private float stars=0;//评论得分
-	
-	
-	
-	
+	private OrderPayBean order;//订单
+	private String type;
+	private Integer nurseId;
+	private String nurseName;
+	private String job;
+	private String userId;
 	
 	
 	@Override
@@ -80,8 +85,8 @@ public class CommentActivity extends Activity {
 		setContentView(R.layout.activity_mypage_comment);
 		EasyMotherUtils.initTitle(this, "评论", false);
 		intent=getIntent();
-		nursebase=(NurseBaseBean) intent.getSerializableExtra("nursebase");
-		nursejob=(NurseJobBean) intent.getSerializableExtra("nursejob");
+		type=intent.getStringExtra("type");
+		stars=5;//默认给10分
 		findView();
 		init();
 	}
@@ -100,57 +105,144 @@ public class CommentActivity extends Activity {
 		gridview=(MyGridView) findViewById(R.id.gridview);
 		comment_content=(EditText) findViewById(R.id.comment_content);
 		add_photo=(ImageView) findViewById(R.id.add_photo);
+		image=(ImageView) findViewById(R.id.image);
 	}
 
 	private void init() {
 		//清楚选中状态
 		comment_content.clearFocus();
-		images=new ArrayList<>();
-		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+nursebase.getImage(), image,MyApplication.options_photo);
-		if (nursebase.getRealName()!=null) {
-			nurse_name.setText(nursebase.getRealName());
-		}else {
-			nurse_name.setText("");
-		}
-		if (nursejob.getJob()!=null) {
-			if ("YS".equals(nursejob.getJob())) {
-				nurse_type.setText("月嫂");
+	
+		if ("detail".equals(type)) {
+			nursebase=(NurseBaseBean) intent.getSerializableExtra("nursebase");
+			nursejob=(NurseJobBean) intent.getSerializableExtra("nursejob");
+			Log.e("base", nursebase.toString());
+			Log.e("nursejob", nursejob.toString());
+			images=new ArrayList<>();
+			
+			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+nursebase.getImage(), image,MyApplication.options_photo);
+			image.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					ImageZoom.showBigImgae(CommentActivity.this, BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+nursebase.getImage());
+				}
+			});
+			if (nursebase.getRealName()!=null) {
+				nurseName=nursebase.getRealName();
+				nurse_name.setText(nursebase.getRealName());
+			}else {
+				nurse_name.setText("");
 			}
-			if ("YYS".equals(nursejob.getJob())) {
-				nurse_type.setText("育婴师");
+			if (nursejob.getJob()!=null) {
+				nurseId=nursejob.getNurseId();
+				job=nursejob.getJob();
+				if ("YS".equals(nursejob.getJob())) {
+					nurse_type.setText("月嫂");
+				}
+				if ("YYS".equals(nursejob.getJob())) {
+					nurse_type.setText("育婴师");
+				}
+				if ("CRS".equals(nursejob.getJob())) {
+					nurse_type.setText("催乳师");
+				}
+				if ("SHORT_YS".equals(nursejob.getJob())) {
+					nurse_type.setText("短期月嫂");
+				}
+				if ("SHORT_YYS".equals(nursejob.getJob())) {
+					nurse_type.setText("短期育婴师");
+				}
+				if (nursejob.getLevelScore()!=null) {
+					ratingBar1.setProgress(nursejob.getLevelScore()/2);
+				}
 			}
-			if ("CRS".equals(nursejob.getJob())) {
-				nurse_type.setText("催乳师");
+			if (nursejob.getSeniority()!=null) {
+				work_express.setText("从业"+nursejob.getSeniority()+"年");
 			}
-			if ("SHORT_YS".equals(nursejob.getJob())) {
-				nurse_type.setText("短期月嫂");
+			if (nursebase.getAge()!=null) {
+				nurse_age.setText(nursebase.getAge()+"岁");
 			}
-			if ("SHORT_YYS".equals(nursejob.getJob())) {
-				nurse_type.setText("短期育婴师");
+			if (nursebase.getHometown()!=null) {
+				nurse_area.setText(nursebase.getHometown());
 			}
-			if (nursejob.getLevelScore()!=null) {
-				ratingBar1.setProgress(nursejob.getLevelScore()/2);
+			if (nursebase.getCurrentAddress()!=null) {
+				nurse_address.setText("现居地："+nursebase.getCurrentAddress());
+			}else {
+				nurse_address.setText("");
 			}
+//			if (nursejob.getPrice()!=null) {
+//				price.setText(nursejob.getPrice()+"元/月");
+//			}
+			if (nursejob.getShowPrice()!=null) {
+				price.setText(nursejob.getShowPrice());
+			}
+			if (nursejob.getMarketPrice()!=null) {
+				marketprice.setText("市场价："+nursejob.getMarketPrice()+"元/月");
+				marketprice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+			}
+		}else if ("order".equals(type)){
+			order=(OrderPayBean) intent.getSerializableExtra("order");
+			if (order!=null) {
+				nurseId=order.getNurseId();
+				images=new ArrayList<>();
+				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+order.getImage(), image,MyApplication.options_photo);
+				image.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						ImageZoom.showBigImgae(CommentActivity.this, BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+order.getImage());
+					}
+				});
+				
+				if (order.getRealName()!=null) {
+					nurseName=order.getRealName();
+					nurse_name.setText(order.getRealName());
+				}else {
+					nurse_name.setText("");
+				}
+				if (order.getJob()!=null) {
+					
+					job=order.getJob();
+					if ("YS".equals(order.getJob())) {
+						nurse_type.setText("月嫂");
+					}
+					if ("YYS".equals(order.getJob())) {
+						nurse_type.setText("育婴师");
+					}
+					if ("CRS".equals(order.getJob())) {
+						nurse_type.setText("催乳师");
+					}
+					if ("SHORT_YS".equals(order.getJob())) {
+						nurse_type.setText("短期月嫂");
+					}
+					if ("SHORT_YYS".equals(order.getJob())) {
+						nurse_type.setText("短期育婴师");
+					}
+				}
+				if (order.getSeniority()!=null) {
+					work_express.setText("从业"+order.getSeniority()+"年");
+				}
+				if (order.getAge()!=null) {
+					nurse_age.setText(order.getAge()+"岁");
+				}
+				if (order.getHometown()!=null) {
+					nurse_area.setText(order.getHometown());
+				}
+				if (order.getCurrentAddress()!=null) {
+					nurse_address.setText("现居地："+order.getCurrentAddress());
+				}else {
+					nurse_address.setText("");
+				}
+				if (order.getPrice()!=null) {
+					price.setText(order.getPrice()+"元/月");
+				}
+				if (order.getMarketPrice()!=null) {
+					marketprice.setText("市场价："+order.getMarketPrice()+"元/月");
+					marketprice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+				}
+			}
+			
 		}
-		if (nursebase.getSeniority()!=null) {
-			work_express.setText("从业"+nursebase.getSeniority()+"年");
-		}
-		if (nursebase.getAge()!=null) {
-			nurse_age.setText(nursebase.getAge()+"岁");
-		}
-		if (nursebase.getHometown()!=null) {
-			nurse_area.setText(nursebase.getHometown());
-		}
-		if (nursebase.getCurrentAddress()!=null) {
-			nurse_address.setText(nursebase.getCurrentAddress());
-		}
-		if (nursejob.getPrice()!=null) {
-			price.setText(nursejob.getPrice()+"元/月");
-		}
-		if (nursejob.getMarketPrice()!=null) {
-			marketprice.setText("市场价："+nursejob.getMarketPrice()+"元/月");
-			marketprice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-		}
+		
 		
 		confirm.setOnClickListener(new OnClickListener() {
 			
@@ -230,21 +322,37 @@ public class CommentActivity extends Activity {
 		}
 		
 		params.put("userId",MyApplication.preferences.getInt("id", 0) );
-		if (nursejob.getId()!=null) {
-			params.put("nurseId", nursejob.getNurseId());
-			params.put("nurseId", nursejob.getId());
-			
+	    if ("detail".equals(type)) {
+	    	if (nursejob.getId()!=null) {
+				params.put("nurseId", nurseId);
+			}
+			if (nursejob.getNurseName()!=null) {
+				params.put("nurseName", nurseName);
+			}
+			if (nursejob.getJob()!=null) {
+				params.put("job", job);
+			}
+				params.put("score", (int)stars*2+"");
+			if (comment_content.getText().toString().trim()!=null) {
+				params.put("content", comment_content.getText().toString());
+			}
 		}
-		if (nursejob.getNurseName()!=null) {
-			params.put("nurseName", nursejob.getNurseName());
+	    if ("order".equals(type)) {
+	    	if (order.getNurseId()!=null) {
+				params.put("nurseId", nurseId);
+			}
+			if (order.getRealName()!=null) {
+				params.put("nurseName", nurseName);
+			}
+			if (order.getJob()!=null) {
+				params.put("job", job);
+			}
+				params.put("score", (int)stars*2+"");
+			if (comment_content.getText().toString().trim()!=null) {
+				params.put("content", comment_content.getText().toString());
+			}
 		}
-		if (nursejob.getJob()!=null) {
-			params.put("job", nursejob.getJob());
-		}
-			params.put("score", (int)stars*2+"");
-		if (comment_content.getText().toString().trim()!=null) {
-			params.put("content", comment_content.getText().toString());
-		}
+		
 		//获取上传图片时保存的名字
 		imagenames=EasyMotherUtils.photosname;
 		if (imagenames!=null&&imagenames.size()>0) {

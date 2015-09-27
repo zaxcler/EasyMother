@@ -1,0 +1,322 @@
+package com.Library.ToolsClass;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.shelwee.updater.R;
+
+import android.app.Activity;
+import android.content.Context;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+public class UIViewPager extends LinearLayout
+{
+
+	Context context = null;
+
+	int offSet = 0;
+	private int _iCurrentTab = -1;
+
+	OnViewPageChangeListener pageChangelistener;
+
+	public UIViewPager(Context context)
+	{
+		super(context);
+		// 导入布局
+		LayoutInflater.from(context).inflate(R.layout.ui_view_pager, this, true);
+		InitUI();
+		this.context = context;
+	}
+
+	public UIViewPager(Context context, AttributeSet attrs)
+	{
+		super(context, attrs);
+		// 导入布局
+		LayoutInflater.from(context).inflate(R.layout.ui_view_pager, this, true);
+		InitUI();
+		this.context = context;
+	}
+
+	private void InitUI()
+	{
+		llTitleViews = (LinearLayout) findViewById(R.id.llTextViews);
+
+		viewPager = (ViewPager) findViewById(R.id.vPager);
+
+		pageChangelistener = new OnViewPageChangeListener();
+		viewPager.setOnPageChangeListener(pageChangelistener);
+
+		// InitImageView();
+	}
+
+	public interface IViewPagerControl
+	{
+		/**
+		 * ViewPage 改变事件
+		 * 
+		 * @param tabName
+		 *            Tab 名称
+		 * @param position
+		 */
+		boolean OnViewPageChangeListener(String tabName, int position);
+
+		/**
+		 * 
+		 * @param arg0
+		 *            当前页面，及你点击滑动的页面
+		 * @param arg1
+		 *            当前页面偏移的百分比
+		 * @param arg2
+		 *            当前页面偏移的像素位置
+		 */
+		public void onPageScrolled(int arg0, float arg1, int arg2);
+
+		/**
+		 * 它的滑动的状态顺序是 正在滑动 --> 滑动完毕 --> 什么都没做
+		 * 
+		 * 
+		 * @param arg0
+		 *            有三种状态（0，1，2）。 arg0 ==1的时辰默示正在滑动，arg0==2的时辰默示滑动完毕了，arg0==0的时辰默示什么都没做
+		 */
+		public void onPageScrollStateChanged(int arg0);
+
+	}
+
+	public IViewPagerControl Notify;
+	/**
+	 * 控件集合
+	 */
+	ArrayList<View> views = new ArrayList<View>();
+	/**
+	 * Tab集合
+	 */
+	ArrayList<TextView> tabViews = new ArrayList<TextView>();
+
+	private ViewPager viewPager;// 页卡内容
+	private ImageView imageView;// 动画图片
+	// private int offset = 0;// 动画图片偏移量
+	private int currIndex = 0;// 当前页卡编号
+
+	private LinearLayout llTitleViews = null;
+	private TextView oldView = null;
+
+	public boolean addView(ArrayList<String> titles, ArrayList<View> views)
+	{
+		if (titles == null || views == null || titles.size() == 0 || views.size() == 0 || titles.size() != views.size())
+			return false;
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT, 1);
+
+		for (int n = 0; n < titles.size(); n++)
+		{
+
+			TextView textView = new TextView(context);
+			textView.setGravity(Gravity.CENTER);
+			textView.setText(titles.get(n));
+			textView.setTextColor(getResources().getColor(R.color.black));
+			tabViews.add(textView);
+
+			llTitleViews.addView(textView, layoutParams);
+			textView.setOnClickListener(new MyOnClickListener(n));
+
+		}
+
+		this.views = views;
+
+		viewPager.setAdapter(new MyViewPagerAdapter(views));
+		return true;
+	}
+
+	/**
+	 * 
+	 * 头标点击监听 3
+	 */
+	private class MyOnClickListener implements OnClickListener
+	{
+		private int index = 0;
+
+		public MyOnClickListener(int i)
+		{
+			index = i;
+		}
+
+		public void onClick(View v)
+		{
+			viewPager.setCurrentItem(index);
+		}
+	}
+
+	public class MyViewPagerAdapter extends PagerAdapter
+	{
+		private List<View> mListViews;
+
+		public MyViewPagerAdapter(List<View> mListViews)
+		{
+			this.mListViews = mListViews;
+		}
+
+		@Override
+		public void destroyItem(ViewGroup container, int position, Object object)
+		{
+			container.removeView(mListViews.get(position));
+		}
+
+		@Override
+		public Object instantiateItem(ViewGroup container, int position)
+		{
+			container.addView(mListViews.get(position), 0);
+			return mListViews.get(position);
+		}
+
+		@Override
+		public int getCount()
+		{
+			return mListViews.size();
+		}
+
+		@Override
+		public boolean isViewFromObject(View arg0, Object arg1)
+		{
+			return arg0 == arg1;
+		}
+	}
+
+	public class OnViewPageChangeListener implements OnPageChangeListener
+	{
+		/**
+		 * 有三种状态（0，1，2）。arg0 ==1的时辰默示正在滑动，arg0==2的时辰默示滑动完毕了，arg0==0的时辰默示什么都没做
+		 */
+		public void onPageScrollStateChanged(int arg0)
+		{
+		//	Log.e("Tag--->", "onPageScrollStateChanged--arg0-->" + arg0);
+			System.out.println(arg0);
+			if (Notify != null)
+				Notify.onPageScrollStateChanged(arg0);
+		}
+
+		/**
+		 * arg0 :当前页面，及你点击滑动的页面
+		 * 
+		 * arg1:当前页面偏移的百分比
+		 * 
+		 * arg2:当前页面偏移的像素位置
+		 */
+		public void onPageScrolled(int arg0, float arg1, int arg2)
+		{
+		//	Log.e("Tag--->", "onPageScrolled--arg0-->" + arg0 + " --arg1-->" + arg1 + " --arg2-->" + arg2);
+			if (Notify != null)
+				Notify.onPageScrolled(arg0, arg1, arg2);
+			// System.out.println(arg0 + "  " + arg2);
+		}
+
+		public void onPageSelected(int position)
+		{
+			if (imageView == null)
+				return;
+
+			//Log.e("Tag--->", "onPageSelected--position-->" + position);
+
+			if (_iCurrentTab == position)
+				return;
+
+			// 为使第一个View能执行OnViewPageChangeListener，且AddTab后_iCurrentTab默认为0的做法
+			_iCurrentTab = _iCurrentTab == -1 ? 0 : _iCurrentTab;
+
+			// Log.e("--->", position + "");
+			Animation animation = new TranslateAnimation(offSet * currIndex, offSet * position, 0, 0);
+			currIndex = position;
+			animation.setFillAfter(true);// True:图片停在动画结束位置
+			animation.setDuration(300);
+			imageView.startAnimation(animation);
+
+			// 若OnViewPageChangeListener==false,则不翻页（保持上 一页）
+			if (Notify == null || Notify.OnViewPageChangeListener(tabViews.get(position).getText().toString(), position) == true)
+			{
+				_iCurrentTab = position;
+			}
+
+			// 记录以前状态
+			TextView view = (TextView) tabViews.get(position);
+			view.setTextColor(getResources().getColor(R.color.red));
+			if (oldView != null)
+				oldView.setTextColor(getResources().getColor(R.color.black));
+			oldView = view;
+		}
+	}
+
+	public void SetTabIndex(int index)
+	{
+		pageChangelistener.onPageSelected(index);
+	}
+
+	/**
+	 * 获取ViewPage的单个View
+	 * 
+	 * @param position
+	 *            索引
+	 * @return ViewPage的 单个View
+	 */
+	public View GetTab(int index)
+	{
+		return this.views.get(index);
+	}
+
+	/**
+	 * 获取当前的tab
+	 * 
+	 * @return
+	 */
+	public View GetCurrentTab()
+	{
+		return GetTab(_iCurrentTab);
+	}
+
+	/**
+	 * 获取当前tab的索引
+	 * 
+	 * @return
+	 */
+	public int GetCurrentTabIndex()
+	{
+		return _iCurrentTab;
+	}
+
+	/**
+	 * 设置滑动条的长度
+	 */
+	public void setScrollBarWidth()
+	{
+		// length = (int) (tvView.getWidth()*0.6);
+		InitImageView();
+
+		/**
+		 * 默认选择第一个
+		 */
+		// viewPager.setCurrentItem(0);
+		pageChangelistener.onPageSelected(0);
+	}
+
+	private void InitImageView()
+	{
+		imageView = (ImageView) findViewById(R.id.cursor);
+
+		DisplayMetrics dm = new DisplayMetrics();
+		((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(dm);
+		int disPlayWidth = dm.widthPixels;// 获取屏幕分辨率宽度
+		offSet = disPlayWidth / tabViews.size(); // 每个Tab页占居屏幕的大小
+		imageView.getLayoutParams().width = offSet;
+	}
+}

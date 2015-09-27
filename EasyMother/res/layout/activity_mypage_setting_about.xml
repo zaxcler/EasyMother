@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/commontitle" />
+    
 
     <ImageView
         android:id="@+id/imageView1"
@@ -41,7 +42,7 @@
         android:layout_marginRight="@dimen/dp_30"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_30"
-        
-        android:text="TextView" />
+        android:padding="@dimen/dp_10"
+        android:text="轻松妈妈，一个专业的母婴护理师平台，通过专业化的管理，透明化的平台，为孕妈们提供所需的专业的月嫂、育儿嫂和催乳师。零中介的服务平台，解决传统母婴服务行业护理师与用户之间信息不对等的弊端；高品质的母婴护理服务，让每一个孕后的妈妈都能享受护理师的服务。轻松妈妈，正在做一件有意义的事情，我们打破传统母婴护理行业的瓶颈，用高水准的服务说话，打造您身边的母婴护理师。" />
 
 </RelativeLayout>

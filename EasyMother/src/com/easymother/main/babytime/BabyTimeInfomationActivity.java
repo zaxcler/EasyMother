@@ -28,6 +28,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.PendingIntent.OnFinished;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -60,6 +62,7 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 	private final Uri uri1 = Uri.parse(URI1);// //保存剪切图片后的URI
 	private boolean uploadstatu;// 上传是否成功
 	private BabyInfoBean info;//宝贝信息
+	private String birthday;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -187,45 +190,63 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 				
 				@Override
 				public void onDateSet(DatePicker view, final int year, final int monthOfYear,final int dayOfMonth) {
-					RequestParams params=new RequestParams();
-					if (info!=null) {
-						params.put("id", info.getId());
-					}else {
-						params.put("id", "");
-					}
-					if (MyApplication.preferences.getInt("id", 0)!=0) {
-						params.put("userId", MyApplication.preferences.getInt("id", 0));
-					}else {
-						EasyMotherUtils.goActivity(BabyTimeInfomationActivity.this, LoginOrRegisterActivity.class);
-					}
-					params.put("birthday", year+"-"+monthOfYear+"-"+dayOfMonth);
-					NetworkHelper.doGet(BaseInfo.BABYINFO_SAVEINFO, params, new JsonHttpResponseHandler(){
-						@Override
-						public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-							super.onSuccess(statusCode, headers, response);
-							if (JsonUtils.getRootResult(response).getIsSuccess()) {
-								nannan_birthday.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
-							}else {
-								Toast.makeText(BabyTimeInfomationActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
-							}
-						}
-						@Override
-						public void onFailure(int statusCode, Header[] headers, String responseString,
-								Throwable throwable) {
-							super.onFailure(statusCode, headers, responseString, throwable);
-							Toast.makeText(BabyTimeInfomationActivity.this, "连接服务器失败", Toast.LENGTH_SHORT).show();
-							Log.e("连接服务器失败", responseString);
-						}
-					});
+					birthday=year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+					nannan_birthday.setText(year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日");
 				}
+				
+			
 			}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+			picker.setOnDismissListener(new DialogInterface.OnDismissListener() {
+				
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					save();
+					Log.e("setOnDismissListener", "setOnDismissListener========");
+				}
+			});
+			
 			picker.show();
 			break;
 
 		}
+		
 
 	}
-
+	/*
+	 * 保存年龄信息
+	 */
+	public void save(){
+		RequestParams params=new RequestParams();
+		if (info!=null) {
+			params.put("id", info.getId());
+		}else {
+			params.put("id", "");
+		}
+		if (MyApplication.preferences.getInt("id", 0)!=0) {
+			params.put("userId", MyApplication.preferences.getInt("id", 0));
+		}else {
+			EasyMotherUtils.goActivity(BabyTimeInfomationActivity.this, LoginOrRegisterActivity.class);
+		}
+		params.put("birthday", birthday);
+		NetworkHelper.doGet(BaseInfo.BABYINFO_SAVEINFO, params, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+				super.onSuccess(statusCode, headers, response);
+				if (JsonUtils.getRootResult(response).getIsSuccess()) {
+					Toast.makeText(BabyTimeInfomationActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+				}else {
+					Toast.makeText(BabyTimeInfomationActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers, String responseString,
+					Throwable throwable) {
+				super.onFailure(statusCode, headers, responseString, throwable);
+				Toast.makeText(BabyTimeInfomationActivity.this, "连接服务器失败", Toast.LENGTH_SHORT).show();
+				Log.e("连接服务器失败", responseString);
+			}
+		});
+	}
 	private class ChengeImageClickLisenter implements OnClickListener {
 		MyPopupWindow window;
 

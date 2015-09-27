@@ -1,6 +1,5 @@
 package com.easymother.main.homepage;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,29 +11,30 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import com.alibaba.fastjson.JSON;
+import com.alidao.mama.WeiXinUtils;
 import com.easymother.bean.Certificate;
 import com.easymother.bean.DetailResult;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
 import com.easymother.bean.Order;
 import com.easymother.bean.OrderComments;
-import com.easymother.bean.TestBean;
+import com.easymother.bean.Skill;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
+import com.easymother.customview.ImageZoom;
 import com.easymother.customview.MyGridView;
 import com.easymother.customview.MyListview;
 import com.easymother.customview.MyLoadingProgress;
-import com.easymother.main.MainActivity;
 import com.easymother.main.R;
 import com.easymother.main.community.HuLiShiZoneDetailActivity;
 import com.easymother.main.my.CommentActivity;
 import com.easymother.main.my.CommentListActivity;
 import com.easymother.main.my.CommentListAdapter;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
-import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -47,31 +47,22 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.text.TextUtils.TruncateAt;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 public class YueSaoDetailActivity extends Activity implements OnClickListener {
 	private GridView gridView;// 证书列表
 	private PullToRefreshScrollView pullToRefreshScrollView;// 下拉刷新空间
@@ -150,6 +141,8 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 
 	private boolean show_all = false;// 是否显示全部的
 	private TextView work_express_content;// 履历显示内容
+	
+	private ListView skilllistview;//技能列表
 
 	// 日历部分
 	// 删掉年份的加减
@@ -170,6 +163,9 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 	private TextView day2;
 	private TextView day3;
 	private TextView day4;
+	private TextView share;
+	private TextView show_all_tv;//显示所有
+	private List<String> weeks ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -232,6 +228,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		like = (TextView) findViewById(R.id.like);
 		allcomment = (TextView) findViewById(R.id.allcomment);
 		check_all = (TextView) findViewById(R.id.check_all);
+		show_all_tv = (TextView) findViewById(R.id.show_all);
 		check1 = (TextView) findViewById(R.id.check1);
 		check2 = (TextView) findViewById(R.id.check2);
 		check3 = (TextView) findViewById(R.id.check3);
@@ -287,7 +284,6 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		text10 = (TextView) findViewById(R.id.text10);
 		text12 = (TextView) findViewById(R.id.text12);
 		text14 = (TextView) findViewById(R.id.text14);
-		text16 = (TextView) findViewById(R.id.text16);
 		// 日历
 		// content=(ViewPager)findViewById(R.id.content);
 
@@ -301,6 +297,11 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		calendar = (LinearLayout) findViewById(R.id.calendar);
 		crs_calendar = (LinearLayout) findViewById(R.id.crs_calendar);
 		gridView2 = (MyGridView) findViewById(R.id.gridView2);
+		
+		
+		skilllistview=(ListView) findViewById(R.id.cuirushiskillslist);
+		
+		share=(TextView) findViewById(R.id.share);
 
 	}
 
@@ -309,8 +310,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		MyLoadingProgress.showLoadingDialog(this);//显示加载dialog
 		//强制获取焦点防止pulltoreflash滑动到listview的第一条
 		pullToRefreshScrollView.requestChildFocus(pullToRefreshScrollView.getChildAt(0), backgroudPhoto);
-		
-		
+		share.setOnClickListener(this);
 		RequestParams params = new RequestParams();
 		params.put("job", job);
 		params.put("nurseId", id);
@@ -322,7 +322,15 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 					DetailResult result = JsonUtils.getDeatilResult(response);
 					bindData(result);
 					Log.e("DetailResult---->", result.toString());
+				}else {
+					MyLoadingProgress.closeLoadingDialog();
 				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+				super.onFailure(statusCode, headers, responseString, throwable);
+				MyLoadingProgress.closeLoadingDialog();
+				Toast.makeText(YueSaoDetailActivity.this, "连接服务器失败！", Toast.LENGTH_SHORT).show();
 			}
 		});
 		// mListview.setAdapter(commentAdapter);
@@ -337,11 +345,14 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		add_mouth.setOnClickListener(this);
 		delete_mouth.setOnClickListener(this);
 		// delete_year.setOnClickListener(this);
+		work_express_content.setOnClickListener(this);
 		day1.setOnClickListener(this);
 		day2.setOnClickListener(this);
 		day3.setOnClickListener(this);
 		day4.setOnClickListener(this);
+		day4.setOnClickListener(this);
 		check_zhengshu.setOnClickListener(this);
+		show_all_tv.setOnClickListener(this);
 		
 		onSkillsClicklisener clickListener = new onSkillsClicklisener();
 		if ("SHORT_YS".equals(job) || "YS".equals(job)) {
@@ -362,12 +373,11 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 			text10.setOnClickListener(clickListener);
 			text12.setOnClickListener(clickListener);
 			text14.setOnClickListener(clickListener);
-			text16.setOnClickListener(clickListener);
 
 		}
 		if ("CRS".equals(job)) {
 			yuesaoskills.setVisibility(View.GONE);
-			yuesaoskills.setVisibility(View.GONE);
+			yuyingshiskills.setVisibility(View.GONE);
 		}
 
 		kongjian.setOnClickListener(this);
@@ -380,52 +390,49 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.check1:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/process1.html",
-						R.drawable.pic1);
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/ys_project1.html",
+						R.drawable.pic1,"");
 				break;
 			case R.id.check2:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/demo.html",
-						R.drawable.pic1);
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/ys_project2.html",
+						R.drawable.pic1,"");
 				break;
 			case R.id.check3:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/demo.html",
-						R.drawable.pic1);
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/ys_project3.html",
+						R.drawable.pic1,"");
 				break;
 			case R.id.check4:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/demo.html",
-						R.drawable.pic1);
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/ys_project4.html",
+						R.drawable.pic1,"");
 				break;
 			case R.id.text1:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/demo.html",
-						R.drawable.pic1);
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project1.html",
+						R.drawable.pic1,"");
 				break;
 			case R.id.text4:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/demo.html",
-						R.drawable.pic1);
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project2.html",
+						R.drawable.pic1,"");
 				break;
 			case R.id.text6:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/demo.html",
-						R.drawable.pic1);
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project3.html",
+						R.drawable.pic1,"");
 				break;
 			case R.id.text8:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/process1.html",
-						R.drawable.pic1);
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project4.html",
+						R.drawable.pic1,"");
 				break;
 			case R.id.text10:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/demo.html",
-						R.drawable.pic1);
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project5.html",
+						R.drawable.pic1,"");
 				break;
 			case R.id.text12:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/demo.html",
-						R.drawable.pic1);
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project6.html",
+						R.drawable.pic1,"");
 			case R.id.text14:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/demo.html",
-						R.drawable.pic1);
+				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project7.html",
+						R.drawable.pic1,"");
 				break;
-			case R.id.text16:
-				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/demo.html",
-						R.drawable.pic1);
-				break;
+			
 			}
 		}
 
@@ -437,6 +444,15 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 	 * @param result
 	 */
 	protected void bindData(DetailResult result) {
+		
+		weeks= new ArrayList<>();
+		weeks.add("日");
+		weeks.add("一");
+		weeks.add("二");
+		weeks.add("三");
+		weeks.add("四");
+		weeks.add("五");
+		weeks.add("六");
 		/**
 		 * 绑定nursejob部分
 		 */
@@ -448,8 +464,8 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		if (nurseJobBean == null) {
 			return;
 		}
-		if (nurseJobBean.getReferee() != null) {
-			work_express_content.setText(nurseJobBean.getReferee());
+		if (nurseJobBean.getResume() != null) {
+			work_express_content.setText(NetworkHelper.showFWBText(nurseJobBean.getResume()));
 		} else {
 			work_express_content.setText("");
 		}
@@ -463,32 +479,34 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 			return;
 		}
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
-//
-//		try {
-//			Log.e("intent.getStringExtra()", intent.getStringExtra("startTime"));
-//			Date startTime = format.parse(intent.getStringExtra("startTime"));
-//			Date endTime = format.parse(intent.getStringExtra("endTime"));
-//			Log.e("startTime", startTime.toString());
-//			baseBean.setEmploymentStartTime(startTime);
-//			baseBean.setEmploymentEndTime(endTime);
-//
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
 
 		if (nurseJobBean != null && baseBean != null) {
-			String backgroud=null;
-			if (nurseJobBean.getWorkImageArrays()!=null) {
-				String[] workimages=nurseJobBean.getWorkImageArrays();
-				if (workimages.length>0) {
-					backgroud=workimages[0];
-				}
-			}
-			if (baseBean.getLifeImages()!=null&&!"".equals(baseBean.getLifeImages()) ) {
-				ArrayList<String> lifeimages=(ArrayList<String>) JSON.parseArray(baseBean.getLifeImages(), String.class);
-				if (lifeimages.size()>0) {
-					ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + lifeimages.get(0), backgroudPhoto,
+//			String backgroud=null;
+//			if (nurseJobBean.getWorkImageArrays()!=null) {
+//				String[] workimages=nurseJobBean.getWorkImageArrays();
+//				if (workimages.length>0) {
+//					backgroud=workimages[0];
+//					ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + backgroud, backgroudPhoto,
+//							MyApplication.options_image,new imageLoadingLisenter());
+//				}else {
+//					MyLoadingProgress.closeLoadingDialog();
+//				}
+//			}
+//			else {
+//				MyLoadingProgress.closeLoadingDialog();
+//			}
+			if (nurseJobBean.getWorkImages()!=null&&!"".equals(nurseJobBean.getWorkImages()) ) {
+				ArrayList<String> workimages=(ArrayList<String>) JSON.parseArray(nurseJobBean.getWorkImages(), String.class);
+				if (workimages.size()>0) {
+					ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + workimages.get(0), backgroudPhoto,
 							MyApplication.options_image,new imageLoadingLisenter());
+					backgroudPhoto.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							ImageZoom.showBigImgaes(YueSaoDetailActivity.this, nurseJobBean.getWorkImages());
+						}
+					});
 				}else {
 					MyLoadingProgress.closeLoadingDialog();
 				}
@@ -511,19 +529,28 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 					ysoryys.setVisibility(View.VISIBLE);
 					nurseType.setText("月嫂");
 					nurseLevel.setText(nurseJobBean.getJobTitle() + "");
-					nurseCurrentPrice.setText("￥" + nurseJobBean.getPrice()*26 +"元/26天");
+					nurseCurrentPrice.setText("￥" + nurseJobBean.getShowPrice());
 					nurseMarketPrice.setText("市场价：" + nurseJobBean.getMarketPrice() + "元/26天");
 				}
 				if ("YYS".equals(nurseJobBean.getJob()) || "SHORT_YYS".equals(nurseJobBean.getJob())) {
 					ysoryys.setVisibility(View.VISIBLE);
 					nurseType.setText("育婴师");
 					nurseLevel.setText(nurseJobBean.getJobTitle() + "");
-					nurseCurrentPrice.setText("￥" + nurseJobBean.getPrice()+ "/月");
+					nurseCurrentPrice.setText("￥" + nurseJobBean.getShowPrice());
 					nurseMarketPrice.setText("市场价：" + nurseJobBean.getMarketPrice() + "元/26天");
 				}
 				if ("CRS".equals(nurseJobBean.getJob())) {
-					cuishi_stars.setVisibility(View.VISIBLE);
+					cuishi_stars.setVisibility(View.GONE);
+					ysoryys.setVisibility(View.VISIBLE);
 					nurseType.setText("催乳师");
+					nurseLevel.setText(nurseJobBean.getJobTitle() + "");
+					nurseMarketPrice.setVisibility(View.GONE);
+					nurseCurrentPrice.setText("￥" + nurseJobBean.getShowPrice());
+					List<Skill> skills= result.getSkyiies();
+					if (skills!=null) {
+						SkillsAdapter adapter=new SkillsAdapter(YueSaoDetailActivity.this, skills, R.layout.skill_item);
+						skilllistview.setAdapter(adapter);
+					}
 					if (nurseJobBean.getLevel() != null) {
 						ratingBar1.setProgress(nurseJobBean.getLevelScore());
 					} else {
@@ -587,7 +614,6 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		} else {
 			letter_content.setText("");
 		}
-
 		/**
 		 * 绑定最下面nursebase部分
 		 */
@@ -595,14 +621,14 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 			message_height.setText("身高：" + baseBean.getHeight() + "cm");
 		}
 		if (baseBean.getEducation() != null) {
-			message_edu.setText("文化程度：" + baseBean.getEducation());
+			message_edu.setText("文化程度：" + EasyMotherUtils.EDU[Integer.valueOf(baseBean.getEducation())] );
 		}
 		if (baseBean.getPersionCharacter() != null) {
 			message_weight.setText("性格：" + baseBean.getPersionCharacter());
 			message_weight.setLines(1);
 		}
 		if (baseBean.getProficiency() != null) {
-			message_pth.setText("普通话水平：" + baseBean.getProficiency());
+			message_pth.setText("普通话水平：" + EasyMotherUtils.PTH[Integer.valueOf(baseBean.getProficiency())]);
 		}
 		if (baseBean.getYearLunar() != null) {
 			message_sx.setText("生肖：" + baseBean.getYearLunar());
@@ -626,43 +652,45 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 
 		} else {
 			// 绑定calender
-			List<String> weeks = new ArrayList<>();
-			weeks.add("日");
-			weeks.add("一");
-			weeks.add("二");
-			weeks.add("三");
-			weeks.add("四");
-			weeks.add("五");
-			weeks.add("六");
+			
 			WeekAdapter weekAdapter = new WeekAdapter(this, weeks, R.layout.crs_gridview_item2);
 			week.setAdapter(weekAdapter);
 			List<Integer> date = new ArrayList<>();
 			for (int i = 0; i < 42; i++) {
 				date.add(i);
-			}
+			} 
 			aadpter = new CalenderAadpter(this, date, R.layout.crs_gridview_item);
 			aadpter.setOrders(orders);
 			days.setAdapter(aadpter);
 			Calendar currentDate = aadpter.setCurrtentMonth(0);
-			aadpter.notifyDataSetChanged();
+//			aadpter.notifyDataSetChanged();
 			showdate.setText(currentDate.get(Calendar.YEAR) + "年" + (currentDate.get(Calendar.MONTH)+1 )+ "月");
+		
+			
 		}
 		
+		Date today=new Date(System.currentTimeMillis());
+		Calendar today_c=Calendar.getInstance();
+		today_c.setTime(today);
+		int day=today_c.get(Calendar.DAY_OF_WEEK);
+		int disitian=(day+3)%7;
+		day4.setText("星期"+weeks.get(disitian-1));
 
 	}
 
 	@Override
 	public void onClick(View arg0) {
-		clearState();
+		
 		Calendar currentDate = null;
-		Intent intent = new Intent();
+		Intent intent =getIntent();
 		intent.putParcelableArrayListExtra("orders", orders);
 		intent.putExtra("nursebase", baseBean);
 		intent.putExtra("nursejob", nurseJobBean);
+		
 		switch (arg0.getId()) {
 
 		case R.id.buy_now:
-			if ("YS".equals(nurseJobBean.getJob()) || "YYS".equals(nurseJobBean.getJob())) {
+			if ("YS".equals(nurseJobBean.getJob()) || "YYS".equals(nurseJobBean.getJob()) ||"SHORT_YS".equals(nurseJobBean.getJob()) || "SHORT_YYS".equals(nurseJobBean.getJob())) {
 				intent.setClass(this, OrderYSandYYSProcess.class);
 			}
 			if ("CRS".equals(nurseJobBean.getJob())) {
@@ -675,6 +703,9 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 			intent.putExtra("jobId", nurseJobBean.getId());
 			intent.setClass(this, ZhengshuListActivity.class);
 			startActivity(intent);
+			break;
+		case R.id.share:
+			WeiXinUtils.shareDownloadUrl(this);
 			break;
 		case R.id.allcomment:
 			intent.setClass(this, CommentListActivity.class);
@@ -707,13 +738,15 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 
 		case R.id.kongjian:
 			intent.setClass(this, HuLiShiZoneDetailActivity.class);
-			intent.putExtra("id", baseBean.getNurseId());
+			intent.putExtra("id", baseBean.getId());
 			startActivity(intent);
 			break;
 		case R.id.submit_comment:
+			
 			intent.setClass(this, CommentActivity.class);
-			intent.putExtra("nursebase", baseBean);
-			intent.putExtra("nursejob", nurseJobBean);
+//			intent.putExtra("nursebase", baseBean);
+			intent.putExtra("type", "detail");
+//			intent.putExtra("nursejob", nurseJobBean);
 			startActivity(intent);
 			break;
 		case R.id.add:
@@ -729,7 +762,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 						Toast.makeText(YueSaoDetailActivity.this, "添加心愿单成功", 0).show();
 					} else {
 						Toast.makeText(YueSaoDetailActivity.this,
-								"添加心愿单失败" , 0).show();
+								"您已收藏过该护理师！" , 0).show();
 					}
 				}
 
@@ -737,7 +770,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 				public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 					super.onFailure(statusCode, headers, responseString, throwable);
 					Log.e("添加心愿单连接服务器失败", responseString);
-					Toast.makeText(YueSaoDetailActivity.this, "连接服务器失败", 0).show();
+					Toast.makeText(YueSaoDetailActivity.this, "请检查网络！", 0).show();
 				}
 			});
 
@@ -764,6 +797,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 		// showdate.setText(currentDate.get(Calendar.YEAR)+"年"+currentDate.get(Calendar.MONTH)+"月");
 		// break;
 		case R.id.day1:
+			clearState();
 			day1.setTextColor(getResources().getColor(R.color.white));
 			day1.setBackgroundColor(getResources().getColor(R.color.lightredwine));
 			aadpter1.setCurrentDay();
@@ -771,18 +805,26 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 			break;
 
 		case R.id.day2:
+			clearState();
 			day2.setTextColor(getResources().getColor(R.color.white));
 			day2.setBackgroundColor(getResources().getColor(R.color.lightredwine));
 			aadpter1.setTomorrow();
 			aadpter1.notifyDataSetChanged();
 			break;
 		case R.id.day3:
+			clearState();
 			day3.setTextColor(getResources().getColor(R.color.white));
 			day3.setBackgroundColor(getResources().getColor(R.color.lightredwine));
 			aadpter1.setTheDayAffterTomorrow();
 			aadpter1.notifyDataSetChanged();
 			break;
 		case R.id.day4:
+			clearState();
+//			Date today=new Date(System.currentTimeMillis());
+//			Calendar today_c=Calendar.getInstance();
+//			today_c.setTime(today);
+//			int day=today_c.get(Calendar.DAY_OF_WEEK)+3;
+//			day4.setText("星期"+weeks.get(day));
 			day4.setTextColor(getResources().getColor(R.color.white));
 			day4.setBackgroundColor(getResources().getColor(R.color.lightredwine));
 			aadpter1.setForthDay();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -15,49 +15,42 @@
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_150"
+            android:layout_height="@dimen/dp_120"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:scaleType="fitXY"
-            android:src="@drawable/pic1" />
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageView1"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="29dp"
-            android:text="轻松妈妈项目介绍"
-            android:textColor="@color/blacktext" />
+            android:src="@drawable/baby_photo" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/textView1"
+            android:layout_alignBottom="@+id/imageView1"
             android:layout_alignParentLeft="true"
             android:text="乳腺小叶增生护养"
             android:textColor="@color/waterpink"
-            android:textSize="@dimen/sp_22" />
+            android:textSize="@dimen/sp_22"
+            android:padding="@dimen/dp_20" />
 
     </RelativeLayout>
-<ScrollView
+<!-- <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/top" >
+        android:layout_below="@id/top" > -->
 
         <WebView
             android:id="@+id/contents"
+             android:layout_below="@id/top"
+             android:scrollbars="@null"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="内容" />
-    </ScrollView>
+   
     <LinearLayout
         android:background="@color/white"
         android:id="@+id/bottom"
-        android:padding="@dimen/dp_10"
+        android:padding="@dimen/dp_20"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,20 +64,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="取消" />
+            android:textSize="@dimen/sp_20"
+            android:text="我知道了" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/line" />
-
-        <TextView
-            android:id="@+id/yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:text="确定" />
+      
     </LinearLayout>
 
     

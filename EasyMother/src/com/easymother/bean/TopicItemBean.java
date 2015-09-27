@@ -1,5 +1,6 @@
 package com.easymother.bean;
 
+import java.util.Date;
 
 public class TopicItemBean {
 	private int id;
@@ -10,7 +11,7 @@ public class TopicItemBean {
 	private String images;
 	private Integer userId;
 	private String userNickname;
-	private String userImae;
+	private String userImage;
 	private String content;
 	private String job;
 	private Integer collectionAmount;
@@ -21,7 +22,16 @@ public class TopicItemBean {
 	private String more1;//收藏状态
 	private String more2;//点赞次数
 	private String more3;//点赞状态
+	private Date createTime;
 	
+	
+	
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 	public int getId() {
 		return id;
 	}
@@ -29,6 +39,12 @@ public class TopicItemBean {
 		this.id = id;
 	}
 	
+	public String getUserImage() {
+		return userImage;
+	}
+	public void setUserImage(String userImage) {
+		this.userImage = userImage;
+	}
 	public Integer getNurseId() {
 		return nurseId;
 	}
@@ -95,12 +111,7 @@ public class TopicItemBean {
 	public void setMore3(String more3) {
 		this.more3 = more3;
 	}
-	public String getUserImae() {
-		return userImae;
-	}
-	public void setUserImae(String userImae) {
-		this.userImae = userImae;
-	}
+	
 	public String getContent() {
 		return content;
 	}

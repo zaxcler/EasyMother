@@ -18,10 +18,12 @@
             android:orientation="vertical" >
 
             <RelativeLayout
+                
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="@dimen/dp_10" >
+                android:layout_marginTop="@dimen/dp_10"
+                android:padding="@dimen/dp_20" >
 
                 <TextView
                     android:id="@+id/w1"
@@ -29,8 +31,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView1"
                     android:layout_alignParentTop="true"
-                    android:paddingBottom="@dimen/dp_5"
+                    android:paddingBottom="@dimen/dp_10"
                     android:paddingTop="@dimen/dp_5"
+                    android:textSize="14sp"
                     android:text="订单详情" />
 
                 <TextView
@@ -39,8 +42,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@id/w1"
+                    android:layout_marginRight="@dimen/dp_20"
                     android:textColor="@color/boroblacktext"
-                    android:text="姓    名：" />
+                    android:text="姓       名：" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -50,7 +54,7 @@
                     android:layout_alignLeft="@+id/textView1"
                     android:layout_below="@+id/textView1"
                     android:layout_marginTop="16dp"
-                    android:text="电    话" />
+                    android:text="电       话" />
 
                 <TextView
                     android:id="@+id/user_phone"
@@ -113,6 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
+                android:padding="@dimen/dp_10"
                 android:background="@color/white" >
 
                 <com.easymother.customview.CircleImageView
@@ -121,6 +126,7 @@
                     android:layout_height="@dimen/dp_64"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_10"
                     android:src="@drawable/baby" />
 
                 <LinearLayout
@@ -128,7 +134,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="31dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="@dimen/dp_5"
                     android:layout_toRightOf="@+id/circleImageView1"
                     android:orientation="vertical" >
 
@@ -137,14 +144,14 @@
                         android:textColor="@color/boroblacktext"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="护理师姓名" />
+                        android:text="护理师姓名:" />
 
                     <TextView
                         android:id="@+id/textView6"
                         android:textColor="@color/boroblacktext"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="护理师工种" />
+                        android:text="护理师工种:" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -176,6 +183,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dp_10"
                 android:layout_marginLeft="@dimen/dp_20"
+                android:textSize="@dimen/sp_14"
                 android:text="薪水及支付信息" />
 
             <RelativeLayout
@@ -307,7 +315,7 @@
                     android:background="@color/line" />
             </RelativeLayout>
 
-            <LinearLayout
+            <!-- <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -337,7 +345,7 @@
                 android:id="@+id/checkBox2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="《雇主责任险》" />
+                android:text="《雇主责任险》" /> -->
 
             <Button
                 android:onClick="pay"
@@ -350,6 +358,7 @@
                 android:paddingBottom="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_10"
                 android:text="确定并支付费用"
+                android:layout_marginBottom="@dimen/dp_20"
                 android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>

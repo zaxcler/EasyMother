@@ -10,6 +10,7 @@ import com.easymother.bean.NewsInfoBean;
 import com.easymother.bean.TestBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.customview.MyListview;
+import com.easymother.customview.MyLoadingProgress;
 import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
@@ -22,7 +23,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class ArticleListActivity extends Activity {
@@ -51,6 +55,7 @@ public class ArticleListActivity extends Activity {
 
 	private void init() {
 		loadData();
+		MyLoadingProgress.showLoadingDialog(this);
 //		List<TestBean> list=new ArrayList<>();
 //		TestBean bean=new TestBean();
 //		list.add(bean);
@@ -72,6 +77,7 @@ public class ArticleListActivity extends Activity {
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
 					List<NewsInfoBean> list=JsonUtils.getResultList(response, NewsInfoBean.class);
 					bindData(list);
+					MyLoadingProgress.closeLoadingDialog();
 				}
 			}
 			@Override
@@ -84,10 +90,20 @@ public class ArticleListActivity extends Activity {
 	/**
 	 * 绑定数据
 	 */
-	protected void bindData(List<NewsInfoBean> list) {
+	protected void bindData(final List<NewsInfoBean> list) {
 		if (list!=null) {
 			ArticleListAdapter adapter=new ArticleListAdapter(this, list, R.layout.article_details_item);
 			listview.setAdapter(adapter);
+			listview.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+					Intent intent=new Intent();
+					intent.setClass(ArticleListActivity.this, ArticleActivity.class);
+					intent.putExtra("id", list.get(arg2).getId());
+					startActivity(intent);
+				}
+			});
 		}
 	}
 

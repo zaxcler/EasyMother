@@ -13,8 +13,7 @@
         android:layout_marginBottom="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_20"
         android:textColor="@color/boroblacktext" 
-        android:paddingLeft="@dimen/dp_10"
-        android:text="0571-28237837" />
+        android:text="4008068222" />
 
     <View
         android:layout_width="match_parent"

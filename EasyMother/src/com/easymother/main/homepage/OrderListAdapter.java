@@ -46,20 +46,23 @@ public class OrderListAdapter<T> extends CommonAdapter<T> {
 	@Override
 	public void setDataToItem(final ViewHolder holder, final T t) {
 		final View convertview=holder.getConvertView();
+		
+		TextView day=holder.getView(R.id.textView10);
+		day.setVisibility(View.GONE);
 			final OrderListBean bean=(OrderListBean) t;
 			TextView name=holder.getView(R.id.textView1);
 			/*
 			 * 设置之前先判断空
 			 */
-			if ("payorder".equals(flag)) {
-				if (bean.getNurseName()!=null) {
-					name.setText(bean.getNurseName());
-				}
-			}else if ("allorder".equals(flag)) {
+//			if ("payorder".equals(flag)) {
+//				if (bean.getNurseName()!=null) {
+//					name.setText(bean.getNurseName());
+//				}
+//			}else if ("allorder".equals(flag)) {
 				if (bean.getRealName()!=null) {
 					name.setText(bean.getRealName());
 				}
-			}
+//			}
 			
 			TextView job=holder.getView(R.id.textView2);
 			/*
@@ -113,8 +116,8 @@ public class OrderListAdapter<T> extends CommonAdapter<T> {
 			/*
 			 * 设置之前先判断空
 			 */
-			if (bean.getPrice()!=null) {
-				showPrice.setText(bean.getPrice()+"");
+			if (bean.getShowPrice()!=null) {
+				showPrice.setText(bean.getShowPrice()+"");
 			}
 			TextView dengji=holder.getView(R.id.textView9);
 			/*
@@ -146,8 +149,8 @@ public class OrderListAdapter<T> extends CommonAdapter<T> {
 			holder.getView(R.id.line1).setVisibility(View.VISIBLE);
 			holder.getView(R.id.price_tv).setVisibility(View.VISIBLE);
 			price_tv2.setVisibility(View.VISIBLE);
-			if (bean.getRealAllAmount()!=null) {
-				price_tv2.setText("￥"+bean.getRealAllAmount()+"元");
+			if (bean.getPayMoney()!=null) {
+				price_tv2.setText("￥"+bean.getPayMoney()+"元");
 			}else {
 				price_tv2.setText("");
 			}
@@ -158,8 +161,8 @@ public class OrderListAdapter<T> extends CommonAdapter<T> {
 				TextView pay=holder.getView(R.id.pay);
 				pay.setText("待付服务款");
 				pay.setVisibility(View.VISIBLE);
-				if (bean.getRealAllAmount()!=null) {
-					price_tv2.setText("￥"+bean.getRealAllAmount()+"元");
+				if (bean.getPayMoney()!=null) {
+					price_tv2.setText("￥"+bean.getPayMoney()+"元");
 				}else {
 					price_tv2.setText("");
 				}
@@ -168,7 +171,13 @@ public class OrderListAdapter<T> extends CommonAdapter<T> {
 				TextView pay=holder.getView(R.id.pay);
 				pay.setText("待付定金");
 				pay.setVisibility(View.VISIBLE);
-				price_tv2.setText("￥500元");
+				price_tv2.setText("￥"+bean.getPayMoney()+"元");
+			}
+			if ("40".equals(bean.getStatus())){
+				TextView pay=holder.getView(R.id.pay);
+				pay.setText("服务结束");
+				pay.setVisibility(View.VISIBLE);
+				price_tv2.setText("￥"+bean.getPayMoney()+"元");
 			}
 		}
 		

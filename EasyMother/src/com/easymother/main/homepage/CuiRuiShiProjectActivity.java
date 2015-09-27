@@ -35,6 +35,7 @@ public class CuiRuiShiProjectActivity extends Activity implements OnClickListene
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_cuirushi_project);
+		EasyMotherUtils.initTitle(this, "项目介绍", false);
 		intent=getIntent();
 		findView();
 		init();
@@ -68,31 +69,31 @@ public class CuiRuiShiProjectActivity extends Activity implements OnClickListene
 		switch (arg0.getId()) {
 		case R.id.layout1:
 			intent.putExtra("CRS_Project", 1);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project1.html",R.drawable.pic1,"产前开奶");
 			break;
 		case R.id.layout2:
 			intent.putExtra("CRS_Project", 2);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project2.html",R.drawable.pic1,"产后无痛点穴开奶");
 			break;
 		case R.id.layout3:
 			intent.putExtra("CRS_Project", 3);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project3.html",R.drawable.pic1,"催乳");
 			break;
 		case R.id.layout4:
 			intent.putExtra("CRS_Project", 4);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project4.html",R.drawable.pic1,"消淤");
 			break;
 		case R.id.layout5:
 			intent.putExtra("CRS_Project", 5);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project5.html",R.drawable.pic1,"乳腺小叶增生护养");
 			break;
 		case R.id.layout6:
 			intent.putExtra("CRS_Project", 6);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project6.html",R.drawable.pic1,"产后满月汗蒸排毒");
 			break;
 		case R.id.layout7:
 			intent.putExtra("CRS_Project", 7);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1);
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project7.html",R.drawable.pic1,"产后经络调理消月子病");
 			break;
 			
 

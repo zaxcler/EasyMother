@@ -29,7 +29,7 @@
             android:id="@+id/circleImageView2"
             android:layout_width="@dimen/dp_64"
             android:layout_height="@dimen/dp_64"
-            android:src="@drawable/photo" />
+            android:src="@drawable/photo1" />
     </LinearLayout>
 
 </RelativeLayout>

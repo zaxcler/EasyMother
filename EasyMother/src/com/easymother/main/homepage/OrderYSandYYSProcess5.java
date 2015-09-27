@@ -82,11 +82,12 @@ public class OrderYSandYYSProcess5 extends Activity {
 		card_id=(TextView) findViewById(R.id.card_id);
 		user_address=(TextView) findViewById(R.id.user_address);
 		hetong=(WebView) findViewById(R.id.hetong);
+		nurse_image=(ImageView) findViewById(R.id.nurse_image);
 	}
 
 	private void init() {
 		showData();
-		hetong.loadUrl("file:///android_asset/demo.html");
+		hetong.loadUrl("file:///android_asset/hetong.html");
 		complete.setOnClickListener(new OnClickListener(){
 			
 			@Override
@@ -105,9 +106,7 @@ public class OrderYSandYYSProcess5 extends Activity {
 	 * 展示数据
 	 */
 	public void showData(){
-		if (nursebase.getImage()!=null) {
 			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+nursebase.getImage(), nurse_image);
-		}
 		if (nursebase.getRealName()!=null) {
 			nurse_name.setText(nursebase.getRealName());
 		}
@@ -138,11 +137,11 @@ public class OrderYSandYYSProcess5 extends Activity {
 		
 		RequestParams params=new RequestParams();
 		int id=MyApplication.preferences.getInt("id", 0);
-		if (id==0) {
-			Toast.makeText(OrderYSandYYSProcess5.this, "请登录", 0).show();
-			EasyMotherUtils.goActivity(OrderYSandYYSProcess5.this, LoginOrRegisterActivity.class);
-			return false;
-		}
+//		if (id==0) {
+//			Toast.makeText(OrderYSandYYSProcess5.this, "请登录", 0).show();
+//			EasyMotherUtils.goActivity(OrderYSandYYSProcess5.this, LoginOrRegisterActivity.class);
+//			return false;
+//		}
 		params.put("userId",id);
 		if (!"".equals(MyApplication.preferences.getString("order_user_name", ""))) {
 			params.put("userName",MyApplication.preferences.getString("order_user_name", ""));
@@ -179,7 +178,7 @@ public class OrderYSandYYSProcess5 extends Activity {
 			
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				Toast.makeText(OrderYSandYYSProcess5.this, "连接服务器失败", 0).show();
+				Toast.makeText(OrderYSandYYSProcess5.this, "保存合同失败！", 0).show();
 				Log.e("onFailure","错误"+ arg2);
 			}
 		});
@@ -202,6 +201,9 @@ public class OrderYSandYYSProcess5 extends Activity {
 		}
 		if (!"".equals(MyApplication.preferences.getString("order_user_phone", ""))) {
 			params.put("userMobile",MyApplication.preferences.getString("order_user_phone", ""));
+		}
+		if (!"".equals(MyApplication.preferences.getString("order_user_address", ""))) {
+			params.put("userAddress",MyApplication.preferences.getString("order_user_address", ""));
 		}
 		if (nursejob.getNurseId()!=null) {
 			params.put("nurseId", nursejob.getNurseId());
@@ -252,9 +254,11 @@ public class OrderYSandYYSProcess5 extends Activity {
 			params.put("nurseJobId", nursejob.getId());
 			params.put("isSee", intent.getByteExtra("isSee", (byte) 0));
 			params.put("allServerPrice", nursejob.getPrice());//总价
-			params.put("deposit", 500);
-			
-			
+//			Double deposit=Double.valueOf(MyApplication.preferences.getInt("prePrice",0));
+			int deposit=MyApplication.preferences.getInt("prePrice",0);
+			if (deposit!=0) {
+				params.put("deposit", deposit);
+			}
 			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 			Date date;
 			try {
@@ -272,7 +276,7 @@ public class OrderYSandYYSProcess5 extends Activity {
 					super.onSuccess(statusCode, headers, response);
 					if (JsonUtils.getRootResult(response).getIsSuccess()) {
 						Order order=JsonUtils.getResult(response, Order.class);
-						order.setPrice(0.01);
+//						order.setPrice(0.01);
 						intent.putExtra("order",order);
 						intent.setClass(OrderYSandYYSProcess5.this, OrderYSandYYSProcess6.class);
 						startActivity(intent);

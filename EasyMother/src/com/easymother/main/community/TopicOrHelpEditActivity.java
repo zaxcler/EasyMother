@@ -93,10 +93,10 @@ public class TopicOrHelpEditActivity extends Activity {
 							@Override
 							public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 								super.onSuccess(statusCode, headers, response);
+								TopicOrHelpEditActivity.this.finish();
 								if (JsonUtils.getRootResult(response).getIsSuccess()) {
 									Toast.makeText(TopicOrHelpEditActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
 									TopicOrHelpEditActivity.this.setResult(Activity.RESULT_OK);//返回状态给上一级
-									TopicOrHelpEditActivity.this.finish();
 								}else {
 									Toast.makeText(TopicOrHelpEditActivity.this, "发布失败", Toast.LENGTH_SHORT).show();
 								}

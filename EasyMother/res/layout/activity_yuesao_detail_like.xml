@@ -43,6 +43,12 @@
         android:background="@drawable/share" />
 
     <TextView
+        
+        android:id="@+id/share"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_30"
+        android:paddingLeft="@dimen/dp_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="分享" />

@@ -21,6 +21,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_10"
                 android:background="@drawable/white_solid" >
 
                 <TextView
@@ -32,8 +33,8 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_toRightOf="@+id/circleImageView1"
                     android:text="杨烨"
-                    android:textColor="@color/blackgreen"
-                    android:textSize="@dimen/sp_20" />
+                    android:textColor="@color/liangboro"
+                    android:textSize="@dimen/sp_16" />
 
                 <TextView
                     android:id="@+id/content"
@@ -43,7 +44,7 @@
                     android:layout_below="@+id/circleImageView1"
                     android:layout_marginBottom="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:text="第一次用了于嫂空间" />
+                    />
 
                 <com.easymother.customview.MyGridView 
                     android:id="@+id/pictures"
@@ -53,15 +54,9 @@
                     android:verticalSpacing="@dimen/dp_5"
                     android:horizontalSpacing="@dimen/dp_5"
                     android:layout_below="@+id/content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
                     ></com.easymother.customview.MyGridView>
-               
-                <View
-                    android:id="@+id/view1"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/pictures"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@color/line" />
 
                 <TextView
                     android:id="@+id/reply"
@@ -92,6 +87,7 @@
                     android:layout_above="@+id/content"
                     android:layout_alignLeft="@+id/user_name"
                     android:text="2015-08-09"
+                    android:textSize="@dimen/sp_12"
                     android:textColor="@color/borotext" />
 
                 <TextView
@@ -99,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/content"
-                    android:layout_below="@+id/view1"
+                    android:layout_below="@id/pictures"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_20"
                     android:drawableLeft="@drawable/babytime_share"
@@ -108,24 +104,23 @@
 
                 <com.easymother.customview.CircleImageView
                     android:id="@+id/circleImageView1"
-                    android:layout_width="@dimen/dp_72"
-                    android:layout_height="@dimen/dp_72"
+                    android:layout_width="@dimen/dp_64"
+                    android:layout_height="@dimen/dp_64"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/baby" />
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/photo" />
 
                 <TextView
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/circleImageView1"
-                    android:text="回复"
                     android:layout_alignParentRight="true"
                     android:paddingRight="@dimen/dp_10"
                     android:paddingLeft="@dimen/dp_10"
-                    android:drawableLeft="@drawable/reply"
+                    android:drawableLeft="@drawable/huifu_1"
                     android:textColor="@color/boroblacktext" />
             </RelativeLayout>
 
@@ -141,13 +136,13 @@
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_10"
-                android:text="回复15条"
+                android:text="回复0条"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:textColor="@color/waterpink" />
             <View android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/line"
+                android:background="@color/lightlightboro"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"/>
 
@@ -164,7 +159,7 @@
     <LinearLayout 
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/dp_60"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@color/white">
@@ -180,13 +175,16 @@
             android:id="@+id/editText1"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:padding="@dimen/dp_5"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_marginBottom="@dimen/dp_5"
-            android:layout_marginRight="@dimen/dp_2"
-            android:layout_marginLeft="@dimen/dp_2"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:textSize="@dimen/sp_14"
+            android:textColorHint="@color/lightlightboro"
             android:background="@drawable/borotext_border_and_soild"
             android:layout_height="match_parent"
+            android:paddingLeft="@dimen/dp_5"
+            android:paddingRight="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_10"
             >
         </EditText>
 
@@ -197,7 +195,12 @@
             android:layout_height="wrap_content"
             android:text="发送"
             android:textColor="@color/white"
-            android:padding="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:paddingTop="@dimen/dp_5"
+            android:paddingBottom="@dimen/dp_5"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
             android:background="@drawable/lightredwine_solid" />
         
     </LinearLayout>

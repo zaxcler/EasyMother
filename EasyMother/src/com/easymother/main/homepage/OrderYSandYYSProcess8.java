@@ -21,7 +21,7 @@ public class OrderYSandYYSProcess8 extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.process_ysandyys_order_next8);
 		EasyMotherUtils.initTitle(this, "支付成功", false);
-		MyApplication.addActivityToMap(this, "YSprocess");
+		MyApplication.addActivityToMap(this, "YSprocess1");
 		findView();
 		init();
 	}
@@ -47,7 +47,7 @@ public class OrderYSandYYSProcess8 extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		MyApplication.destoryActivity("YSprocess");
+		MyApplication.destoryActivity("YSprocess1");
 	}
 
 }

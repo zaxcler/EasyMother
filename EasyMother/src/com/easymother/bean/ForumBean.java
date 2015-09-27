@@ -1,27 +1,67 @@
 package com.easymother.bean;
 
+import java.util.Date;
+
 public class ForumBean {
-	
+
+	private String createUser;
+
+	private Date createTime;
+
+	private String updateUser;
+
+	private Date updateTime;
 	private Integer userId;
-	
+
 	private String userName;
-	
+
 	private String userImage;
-	
+
 	private Integer postId;
-	
+
 	private String postTitle;
-	
+
 	private String postImage;
-	
+
 	private Integer bolckId;
-	
+
 	private String postType;
-	
+
 	private String content;
 
 	
-	
+	public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	public String getContent() {
 		return content;
 	}
@@ -93,8 +133,5 @@ public class ForumBean {
 	public void setPostType(String postType) {
 		this.postType = postType;
 	}
-	
-	
-	
 
 }

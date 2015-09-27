@@ -22,6 +22,7 @@ import com.alipay.sdk.app.PayTask;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
 import com.easymother.bean.Order;
+import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.main.homepage.OrderYSandYYSProcess5;
@@ -95,7 +96,7 @@ public class PayYSorYYSActivity extends FragmentActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.process_ysandyys_order_next7);
 		EasyMotherUtils.initTitle(this, "支付定金", false);
-		MyApplication.addActivityToMap(this, "YSprocess");
+		MyApplication.addActivityToMap(this, "YSprocess1");
 		intent=getIntent();
 		nursebase=(NurseBaseBean) intent.getSerializableExtra("nursebase");
 		nursejob=(NurseJobBean) intent.getSerializableExtra("nursejob");
@@ -218,8 +219,8 @@ public class PayYSorYYSActivity extends FragmentActivity {
 		orderInfo += "&total_fee=" + "\"" + price + "\"";
 
 		// 服务器异步通知页面路径
-		orderInfo += "&notify_url=" + "\"" + "http://zhonglv.hzlianhai.com/easyMother/app/ordernotifyurl" + "\"";
-
+//		orderInfo += "&notify_url=" + "\"" + "http://test1.hzlianhai.com/easyMother/app/ordernotifyurl" + "\"";
+		orderInfo += "&notify_url=" + "\"" + BaseInfo.BASE_URL+"app/ordernotifyurl"+ "\"";
 		// 服务接口名称， 固定值
 		orderInfo += "&service=\"mobile.securitypay.pay\"";
 

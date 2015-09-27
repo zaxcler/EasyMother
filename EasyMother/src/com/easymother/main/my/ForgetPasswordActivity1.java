@@ -1,5 +1,6 @@
 package com.easymother.main.my;
 
+import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.RegularUtils;
@@ -26,6 +27,7 @@ public class ForgetPasswordActivity1 extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_forget_password);
 		EasyMotherUtils.initTitle(this, "找回密码", false);
+		MyApplication.addActivityToMap(this, "forgetpassword");
 		findView();
 		init();
 	}

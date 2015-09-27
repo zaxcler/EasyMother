@@ -104,7 +104,7 @@ public class ArticleActivity extends Activity {
 					
 					@Override
 					public void onClick(View v) {
-						WeiXinUtils.shareDownloadUrl(ArticleActivity.this, "www.qsmam.com", R.drawable.app, SendMessageToWX.Req.WXSceneSession);
+						WeiXinUtils.shareDownloadUrl(ArticleActivity.this);
 						popupwindow.dismiss();
 					}
 				});

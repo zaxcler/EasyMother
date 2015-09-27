@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.easymother.main"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="2.0" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /><!-- //读写权限 -->
     <uses-permission android:name="android.permission.CAMERA"/><!-- 照相机权限 -->
     <uses-permission android:name="android.permission.CALL_PHONE"/><!-- 打电话权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/><!-- 查看网络状态 -->
 
     <application
         android:allowBackup="true"
@@ -29,8 +30,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+         <activity android:name="com.alidao.mama.WelActivity" android:theme="@android:style/Theme.DeviceDefault.NoActionBar"></activity>
         <activity android:name="com.easymother.main.MainActivity"></activity>
+        <activity android:name="com.alidao.mama.YingDao"></activity>
         <activity android:name="com.alipay.sdk.pay.demo.PayCRSActivity"></activity>
         <activity android:name="com.alipay.sdk.pay.demo.PayYSorYYSActivity"></activity>
         <!-- 点击多张图片滑动 -->

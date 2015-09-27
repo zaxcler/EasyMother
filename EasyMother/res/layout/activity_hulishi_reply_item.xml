@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingBottom="@dimen/dp_10" >
+         >
 
         <com.easymother.customview.MyGridView
              android:id="@+id/pictures"
@@ -25,7 +25,7 @@
             android:layout_below="@id/pictures"
             android:layout_alignLeft="@+id/content"
             android:layout_marginTop="@dimen/dp_10"
-            android:background="@color/line" />
+            android:background="@color/lightlightboro" />
 
         <TextView
             android:id="@+id/floor"
@@ -35,16 +35,16 @@
             android:layout_alignLeft="@+id/user_name"
             android:text="1楼"
             android:textSize="@dimen/dp_12"
-            android:textColor="@color/borotext" />
+            android:textColor="@color/lightredwine" />
 
         <com.easymother.customview.CircleImageView
             android:id="@+id/circleImageView1"
-            android:layout_width="@dimen/dp_32"
-            android:layout_height="@dimen/dp_32"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/baby" />
 
         <TextView
@@ -53,8 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/user_name"
-            android:text="回复"
-            android:drawableLeft="@drawable/reply"
+            android:drawableLeft="@drawable/huifu_1"
+            android:layout_marginRight="@dimen/dp_10"
             android:textColor="@color/boro" />
 
         <TextView
@@ -65,8 +65,7 @@
             android:layout_marginLeft="19dp"
             android:layout_toRightOf="@+id/circleImageView1"
             android:text="杨烨"
-            android:textColor="@color/blackgreen"
-            android:textSize="@dimen/sp_20" />
+            android:textSize="@dimen/sp_14" />
 
         <TextView
             android:id="@+id/show_time"
@@ -75,7 +74,7 @@
             android:layout_alignBaseline="@+id/textView4"
             android:layout_alignBottom="@+id/textView4"
             android:layout_toRightOf="@+id/textView4"
-            android:textColor="@color/boroblacktext"
+            android:textColor="@color/liangboro"
             android:textSize="@dimen/dp_12"
             android:text="9分钟前" />
 
@@ -94,8 +93,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/floor"
+            android:textColor="@color/liangboro"
             android:layout_below="@+id/circleImageView1"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="10dp"
             android:text="第一次用了于嫂空间" />
 
     </RelativeLayout>

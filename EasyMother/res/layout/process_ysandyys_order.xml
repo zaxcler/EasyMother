@@ -29,6 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:paddingBottom="@dimen/dp_20"
                 android:gravity="center"
                 android:orientation="vertical" >
 
@@ -84,7 +85,7 @@
                         android:id="@+id/phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="400-1008-251"
+                        android:text="400-8068-222"
                         android:background="@color/white"
                         android:textColor="@color/boroblacktext" />
                 </LinearLayout>
@@ -118,18 +119,13 @@
                         android:id="@+id/type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="月嫂合同"
+                        android:text="护理师合同"
                         android:textColor="@color/boroblacktext" />
 
                     <View
                         android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_weight="1" />
-
-                    <ImageView
-                        android:layout_width="@dimen/dp_32"
-                        android:layout_height="@dimen/dp_32"
-                        android:src="@drawable/order_bookpng" />
                 </LinearLayout>
 
                 <View
@@ -147,6 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/v3"
                     android:layout_alignTop="@+id/v3"
+                    android:textSize="12sp"
                     android:text="同意"
                     android:textColor="@color/boroblacktext" />
 
@@ -157,6 +154,7 @@
                     android:layout_alignBaseline="@+id/checkBox1"
                     android:layout_alignBottom="@+id/checkBox1"
                     android:layout_toRightOf="@id/checkBox1"
+                    android:textSize="12sp"
                     android:text="《轻松妈妈网签协议》" />
             </RelativeLayout>
 

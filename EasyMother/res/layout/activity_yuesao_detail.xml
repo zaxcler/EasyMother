@@ -16,7 +16,7 @@
     <LinearLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/dp_60"
         android:layout_alignParentBottom="true"
         android:gravity="bottom"
         android:background="@color/lightredwine"
@@ -27,13 +27,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/xinyuandan"
+            android:drawableLeft="@drawable/xinyuandan1"
             android:gravity="center"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="加入星愿单"
+            android:text="加入心愿单"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16" />
 
@@ -53,7 +53,7 @@
             android:drawableLeft="@drawable/yue_now"
             android:gravity="center"
             android:text="立即预约"
-            android:paddingLeft="20dp"
+            android:paddingLeft="30dp"
             android:paddingRight="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -63,8 +63,8 @@
 
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:id="@+id/pulltoreflash"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_above="@id/bottom"
         android:layout_below="@id/title1"
         android:orientation="vertical" >
@@ -105,7 +105,9 @@
 
             <include
                 android:id="@+id/calendar"
-                layout="@layout/calender" />
+                layout="@layout/calender" 
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"/>
 
             <include
                 android:id="@+id/crs_calendar"

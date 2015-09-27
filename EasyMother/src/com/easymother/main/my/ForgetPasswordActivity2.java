@@ -6,7 +6,9 @@ import java.util.TimerTask;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.easymother.bean.Root;
 import com.easymother.configure.BaseInfo;
+import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
@@ -20,6 +22,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -40,23 +44,24 @@ public class ForgetPasswordActivity2 extends Activity implements OnClickListener
 
 	private TimerTask task;// 计时器任务
 	private Timer timer;// 计时器
-	private boolean canGetIdentity=true;
-	private int time=60;
+	private boolean canGetIdentity = true;
+	private int time = 180;
 	private String phone;
-	
-	private Handler handler=new Handler(){
+	private boolean isShow=false;//是否显示密码
+
+	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
-			if (msg.arg1==0) {
+			if (msg.arg1 == 0) {
 				identity_code.setText("重新获取验证码");
-				time=60;
+				time = 180;
 				timer.cancel();
-				canGetIdentity=true;
+				canGetIdentity = true;
 				identity_code.setTextColor(getResources().getColor(R.color.boroblacktext));
 				identity_code.setBackgroundDrawable(getResources().getDrawable(R.drawable.boro_border));
-			}else {
-				identity_code.setText(msg.arg1+"秒后重新获取");
+			} else {
+				identity_code.setText(msg.arg1 + "秒后重新获取");
 			}
-			
+
 		};
 	};
 
@@ -65,6 +70,7 @@ public class ForgetPasswordActivity2 extends Activity implements OnClickListener
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_forget_password_confirm);
+		MyApplication.addActivityToMap(this, "forgetpassword");
 		EasyMotherUtils.initTitle(this, "找回密码", false);
 		findView();
 		init();
@@ -86,58 +92,113 @@ public class ForgetPasswordActivity2 extends Activity implements OnClickListener
 		identity_code.setOnClickListener(this);
 		confirm.setOnClickListener(this);
 		showpassword.setOnClickListener(this);
+		new_password.setOnClickListener(this);
+		new_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
 	}
-
 	@SuppressLint("NewApi")
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.identity_code:
 			if (canGetIdentity) {
-				canGetIdentity=false;
-				//为了向下兼容，使用过时的api
-				RequestParams params=new RequestParams();
+				canGetIdentity = false;
+				// 为了向下兼容，使用过时的api
+				RequestParams params = new RequestParams();
 				params.put("mobile", phone);
-				NetworkHelper.doGetNoToken(BaseInfo.SEND_SMS_CODE, params, new JsonHttpResponseHandler(){
+				params.put("type", "findpassword");
+				NetworkHelper.doGetNoToken(BaseInfo.SEND_SMS_CODE, params, new JsonHttpResponseHandler() {
 					@Override
 					public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 						super.onSuccess(statusCode, headers, response);
 						if (JsonUtils.getRootResult(response).getIsSuccess()) {
 							identity_code.setTextColor(getResources().getColor(R.color.white));
 							identity_code.setBackgroundDrawable(getResources().getDrawable(R.drawable.boro_solid));
-							task=new TimerTask() {
-								
+							task = new TimerTask() {
+
 								@Override
 								public void run() {
 									--time;
-									Message message=Message.obtain();
-									message.arg1=time;
+									Message message = Message.obtain();
+									message.arg1 = time;
 									handler.sendMessage(message);
 								}
 							};
-							timer=new Timer(true);
+							timer = new Timer(true);
 							timer.schedule(task, 1000, 1000);
-						}else {
-        					Toast.makeText(ForgetPasswordActivity2.this, JsonUtils.getRootResult(response).getMessage(), 0).show();
+						} else {
+							Toast.makeText(ForgetPasswordActivity2.this, JsonUtils.getRootResult(response).getMessage(),
+									0).show();
 						}
 					}
-					public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-        				Toast.makeText(ForgetPasswordActivity2.this, "连接服务器失败", 0).show();
-        			};
+
+					public void onFailure(int statusCode, Header[] headers, String responseString,
+							Throwable throwable) {
+						Toast.makeText(ForgetPasswordActivity2.this, "连接服务器失败", 0).show();
+					};
 				});
-				
-				
+
 			}
 			break;
 
 		case R.id.confirm:
+			RequestParams params = new RequestParams();
+			params.put("mobile", phone);
+			String identity = identity_edit.getText().toString().trim();
+			if ("".equals(identity) || identity == null) {
+				Toast.makeText(ForgetPasswordActivity2.this, "验证码不能为空", 0).show();
+				return;
+			}
+			params.put("yzm", identity);
+			String newPassWord = new_password.getText().toString().trim();
+			if ("".equals(newPassWord) || newPassWord == null) {
+				Toast.makeText(ForgetPasswordActivity2.this, "密码不能为空", 0).show();
+				return;
+			}
+			params.put("password", newPassWord);
+			
+			NetworkHelper.doGet(BaseInfo.FORGET_PASSWORD, params, new JsonHttpResponseHandler() {
+				@Override
+				public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+					super.onSuccess(statusCode, headers, response);
+					if (JsonUtils.getRootResult(response).getIsSuccess()) {
+						Root root=JsonUtils.getResult(response, Root.class);
+						if (root.getIsSuccess()) {
+//							EasyMotherUtils.goActivity(ForgetPasswordActivity2.this, LoginOrRegisterActivity.class);
+							ForgetPasswordActivity2.this.finish();
+						}
+						Toast.makeText(ForgetPasswordActivity2.this, root.getMessage(), 0).show();
+					}
+					
+				}
+				@Override
+				public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+					super.onFailure(statusCode, headers, responseString, throwable);
+					
+				}
+			});
 
 			break;
 		case R.id.showpassword:
-
+			if (isShow) {
+				isShow=false;
+                    //如果选中，显示密码      
+				new_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else{
+                	isShow=true;
+                    //否则隐藏密码
+                	new_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+			
 			break;
 		}
+
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		MyApplication.destoryActivity("forgetpassword");
+		MyApplication.destoryActivity("infomationactivity");
 	}
 
 }

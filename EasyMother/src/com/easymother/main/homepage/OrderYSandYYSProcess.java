@@ -48,34 +48,37 @@ public class OrderYSandYYSProcess extends Activity {
 	}
 
 	private void init() {
-		if (nurseBase.getRealName()!=null||!"".equals(nurseBase.getRealName())) {
-			name.setText(nurseBase.getRealName());
-		}
-		if (nurseBase.getMobile()!=null||!"".equals(nurseBase.getMobile())) {
-			phone.setText(nurseBase.getMobile());
-		}
-		if ("YS".equals(nurseBase.getJob())) {
-			nursetype.setText("月嫂合同");
-		}
-		if ("YYS".equals(nurseBase.getJob())) {
-			nursetype.setText("育婴师合同");
+		if (nurseBase!=null) {
+			if (nurseBase.getRealName()!=null||!"".equals(nurseBase.getRealName())) {
+				name.setText(nurseBase.getRealName());
+			}
+//			if (nurseBase.getMobile()!=null||!"".equals(nurseBase.getMobile())) {
+//				phone.setText(nurseBase.getMobile());
+//			}
+			if ("YS".equals(nurseBase.getJob())) {
+				nursetype.setText("月嫂合同");
+			}
+			if ("YYS".equals(nurseBase.getJob())) {
+				nursetype.setText("育婴师合同");
+			}
+			
+			begain_sign.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					if (checkbox.isChecked()) {
+						Intent intent=getIntent();
+						intent.setClass(OrderYSandYYSProcess.this, OrderYSandYYSProcess1.class);
+						intent.putExtra("nursebase", nurseBase);
+						intent.putExtra("nursejob", nurseJob);
+						startActivity(intent);
+					}else {
+						Toast.makeText(OrderYSandYYSProcess.this, "请同意网签协议", 0).show();
+					}
+					
+				}
+			});
 		}
 		
-		begain_sign.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				if (checkbox.isChecked()) {
-					Intent intent=new Intent();
-					intent.setClass(OrderYSandYYSProcess.this, OrderYSandYYSProcess1.class);
-					intent.putExtra("nursebase", nurseBase);
-					intent.putExtra("nursejob", nurseJob);
-					startActivity(intent);
-				}else {
-					Toast.makeText(OrderYSandYYSProcess.this, "请同意网签协议", 0).show();
-				}
-				
-			}
-		});
 	}
 
 }

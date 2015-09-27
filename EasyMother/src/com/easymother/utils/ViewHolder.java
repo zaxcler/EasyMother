@@ -45,6 +45,7 @@ public class ViewHolder {
 
 	public static ViewHolder getInstance(Context context,int position, View convertView,
 			ViewGroup parent,int resourceId) {
+		
 		if (convertView==null) {
 			return new ViewHolder(context, position, parent, resourceId);
 		}else {

@@ -45,7 +45,7 @@
         android:layout_below="@id/textView2"
         android:paddingBottom="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
-        android:text="下一步"
+        android:text="支付"
         android:textColor="@color/white" />
 
 </RelativeLayout>

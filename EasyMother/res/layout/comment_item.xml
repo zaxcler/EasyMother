@@ -8,47 +8,11 @@
         android:id="@+id/employer_photo"
         android:layout_width="@dimen/dp_48"
         android:layout_height="@dimen/dp_48"
-        android:padding="@dimen/dp_5"
-        android:src="@drawable/home_banner" />
-
-    <TextView
-        android:id="@+id/employer_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_10"
-        android:layout_toRightOf="@id/employer_photo"
-        android:text="吴先生"
-        android:textSize="@dimen/sp_14" />
+        android:layout_marginRight="@dimen/dp_10"
+        android:padding="@dimen/dp_5"
+        android:src="@drawable/photo" />
 
-    <TextView
-        android:id="@+id/employer_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/employer_name"
-        android:layout_below="@id/employer_name"
-        android:text="157****1234"
-        android:textColor="@color/boroblacktext"
-        android:textSize="@dimen/sp_12" />
-
-    <TextView
-        android:id="@+id/employer_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/employer_name"
-        android:layout_below="@id/employer_num"
-        android:text="钱阿姨从剖腹产当天就陪在医院里，和我的家人共同照顾小宝宝，度过了一开始最患难的时光。。"
-        android:textColor="@color/boroblacktext"
-        android:textSize="@dimen/sp_12" />
-
-    <GridView 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/photos"
-        android:numColumns="3"
-        android:layout_below="@id/employer_content"
-        android:layout_alignLeft="@id/employer_name"
-        ></GridView>
-    
     <TextView
         android:id="@+id/comment_time"
         android:layout_width="wrap_content"
@@ -56,11 +20,52 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/photos"
         android:text="2015-08-01 12:02:23"
+        android:textColor="@color/lightboro"
+        android:textSize="@dimen/sp_10" />
+
+    <TextView
+        android:id="@+id/employer_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/employer_photo"
+        android:layout_toRightOf="@+id/employer_photo"
         android:textColor="@color/boroblacktext"
         android:textSize="@dimen/sp_12" />
-    <View android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/employer_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/employer_num"
+        android:layout_alignLeft="@+id/employer_num"
+        android:text="吴先生"
+        android:textSize="@dimen/sp_14" />
+
+    <TextView
+        android:id="@+id/employer_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/employer_num"
+        android:layout_below="@id/employer_num"
+        android:text="钱阿姨从剖腹产当天就陪在医院里，和我的家人共同照顾小宝宝，度过了一开始最患难的时光。。"
+        android:textColor="@color/boroblacktext"
+        android:textSize="@dimen/sp_12" 
+        android:layout_marginBottom="@dimen/dp_10"/>
+
+    <GridView
+        android:id="@+id/photos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/employer_name"
+        android:layout_below="@id/employer_content"
+        android:numColumns="3" >
+    </GridView>
+
+    <View
+        android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line"
+        android:layout_alignLeft="@id/employer_name"
         android:layout_below="@id/comment_time"
-        android:layout_alignLeft="@id/employer_name"/>
+        android:background="@color/lightboro" />
+
 </RelativeLayout>

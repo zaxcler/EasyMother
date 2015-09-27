@@ -24,6 +24,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:padding="@dimen/dp_20"
+            android:textSize="@dimen/sp_14"
             android:text="技能描述" />
 
         <TextView
@@ -31,7 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:textColor="@color/boroblacktext"
+            android:textColor="@color/liangboro"
+            android:textSize="@dimen/sp_12"
             android:layout_below="@id/text1"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="生活照料（饮食）" />
@@ -41,6 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/text1"
+             android:textSize="@dimen/sp_12"
+            android:textColor="@color/lightredwine"
             android:layout_marginRight="@dimen/dp_10"
             android:text="查看"
              />
@@ -63,7 +67,9 @@
             android:layout_below="@id/view1"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="饮水"
-            android:textColor="@color/boroblacktext" />
+              android:textSize="@dimen/sp_12"
+            android:textColor="@color/liangboro"
+             />
 
         <TextView
             android:id="@+id/text4"
@@ -71,6 +77,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/view1"
+             android:textSize="@dimen/sp_12"
+            android:textColor="@color/lightredwine"
             android:layout_marginRight="@dimen/dp_10"
             android:text="查看"
              />
@@ -93,7 +101,9 @@
             android:layout_below="@id/view2"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="睡眠、二便"
-            android:textColor="@color/boroblacktext" />
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/liangboro"
+            />
 
         <TextView
             android:id="@+id/text6"
@@ -103,6 +113,8 @@
             android:layout_below="@id/view2"
             android:layout_marginRight="@dimen/dp_10"
             android:text="查看"
+             android:textSize="@dimen/sp_12"
+            android:textColor="@color/lightredwine"
              />
 
         <View
@@ -123,7 +135,9 @@
             android:layout_below="@id/view3"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="卫生（居家个人）"
-            android:textColor="@color/boroblacktext" />
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/liangboro"
+            />
 
         <TextView
             android:id="@+id/text8"
@@ -133,6 +147,8 @@
             android:layout_below="@id/view3"
             android:layout_marginRight="@dimen/dp_10"
             android:text="查看"
+             android:textSize="@dimen/sp_12"
+            android:textColor="@color/lightredwine"
              />
 
         <View
@@ -152,7 +168,9 @@
             android:layout_below="@id/view4"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="日常生活保健与护理"
-            android:textColor="@color/boroblacktext" />
+              android:textSize="@dimen/sp_12"
+            android:textColor="@color/liangboro"
+             />
 
         <TextView
             android:id="@+id/text10"
@@ -162,6 +180,8 @@
             android:layout_below="@id/view4"
             android:layout_marginRight="@dimen/dp_10"
             android:text="查看"
+             android:textSize="@dimen/sp_12"
+            android:textColor="@color/lightredwine"
              />
 
         <View
@@ -181,7 +201,9 @@
             android:layout_below="@id/view5"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="教育"
-            android:textColor="@color/boroblacktext" />
+              android:textSize="@dimen/sp_12"
+            android:textColor="@color/liangboro"
+            />
 
         <TextView
             android:id="@+id/text12"
@@ -191,6 +213,8 @@
             android:layout_below="@id/view5"
             android:layout_marginRight="@dimen/dp_10"
             android:text="查看"
+             android:textSize="@dimen/sp_12"
+            android:textColor="@color/lightredwine"
              />
 
         <View
@@ -210,7 +234,9 @@
             android:layout_below="@id/view6"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="培养幼儿的性格和良好的情绪"
-            android:textColor="@color/boroblacktext" />
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/liangboro"
+             />
 
         <TextView
             android:id="@+id/text14"
@@ -220,6 +246,8 @@
             android:layout_below="@id/view6"
             android:layout_marginRight="@dimen/dp_10"
             android:text="查看"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/lightredwine"
              />
 
         <View
@@ -227,35 +255,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/text13"
-            android:layout_marginBottom="@dimen/dp_30"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:background="@color/line" />
-         <TextView
-            android:id="@+id/text15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/view7"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:text="护理特色"
-            android:textColor="@color/boroblacktext" />
-
-        <TextView
-            android:id="@+id/text16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/view7"
-            android:layout_marginRight="@dimen/dp_10"
-            android:text="查看"
-             />
-
-        <View
-            android:id="@+id/view8"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/text15"
             android:layout_marginBottom="@dimen/dp_30"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"

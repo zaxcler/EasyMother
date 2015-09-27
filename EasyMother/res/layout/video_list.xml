@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <include
@@ -9,21 +10,28 @@
         android:layout_height="wrap_content"
         layout="@layout/commontitle" />
 
-   
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:id="@+id/pulltoreflash"
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_10"
-        android:divider="@color/background"
-        android:dividerHeight="@dimen/dp_5" >
-    </com.handmark.pulltorefresh.library.PullToRefreshListView>
-    
+        android:layout_height="match_parent" 
+        android:id="@+id/scrollview">
 
-   <!--  <com.easymother.customview.MyReflashLayout
+        <com.easymother.customview.MyListview
+            android:id="@+id/pulltoreflash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/background"
+            android:divider="@color/background"
+            android:dividerHeight="@dimen/dp_10" >
+        </com.easymother.customview.MyListview>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+
+    <!--
+    <com.easymother.customview.MyReflashLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-    </com.easymother.customview.MyReflashLayout> -->
+    </com.easymother.customview.MyReflashLayout>
+    -->
 
 </LinearLayout>

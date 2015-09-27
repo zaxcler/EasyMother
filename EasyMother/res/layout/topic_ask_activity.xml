@@ -11,45 +11,44 @@
         android:padding="@dimen/dp_5" >
 
         <LinearLayout
-            android:padding="@dimen/dp_1"
-            android:layout_width="@dimen/dp_100"
-            android:layout_height="@dimen/dp_35"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp_30"
             android:layout_centerInParent="true"
-            android:gravity="center"
             android:background="@drawable/boro_border"
-            android:orientation="horizontal" >
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_1" >
 
             <TextView
                 android:id="@+id/topic"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="话题"
-                android:gravity="center"
+                android:layout_weight="1"
                 android:background="@drawable/lightredwine_solid2"
-                android:padding="@dimen/dp_5"
+                android:gravity="center"
+                android:text="话题"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_16" />
 
             <TextView
                 android:id="@+id/ask"
-                android:layout_weight="1"
-                android:padding="@dimen/dp_5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="求助"
-                 android:gravity="center"
                 android:textColor="@color/blacktext"
                 android:textSize="@dimen/sp_16" />
         </LinearLayout>
 
         <ImageView
             android:id="@+id/more"
-            android:layout_width="@dimen/dp_32"
-            android:layout_height="@dimen/dp_32"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/add1" />
+            android:layout_marginRight="@dimen/dp_5"
+            android:src="@drawable/add_yuan" />
 
         <ImageView
             android:id="@+id/back"
@@ -64,19 +63,24 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/line" />
-    <com.handmark.pulltorefresh.library.PullToRefreshScrollView 
+
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/pulltoreflash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
-        android:id="@+id/pulltoreflash"
-        >
-        <com.easymother.customview.MyListview 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@color/background"
-            android:dividerHeight="@dimen/dp_5"
-            android:id="@+id/mylistview">
-        </com.easymother.customview.MyListview>
+        android:paddingTop="@dimen/dp_10" >
+
+       
+            <com.easymother.customview.MyListview
+                android:id="@+id/mylistview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/background"
+                android:dividerHeight="@dimen/dp_10" >
+            </com.easymother.customview.MyListview>
+
+      
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
 </LinearLayout>

@@ -1,0 +1,479 @@
+package com.Library.ToolsClass;
+ 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+import com.tianzhidao.network.Manager.Urls;
+
+import android.os.Parcel;
+import android.os.Parcelable; 
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+
+@DatabaseTable(tableName = "Video")
+public class ShareData implements Parcelable
+{
+	private static final long serialVersionUID = 1L;
+
+	@DatabaseField(id = true)
+	public int id;// 主题id
+	@DatabaseField
+	public int type_id;// 板块id
+	@DatabaseField
+	public int atime;// ʱ�䣬unixʱ���
+	@DatabaseField
+	public int zancount;// ���޵�����
+	@DatabaseField
+	public int caicount;// ��ȵ�����
+	@DatabaseField
+	public int sharecount;// ���������
+	@DatabaseField
+	public int replycount;// �ظ�������
+	@DatabaseField
+	public int views;// �����
+	@DatabaseField
+	public int isZan;// 是否点过赞：1赞过，0没有
+	@DatabaseField
+	public int isCai;//是否点过踩：1踩过，0没有
+	@DatabaseField
+	public int status;// 审核状态
+
+
+	@DatabaseField
+	public String name;//
+	@DatabaseField
+	public String videoPath;//
+	@DatabaseField
+	public String avatar;// ������ͷ��
+	@DatabaseField
+	public String title;// ����
+	@DatabaseField
+	public String content;// 内容
+	@DatabaseField
+	public String attachment;// ����
+	@DatabaseField
+	public String poster;// ����
+
+	@DatabaseField
+	public long videoLength;//
+	@DatabaseField
+	public boolean isPlaying;//
+	@DatabaseField
+	public boolean isPause;//
+	
+	
+	private ProgressBar videoBar;//
+
+	// 解决listView item 赞的复用机制问题
+	/**
+	 * true 说明ListView item 已经使用过该值
+	 *  false 说明ListView item 没有使用过该值
+	 * 
+	 */
+	public boolean listViewItemShow_zancount = false;
+	// 解决listView item 踩的复用机制问题
+	/**
+	 * true 说明ListView item 已经使用过该值
+	 * false 说明ListView item 没有使用过该值
+	 */
+	public boolean listViewItemShow_caicount = false;
+
+	// 主题URL
+	public String threadUrl = "";
+	// 头像URL
+	public String shareAvatarUrl = Urls.SHARE_AVATAR_URL;
+
+	public Button ivVideoPlay;//
+	public ImageView ivMainView;//
+	public ProgressBar loadingBar;//
+	public RelativeLayout rlVideoLayout;//
+    
+	
+	public ShareData()
+	{
+	}
+
+	public ShareData(String videoPath)
+	{
+		this.videoPath = videoPath;
+	}
+
+	
+ 	
+	public int getId()
+	{
+		return id;
+	}
+
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+
+	public int getType_id()
+	{
+		return type_id;
+	}
+
+	public void setType_id(int type_id)
+	{
+		this.type_id = type_id;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public String getVideoPath()
+	{
+		return videoPath;
+	}
+
+	public void setVideoPath(String videoPath)
+	{
+		this.videoPath = videoPath;
+	}
+
+	public long getVideoLength()
+	{
+		return videoLength;
+	}
+
+	public void setVideoLength(long videoLength)
+	{
+		this.videoLength = videoLength;
+	}
+
+	public boolean isPlaying()
+	{
+		return isPlaying;
+	}
+
+	public void setPlaying(boolean isPlaying)
+	{
+		this.isPlaying = isPlaying;
+	}
+
+	public boolean isPause()
+	{
+		return isPause;
+	}
+
+	public void setPause(boolean isPause)
+	{
+		this.isPause = isPause;
+	}
+
+	public int getAtime()
+	{
+		return atime;
+	}
+
+	public void setAtime(int atime)
+	{
+		this.atime = atime;
+	}
+
+	public int getZancount()
+	{
+		return zancount;
+	}
+
+	public void setZancount(int zancount)
+	{
+		this.zancount = zancount;
+	}
+
+	public int getCaicount()
+	{
+		return caicount;
+	}
+
+	public void setCaicount(int caicount)
+	{
+		this.caicount = caicount;
+	}
+
+	public int getSharecount()
+	{
+		return sharecount;
+	}
+
+	public void setSharecount(int sharecount)
+	{
+		this.sharecount = sharecount;
+	}
+
+	public int getReplycount()
+	{
+		return replycount;
+	}
+
+	public void setReplycount(int replycount)
+	{
+		this.replycount = replycount;
+	}
+
+	public int getViews()
+	{
+		return views;
+	}
+
+	public void setViews(int views)
+	{
+		this.views = views;
+	}
+
+	public int getIsZan()
+	{
+		return isZan;
+	}
+
+	public void setIsZan(int isZan)
+	{
+		this.isZan = isZan;
+	}
+
+	public int getIsCai()
+	{
+		return isCai;
+	}
+
+	public void setIsCai(int isCai)
+	{
+		this.isCai = isCai;
+	}
+
+	public String getAvatar()
+	{
+		return avatar;
+	}
+
+	public void setAvatar(String avatar)
+	{
+		this.avatar = avatar;
+	}
+
+	public String getTitle()
+	{
+		return title;
+	}
+
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
+
+	public String getContent()
+	{
+		return content;
+	}
+
+	public void setContent(String content)
+	{
+		this.content = content;
+	}
+
+	public String getAttachment()
+	{
+		return attachment;
+	}
+
+	public void setAttachment(String attachment)
+	{
+		this.attachment = attachment;
+	}
+
+	public String getPoster()
+	{
+		return poster;
+	}
+
+	public void setPoster(String poster)
+	{
+		this.poster = poster;
+	}
+
+	public int getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(int status)
+	{
+		this.status = status;
+	}
+
+	public ProgressBar getVideoBar()
+	{
+		return videoBar;
+	}
+
+	public void setVideoBar(ProgressBar videoBar)
+	{
+		this.videoBar = videoBar;
+	}
+
+	public boolean isListViewItemShow_zancount()
+	{
+		return listViewItemShow_zancount;
+	}
+
+	public void setListViewItemShow_zancount(boolean listViewItemShow_zancount)
+	{
+		this.listViewItemShow_zancount = listViewItemShow_zancount;
+	}
+
+	public boolean isListViewItemShow_caicount()
+	{
+		return listViewItemShow_caicount;
+	}
+
+	public void setListViewItemShow_caicount(boolean listViewItemShow_caicount)
+	{
+		this.listViewItemShow_caicount = listViewItemShow_caicount;
+	}
+
+	public String getThreadUrl()
+	{
+		return threadUrl;
+	}
+
+	public void setThreadUrl(String threadUrl)
+	{
+		this.threadUrl = threadUrl;
+	}
+
+	public String getShareAvatarUrl()
+	{
+		return shareAvatarUrl;
+	}
+
+	public void setShareAvatarUrl(String shareAvatarUrl)
+	{
+		this.shareAvatarUrl = shareAvatarUrl;
+	}
+
+	public Button getIvVideoPlay()
+	{
+		return ivVideoPlay;
+	}
+
+	public void setIvVideoPlay(Button ivVideoPlay)
+	{
+		this.ivVideoPlay = ivVideoPlay;
+	}
+
+	public ImageView getIvMainView()
+	{
+		return ivMainView;
+	}
+
+	public void setIvMainView(ImageView ivMainView)
+	{
+		this.ivMainView = ivMainView;
+	}
+
+	public ProgressBar getLoadingBar()
+	{
+		return loadingBar;
+	}
+
+	public void setLoadingBar(ProgressBar loadingBar)
+	{
+		this.loadingBar = loadingBar;
+	}
+
+	public RelativeLayout getRlVideoLayout()
+	{
+		return rlVideoLayout;
+	}
+
+	public void setRlVideoLayout(RelativeLayout rlVideoLayout)
+	{
+		this.rlVideoLayout = rlVideoLayout;
+	}
+
+
+
+	public static final Parcelable.Creator<ShareData> CREATOR = new Creator<ShareData>()
+	{
+		public ShareData createFromParcel(Parcel source)
+		{
+			ShareData mVideo = new ShareData();
+			mVideo.id = source.readInt();
+			mVideo.type_id = source.readInt();
+			mVideo.atime = source.readInt(); 
+			mVideo.zancount = source.readInt();
+			mVideo.caicount = source.readInt(); 
+			mVideo.sharecount = source.readInt(); 
+			mVideo.replycount = source.readInt();
+			mVideo.views = source.readInt();
+			mVideo.isZan = source.readInt();
+			mVideo.isCai = source.readInt();
+			mVideo.status = source.readInt();
+			
+			mVideo.name = source.readString();
+			mVideo.videoPath = source.readString(); 
+			mVideo.avatar = source.readString();
+			mVideo.title = source.readString();
+			mVideo.content = source.readString();
+			mVideo.attachment = source.readString();
+			mVideo.poster = source.readString(); 
+			
+			mVideo.videoLength = source.readLong();
+			mVideo.isPlaying = source.readByte() != 0;
+			mVideo.isPause = source.readByte() != 0;	
+			
+			return mVideo;
+		}
+
+		public ShareData[] newArray(int size)
+		{
+			return new ShareData[size];
+		}
+	};
+
+	@Override
+	public int describeContents()
+	{
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel parcel, int flags)
+	{
+		parcel.writeInt(id);
+		parcel.writeInt(type_id);
+		parcel.writeInt(atime); 
+		parcel.writeInt(zancount);
+		parcel.writeInt(caicount);  
+		parcel.writeInt(sharecount); 
+		parcel.writeInt(replycount);
+		parcel.writeInt(views);
+		parcel.writeInt(isZan);
+		parcel.writeInt(isCai);
+		parcel.writeInt(status);
+		 
+		parcel.writeString(name);
+		parcel.writeString(videoPath);
+		parcel.writeString(avatar);
+		parcel.writeString(title);
+		parcel.writeString(content);
+		parcel.writeString(attachment);
+		parcel.writeString(poster);
+		
+		parcel.writeLong(videoLength);;
+		parcel.writeByte((byte) (isPlaying ? 1 : 0));     //if myBoolean == true, byte == 1   
+		parcel.writeByte((byte) (isPause ? 1 : 0));     //if myBoolean == true, byte == 1  
+	 
+		
+	}
+}

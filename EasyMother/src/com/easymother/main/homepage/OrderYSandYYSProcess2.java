@@ -9,6 +9,7 @@ import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.RegularUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.app.Activity;
@@ -75,9 +76,9 @@ public class OrderYSandYYSProcess2 extends Activity {
 		if (nursebase.getRealName()!=null) {
 			nursename.setText(nursebase.getRealName());
 		}
-		if (nursebase.getMobile()!=null) {
-			nursephone.setText(nursebase.getMobile());
-		}
+//		if (nursebase.getMobile()!=null) {
+//			nursephone.setText(nursebase.getMobile());
+//		}
 		if (nursebase.getCurrentAddress()!=null) {
 			nurseaddress.setText(nursebase.getCurrentAddress());
 		}
@@ -100,6 +101,10 @@ public class OrderYSandYYSProcess2 extends Activity {
 				}
 				if (user_phone.getText().toString().trim()==null||"".equals(user_phone.getText().toString().trim())) {
 					Toast.makeText(OrderYSandYYSProcess2.this, "电话不能为空", 0).show();
+					return;
+				}else if(!RegularUtils.isPhoneNumber(user_phone.getText().toString().trim())){
+					
+					Toast.makeText(OrderYSandYYSProcess2.this, "请输入正确电话号码！", 0).show();
 					return;
 				}
 				if (card_id.getText().toString().trim()==null||"".equals(card_id.getText().toString().trim())) {

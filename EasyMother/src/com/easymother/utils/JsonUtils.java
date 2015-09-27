@@ -27,7 +27,7 @@ public class JsonUtils {
 	 */
 	public static HomePageResult getHomePageResult(String json){
 		HomePageResult result=JSON.parseObject(json, HomePageResult.class);
-		Log.e("result----------", json);
+//		Log.e("result----------", json);
 		return result;
 	}
 	/**
@@ -38,7 +38,7 @@ public class JsonUtils {
 	public static HomePageResult getHomePageResult(JSONObject json){
 		Root root=JSON.parseObject(json.toString(), Root.class);
 		HomePageResult result = null;
-		Log.e("json----------", json.toString());
+//		Log.e("json----------", json.toString());
 		//若根元素result返回的是String
 		
 			String object=root.getResult().toString();

@@ -33,7 +33,7 @@
         android:layout_toRightOf="@+id/circlepicture"
         android:text="杨️烨"
         android:textColor="@color/blackgreen"
-        android:textSize="@dimen/sp_20" />
+        android:textSize="@dimen/sp_16" />
 
     <ImageView
         android:id="@+id/picture"

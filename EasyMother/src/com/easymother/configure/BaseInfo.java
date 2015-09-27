@@ -3,7 +3,9 @@ package com.easymother.configure;
 public class BaseInfo {
 	//基本地址
 //		public final static String BASE_URL="http://192.168.1.101:8080/";//基本url
-		public final static String BASE_URL="http://121.40.152.3/";//基本url
+//		public final static String BASE_URL="http://121.40.152.3/";//基本url
+//		public final static String BASE_URL="http://test1.hzlianhai.com/";//基本url
+		public final static String BASE_URL="http://121.40.106.213:8081/";//基本url
 		public final static String BASE_PICTURE="resources/admin/store/";//图片基本url
 		public final static String DELETE_WISH="app/nursecollection/toDelete";//删除心愿单
 		public final static String SEARCH_URL="app/nursejob/search";//搜索url（月嫂，育婴师，催乳师）
@@ -14,6 +16,7 @@ public class BaseInfo {
 		public final static String LOGOUT="app/userinfo/logout";//登出
 		public final static String DETAIL="app/nursebase/detail";//详情页
 		public final static String SEND_SMS_CODE="app/userinfo/sendSmsCode";//发送验证码
+		public final static String TO_PERSONAL_CENT="app/userinfo/toPersonalCenter";//个人中心
 		public final static String UPLOADPHTO="app/file/upload";//上传图片
 		public final static String CHANGEINFO="app/userinfo/save";//修改信息
 		public final static String CHANGEPASSWORD="app/userinfo/updatePassword";//修改密码
@@ -30,11 +33,23 @@ public class BaseInfo {
 //		public final static String PAY_ORDER="app/order/toPayOrder";//支付订单
 		public final static String PAY_ORDER="app/order/selectNoPayOrders";//支付订单
 		public final static String GET_TAOCAN="app/nurseservice/findByNameAndLevel";//获取套餐
-	
+
 		public final static String CHCLK_LETTER="app/nursepushletter/findByNurseIdAndJob";//查看订单
 		public final static String CHCLK_ZHENGSHU="app/nursejobcertificate/findByJobId";//查看证书
 		public final static String CHCLK_ALL_COMMENTS="app/ordercomment/selectByNurseIdAndJob";//查看订单
 		public final static String COLLECTION_LIST="app/userinfo/loadCollect";//收藏列表
+		
+		
+		public final static String FORGET_PASSWORD="app/userinfo/forgetPassword";//忘记密码
+
+		
+		public final static String LOAD_SERVER_INFO="app/sysconfig/loadSys";//加载服务器数据
+		
+		
+		
+		public final static String SAVESUGGESTION="app/suggestion/save";//提交建议
+		
+		
 		
 		
 		public final static String YSYQ_INFO="app/newstype/toIndex";//医食衣趣

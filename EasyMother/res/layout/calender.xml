@@ -62,7 +62,7 @@
             android:layout_height="@dimen/dp_36"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
-            android:src="@drawable/red_go1" />
+            android:src="@drawable/red_go" />
 
         <ImageView
             android:id="@+id/add_year"
@@ -77,14 +77,14 @@
     <GridView
         android:id="@+id/week"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:numColumns="7" >
     </GridView>
 
     <com.easymother.customview.MyGridView
         android:id="@+id/days"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:background="@color/white"
         android:horizontalSpacing="@dimen/dp_5"
         android:numColumns="7"

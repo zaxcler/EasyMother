@@ -15,9 +15,9 @@ import com.easymother.bean.YuYingShi;
 import com.easymother.bean.YueSao;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.customview.ImageCycleView;
+import com.easymother.customview.ImageCycleView1;
 import com.easymother.customview.MyGridView;
-import com.easymother.customview.ImageCycleView.ImageCycleViewListener;
+import com.easymother.customview.ImageCycleView1.ImageCycleViewListener;
 import com.easymother.customview.MyViewPager;
 import com.easymother.main.homepage.CuiRuShiListActivity;
 import com.easymother.main.homepage.GridViewAdapter;
@@ -63,7 +63,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	private View homepage;// 首页的对象
 	private TextView homepage_area;// 地区
 	private ImageView homepage_wish;// 心愿单
-	private ImageCycleView homepage_ad;// 广告栏
+	private ImageCycleView1 homepage_ad;// 广告栏
 	private int stype = 0;// 0轮播图下面的是小圆点
 	private View scorllbar;// 滑动条
 	public PullToRefreshScrollView scrollView;//下拉刷新的scrollview
@@ -124,7 +124,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		scrollView=(PullToRefreshScrollView) homepage.findViewById(R.id.pulltoreflashscrollview);
 		homepage_area = (TextView) homepage.findViewById(R.id.home_page_area);
 		homepage_wish =  (ImageView) homepage.findViewById(R.id.home_page_wish);
-		homepage_ad = (ImageCycleView) homepage.findViewById(R.id.home_page_ad);
+		homepage_ad = (ImageCycleView1) homepage.findViewById(R.id.home_page_ad);
 		
 		tuijian_yuesao=(TextView) homepage.findViewById(R.id.tuijian_yuesao);
 		tuijian_yuyingshi=(TextView) homepage.findViewById(R.id.tuijian_yuyingshi);
@@ -145,7 +145,9 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	}
 	private void init() {
 
-		loadData();
+		loadData();//加载数据
+		NetworkHelper.getServerInfo();//获取服务器信息
+		MyApplication.autoLogin();//自动登录
 		//初始化话水平的红色滑动条
 		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) scorllbar
 				.getLayoutParams();

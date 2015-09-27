@@ -24,7 +24,8 @@ public class OrderYSandYYSProcess6 extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.process_ysandyys_order_next6);
 		EasyMotherUtils.initTitle(this, "签订成功", false);
-		MyApplication.addActivityToMap(this, "YSprocess");
+		MyApplication.addActivityToMap(this, "YSprocess1");
+		MyApplication.destoryActivity("YSprocess");
 		intent=getIntent();
 		findView();
 		init();
@@ -33,12 +34,10 @@ public class OrderYSandYYSProcess6 extends Activity {
 	private void findView() {
 		complete=(Button) findViewById(R.id.begain_next6);
 		
-		
 	}
 
 	private void init() {
 		complete.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View arg0) {
 				intent.setClass(OrderYSandYYSProcess6.this, PayYSorYYSActivity.class);
@@ -46,6 +45,12 @@ public class OrderYSandYYSProcess6 extends Activity {
 				
 			}
 		});
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		
 	}
 
 }

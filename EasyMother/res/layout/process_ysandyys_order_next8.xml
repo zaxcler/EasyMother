@@ -12,15 +12,6 @@
         android:layout_height="wrap_content"
         layout="@layout/commontitle" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/comfirm"
-        android:layout_below="@+id/include1"
-        android:layout_marginTop="71dp"
-        android:src="@drawable/chenggong" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -37,80 +28,40 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
-        android:text="等待护理师确认，尽块为您安排面试"
+        android:text="等待护理师确认，尽块为您安排"
         android:textSize="@dimen/sp_12" />
 
-    <TextView
-        android:id="@+id/textView3"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/imageView1"
         android:layout_centerVertical="true"
-        android:text="您还可以将合同发送至邮箱" />
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="20dp"
+        android:gravity="center" >
+    </LinearLayout>
 
     <Button
         android:id="@+id/comfirm"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/imageView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="65dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/lightredwine_solid"
         android:paddingBottom="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
         android:text="查看订单"
         android:textColor="@color/white" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_below="@+id/textView3"
-        android:gravity="center"
-        android:layout_marginTop="20dp" 
-        android:layout_marginRight="@dimen/dp_20">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="邮箱：" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView2"
-            android:layout_alignRight="@+id/comfirm"
-            android:layout_alignTop="@+id/textView4"
-            android:background="@drawable/white_solid"
-            android:padding="@dimen/dp_5" >
-
-            <EditText
-                android:id="@+id/editText1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:background="@color/white"
-                android:inputType="textEmailAddress" >
-            </EditText>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/line" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/linearLayout1"
-                android:layout_marginLeft="@dimen/dp_5"
-                android:layout_marginRight="@dimen/dp_5"
-                android:text="发送" />
-        </LinearLayout>
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="@dimen/dp_64"
+        android:layout_height="@dimen/dp_64"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/include1"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="39dp"
+        android:src="@drawable/chenggong" />
 
 </RelativeLayout>

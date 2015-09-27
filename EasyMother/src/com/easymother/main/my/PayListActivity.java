@@ -15,6 +15,7 @@ import com.alipay.sdk.app.PayTask;
 import com.alipay.sdk.pay.demo.PayResult;
 import com.alipay.sdk.pay.demo.SignUtils;
 import com.easymother.bean.OrderListBean;
+import com.easymother.bean.OrderPayBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.main.R;
 import com.easymother.main.homepage.OrderListAdapter;
@@ -24,6 +25,7 @@ import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,6 +38,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class PayListActivity extends Activity {
+	
+	private List<OrderListBean> list;
+	private OrderPayBean orderPayBean;//传递的订单
+	private final int COMMENT=0;//评价 
 	
 	//支付部分
 	
@@ -54,6 +60,11 @@ public class PayListActivity extends Activity {
 
 		private Handler mHandler = new Handler() {
 			public void handleMessage(Message msg) {
+				
+//				Intent intent=new Intent(PayListActivity.this,CommentActivity.class);
+//				intent.putExtra("order", orderPayBean);
+//				intent.putExtra("type", "order");
+//				startActivityForResult(intent, COMMENT);
 				switch (msg.what) {
 				case SDK_PAY_FLAG: {
 					PayResult payResult = new PayResult((String) msg.obj);
@@ -65,7 +76,15 @@ public class PayListActivity extends Activity {
 					// 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
 					if (TextUtils.equals(resultStatus, "9000")) {
 						Toast.makeText(PayListActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-						PayListActivity.this.finish();
+						if (!"10".equals(orderPayBean.getStatus())) {
+							Intent intent=new Intent(PayListActivity.this,CommentActivity.class);
+							intent.putExtra("order", orderPayBean);
+							intent.putExtra("type", "order");
+							startActivityForResult(intent, COMMENT);
+						}else {
+							loadData();
+						}
+						
 					} else {
 						// 判断resultStatus 为非“9000”则代表可能支付失败
 						// “8000”代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
@@ -107,13 +126,17 @@ public class PayListActivity extends Activity {
 		listview=(ListView) findViewById(R.id.listview);
 	}
 	private void init() {
-		
+		loadData();
+	}
+	
+	
+	private void loadData() {
 		NetworkHelper.doGet(BaseInfo.PAY_ORDER, new JsonHttpResponseHandler(){
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
-					List<OrderListBean> list=JsonUtils.getResultList(response, OrderListBean.class);
+					list=JsonUtils.getResultList(response, OrderListBean.class);
 					bindData(list);
 				}
 			}
@@ -125,6 +148,7 @@ public class PayListActivity extends Activity {
 	 * @param list
 	 */
 	protected void bindData(final List<OrderListBean> list) {
+		orderPayBean=new OrderPayBean();
 		if (list!=null) {
 			OrderListAdapter<OrderListBean> adapter=new OrderListAdapter<>(this, list, null, R.layout.activity_yuesao_item);
 			listview.setAdapter(adapter);
@@ -132,20 +156,31 @@ public class PayListActivity extends Activity {
 
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-					pay(list.get(arg2));
+					pay(list.get(arg2),arg2);
+					orderPayBean.setAge(PayListActivity.this.list.get(arg2).getAge());
+					orderPayBean.setRealName(PayListActivity.this.list.get(arg2).getRealName());
+					orderPayBean.setJob(PayListActivity.this.list.get(arg2).getJob());
+					orderPayBean.setSeniority(PayListActivity.this.list.get(arg2).getSeniority());
+					orderPayBean.setHometown(PayListActivity.this.list.get(arg2).getHometown());
+					orderPayBean.setPayMoney(PayListActivity.this.list.get(arg2).getPayMoney());
+					orderPayBean.setMarketPrice(PayListActivity.this.list.get(arg2).getMarketPrice());
+					orderPayBean.setNurseId(PayListActivity.this.list.get(arg2).getNurseId());
+					orderPayBean.setStatus(PayListActivity.this.list.get(arg2).getStatus());
 				}
 			});
 		}
+		
+		
 	}
 	
 	/**
 	 * call alipay sdk pay. 调用SDK支付
 	 * 
 	 */
-	public void pay(OrderListBean order) {
+	public void pay(OrderListBean order,final int postion) {
 		
 		// 订单
-		String orderInfo = getOrderInfo("本次支付费用", "护理师费用每周支付一次", "0.01",order.getOrderCode()+"_"+order.getInt1());
+		String orderInfo = getOrderInfo("本次支付费用", "护理师费用每周支付一次", ""+order.getPayMoney(),order.getOrderCode());
 
 		// 对订单做RSA 签名
 		String sign = sign(orderInfo);
@@ -171,6 +206,7 @@ public class PayListActivity extends Activity {
 				Message msg = new Message();
 				msg.what = SDK_PAY_FLAG;
 				msg.obj = result;
+				msg.arg1=postion;
 				mHandler.sendMessage(msg);
 			}
 		};
@@ -241,8 +277,9 @@ public class PayListActivity extends Activity {
 		orderInfo += "&total_fee=" + "\"" + price + "\"";
 
 		// 服务器异步通知页面路径
-		orderInfo += "&notify_url=" + "\"" + "http://zhonglv.hzlianhai.com/easyMother/app/ordernotifyurl" + "\"";
-
+//		orderInfo += "&notify_url=" + "\"" + "http://test1.hzlianhai.com/easyMother/app/ordernotifyurl" + "\"";
+		orderInfo += "&notify_url=" + "\"" + BaseInfo.BASE_URL+"app/ordernotifyurl"+ "\"";
+		
 		// 服务接口名称， 固定值
 		orderInfo += "&service=\"mobile.securitypay.pay\"";
 
@@ -302,6 +339,21 @@ public class PayListActivity extends Activity {
 	 */
 	public String getSignType() {
 		return "sign_type=\"RSA\"";
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode==RESULT_OK) {
+			switch (requestCode) {
+			case COMMENT:
+				loadData();
+				break;
+
+			default:
+				break;
+			}
+		}
 	}
 
 	

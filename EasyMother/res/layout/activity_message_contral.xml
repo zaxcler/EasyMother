@@ -7,15 +7,20 @@
 
     <include layout="@layout/commontitle" />
 
-    <ListView
-        android:id="@+id/listview"
-        android:background="@color/background"
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/pulltoreflash"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@color/background"
-        android:dividerHeight="@dimen/dp_2"
-        android:paddingLeft="@dimen/dp_2"
-        android:paddingRight="@dimen/dp_2" >
-    </ListView>
+        android:layout_height="match_parent" >
+        <com.easymother.customview.MyListview
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            android:divider="@color/background"
+            android:dividerHeight="@dimen/dp_2"
+            android:paddingLeft="@dimen/dp_2"
+            android:paddingRight="@dimen/dp_2" >
+        </com.easymother.customview.MyListview>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
 </LinearLayout>

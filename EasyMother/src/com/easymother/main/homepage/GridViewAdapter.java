@@ -40,12 +40,12 @@ public class GridViewAdapter<T> extends CommonAdapter<T> {
 			if (yuesao.getNums()!=null) {
 				tuijian_num.setText("共有"+yuesao.getNums()+"人喜欢该护理师");
 			}else {
-				tuijian_num.setText("");
+				tuijian_num.setText("共有"+0+"人喜欢该护理师");
 			}
 			
 			TextView tuijian_price=holder.getView(R.id.tuijian_price);
-			if (yuesao.getPrice()!=null) {
-				tuijian_price.setText("￥"+yuesao.getPrice()*26+"/26天");
+			if (yuesao.getShowPrice()!=null) {
+				tuijian_price.setText(yuesao.getShowPrice());
 			}else {
 				tuijian_price.setText("");
 			}
@@ -66,12 +66,12 @@ public class GridViewAdapter<T> extends CommonAdapter<T> {
 			if (yys.getNums()!=null) {
 				tuijian_num.setText("共有"+yys.getNums()+"喜欢该月嫂");
 			}else {
-				tuijian_num.setText("");
+				tuijian_num.setText("共有"+0+"喜欢该月嫂");
 			}
 			
 			TextView tuijian_price=holder.getView(R.id.tuijian_price);
-			if (yys.getPrice()!=null) {
-				tuijian_price.setText("￥"+yys.getPrice()*26+"/26天");
+			if (yys.getShowPrice()!=null) {
+				tuijian_price.setText(yys.getShowPrice());
 			}else {
 				tuijian_price.setText("");
 			}
@@ -90,14 +90,14 @@ public class GridViewAdapter<T> extends CommonAdapter<T> {
 			
 			TextView tuijian_num=holder.getView(R.id.tuijian_num);
 			if (crs.getNums()!=null) {
-				tuijian_num.setText("共有"+crs.getNums()+"喜欢该月嫂");
+				tuijian_num.setText("共有"+crs.getNums()+"喜欢该育婴师");
 			}else {
-				tuijian_num.setText("");
+				tuijian_num.setText("共有"+0+"喜欢该育婴师");
 			}
 			
 			TextView tuijian_price=holder.getView(R.id.tuijian_price);
-			if (crs.getPrice()!=null) {
-				tuijian_price.setText("￥"+crs.getPrice()*26+"/26天");
+			if (crs.getShowPrice()!=null) {
+				tuijian_price.setText(crs.getShowPrice());
 			}else {
 				tuijian_price.setText("");
 			}

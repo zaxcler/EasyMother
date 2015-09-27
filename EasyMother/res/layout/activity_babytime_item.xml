@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/background"
     android:orientation="horizontal" >
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/dp_34"
+        android:layout_marginLeft="@dimen/dp_40"
         android:orientation="vertical" >
 
         <ImageView
@@ -41,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/createdate"
+            android:textSize="@dimen/dp_10"
             android:textColor="@color/boroblacktext" />
 
         <com.easymother.customview.MyGridView
@@ -49,30 +50,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/content"
             android:layout_margin="@dimen/dp_10"
-            android:horizontalSpacing="@dimen/dp_2"
+            android:horizontalSpacing="@dimen/dp_4"
             android:numColumns="3"
-            android:verticalSpacing="@dimen/dp_2" >
+            android:verticalSpacing="@dimen/dp_4" >
         </com.easymother.customview.MyGridView>
-
-        <ImageView
-            android:id="@+id/photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/photos"
-            android:layout_margin="@dimen/dp_10"
-            android:scaleType="fitXY"
-            android:src="@drawable/baby_image3" />
-
-        <TextView
-            android:id="@+id/createdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textView8"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:text="4/28"
-            android:textColor="@color/boroblacktext" />
 
         <TextView
             android:id="@+id/textView1"
@@ -100,11 +81,11 @@
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@id/photo"
+            android:layout_below="@id/photos"
             android:background="@color/background" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView5"
@@ -112,7 +93,7 @@
             android:layout_alignRight="@+id/textView1"
             android:drawableLeft="@drawable/babytime_share"
             android:gravity="clip_horizontal"
-            android:text="TextView"
+            android:text="分享"
             android:textColor="@color/boroblacktext" />
 
         <TextView
@@ -121,11 +102,10 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/content"
             android:layout_below="@+id/line"
-            android:drawableLeft="@drawable/babytime_edit"
             android:gravity="clip_horizontal"
             android:paddingBottom="@dimen/dp_10"
             android:paddingTop="@dimen/dp_10"
-            android:text="编辑"
+            android:text="查看"
             android:textColor="@color/boroblacktext" />
 
         <TextView
@@ -136,8 +116,17 @@
             android:layout_alignBottom="@+id/textView8"
             android:layout_toLeftOf="@+id/textView1"
             android:text="24"
-            android:textColor="@color/boroblacktext"
+            android:textColor="@color/lightredwine"
             android:textSize="@dimen/sp_18" />
+
+        <TextView
+            android:id="@+id/createdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/content"
+            android:layout_alignTop="@+id/textView1"
+            android:text="4/28"
+            android:textColor="@color/lightlightboro" />
 
     </RelativeLayout>
 

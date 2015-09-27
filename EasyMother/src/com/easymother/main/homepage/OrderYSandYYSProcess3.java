@@ -46,7 +46,7 @@ public class OrderYSandYYSProcess3 extends Activity {
 		intent=getIntent();
 		nursebase=(NurseBaseBean) intent.getSerializableExtra("nursebase");
 		nursejob=(NurseJobBean) intent.getSerializableExtra("nursejob");
-		hetong.loadUrl("file:///android_asset/demo.html");
+		hetong.loadUrl("file:///android_asset/hetong.html");
 		begain_sign.setOnClickListener(new OnClickListener() {
 			
 			@Override

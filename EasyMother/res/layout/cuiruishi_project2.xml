@@ -18,9 +18,10 @@
              android:background="@drawable/deepmudyellow_solid"
              android:layout_weight="0.2"
              android:gravity="center"
-             android:text="产前开奶"
+             android:padding="@dimen/dp_5"
+             android:text="产后无痛点穴开奶"
              android:textColor="@color/white"
-             android:textSize="@dimen/sp_18" />
+             android:textSize="@dimen/sp_16" />
 
          <RelativeLayout
              android:layout_width="0dp"
@@ -31,7 +32,7 @@
              <ImageView
                  android:id="@+id/imageView2"
                  android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
+                 android:layout_height="30dp"
                  android:layout_alignRight="@+id/imageView1"
                  android:layout_below="@+id/imageView1"
                  android:src="@drawable/green_dian" />
@@ -56,13 +57,14 @@
 
              <TextView
                  android:id="@+id/textView1"
-                 android:layout_width="wrap_content"
+                 android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:layout_alignBottom="@+id/imageView3"
                  android:layout_marginLeft="@dimen/dp_10"
+                 android:layout_marginRight="@dimen/dp_10"
+                 android:paddingBottom="@dimen/dp_10"
                  android:layout_toRightOf="@id/imageView1"
-                 android:ems="16"
-                 android:text="通过对孕妈妈进行一系列乳房检查、润滑乳头、点穴按摩提高母乳喂养成功率，在真正意义上让母婴受益"
+                 android:text="通过点穴按摩、做操训练、技巧哺乳、经络调理、刮痧艾灸等综合手段为新妈妈及时解决哺乳..."
                  android:textColor="@color/boroblacktext"
                  android:textSize="@dimen/sp_10" />
 
@@ -123,7 +125,7 @@
                          android:layout_height="wrap_content"
                          android:layout_alignParentBottom="true"
                          android:layout_centerHorizontal="true"
-                         android:text="单/多"
+                         android:text="星级"
                          android:textSize="@dimen/sp_10" />
 
                      <View
@@ -138,7 +140,7 @@
                          android:layout_height="wrap_content"
                          android:layout_centerHorizontal="true"
                          android:layout_centerVertical="true"
-                         android:text="服务形式（次）"
+                         android:text="价格（元）"
                          android:textColor="@color/boroblacktext"
                          android:textSize="@dimen/sp_10" />
                  </RelativeLayout>
@@ -154,7 +156,7 @@
                          android:layout_height="wrap_content"
                          android:layout_alignParentBottom="true"
                          android:layout_centerHorizontal="true"
-                         android:text="单/多"
+                         android:text="120"
                          android:textSize="@dimen/sp_10" />
 
                      <View

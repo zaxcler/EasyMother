@@ -15,6 +15,7 @@
             android:layout_height="@dimen/fragment_title_height"
             android:background="@color/white"
             android:padding="@dimen/dp_5"
+            android:gravity="center_vertical"
              >
 
             <TextView
@@ -24,16 +25,18 @@
                 android:layout_centerInParent="true"
                 android:gravity="center"
                 android:text="社区"
-                android:textColor="@color/orange_red"
+                android:textColor="@color/lightredwine"
                 android:textSize="@dimen/sp_20" />
 
             <ImageView
                 android:id="@+id/message"
-                android:layout_width="@dimen/dp_24"
-                android:layout_height="@dimen/dp_24"
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_26"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/dp_5"
-                android:src="@drawable/comment1" />
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_alignTop="@+id/title"
+                android:src="@drawable/xiaox2" />
+
         </RelativeLayout>
 
         <View
@@ -46,6 +49,8 @@
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
+        android:layout_marginBottom="@dimen/dp_10"
         android:id="@+id/pulltoreflash" >
 
         <LinearLayout
@@ -53,11 +58,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <com.easymother.customview.ImageCycleView
+            <com.easymother.customview.ImageCycleView1
                 android:id="@+id/imageCycleView2"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_180" >
-            </com.easymother.customview.ImageCycleView>
+            </com.easymother.customview.ImageCycleView1>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -72,7 +77,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/zone"
+                    android:paddingLeft="@dimen/dp_20"
+                    android:paddingRight="@dimen/dp_20"
+                    android:drawableLeft="@drawable/kongjian_red"
                     android:gravity="center"
                     android:text="护理师空间" />
 
@@ -87,7 +94,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_20"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/more"
+                    android:paddingLeft="@dimen/dp_20"
+                    android:paddingRight="@dimen/dp_20"
+                    android:drawableLeft="@drawable/serch_small"
                     android:gravity="center"
                     android:text="医食衣趣" />
             </LinearLayout>

@@ -2,9 +2,12 @@ package com.easymother.main.community;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -31,9 +34,11 @@ import com.easymother.bean.TopicItemBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.MyListview;
+import com.easymother.customview.MyLoadingProgress;
 import com.easymother.main.R;
 import com.easymother.main.homepage.CommonListActivity;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.example.demobyimage.DensityUtil;
@@ -66,6 +71,13 @@ public class HuLiShiZoneDetailActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_hulishi_zone);
+		EasyMotherUtils.setRightButton(new RightButtonLisenter() {
+			
+			@Override
+			public void addRightButton(ImageView imageView) {
+				
+			}
+		});
 		EasyMotherUtils.initTitle(this, "护理师空间", false);
 		intent=getIntent();
 		nurseId=intent.getIntExtra("id", 0);
@@ -89,6 +101,8 @@ public class HuLiShiZoneDetailActivity extends Activity {
 	}
 	private void init() {
 		loadData();
+		MyLoadingProgress.showLoadingDialog(this);
+		imageView1.requestFocus();
 //		HuLiShiAdapter adapter=new HuLiShiAdapter(this, list, R.layout.activity_mypage_topic_item);
 //		listview.setAdapter(adapter);
 		listview.setOnItemClickListener(new OnItemClickListener() {
@@ -114,6 +128,7 @@ public class HuLiShiZoneDetailActivity extends Activity {
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
 					NurseSpaceDetailBean detail=JsonUtils.getResult(response, NurseSpaceDetailBean.class);
 					bindData(detail);
+					MyLoadingProgress.closeLoadingDialog();
 				}
 			}
 		});
@@ -123,6 +138,13 @@ public class HuLiShiZoneDetailActivity extends Activity {
 	 * @param detail
 	 */
 	protected void bindData(NurseSpaceDetailBean detail) {
+		
+		if (detail!=null) {
+			article.setText("共发表"+detail.getNums1()+"篇话题");
+		}
+		if (detail!=null) {
+			like.setText(detail.getNums2()+"");
+		}
 		NurseBaseBean nursebase=detail.getNurseinfo();
 		if (nursebase!=null) {
 			if (nursebase.getRealName()!=null) {
@@ -130,13 +152,15 @@ public class HuLiShiZoneDetailActivity extends Activity {
 			}else {
 				nurse_name.setText("");
 			}
-			if (nursebase.getSeniority()!=null) {
-				work_experience.setText("工龄："+nursebase.getSeniority()+"年");
-			}else {
-				work_experience.setText("工龄："+0+"年");
-			}
-			if (nursebase.getAge()!=null) {
-				age.setText("年龄："+nursebase.getAge()+"岁");
+//			if (nursebase.getSeniority()!=null) {
+//				work_experience.setText("工龄："+nursebase.getSeniority()+"年");
+//			}else {
+//				work_experience.setText("工龄："+0+"年");
+//			}
+			if (nursebase.getBirthday()!=null) {
+				Date date=new Date(System.currentTimeMillis());
+				int years=date.getYear()-nursebase.getBirthday().getYear();
+				age.setText("年龄："+years+"岁");
 			}else {
 				age.setText("年龄："+0+"岁");
 			}
@@ -157,54 +181,43 @@ public class HuLiShiZoneDetailActivity extends Activity {
 			}
 			
 //			if (nursebase.getWorkImageArrays()!=null) {
-				final ArrayList<String> picture=(ArrayList<String>) JSON.parseArray(nursebase.getLifeImages(), String.class);
-//				final ArrayList<String> picture=(ArrayList<String>) nursebase.getWorkImageArrays();
-				android.widget.LinearLayout.LayoutParams layoutParams = null;
-				DensityUtil densityUtil=new DensityUtil(this);
-				for (int i = 0; i < picture.size(); i++) {
-					final ImageView imageview = new ImageView(this);
-					int space = densityUtil.convertDipsToPixels(15);// 间距
-					int width = (densityUtil.getDisplayMetrics().widthPixels - 3 * space) / 2;
-					int height = width * 800 / 480;
-					layoutParams = new LinearLayout.LayoutParams(width,height);
-					layoutParams.leftMargin = space;
-					if (i == picture.size() - 1) {
-						layoutParams.rightMargin = space;
+			if (nursebase.getLifeImages()!=null&& !"".equals(nursebase.getLifeImages())) {
+				try {
+					JSONArray array=new JSONArray(nursebase.getLifeImages());
+					ArrayList<String>  p=new ArrayList<>();
+					if (array.length()>0) {
+						for (int i = 0; i < array.length(); i++) {
+							p.add(array.getString(i));
+						}
+						ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+p.get(0), imageView1, MyApplication.options_image);
+						final ArrayList<String> picture=p;
+//						final ArrayList<String> picture=(ArrayList<String>) nursebase.getWorkImageArrays();
+						android.widget.LinearLayout.LayoutParams layoutParams = null;
+						DensityUtil densityUtil=new DensityUtil(this);
+						for (int i = 0; i < picture.size(); i++) {
+							final ImageView imageview = new ImageView(this);
+							int space = densityUtil.convertDipsToPixels(15);// 间距
+							int width = ((densityUtil.getDisplayMetrics().widthPixels - 3 * space) / 2)*2/3;
+							int height = (width * 800 / 480)*2/3;
+							layoutParams = new LinearLayout.LayoutParams(width,height);
+							layoutParams.leftMargin = space;
+							if (i == picture.size() - 1) {
+								layoutParams.rightMargin = space;
+							}
+							// 显示图片
+							ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+picture.get(i), imageview,MyApplication.options_image);
+							images.addView(imageview, layoutParams);
+							imageview.setTag(i);
+							imageview.setScaleType(ScaleType.FIT_XY);
+						}
 					}
-					// 显示图片
-					ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+picture.get(i), imageview,MyApplication.options_image);
-					images.addView(imageview, layoutParams);
-					imageview.setTag(i);
-					imageview.setScaleType(ScaleType.FIT_XY);
-					//点击放大 后面再做
-//					imageview.setOnClickListener(new OnClickListener() {
-//						public void onClick(View arg0) {
-//							Intent intent = new Intent(HuLiShiZoneDetailActivity.this,
-//									GalleryUrlActivity.class);
-////							System.out.println(Integer.parseInt(arg0.getTag().toString())+"---Integer.parseInt(arg0.getTag().toString())");
-//							intent.putExtra("tag", Integer.parseInt(arg0.getTag().toString()));
-//							Bundle b = new Bundle();
-//							b.putSerializable("list_img", picture);
-//							intent.putExtras(b);
-////							int[] location = new int[2];
-////							imageview.getLocationOnScreen(location);
-////							intent.putExtra("locationX", location[0]);
-////							intent.putExtra("locationY", location[1]);
-////							intent.putExtra("width", imageview.getWidth());
-////							intent.putExtra("height", imageview.getHeight());
-//							startActivity(intent);
-//							overridePendingTransition(0, 0);
-//						}
-//					});
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-//			}
-			ArrayList<String> list=(ArrayList<String>) JSON.parseArray(nursebase.getLifeImages(), String.class);
-			if (list!=null) {
-				if (list.size()>0) {
-					ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+nursebase.getImage(), imageView1, MyApplication.options_image);
-				}
-				
 			}
+			//头像
+						
 			
 		}
 		List<TopicItemBean> beans=detail.getPosts();

@@ -50,7 +50,7 @@ public class MyLoadingProgress  {
 		loading.setAnimation(animation);
 		loading.startAnimation(animation);
 		
-		dialog.setCancelable(false);
+		dialog.setCancelable(true);
 		dialog.show();
 	}
 	/*
