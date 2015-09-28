@@ -107,7 +107,11 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 					BabyTimeResult result=JsonUtils.getResult(response, BabyTimeResult.class);
 					bindData(result);
 				}else {
+					baby_name.setText("");
+					days.setText("");
 					Toast.makeText(getActivity(),"未登录！", Toast.LENGTH_SHORT).show();
+					background.setImageDrawable(getResources().getDrawable(R.drawable.baby_image3));
+					circleImageView.setImageDrawable(getResources().getDrawable(R.drawable.photo));
 				}
 			}
 			@Override
@@ -131,8 +135,10 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 //				return;
 			}
 			//没有囡囡信息就加载一个错误的图片，会有默认图片
-			ImageLoader.getInstance().displayImage("", circleImageView,MyApplication.options_photo);
-//			ImageLoader.getInstance().displayImage("", background,MyApplication.options_image);
+			baby_name.setText("");
+			days.setText("");
+			background.setImageDrawable(getResources().getDrawable(R.drawable.baby_image3));
+			circleImageView.setImageDrawable(getResources().getDrawable(R.drawable.photo));
 		}else {
 			int baby_id=MyApplication.preferences.getInt("baby_id", 0);
 			String baby_image=MyApplication.preferences.getString("baby_image", "");

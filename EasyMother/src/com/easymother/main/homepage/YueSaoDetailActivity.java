@@ -634,7 +634,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 			message_sx.setText("生肖：" + baseBean.getYearLunar());
 		}
 		 if (baseBean.getConstellation() !=null) {
-		 message_xz.setText("现居地址："+baseBean.getConstellation());
+		 message_xz.setText("星座："+baseBean.getConstellation());
 		 }
 		if (nurseJobBean.getEmploymentDate()!= null) {
 			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");

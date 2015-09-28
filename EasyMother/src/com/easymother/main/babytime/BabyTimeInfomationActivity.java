@@ -228,7 +228,13 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 		if (info!=null) {
 			params.put("id", info.getId());
 		}else {
-			params.put("id", "");
+			//当还在这个页面的时候更改其他的信息，则不会再次获取数据，就从本地获取数据
+			if (MyApplication.preferences.getInt("baby_id", 0)!=0) {
+				params.put("id", MyApplication.preferences.getInt("baby_id", 0));
+			}else {
+				params.put("id", "");
+			}
+			
 		}
 		
 		params.put("birthday", birthday);

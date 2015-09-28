@@ -97,9 +97,9 @@ public class CommentListActivity extends Activity {
 		RequestParams params = new RequestParams();
 		params.put("pageNo", pageNo);
 		if (nursejob.getId() != null) {
-			params.put("jobId", nursejob.getId());
+			params.put("nurseId", nursebase.getId());
 		}
-		if (nursebase.getId() != null) {
+		if (nursejob.getJob() != null) {
 			params.put("job", nursejob.getJob());
 		}
 		NetworkHelper.doGet(BaseInfo.CHCLK_ALL_COMMENTS, params, new JsonHttpResponseHandler() {

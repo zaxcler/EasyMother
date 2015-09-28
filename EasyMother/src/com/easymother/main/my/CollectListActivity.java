@@ -1,6 +1,5 @@
  package com.easymother.main.my;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.Header;
@@ -9,22 +8,19 @@ import org.json.JSONObject;
 import com.easymother.bean.CollectionListResult;
 import com.easymother.bean.ForumBean;
 import com.easymother.bean.NewsBean;
-import com.easymother.bean.TestBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.customview.MyListview;
 import com.easymother.main.R;
 import com.easymother.main.community.ArticleActivity;
 import com.easymother.main.community.HuLiShiReplyListActivity;
-import com.easymother.main.homepage.LetterListActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -37,9 +33,11 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
+//import android.support.v4.widget.SwipeRefreshLayout;
+//import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 
 public class CollectListActivity extends Activity {
 	private PullToRefreshScrollView scrollView;//下拉刷新控件
@@ -47,6 +45,7 @@ public class CollectListActivity extends Activity {
 	private MyListview listview1;//
 	protected int pageNo=1;
 	private TextView notice;
+//	private SwipeRefreshLayout swipelayout;//下拉刷新
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,6 +59,7 @@ public class CollectListActivity extends Activity {
 	}
 	private void findView() {
 		scrollView=(PullToRefreshScrollView) findViewById(R.id.pulltoreflash);
+//		swipelayout=(SwipeRefreshLayout) findViewById(R.id.pulltoreflash);
 		listview=(MyListview) findViewById(R.id.listview);
 		listview1=(MyListview) findViewById(R.id.listview1);
 		
@@ -85,8 +85,16 @@ public class CollectListActivity extends Activity {
 				scrollView.onRefreshComplete();
 			}
 		});
-		
-		
+//		swipelayout.setOnRefreshListener(new OnRefreshListener() {
+//			
+//			@Override
+//			public void onRefresh() {
+//				pageNo++;
+//				loadData();
+//				scrollView.onRefreshComplete();
+//			}
+//		});
+//		
 		
 		
 	}

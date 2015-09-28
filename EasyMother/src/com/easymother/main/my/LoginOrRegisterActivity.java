@@ -117,7 +117,7 @@ public class LoginOrRegisterActivity extends Activity implements OnClickListener
 						Log.e("登录后的appToken", result.getAppToken());
 						//保存登录后的appToken
 						MyApplication.editor.putString("appToken", result.getAppToken()).commit();
-						loadBabyInfo();
+//						loadBabyInfo();
 						LoginOrRegisterActivity.this.finish();
 						
 					}else {
@@ -168,6 +168,7 @@ public class LoginOrRegisterActivity extends Activity implements OnClickListener
 							MyApplication.editor.putString("nannan_birthday",birthy);
 						}
 						MyApplication.editor.commit();
+//						Log.e("", msg);
 					}
 					}
 					

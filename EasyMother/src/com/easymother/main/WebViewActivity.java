@@ -1,5 +1,6 @@
 package com.easymother.main;
 
+import com.easymother.customview.MyLoadingProgress;
 import com.easymother.utils.EasyMotherUtils;
 
 import android.app.Activity;
@@ -26,7 +27,7 @@ public class WebViewActivity extends Activity {
 		webview=(WebView) findViewById(R.id.webview);
 		WebSettings settings=webview.getSettings();
 		settings.setJavaScriptEnabled(true);
-		
+		MyLoadingProgress.showLoadingDialog(this);
 		webview.setWebViewClient(new WebViewClient(){
 			/*
 			 * 重写该方法使加载网页在webview中，不调用浏览器
@@ -37,6 +38,11 @@ public class WebViewActivity extends Activity {
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
 				view.loadUrl(url);
 				return true;
+			}
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				MyLoadingProgress.closeLoadingDialog();
+				super.onPageFinished(view, url);
 			}
 		});
 		webview.loadUrl(url);
