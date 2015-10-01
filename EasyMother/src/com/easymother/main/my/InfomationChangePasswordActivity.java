@@ -3,9 +3,9 @@ package com.easymother.main.my;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
@@ -14,7 +14,6 @@ import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.provider.DocumentsContract.Root;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;

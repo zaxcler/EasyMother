@@ -2,8 +2,8 @@ package com.easymother.main.homepage;
 
 import java.util.List;
 
+import com.alidao.mama.R;
 import com.easymother.bean.Skill;
-import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.ViewHolder;
 
@@ -15,7 +15,6 @@ public class SkillsAdapter extends CommonAdapter<Skill> {
 	protected SkillsAdapter(Context context, List<Skill> list, int resource) {
 		super(context, list, resource);
 	}
-
 	@Override
 	public void setDataToItem(ViewHolder holder, Skill t) {
 		TextView name=holder.getView(R.id.skill_name);

@@ -2,17 +2,14 @@ package com.easymother.main.community;
 
 import java.util.List;
 
-import org.w3c.dom.Text;
-
+import com.alidao.mama.R;
 import com.easymother.bean.CommunityHotBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.ViewHolder;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 

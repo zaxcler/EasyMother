@@ -18,8 +18,8 @@
             android:layout_alignParentLeft="true"
             android:drawableLeft="@drawable/location1"
             android:gravity="left|center_vertical"
-            android:textColor="@color/boroblacktext"
-            android:text="杭州" />
+            android:text="杭州"
+            android:textColor="@color/boroblacktext" />
 
         <TextView
             android:id="@+id/home_page_title"
@@ -48,34 +48,47 @@
         android:layout_height="@dimen/dp_1"
         android:background="@color/lightboro" />
 
-    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+    <!--
+         <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:id="@+id/pulltoreflashscrollview"
         android:layout_width="match_parent"
         android:scrollbars="@null"
         android:layout_height="0dp"
         android:layout_weight="1" >
+    -->
 
-        <LinearLayout
-            android:id="@+id/childview"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical" >
+    <com.easymother.customview.MySwipleReflashLayout
+        android:id="@+id/pulltoreflashscrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         >
 
-            <com.easymother.customview.ImageCycleView1
-                android:id="@+id/home_page_ad"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_200" />
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-            <!--
+            <LinearLayout
+                android:id="@+id/childview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <com.easymother.customview.ImageCycleView1
+                    android:id="@+id/home_page_ad"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_200" />
+
+                <!--
                  <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_height_5"
                 android:background="@color/background" />
-            -->
+                -->
 
 
-            <!--
+                <!--
                  <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_30"
@@ -85,247 +98,249 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="horizontal" >
-            -->
+                -->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:background="@color/white"
-                android:gravity="center"
-                android:orientation="horizontal" >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_margin_left_10"
-                    android:layout_marginRight="@dimen/dp_margin_right_10"
-                    android:text="【轻松一条】"
-                    android:textColor="@color/lightredwine"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_margin_left_10"
+                        android:layout_marginRight="@dimen/dp_margin_right_10"
+                        android:text="【轻松一条】"
+                        android:textColor="@color/lightredwine"
+                        android:textSize="16sp" />
 
-                <!--
+                    <!--
                      <ImageView
                     android:layout_width="@dimen/horn_width"
                     android:layout_height="@dimen/horn_height"
                     android:layout_marginLeft="@dimen/dp_margin_left_10"
                     android:layout_marginRight="@dimen/dp_margin_right_10"
                     android:src="@drawable/hron" />
-                -->
+                    -->
 
-                <View
-                    android:layout_width="@dimen/dp_width_1"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:background="#ececec" />
+                    <View
+                        android:layout_width="@dimen/dp_width_1"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#ececec" />
 
-                <ViewFlipper
-                    android:id="@+id/homepage_notice"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_margin_left_10"
-                    android:layout_weight="1"
-                    android:singleLine="true"
-                    android:textColor="@color/boro" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_20"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/dp_15"
-                android:paddingTop="@dimen/dp_15" >
-
-                <LinearLayout
-                    android:id="@+id/yuesao"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical" >
-
-                    <ImageView
-                        android:layout_width="@dimen/dp_64"
-                        android:layout_height="@dimen/dp_64"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/yuesao" />
-
-                    <TextView
-                        android:id="@+id/yuesao_text"
-                        android:layout_width="wrap_content"
+                    <ViewFlipper
+                        android:id="@+id/homepage_notice"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="找月嫂"
-                        android:textColor="@color/boroblacktext"
-                        android:textSize="14sp" />
+                        android:layout_marginLeft="@dimen/dp_margin_left_10"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:textColor="@color/boro" />
                 </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/yuyingshi"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical" >
-
-                    <ImageView
-                        android:layout_width="@dimen/dp_64"
-                        android:layout_height="@dimen/dp_64"
-                        android:src="@drawable/yuyingshi" />
-
-                    <TextView
-                        android:id="@+id/yuyingshi_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="育婴师"
-                        android:textColor="@color/boroblacktext"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/cuirushi"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical" >
-
-                    <ImageView
-                        android:layout_width="@dimen/dp_64"
-                        android:layout_height="@dimen/dp_64"
-                        android:src="@drawable/cuirushi" />
-
-                    <TextView
-                        android:id="@+id/cuirushi_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="催乳师"
-                        android:textColor="@color/boroblacktext"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/duanqihuli"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical" >
-
-                    <ImageView
-                        android:layout_width="@dimen/dp_64"
-                        android:layout_height="@dimen/dp_64"
-                        android:src="@drawable/duanqi" />
-
-                    <TextView
-                        android:id="@+id/duanqihuli_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="短期护理"
-                        android:textColor="@color/boroblacktext"
-                        android:textSize="14sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:gravity="center"
-                    android:orientation="horizontal" >
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/dp_15"
+                    android:paddingTop="@dimen/dp_15" >
 
-                    <TextView
-                        android:id="@+id/tuijian_yuesao"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/yuesao"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="  推荐月嫂"
-                        android:textColor="@color/lightboro"
-                        android:textSize="16sp" />
+                        android:orientation="vertical" >
 
-                    <View
-                        android:layout_width="@dimen/dp_width_2"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
-                        android:background="#ececec" />
+                        <ImageView
+                            android:layout_width="@dimen/dp_64"
+                            android:layout_height="@dimen/dp_64"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/yuesao" />
 
-                    <TextView
-                        android:id="@+id/tuijian_yuyingshi"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/yuesao_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="找月嫂"
+                            android:textColor="@color/boroblacktext"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/yuyingshi"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="推荐育婴师"
-                        android:textColor="@color/lightboro"
-                        android:textSize="16sp" />
+                        android:orientation="vertical" >
 
-                    <View
-                        android:layout_width="@dimen/dp_width_2"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
-                        android:background="#ececec" />
+                        <ImageView
+                            android:layout_width="@dimen/dp_64"
+                            android:layout_height="@dimen/dp_64"
+                            android:src="@drawable/yuyingshi" />
 
-                    <TextView
-                        android:id="@+id/tuijian_cuirushi"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/yuyingshi_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="育婴师"
+                            android:textColor="@color/boroblacktext"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/cuirushi"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="推荐催乳师"
-                        android:textColor="@color/lightboro"
-                        android:textSize="16sp" />
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_64"
+                            android:layout_height="@dimen/dp_64"
+                            android:src="@drawable/cuirushi" />
+
+                        <TextView
+                            android:id="@+id/cuirushi_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="催乳师"
+                            android:textColor="@color/boroblacktext"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/duanqihuli"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_64"
+                            android:layout_height="@dimen/dp_64"
+                            android:src="@drawable/duanqi" />
+
+                        <TextView
+                            android:id="@+id/duanqihuli_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="短期护理"
+                            android:textColor="@color/boroblacktext"
+                            android:textSize="14sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
-                <View
-                    android:id="@+id/scorllbar"
-                    android:layout_width="@dimen/dp_2"
-                    android:layout_height="@dimen/dp_2"
-                    android:layout_marginBottom="@dimen/dp_20"
-                    android:background="@color/deeppink" />
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical" >
 
-            <com.easymother.customview.MyGridView
-                android:id="@+id/mygridview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:numColumns="2" >
-            </com.easymother.customview.MyGridView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
 
-            <!--
+                        <TextView
+                            android:id="@+id/tuijian_yuesao"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="  推荐月嫂"
+                            android:textColor="@color/lightboro"
+                            android:textSize="16sp" />
+
+                        <View
+                            android:layout_width="@dimen/dp_width_2"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="#ececec" />
+
+                        <TextView
+                            android:id="@+id/tuijian_yuyingshi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="推荐育婴师"
+                            android:textColor="@color/lightboro"
+                            android:textSize="16sp" />
+
+                        <View
+                            android:layout_width="@dimen/dp_width_2"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="#ececec" />
+
+                        <TextView
+                            android:id="@+id/tuijian_cuirushi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="推荐催乳师"
+                            android:textColor="@color/lightboro"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/scorllbar"
+                        android:layout_width="@dimen/dp_2"
+                        android:layout_height="@dimen/dp_2"
+                        android:layout_marginBottom="@dimen/dp_20"
+                        android:background="@color/deeppink" />
+                </LinearLayout>
+
+                <com.easymother.customview.MyGridView
+                    android:id="@+id/mygridview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:numColumns="2" >
+                </com.easymother.customview.MyGridView>
+
+                <!--
             <com.easymother.customview.MyViewPager
                 android:id="@+id/tuijian_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </com.easymother.customview.MyViewPager>
-            -->
+                -->
 
 
-            <!--
+                <!--
             <android.support.v4.view.ViewPager
                 android:id="@+id/tuijian_content"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_420" >
             </android.support.v4.view.ViewPager>
-            -->
+                -->
 
-        </LinearLayout>
-    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+            </LinearLayout>
+        </ScrollView>
+    </com.easymother.customview.MySwipleReflashLayout>
+    <!-- </com.handmark.pulltorefresh.library.PullToRefreshScrollView> -->
 
 </LinearLayout>

@@ -3,9 +3,9 @@ package com.easymother.main.homepage;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alidao.mama.R;
 import com.easymother.bean.TestBean;
 import com.easymother.customview.MyListview;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 

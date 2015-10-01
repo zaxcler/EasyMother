@@ -5,10 +5,10 @@ import java.io.File;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.alidao.mama.WeiXinUtils;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.ConuntSize;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
@@ -16,7 +16,6 @@ import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
-import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 import android.app.Activity;
 import android.os.Bundle;

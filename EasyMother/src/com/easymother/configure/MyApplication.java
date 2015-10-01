@@ -7,9 +7,10 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.http.Header;
 import org.json.JSONObject;
+
+import com.alidao.mama.R;
 import com.alidao.mama.WeiXinUtils;
 import com.easymother.bean.UserInfo;
-import com.easymother.main.R;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -52,7 +53,8 @@ public class MyApplication extends Application {
 	private static String cachedir;// imageloader
 
 	// public static final String APP_ID="wxcacf2de19303ba3";//微信的id
-	public static final String APP_ID = "wx65cc3cea8ede40f9";// 微信的id
+//	public static final String APP_ID = "wx65cc3cea8ede40f9";// 轻松妈妈2的微信的id
+	public static final String APP_ID = "wxa2469166669a944b";// 原轻松妈妈的微信的id
 	public static IWXAPI WX_API;// 微信的api根，所有微信api根据 WX_API 调用；
 
 	@Override

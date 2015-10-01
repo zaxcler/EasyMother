@@ -2,8 +2,22 @@ package com.easymother.main.community;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+
 import org.apache.http.Header;
 import org.json.JSONObject;
+
+import com.alidao.mama.R;
+import com.easymother.bean.ForumPost;
+import com.easymother.configure.BaseInfo;
+import com.easymother.configure.MyApplication;
+import com.easymother.utils.CommonAdapter;
+import com.easymother.utils.JsonUtils;
+import com.easymother.utils.NetworkHelper;
+import com.easymother.utils.ViewHolder;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
@@ -16,17 +30,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.easymother.bean.ForumPost;
-import com.easymother.configure.BaseInfo;
-import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
-import com.easymother.utils.CommonAdapter;
-import com.easymother.utils.JsonUtils;
-import com.easymother.utils.NetworkHelper;
-import com.easymother.utils.ViewHolder;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class MessageAdapter extends CommonAdapter<ForumPost> {
 
@@ -38,7 +41,10 @@ public class MessageAdapter extends CommonAdapter<ForumPost> {
 		this.context=context;
 	}
 	public void addList(List<ForumPost> list){
-		this.list=list;
+		this.list.addAll(list);
+	}
+	public void clear(){
+		this.list.clear();
 	}
 
 	@Override

@@ -6,15 +6,16 @@ import java.util.TimerTask;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.easymother.utils.RegularUtils;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
@@ -161,6 +162,14 @@ public class RegisterActivity extends Activity implements OnClickListener{
 			}
         	if ("".equals(passwordString)||passwordString.equals(null)) {
 				Toast.makeText(this, "密码不能为空", 0).show();
+				return;
+			}
+        	if (passwordString.length()<6) {
+        		Toast.makeText(this, "密码长度大于6", 0).show();
+				return;
+			}
+        	if (passwordString.length()>20) {
+        		Toast.makeText(this, "密码长度过大", 0).show();
 				return;
 			}
         	if (!RegularUtils.isPhoneNumber(phone)) {

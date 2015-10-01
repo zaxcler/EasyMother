@@ -2,7 +2,9 @@ package com.easymother.main.community;
 
 import java.util.Date;
 import java.util.List;
+
 import com.alibaba.fastjson.JSON;
+import com.alidao.mama.R;
 import com.alidao.mama.WeiXinUtils;
 import com.easymother.bean.TopicItemBean;
 import com.easymother.configure.BaseInfo;
@@ -10,12 +12,9 @@ import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
 import com.easymother.customview.ImageZoom;
 import com.easymother.customview.MyGridView;
-import com.easymother.main.R;
 import com.easymother.main.babytime.ImageAdapter;
-import com.easymother.main.my.LoginOrRegisterActivity;
 import com.easymother.main.my.TopicListActivity;
 import com.easymother.utils.CommonAdapter;
-import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.easymother.utils.TimeCounter;
@@ -23,21 +22,16 @@ import com.easymother.utils.ViewHolder;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
+import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
-import android.widget.RelativeLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -176,6 +170,15 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 			} else {
 				msgAmoount.setText("收藏");
 			}
+//			//设置长点事件，防止外面的长点事件无法触发
+//			msgAmoount.setOnLongClickListener(new OnLongClickListener() {
+//				
+//				@Override
+//				public boolean onLongClick(View v) {
+//					return false;
+//				}
+//			});
+//			//---------
 			msgAmoount.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -245,6 +248,15 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 		} else {
 			upAmount.setText("");
 		}
+//		//设置长点事件，防止外面的长点事件无法触发
+//		upAmount.setOnLongClickListener(new OnLongClickListener() {
+//			
+//			@Override
+//			public boolean onLongClick(View v) {
+//				return false;
+//			}
+//		});
+		//---------
 		upAmount.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -292,6 +304,14 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 				WeiXinUtils.shareDownloadUrl((Activity) context);
 			}
 		});
+//		//设置长点事件，防止外面的长点事件无法触发
+//		share.setOnLongClickListener(new OnLongClickListener() {
+//			
+//			@Override
+//			public boolean onLongClick(View v) {
+//				return false;
+//			}
+//		});
 		// 如果是从我的话题打开的，就影藏收藏和点赞等功能
 		if ("user_topic".equals(flag)) {
 			msgAmoount.setVisibility(View.GONE);

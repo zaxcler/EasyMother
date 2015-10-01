@@ -1,11 +1,12 @@
 package com.alidao.mama;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.text.Normalizer.Form;
 
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
+import com.easymother.utils.CompressImage;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
@@ -92,8 +93,13 @@ public class WeiXinUtils {
 	 */
 	public static byte[] bmpToByteArray(Bitmap bitmap, boolean isRecycle) {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//		先将图片压缩
+//		Bitmap thump=compressImage(bitmap);
 		// 将图片压缩，并写到输出流里
-		bitmap.compress(CompressFormat.PNG, 100, outputStream);
+		Bitmap thump=CompressImage.createBitmapThumbnail(bitmap);
+		thump.compress(CompressFormat.PNG, 100, outputStream);
+		
+		
 		if (isRecycle) {
 			bitmap.recycle();
 		}
@@ -101,6 +107,9 @@ public class WeiXinUtils {
 
 	}
 
+	
+	
+	
 	/*
 	 * 创建唯一标识
 	 */

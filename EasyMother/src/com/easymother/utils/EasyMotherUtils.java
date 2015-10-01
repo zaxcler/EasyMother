@@ -3,24 +3,19 @@ package com.easymother.utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
-import org.json.JSONException;
 
 import com.alibaba.fastjson.JSON;
+import com.alidao.mama.R;
 import com.easymother.bean.BabyInfoBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.BabyTiemFragment;
-import com.easymother.main.R;
-import com.easymother.main.R.id;
 import com.easymother.main.homepage.CuiRuiShiProjectActivity;
 import com.easymother.main.homepage.OrderCRSProcess;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -33,10 +28,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.provider.MediaStore;
-import android.provider.Settings.System;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,7 +38,6 @@ import android.view.Window;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class EasyMotherUtils {
 	private static TextView title;// 标题

@@ -8,11 +8,11 @@ import java.util.Date;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
@@ -21,9 +21,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,12 +31,12 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.DatePicker.OnDateChangedListener;
 
 public class OrderYSandYYSProcess1 extends Activity {
 	private Button begain_sign;// 开始签约
@@ -102,18 +100,7 @@ public class OrderYSandYYSProcess1 extends Activity {
 //		// 结束时间
 //		Date enddate = nursebase.getEmploymentEndTime();
 
-		time.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				try {
-					showDateDialog(v);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
+		
 		if (startTime != null && endTime != null) {
 			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
 			Date startdate;
@@ -138,10 +125,23 @@ public class OrderYSandYYSProcess1 extends Activity {
 			Calendar calendar=Calendar.getInstance();
 			calendar.setTime(currentdate);
 			startTime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+ calendar.get(Calendar.DAY_OF_MONTH);
+			endTime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+ calendar.get(Calendar.DAY_OF_MONTH);
 			startTime_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
 			endTime_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
 			countTime.setText("共计" + 1 + "天");
 		}
+        time.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				try {
+					showDateDialog(v);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		if (!isMeet) {
 			meetImage.setVisibility(View.GONE);
 		}
@@ -258,8 +258,15 @@ public class OrderYSandYYSProcess1 extends Activity {
 		});
 		//初始化结束时间 ，记录上次选择的时间
 		 Calendar calendar1=Calendar.getInstance();
+		 if (endTime==null&& "".equals(endTime)) {
+			 currentdate=new Date(System.currentTimeMillis());
+			 calendar1.setTime(currentdate);
+			endTime=calendar1.get(Calendar.YEAR)+"-"+(calendar1.get(Calendar.MONTH)+1)+"-"+ calendar1.get(Calendar.DAY_OF_MONTH);
+			}else {
+				currentdate=dateFormat.parse(endTime);
+			}
 		calendar1.setTime(currentdate);
-		calendar1.add(Calendar.DAY_OF_MONTH,day);
+//		calendar1.add(Calendar.DAY_OF_MONTH,day);
         datePicker2.init(calendar1.get(Calendar.YEAR), calendar1.get(Calendar.MONTH), calendar1.get(Calendar.DAY_OF_MONTH), new OnDateChangedListener() {
 			@Override
 			public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

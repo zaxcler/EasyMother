@@ -1,7 +1,5 @@
 package com.easymother.utils;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.http.Header;
@@ -10,19 +8,15 @@ import org.json.JSONObject;
 import com.easymother.bean.ServerConfig;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R.drawable;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.BinaryHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
-import android.content.SharedPreferences.Editor;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.text.Spanned;
-import android.text.SpannedString;
 import android.util.Log;
 
 public class NetworkHelper {
@@ -145,7 +139,7 @@ public class NetworkHelper {
 	public static void doGet(String url,RequestParams params,JsonHttpResponseHandler handler){
 		params.put("appToken", getAppToken());
 		httpClient.get(BaseInfo.BASE_URL+url,params, handler);
-//		Log.e("访问地址是", BaseInfo.BASE_URL+url);
+		Log.e("访问地址是", BaseInfo.BASE_URL+url+"?"+params.toString());
 //		httpClient.get(url,params, handler);
 	}
 	

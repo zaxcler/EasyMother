@@ -3,6 +3,8 @@ package com.easymother.bean;
 import java.util.Date;
 
 public class ForumBean {
+	
+	private int id;
 
 	private String createUser;
 
@@ -30,6 +32,14 @@ public class ForumBean {
 	private String content;
 
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getCreateUser() {
 		return createUser;
 	}

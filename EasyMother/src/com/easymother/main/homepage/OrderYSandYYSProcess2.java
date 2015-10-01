@@ -3,11 +3,11 @@ package com.easymother.main.homepage;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.alidao.mama.R;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.RegularUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;

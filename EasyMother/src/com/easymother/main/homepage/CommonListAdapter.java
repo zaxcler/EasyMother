@@ -4,21 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alidao.mama.R;
 import com.easymother.bean.NurseBaseBean;
-import com.easymother.bean.YueSao;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
-import com.easymother.utils.ImageUtils;
-import com.easymother.utils.UILUtils;
 import com.easymother.utils.ViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.view.View;
 import android.widget.ImageView;
@@ -136,8 +130,13 @@ public class CommonListAdapter extends CommonAdapter<NurseBaseBean> {
 		 * 设置之前先判断空
 		 */
 		if (bean.getMarketPrice()!=null) {
-			marketPrice.setText("市场价："+bean.getMarketPrice()+"元/26天");
-			marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+			if ("CRS".equals(bean.getJob())) {
+				marketPrice.setText("                                 ");
+			}else {
+				marketPrice.setText("市场价："+bean.getMarketPrice()+"元/26天");
+				marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+			}
+			
 		}
 		TextView dengji=holder.getView(R.id.textView9);
 		if (bean.getJobTitle()!=null) {

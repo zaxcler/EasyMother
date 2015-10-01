@@ -10,6 +10,7 @@ import java.util.Locale;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.bean.DetailResult;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
@@ -17,14 +18,13 @@ import com.easymother.bean.TestBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.customview.CircleImageView;
 import com.easymother.customview.MyListview;
-import com.easymother.main.R;
 import com.easymother.main.community.HuLiShiZoneDetailActivity;
 import com.easymother.main.my.CommentActivity;
 import com.easymother.main.my.CommentListActivity;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
-import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -270,16 +270,16 @@ public class YuYingShiDetailActivity extends Activity implements OnClickListener
 		Intent intent=new Intent();
 		switch (arg0.getId()) {
 		case R.id.check1:
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1,"");
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.baby_photo,"");
 			break;
 		case R.id.check2:
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1,"");
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.baby_photo,"");
 			break;
 		case R.id.check3:
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1,"");
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.baby_photo,"");
 			break;
 		case R.id.check4:
-			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.pic1,"");
+			EasyMotherUtils.showDialog(this,"file:///android_asset/demo.html",R.drawable.baby_photo,"");
 			break;
 		case R.id.buy_now:
 			intent.setClass(this, OrderYSandYYSProcess.class);

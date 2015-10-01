@@ -6,23 +6,20 @@ import java.util.List;
 
 import org.json.JSONArray;
 
-import android.content.Context;
-import android.view.View;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.alibaba.fastjson.JSON;
+import com.alidao.mama.R;
 import com.easymother.bean.OrderComments;
-import com.easymother.bean.TestBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
-import com.easymother.main.R;
 import com.easymother.main.babytime.ImageAdapter;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.ViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import android.content.Context;
+import android.view.View;
+import android.widget.GridView;
+import android.widget.TextView;
 
 public class CommentListAdapter extends CommonAdapter<OrderComments> {
 	private List<OrderComments> list;
@@ -35,6 +32,13 @@ public class CommentListAdapter extends CommonAdapter<OrderComments> {
 		this.list=list;
 		this.context=context;
 		
+	}
+	
+	public  void addList(List<OrderComments> list){
+		this.list.addAll(list);
+	}
+	public void clear(){
+		this.list.clear();
 	}
 
 	@Override

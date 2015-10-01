@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -39,7 +39,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/baby" />
+            android:src="@drawable/photo" />
 
         <TextView
             android:id="@+id/reply"
@@ -105,15 +105,15 @@
             android:id="@+id/child_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/pictures"
              android:textColor="@color/liangboro"
-            android:layout_toRightOf="@+id/parent_name"
+            android:layout_alignLeft="@+id/textView3"
+            android:layout_below="@+id/parent_name"
             android:text="：瞎扯淡。。" />
 
         <LinearLayout
             android:layout_alignLeft="@+id/textView3"
             android:id="@+id/linearlayout"
-            android:layout_below="@+id/textView3"
+            android:layout_below="@+id/child_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_5"

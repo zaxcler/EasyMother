@@ -1,35 +1,29 @@
 package com.easymother.main.community;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import android.content.Context;
-import android.text.Html;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethod;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
-
 import com.alibaba.fastjson.JSON;
-import com.alipay.sdk.auth.h;
+import com.alidao.mama.R;
 import com.easymother.bean.ForumPost;
-import com.easymother.bean.TestBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
 import com.easymother.customview.MyGridView;
-import com.easymother.main.R;
 import com.easymother.main.babytime.ImageAdapter;
-import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.NetworkHelper;
 import com.easymother.utils.TimeCounter;
 import com.easymother.utils.ViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import android.content.Context;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 public class HuLiShiReplyAdapter extends BaseAdapter {
 	private Context context;
@@ -102,6 +96,8 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 				floor.setText((position+1)+"楼");
 				TextView show_time=holder.getView(R.id.show_time);
 				if (forumPost.getCreateTime()!=null) {
+					Log.e("服务器时间", forumPost.getCreateTime().getTime()+"");
+					Log.e("本地时间", currentDate.getTime()+"");
 					show_time.setText(TimeCounter.CountTime(forumPost.getCreateTime(), currentDate));
 				}else {
 					show_time.setText("");
@@ -138,7 +134,8 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 						//调用输入法
 						InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE); 
 //						imm.showSoftInput(m_receiverView(接受软键盘输入的视图(View)),InputMethodManager.SHOW_FORCED(提供当前操作的标记，SHOW_FORCED表示强制显示)); 
-						imm.showSoftInput(activity.editText1,InputMethodManager.SHOW_FORCED); 
+//						imm.showSoftInput(activity.editText1,InputMethodManager.SHOW_IMPLICIT); 
+						imm.toggleSoftInput(0, InputMethodManager.SHOW_IMPLICIT);
 						
 						
 					}
@@ -206,7 +203,8 @@ public class HuLiShiReplyAdapter extends BaseAdapter {
 							}
 							InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE); 
 //							imm.showSoftInput(m_receiverView(接受软键盘输入的视图(View)),InputMethodManager.SHOW_FORCED(提供当前操作的标记，SHOW_FORCED表示强制显示)); 
-							imm.showSoftInput(activity.editText1,InputMethodManager.SHOW_FORCED); 
+//							imm.showSoftInput(activity.editText1,InputMethodManager.SHOW_FORCED); 
+							imm.toggleSoftInput(0, InputMethodManager.SHOW_IMPLICIT);
 						}
 					});
 					convertView=holder.getConvertView();

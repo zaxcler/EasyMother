@@ -5,12 +5,12 @@ import java.util.List;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.bean.CollectionListResult;
 import com.easymother.bean.ForumBean;
 import com.easymother.bean.NewsBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.customview.MyListview;
-import com.easymother.main.R;
 import com.easymother.main.community.ArticleActivity;
 import com.easymother.main.community.HuLiShiReplyListActivity;
 import com.easymother.utils.EasyMotherUtils;
@@ -21,19 +21,27 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager.LayoutParams;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 //import android.support.v4.widget.SwipeRefreshLayout;
@@ -129,7 +137,6 @@ public class CollectListActivity extends Activity {
 			CollectionListAdapter2 adapter2=new CollectionListAdapter2(this, forumBeans, R.layout.activity_mypage_collection_item);
 			LayoutAnimationController controller=new LayoutAnimationController(AnimationUtils.loadAnimation(this, R.anim.zoom_right_in));
 			//刷新模块
-			
 			if (news.size()>0 || forumBeans.size()>0 ) {
 				if (notice!=null) {
 					listview1.removeFooterView(notice);
@@ -148,8 +155,6 @@ public class CollectListActivity extends Activity {
 					pageNo=1;
 				}
 			}
-				
-			
 			
 			listview.setAdapter(adapter);
 			listview1.setAdapter(adapter2);
@@ -163,6 +168,55 @@ public class CollectListActivity extends Activity {
 					startActivity(intent);
 				}
 			});
+			listview.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+				@Override
+				public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+					final NewsBean bean=(NewsBean) arg0.getAdapter().getItem(arg2);
+					AlertDialog.Builder builder=new AlertDialog.Builder(CollectListActivity.this);
+					builder.setTitle("是否删除");
+					builder.setPositiveButton("确定", new OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							RequestParams params=new RequestParams();
+							params.put("id", bean.getId());
+							NetworkHelper.doGet(BaseInfo.YSYQ_LIST_DELETE,params,  new JsonHttpResponseHandler(){
+								@Override
+								public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+									super.onSuccess(statusCode, headers, response);
+									Log.e("删除", "-----response"+response.toString());
+									if (JsonUtils.getRootResult(response).getIsSuccess()) {
+										Toast.makeText(CollectListActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+										loadData();
+									}else {
+										Toast.makeText(CollectListActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
+									}
+								}
+								@Override
+								public void onFailure(int statusCode, Header[] headers, String responseString,
+										Throwable throwable) {
+									super.onFailure(statusCode, headers, responseString, throwable);
+									Log.e("删除", "-----response"+responseString.toString());
+								}
+							});
+							dialog.dismiss();
+						}
+					
+					});
+					builder.setNegativeButton("取消", new OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+					AlertDialog alertDialog=builder.create();
+					alertDialog.setCancelable(false);
+					alertDialog.show();
+					return true;
+				}
+			});
 			listview1.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
@@ -171,6 +225,54 @@ public class CollectListActivity extends Activity {
 					intent.putExtra("id", forumBeans.get(arg2).getPostId());
 					intent.setClass(CollectListActivity.this, HuLiShiReplyListActivity.class);
 					startActivity(intent);
+				}
+			});
+			listview1.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+				@Override
+				public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+					final ForumBean bean=(ForumBean) arg0.getAdapter().getItem(arg2);
+					AlertDialog.Builder builder=new AlertDialog.Builder(CollectListActivity.this);
+					builder.setTitle("是否删除");
+					builder.setPositiveButton("确定", new OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							RequestParams params=new RequestParams();
+							params.put("id", bean.getId());
+							NetworkHelper.doGet(BaseInfo.COLLECTION_DELETE ,params,new JsonHttpResponseHandler(){
+								@Override
+								public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+									super.onSuccess(statusCode, headers, response);
+									if (JsonUtils.getRootResult(response).getIsSuccess()) {
+										Toast.makeText(CollectListActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+										loadData();
+									}else {
+										Toast.makeText(CollectListActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
+									}
+								}
+								@Override
+								public void onFailure(int statusCode, Header[] headers, String responseString,
+										Throwable throwable) {
+									super.onFailure(statusCode, headers, responseString, throwable);
+									Log.e("删除", "-----response"+responseString.toString());
+								}
+							});
+							dialog.dismiss();
+						}
+					
+					});
+					builder.setNegativeButton("取消", new OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+					AlertDialog alertDialog=builder.create();
+					alertDialog.setCancelable(false);
+					alertDialog.show();
+					return true;
 				}
 			});
 			controller.setOrder(LayoutAnimationController.ORDER_NORMAL);

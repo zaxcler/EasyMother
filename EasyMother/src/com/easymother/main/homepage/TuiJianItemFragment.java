@@ -1,13 +1,11 @@
 package com.easymother.main.homepage;
 
-import com.alipay.apmobilesecuritysdk.a.e;
+import com.alidao.mama.R;
 import com.easymother.bean.CuiRuShi;
 import com.easymother.bean.YuYingShi;
 import com.easymother.bean.YueSao;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
-import com.easymother.utils.EasyMotherUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.content.Intent;
@@ -16,9 +14,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.view.ViewGroup;
 
 public class TuiJianItemFragment extends Fragment implements OnClickListener {
 	private View tuijianItem;

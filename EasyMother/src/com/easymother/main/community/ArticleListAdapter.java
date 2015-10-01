@@ -2,12 +2,11 @@ package com.easymother.main.community;
 
 import java.util.List;
 
+import com.alidao.mama.R;
 import com.easymother.bean.NewsInfoBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
-import com.easymother.utils.NetworkHelper;
 import com.easymother.utils.ViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -25,6 +24,13 @@ public class ArticleListAdapter extends CommonAdapter<NewsInfoBean> {
 	protected ArticleListAdapter(Context context, List<NewsInfoBean> list, int resource) {
 		super(context, list, resource);
 		this.context=context;
+	}
+	
+	public void addList(List<NewsInfoBean> list){
+		this.list=list;
+	}
+	public void clearList(){
+		this.list.clear();
 	}
 
 	@Override

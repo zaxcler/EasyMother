@@ -1,9 +1,9 @@
 package com.easymother.main.homepage;
 
+import com.alidao.mama.R;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 
 import android.app.Activity;
@@ -11,9 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.webkit.WebView;
 import android.view.Window;
-import android.widget.Button;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 public class OrderYSandYYSProcess3 extends Activity {

@@ -14,7 +14,7 @@
         android:layout_marginBottom="@dimen/dp_10"
         android:layout_width="match_parent"
         android:hint="记录宝宝新鲜事儿..."
-        android:textColor="@color/lightlightboro"
+        android:textColor="@color/boroblacktext"
         android:gravity="top"
         android:textSize="@dimen/dp_16"
         android:padding="@dimen/dp_5"

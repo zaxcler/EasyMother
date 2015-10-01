@@ -1,5 +1,6 @@
 package com.easymother.main;
 
+import com.alidao.mama.R;
 import com.easymother.customview.MyLoadingProgress;
 import com.easymother.utils.EasyMotherUtils;
 

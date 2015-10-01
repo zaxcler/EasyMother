@@ -2,28 +2,20 @@ package com.easymother.main.homepage;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.alidao.mama.R;
 import com.easymother.bean.TestBean;
-import com.easymother.customview.MyListview;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView.MmyScrollListener;
 
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Dialog;
-import android.graphics.Shader.TileMode;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -32,18 +24,14 @@ import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.view.animation.TranslateAnimation;
+import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AbsListView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ShortOrderListActivity extends Activity {
 

@@ -11,13 +11,13 @@ import java.util.Random;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.alipay.sdk.app.PayTask;
 import com.alipay.sdk.pay.demo.PayResult;
 import com.alipay.sdk.pay.demo.SignUtils;
 import com.easymother.bean.OrderListBean;
 import com.easymother.bean.OrderPayBean;
 import com.easymother.configure.BaseInfo;
-import com.easymother.main.R;
 import com.easymother.main.homepage.OrderListAdapter;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;

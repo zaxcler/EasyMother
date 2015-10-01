@@ -3,14 +3,13 @@ package com.easymother.main.community;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.alidao.mama.WeiXinUtils;
 import com.easymother.bean.NewsInfoBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.customview.MyPopupWindow;
 import com.easymother.customview.MyPopupWindow1;
 import com.easymother.customview.MyPopupWindow1.OnMyPopupWindowsClick;
-import com.easymother.main.R;
 import com.easymother.main.my.LoginOrRegisterActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
@@ -19,7 +18,6 @@ import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 import android.app.Activity;
 import android.content.Intent;

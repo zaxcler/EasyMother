@@ -4,8 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.alidao.mama.R;
 import com.easymother.bean.Order;
-import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter2;
 import com.easymother.utils.ViewHolder;
 
@@ -72,16 +72,17 @@ public class CalenderAadpter extends CommonAdapter2<Integer> {
 		if (t >= Start_day - 1 && t < end_day + Start_day-1) {
 			// 存在订单的就弄成灰色
 			for (Order order : orders) {
+				Date result1 = order.getRealHireStartTime();
+				Date result2 = order.getRealHireEndTime();
+				Calendar date1 = Calendar.getInstance();
+				Calendar date2 = Calendar.getInstance();
+				date1.setTime(result1);
+				date2.setTime(result2);
+				int start_month = date1.get(Calendar.MONTH);
+				int end_month = date2.get(Calendar.MONTH);
+				int current_month = currentDate.get(Calendar.MONTH);
 				if (order.getRealHireStartTime() != null && order.getRealHireEndTime() != null) {
-					Date result1 = order.getRealHireStartTime();
-					Date result2 = order.getRealHireEndTime();
-					Calendar date1 = Calendar.getInstance();
-					Calendar date2 = Calendar.getInstance();
-					date1.setTime(result1);
-					date2.setTime(result2);
-					int start_month = date1.get(Calendar.MONTH);
-					int end_month = date2.get(Calendar.MONTH);
-					int current_month = currentDate.get(Calendar.MONTH);
+					
 					// 如果是同一年
 					if (currentDate.get(Calendar.YEAR) == date1.get(Calendar.YEAR)
 							&& currentDate.get(Calendar.YEAR) == date2.get(Calendar.YEAR)) {
@@ -125,6 +126,10 @@ public class CalenderAadpter extends CommonAdapter2<Integer> {
 //						else {
 //							current_day.setBackgroundColor(context.getResources().getColor(R.color.white));
 //						}
+					}else if (currentDate.get(Calendar.YEAR) < date1.get(Calendar.YEAR)
+							&& currentDate.get(Calendar.YEAR) == date2.get(Calendar.YEAR)){
+						
+						
 					}
 					else {
 						current_day.setBackgroundColor(context.getResources().getColor(R.color.white));
@@ -140,7 +145,7 @@ public class CalenderAadpter extends CommonAdapter2<Integer> {
 				current_day.setText("  " + day++);
 			}
 
-		}else{
+		}else {
 			current_day.setText("");
 			current_day.setBackgroundColor(context.getResources().getColor(R.color.white));
 			

@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.alibaba.fastjson.JSON;
+import com.alidao.mama.R;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
 import com.easymother.bean.NurseService;
@@ -20,12 +21,10 @@ import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
 import com.easymother.customview.MyGridView;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.easymother.utils.ViewHolder;
-import com.example.demobyimage.CustomHorizontalScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -275,8 +274,11 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 		Calendar today_c=Calendar.getInstance();
 		today_c.setTime(today);
 		int day=today_c.get(Calendar.DAY_OF_WEEK);
-		int disitian=(day+3)%7;
-		day4.setText("星期"+weeks.get(disitian-1));
+		int temp=day;
+		if (day+3>7) {
+			temp=(day+3)%7;
+		}
+		day4.setText("星期"+weeks.get(temp-1));
 		
 		
 		if (taocan!=null) {

@@ -3,21 +3,25 @@ package com.easymother.main.babytime;
 import java.util.List;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.bean.BabyTimeBean;
+import com.easymother.bean.NewsInfoBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
 import com.easymother.customview.MyListview;
-import com.easymother.main.R;
+import com.easymother.main.community.ArticleListActivity;
 import com.easymother.main.my.LoginOrRegisterActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -35,7 +39,6 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -51,8 +54,10 @@ public class BabyTimeActivity extends Activity {
 	private TextView days;//囡囡出生多少天
 	private Intent intent;
 	private boolean isFirstTime=true;
-	private int pageNo=1;
+	private int pageNo=2;
+	private boolean canLoad=true;
 	public final static int LOGIN_CODE=2;//请求登陆代码
+	private BabyTimeListAdapter adapter;
 	
 	
 	@Override
@@ -97,24 +102,28 @@ public class BabyTimeActivity extends Activity {
 	}
 
 	private void init() {
-		loadData(pageNo);
-		pulltoreflash.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
+		loadData();
+		pulltoreflash.setMode(Mode.PULL_FROM_END);
+		pulltoreflash.setOnRefreshListener(new OnRefreshListener2() {
 
 			@Override
-			public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-				pageNo++;
-				loadData(pageNo);
-				pulltoreflash.onRefreshComplete();
+			public void onPullDownToRefresh(PullToRefreshBase refreshView) {
+				refreshView.onRefreshComplete();
+			}
+
+			@Override
+			public void onPullUpToRefresh(PullToRefreshBase refreshView) {
+				if (canLoad) {
+					loadMore(pageNo);
+				}
+				refreshView.onRefreshComplete();
+				
 			}
 		});
-		
-		
-		
-		
 	}
-	public void loadData(int pageNo){
+	public void loadData(){
 		RequestParams params=new RequestParams();
-		params.put("pageNo", pageNo+"");
+		params.put("pageNo", 1);
 		NetworkHelper.doGet(BaseInfo.BABYTIME_LIST,params,new JsonHttpResponseHandler(){
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -145,11 +154,6 @@ public class BabyTimeActivity extends Activity {
 		days.setVisibility(View.GONE);
 		
 		if (list2.size()==0) {
-			//如果pageNo>1就不是第一次加载
-			if (pageNo>1) {
-				return;
-			}
-			pageNo=1;
 			notice=new TextView(BabyTimeActivity.this);
 			notice.setText("你还没有记录过囡囡信息哦！快去记录吧！");
 			notice.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -159,14 +163,52 @@ public class BabyTimeActivity extends Activity {
 			notice.setTextColor(getResources().getColor(R.color.boroblacktext));
 			listview.addFooterView(notice);
 		}
-		BabyTimeListAdapter adapter=new BabyTimeListAdapter(this, list, R.layout.activity_babytime_item);
+		if (adapter==null) {
+			adapter=new BabyTimeListAdapter(this, list, R.layout.activity_babytime_item);
+		}
 		if (isFirstTime) {
 			isFirstTime=false;
 			listview.addHeaderView(headview);
 		}
-		
 		listview.setAdapter(adapter);
 		
+	}
+	
+	public void loadMore(int pageNo) {
+		Log.e("pageNo", pageNo+"----S");
+		RequestParams params = new RequestParams();
+		params.put("pageNo", pageNo);
+		NetworkHelper.doGet(BaseInfo.BABYTIME_LIST, params, new JsonHttpResponseHandler() {
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+				super.onSuccess(statusCode, headers, response);
+				if (JsonUtils.getRootResult(response).getIsSuccess()) {
+					List<BabyTimeBean>	list=JsonUtils.getResultList(response, BabyTimeBean.class);
+					if (list != null) {
+						adapter.addList(list);
+						if (list.size() > 0) {
+							if (notice != null) {
+								listview.removeHeaderView(notice);
+							}
+							canLoad = true;
+							BabyTimeActivity.this.pageNo++;
+						} else {
+							BabyTimeActivity.this.pageNo = 2;
+							canLoad = false;
+						}
+						adapter.notifyDataSetChanged();
+					}
+				}
+			}
+
+			@Override
+			public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+				super.onFailure(statusCode, headers, throwable, errorResponse);
+				BabyTimeActivity.this.pageNo = 2;
+				canLoad = false;
+			}
+		});
+
 	}
 
 }

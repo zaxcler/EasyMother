@@ -2,7 +2,7 @@ package com.easymother.configure;
 
 public class BaseInfo {
 	//基本地址
-//		public final static String BASE_URL="http://192.168.1.101:8080/";//基本url
+//		public final static String BASE_URL="http://192.168.1.102:8080/";//基本url
 //		public final static String BASE_URL="http://121.40.152.3/";//基本url
 //		public final static String BASE_URL="http://test1.hzlianhai.com/";//基本url
 		public final static String BASE_URL="http://121.40.106.213:8081/";//基本url
@@ -38,6 +38,8 @@ public class BaseInfo {
 		public final static String CHCLK_ZHENGSHU="app/nursejobcertificate/findByJobId";//查看证书
 		public final static String CHCLK_ALL_COMMENTS="app/ordercomment/selectByNurseIdAndJob";//查看订单
 		public final static String COLLECTION_LIST="app/userinfo/loadCollect";//收藏列表
+		public final static String COLLECTION_DELETE="app/forumcollect/todelete";//删除收藏
+		public final static String YSYQ_LIST_DELETE="app/newscollect/todelete";//删除医食衣趣
 		
 		
 		public final static String FORGET_PASSWORD="app/userinfo/forgetPassword";//忘记密码
@@ -62,6 +64,9 @@ public class BaseInfo {
 		public final static String SAVE_YSYQ_TO_COLLECTION="app/newscollect/save";//收藏医食衣趣到
 		public final static String TOPIC_LIST="app/forumpost/applist";//话题列表
 		public final static String SUBMIT_TOPIC_HELP="app/forumpost/appsave";//发布话题和求助
+		
+		public final static String DELETE_TOPIC_HELP="app/forumpost/delete";//删除话题和求助
+		
 //		public final static String CHECK_TOPIC_DETAIL="app/forumpost/listReply";//查看话题/求助详情
 		public final static String CHECK_TOPIC_DETAIL="app/forumpost/toOnePostDetail";//查看话题/求助详情
 		public final static String REPLY="app/forumpost/reply";//回复空间详情
@@ -83,9 +88,7 @@ public class BaseInfo {
 		public final static String CHECK_VERSION="app/checkVersion";//检查版本更新
 	
 		
-		
-		
-		public final static String DOWNLOAD_URL="www.qsmam.com";//分享下载url
+		public final static String DOWNLOAD_URL="http://www.qsmam.com/download/index.html#rd";//分享下载url
 		
 		
 		//打开activity需要返回结果时的requestCode

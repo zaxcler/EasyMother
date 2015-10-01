@@ -6,19 +6,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.http.Header;
-import org.apache.http.protocol.RequestUserAgent;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.bean.BabyInfoBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
 import com.easymother.customview.MyPopupWindow;
 import com.easymother.customview.MyPopupWindow.OnMyPopupWindowsClick;
-import com.easymother.main.R;
 import com.easymother.main.my.LoginOrRegisterActivity;
 import com.easymother.utils.EasyMotherUtils;
-import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -28,7 +26,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
-import android.app.PendingIntent.OnFinished;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -41,7 +38,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.DatePicker;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -243,6 +239,7 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
+					MyApplication.editor.putString("nannan_birthday", birthday).commit();
 					Toast.makeText(BabyTimeInfomationActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
 				}else {
 					Toast.makeText(BabyTimeInfomationActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
@@ -271,11 +268,12 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 			case R.id.take_photo:
 				// 打开相机
 				EasyMotherUtils.takePhoto(BabyTimeInfomationActivity.this, TAKE_PHOTO, uri1);
-
+				window.dismiss();
 				break;
 
 			case R.id.choose_photo:
 				EasyMotherUtils.chosePhoto(BabyTimeInfomationActivity.this, CHOOSE_PHOTO, null);
+				window.dismiss();
 				break;
 			case R.id.cancle:
 				window.dismiss();
@@ -312,6 +310,7 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 					circleImageView.setImageBitmap(bitmap);
 					String type = "baby_image";
 					EasyMotherUtils.uploadPhoto(bitmap, BaseInfo.UPLOADPHTO, type);
+					
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
@@ -325,11 +324,11 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 	@Override
 	public void onResume() {
 		super.onResume();
-		String babyimgaename = MyApplication.preferences.getString("baby_image", "");
-		if (babyimgaename != null && !"".equals(babyimgaename)) {
-			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + babyimgaename,
-					circleImageView);
-		}
+//		String babyimgaename = MyApplication.preferences.getString("baby_image", "");
+//		if (babyimgaename != null && !"".equals(babyimgaename)) {
+//			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL + BaseInfo.BASE_PICTURE + babyimgaename,
+//					circleImageView);
+//		}
 		String name=MyApplication.preferences.getString("nannan_name", "");
 		if (!"".equals(name)&&name!=null) {
 			nannan_name.setText(name);

@@ -1,15 +1,12 @@
 package com.easymother.customview;
 
-import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
+import com.alidao.mama.R;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
-import android.view.WindowManager.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;

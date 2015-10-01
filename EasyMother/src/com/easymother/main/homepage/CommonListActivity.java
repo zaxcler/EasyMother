@@ -9,12 +9,12 @@ import java.util.List;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.DoubleSeekBar;
 import com.easymother.customview.DoubleSeekBar.OnSeekBarChangeListener;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;

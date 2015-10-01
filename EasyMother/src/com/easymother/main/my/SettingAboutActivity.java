@@ -1,6 +1,6 @@
 package com.easymother.main.my;
 
-import com.easymother.main.R;
+import com.alidao.mama.R;
 import com.easymother.utils.EasyMotherUtils;
 
 import android.app.Activity;

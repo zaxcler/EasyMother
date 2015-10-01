@@ -1,23 +1,15 @@
 package com.easymother.main.homepage;
 
-import com.easymother.main.R;
+import com.alidao.mama.R;
 import com.easymother.utils.EasyMotherUtils;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.webkit.WebView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class CuiRuiShiProjectActivity extends Activity implements OnClickListener{
 	private LinearLayout layout1;
@@ -69,31 +61,31 @@ public class CuiRuiShiProjectActivity extends Activity implements OnClickListene
 		switch (arg0.getId()) {
 		case R.id.layout1:
 			intent.putExtra("CRS_Project", 1);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/project1.html",R.drawable.pic1,"产前开奶");
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project1.html",R.drawable.baby_photo,"产前开奶");
 			break;
 		case R.id.layout2:
 			intent.putExtra("CRS_Project", 2);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/project2.html",R.drawable.pic1,"产后无痛点穴开奶");
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project2.html",R.drawable.baby_photo,"产后无痛点穴开奶");
 			break;
 		case R.id.layout3:
 			intent.putExtra("CRS_Project", 3);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/project3.html",R.drawable.pic1,"催乳");
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project3.html",R.drawable.baby_photo,"催乳");
 			break;
 		case R.id.layout4:
 			intent.putExtra("CRS_Project", 4);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/project4.html",R.drawable.pic1,"消淤");
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project4.html",R.drawable.baby_photo,"消淤");
 			break;
 		case R.id.layout5:
 			intent.putExtra("CRS_Project", 5);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/project5.html",R.drawable.pic1,"乳腺小叶增生护养");
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project5.html",R.drawable.baby_photo,"乳腺小叶增生护养");
 			break;
 		case R.id.layout6:
 			intent.putExtra("CRS_Project", 6);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/project6.html",R.drawable.pic1,"产后满月汗蒸排毒");
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project6.html",R.drawable.baby_photo,"产后满月汗蒸排毒");
 			break;
 		case R.id.layout7:
 			intent.putExtra("CRS_Project", 7);
-			EasyMotherUtils.showDialog(this,"file:///android_asset/project7.html",R.drawable.pic1,"产后经络调理消月子病");
+			EasyMotherUtils.showDialog(this,"file:///android_asset/project7.html",R.drawable.baby_photo,"产后经络调理消月子病");
 			break;
 			
 

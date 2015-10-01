@@ -1,8 +1,8 @@
 package com.easymother.main.homepage;
 
+import com.alidao.mama.R;
 import com.alipay.sdk.pay.demo.PayYSorYYSActivity;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 
 import android.app.Activity;
@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class OrderYSandYYSProcess6 extends Activity {
 	private Button complete;//

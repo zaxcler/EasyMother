@@ -17,21 +17,19 @@
  */
 package com.example.demobyimage;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+import com.alidao.mama.R;
+import com.example.imageadapter.BasePagerAdapter.OnItemChangeListener;
+import com.example.imageadapter.BasePagerAdapter.OnItemClickListener;
+import com.example.imageadapter.GalleryViewPager;
+import com.example.imageadapter.UrlPagerAdapter;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.easymother.main.R;
-import com.example.imageadapter.BasePagerAdapter.OnItemChangeListener;
-import com.example.imageadapter.BasePagerAdapter.OnItemClickListener;
-import com.example.imageadapter.GalleryViewPager;
-import com.example.imageadapter.UrlPagerAdapter;
 
 public class GalleryUrlActivity extends Activity {
 

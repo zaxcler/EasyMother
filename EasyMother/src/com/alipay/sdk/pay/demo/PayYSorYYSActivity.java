@@ -18,13 +18,13 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alidao.mama.R;
 import com.alipay.sdk.app.PayTask;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
 import com.easymother.bean.Order;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.main.homepage.OrderYSandYYSProcess5;
 import com.easymother.main.homepage.OrderYSandYYSProcess8;
 import com.easymother.utils.EasyMotherUtils;

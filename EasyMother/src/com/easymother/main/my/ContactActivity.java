@@ -1,18 +1,17 @@
 package com.easymother.main.my;
 
+import com.alidao.mama.R;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 
-import android.R.layout;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;

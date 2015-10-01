@@ -1,7 +1,6 @@
 package com.shelwee.update;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
@@ -10,6 +9,17 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.Library.ToolsClass.CustomDialog;
+import com.Library.ToolsClass.LibConstant;
+import com.Library.ToolsClass.StringUtils;
+import com.alidao.mama.R;
+import com.shelwee.update.listener.OnUpdateListener;
+import com.shelwee.update.pojo.UpdateInfo;
+import com.shelwee.update.utils.HttpRequest;
+import com.shelwee.update.utils.JSONHandler;
+import com.shelwee.update.utils.NetWorkUtils;
+import com.shelwee.update.utils.URLUtils;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -30,17 +40,6 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
-
-import com.Library.ToolsClass.CustomDialog;
-import com.Library.ToolsClass.LibConstant;
-import com.Library.ToolsClass.StringUtils;
-import com.easymother.main.R;
-import com.shelwee.update.listener.OnUpdateListener;
-import com.shelwee.update.pojo.UpdateInfo;
-import com.shelwee.update.utils.HttpRequest;
-import com.shelwee.update.utils.JSONHandler;
-import com.shelwee.update.utils.NetWorkUtils;
-import com.shelwee.update.utils.URLUtils;
 
 /**
  * Created by ShelWee on 14-5-8.<br/>

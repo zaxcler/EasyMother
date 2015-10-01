@@ -5,13 +5,12 @@ import java.util.List;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
 import com.easymother.bean.NurseJobMediaBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.customview.MyListview;
-import com.easymother.customview.MyReflashLayout;
-import com.easymother.main.R;
 import com.easymother.main.WebViewActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
@@ -19,7 +18,6 @@ import com.easymother.utils.NetworkHelper;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -35,7 +33,6 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class VideoListActivity extends Activity {

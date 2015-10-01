@@ -1,7 +1,6 @@
 package com.easymother.main.my;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,14 +9,12 @@ import java.util.Date;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
 import com.easymother.customview.MyPopupWindow;
 import com.easymother.customview.MyPopupWindow.OnMyPopupWindowsClick;
-import com.easymother.main.MyPageFragment;
-import com.easymother.main.R;
-import com.easymother.main.babytime.BabyTimeInfomationActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;

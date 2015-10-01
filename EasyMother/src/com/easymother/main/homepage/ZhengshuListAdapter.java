@@ -1,7 +1,11 @@
 package com.easymother.main.homepage;
 
 import java.util.List;
-import com.easymother.main.R;
+
+import com.alidao.mama.R;
+import com.easymother.bean.Certificate;
+import com.easymother.configure.BaseInfo;
+import com.easymother.configure.MyApplication;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.ViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -10,9 +14,6 @@ import android.content.Context;
 import android.text.Html;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.easymother.bean.Certificate;
-import com.easymother.configure.BaseInfo;
-import com.easymother.configure.MyApplication;
 
 public class ZhengshuListAdapter extends CommonAdapter<Certificate> {
 

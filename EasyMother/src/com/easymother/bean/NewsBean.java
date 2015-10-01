@@ -3,6 +3,8 @@ package com.easymother.bean;
 import java.util.Date;
 
 public class NewsBean {
+	
+	private int id;
 
 	private String more1;
 
@@ -35,6 +37,15 @@ public class NewsBean {
 
 	
 	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getCreateUser() {
 		return createUser;
 	}

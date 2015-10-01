@@ -1,6 +1,5 @@
 package com.easymother.main.community;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +9,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
+import com.easymother.bean.NurseBaseBean;
+import com.easymother.bean.NurseSpaceDetailBean;
+import com.easymother.bean.TopicItemBean;
+import com.easymother.configure.BaseInfo;
+import com.easymother.configure.MyApplication;
+import com.easymother.customview.MyListview;
+import com.easymother.customview.MyLoadingProgress;
+import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
+import com.easymother.utils.JsonUtils;
+import com.easymother.utils.NetworkHelper;
+import com.example.demobyimage.DensityUtil;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,36 +34,13 @@ import android.support.v4.view.ViewPager.LayoutParams;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
-import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView.ScaleType;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.alibaba.fastjson.JSON;
-import com.easymother.bean.NurseBaseBean;
-import com.easymother.bean.NurseSpaceDetailBean;
-import com.easymother.bean.TestBean;
-import com.easymother.bean.TopicItemBean;
-import com.easymother.configure.BaseInfo;
-import com.easymother.configure.MyApplication;
-import com.easymother.customview.MyListview;
-import com.easymother.customview.MyLoadingProgress;
-import com.easymother.main.R;
-import com.easymother.main.homepage.CommonListActivity;
-import com.easymother.utils.EasyMotherUtils;
-import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
-import com.easymother.utils.JsonUtils;
-import com.easymother.utils.NetworkHelper;
-import com.example.demobyimage.DensityUtil;
-import com.example.demobyimage.GalleryUrlActivity;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class HuLiShiZoneDetailActivity extends Activity {
 	private PullToRefreshScrollView scrollView;//下拉刷新控件

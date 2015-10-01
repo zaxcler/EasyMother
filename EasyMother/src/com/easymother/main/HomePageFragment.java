@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.bean.BannerTexts;
 import com.easymother.bean.Banners;
 import com.easymother.bean.CuiRuShi;
@@ -16,31 +17,31 @@ import com.easymother.bean.YueSao;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.ImageCycleView1;
-import com.easymother.customview.MyGridView;
 import com.easymother.customview.ImageCycleView1.ImageCycleViewListener;
+import com.easymother.customview.MyGridView;
+import com.easymother.customview.MyScrollView1;
+import com.easymother.customview.MySwipleReflashLayout;
 import com.easymother.customview.MyViewPager;
-import com.easymother.main.homepage.CuiRuShiListActivity;
+import com.easymother.main.homepage.CommonListActivity;
 import com.easymother.main.homepage.GridViewAdapter;
 import com.easymother.main.homepage.MyWishListActivity;
-import com.easymother.main.homepage.ShortOrderListActivity;
-import com.easymother.main.homepage.TuiJianFragment;
-import com.easymother.main.homepage.TuiJianFragment2;
-import com.easymother.main.homepage.YuYingShiListActivity;
 import com.easymother.main.homepage.YueSaoDetailActivity;
-import com.easymother.main.homepage.CommonListActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+//import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+//import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +67,7 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	private ImageCycleView1 homepage_ad;// 广告栏
 	private int stype = 0;// 0轮播图下面的是小圆点
 	private View scorllbar;// 滑动条
-	public PullToRefreshScrollView scrollView;//下拉刷新的scrollview
+//	public PullToRefreshScrollView scrollView;//下拉刷新的scrollview
 
 	private ViewFlipper homepage_notic;//公告
 	private LinearLayout yuesao;
@@ -100,6 +101,10 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	private ArrayList<String> mImageUrl = null;
 	private List<Banners> banners;
 	private LinearLayout childview;//scroll的子view
+//	private SwipeRefreshLayout swipeRefreshLayout;
+	private MySwipleReflashLayout swipeRefreshLayout;
+	private ScrollView scrollview;
+//	private MyScrollView1 scrollview;
 
 	public HomePageFragment() {
 	}
@@ -113,6 +118,13 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	}
 	
 	
+	private Handler handler=new Handler(){
+		
+		public void handleMessage(android.os.Message msg) {
+			
+		};
+	};
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -121,7 +133,9 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 
 	private void findView() {
 
-		scrollView=(PullToRefreshScrollView) homepage.findViewById(R.id.pulltoreflashscrollview);
+//		scrollView=(PullToRefreshScrollView) homepage.findViewById(R.id.pulltoreflashscrollview);
+		swipeRefreshLayout=(MySwipleReflashLayout) homepage.findViewById(R.id.pulltoreflashscrollview);
+		scrollview=(ScrollView) homepage.findViewById(R.id.scrollview);
 		homepage_area = (TextView) homepage.findViewById(R.id.home_page_area);
 		homepage_wish =  (ImageView) homepage.findViewById(R.id.home_page_wish);
 		homepage_ad = (ImageCycleView1) homepage.findViewById(R.id.home_page_ad);
@@ -155,6 +169,9 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		params.width = scrollbarLength;
 		scorllbar.setLayoutParams(params);
 		scrollbarMove(0);
+//		homepage_area.requestFocus();
+		scrollview.requestChildFocus(childview, homepage_ad);
+		
 		
 		
 		tuijian_cuirushi.setOnClickListener(this);
@@ -167,19 +184,27 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 		homepage_wish.setOnClickListener(this);
 		
 		
-		
-		
-		scrollView.setMode(Mode.PULL_FROM_START);//设置只能下拉刷新
-		scrollView.requestChildFocus(childview, homepage_ad);
-		scrollView.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
-
+		swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+			
 			@Override
-			public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+			public void onRefresh() {
 				loadData();
-				scrollView.onRefreshComplete();
-				
+				swipeRefreshLayout.setRefreshing(false);
 			}
 		});
+		swipeRefreshLayout.setColorSchemeColors(R.color.lightredwine);
+		
+//		scrollView.setMode(Mode.PULL_FROM_START);//设置只能下拉刷新
+//		scrollView.requestChildFocus(childview, homepage_ad);
+//		scrollView.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
+//
+//			@Override
+//			public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+//				loadData();
+//				scrollView.onRefreshComplete();
+//				
+//			}
+//		});
 
 	}
 	//获取网路数据

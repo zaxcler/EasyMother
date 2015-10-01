@@ -1,5 +1,6 @@
 package com.easymother.main.homepage;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,6 +12,7 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import com.alibaba.fastjson.JSON;
+import com.alidao.mama.R;
 import com.alidao.mama.WeiXinUtils;
 import com.easymother.bean.Certificate;
 import com.easymother.bean.DetailResult;
@@ -26,7 +28,6 @@ import com.easymother.customview.ImageZoom;
 import com.easymother.customview.MyGridView;
 import com.easymother.customview.MyListview;
 import com.easymother.customview.MyLoadingProgress;
-import com.easymother.main.R;
 import com.easymother.main.community.HuLiShiZoneDetailActivity;
 import com.easymother.main.my.CommentActivity;
 import com.easymother.main.my.CommentListActivity;
@@ -391,46 +392,46 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 			switch (v.getId()) {
 			case R.id.check1:
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/ys_project1.html",
-						R.drawable.pic1,"");
+						R.drawable.baby_photo,"");
 				break;
 			case R.id.check2:
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/ys_project2.html",
-						R.drawable.pic1,"");
+						R.drawable.baby_photo,"");
 				break;
 			case R.id.check3:
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/ys_project3.html",
-						R.drawable.pic1,"");
+						R.drawable.baby_photo,"");
 				break;
 			case R.id.check4:
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/ys_project4.html",
-						R.drawable.pic1,"");
+						R.drawable.baby_photo,"");
 				break;
 			case R.id.text1:
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project1.html",
-						R.drawable.pic1,"");
+						R.drawable.baby_photo,"");
 				break;
 			case R.id.text4:
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project2.html",
-						R.drawable.pic1,"");
+						R.drawable.baby_photo,"");
 				break;
 			case R.id.text6:
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project3.html",
-						R.drawable.pic1,"");
+						R.drawable.baby_photo,"");
 				break;
 			case R.id.text8:
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project4.html",
-						R.drawable.pic1,"");
+						R.drawable.baby_photo,"");
 				break;
 			case R.id.text10:
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project5.html",
-						R.drawable.pic1,"");
+						R.drawable.baby_photo,"");
 				break;
 			case R.id.text12:
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project6.html",
-						R.drawable.pic1,"");
+						R.drawable.baby_photo,"");
 			case R.id.text14:
 				EasyMotherUtils.showDialog(YueSaoDetailActivity.this, "file:///android_asset/yys_project7.html",
-						R.drawable.pic1,"");
+						R.drawable.baby_photo,"");
 				break;
 			
 			}
@@ -669,12 +670,31 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 			
 		}
 		
+		
+//		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//		try {
+//			Date date=dateFormat.parse("2015-10-7 00:00:00");
+//			Calendar today_c=Calendar.getInstance();
+//			today_c.setTime(date);
+//			int day=today_c.get(Calendar.DAY_OF_WEEK);
+//			int temp=day;
+//			if (day+3>7) {
+//				temp=(day+3)%7;
+//			}
+//			day4.setText("星期"+weeks.get(temp-1));
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		Date today=new Date(System.currentTimeMillis());
 		Calendar today_c=Calendar.getInstance();
 		today_c.setTime(today);
 		int day=today_c.get(Calendar.DAY_OF_WEEK);
-		int disitian=(day+3)%7;
-		day4.setText("星期"+weeks.get(disitian-1));
+		int temp=day;
+		if (day+3>7) {
+			temp=(day+3)%7;
+		}
+		day4.setText("星期"+weeks.get(temp-1));
 
 	}
 

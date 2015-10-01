@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:app="http://schemas.android.com/apk/res/com.easymother.main"
+     xmlns:app="http://schemas.android.com/apk/res/com.alidao.mama"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/boro_border"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_50"
         android:layout_marginRight="@dimen/dp_50" >
-    </com.easymother.customview.DoubleSeekBar>
+    </com.easymother.customview.DoubleSeekBar>  
    
 
     <TextView
@@ -52,16 +52,17 @@
         android:layout_marginTop="@dimen/dp_20"
         android:textColor="@color/liangboro" />
 
-     <com.easymother.customview.DoubleSeekBar
-        android:id="@+id/seekbar2"
-        app:type="money"
-        app:startText="50"
-        app:endText="150"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_50"
-        android:layout_marginRight="@dimen/dp_50" >
-    </com.easymother.customview.DoubleSeekBar>
+  <com.easymother.customview.DoubleSeekBar
+      android:id="@+id/seekbar2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/dp_50"
+      android:layout_marginRight="@dimen/dp_50"
+      app:endText="150"
+      app:startText="50"
+      app:type="money" >
+
+    </com.easymother.customview.DoubleSeekBar>  
     <Button
         android:id="@+id/submit"
         android:layout_width="@dimen/dp_100"

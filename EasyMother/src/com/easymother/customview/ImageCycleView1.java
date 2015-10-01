@@ -2,12 +2,13 @@ package com.easymother.customview;
 
 import java.util.ArrayList;
 
+import com.alidao.mama.R;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -122,34 +123,54 @@ public class ImageCycleView1 extends LinearLayout {
 		mAdvPager.setAdapter(mAdvAdapter);
 		if (isFrist)
 		{
-			autoScroll();
+//			autoScroll();
+			handler.postDelayed(mImageTimerTask, 3000);
 			isFrist =false;
 		}
 	}
 	
+	private Handler handler=new Handler();
 	
-
-	/**
-	 * 自动滚动
-	 */
-	private void autoScroll()
+	 private Runnable mImageTimerTask = new Runnable()
 	{
-		mAdvPager.postDelayed(new Runnable()
+		@Override
+		public void run()
 		{
-
-			@Override
-			public void run()
+			if (mImageViews != null)
 			{
-				if (!isDragging)
-				{
-					// 若用户没有拖拽，则自动滚动
+				if (!isDragging){
 					mAdvPager.setCurrentItem(mAdvPager.getCurrentItem() + 1);
+					
+					handler.postDelayed(mImageTimerTask, 3000);
 				}
-				mAdvPager.postDelayed(this, 3000);
+				
+				
 			}
-		}, 3000);
-	}
+		}
+	};
 	
+
+//	/**
+//	 * 自动滚动
+//	 */
+//	private void autoScroll()
+//	{
+//		mAdvPager.postDelayed(new Runnable()
+//		{
+//
+//			@Override
+//			public void run()
+//			{
+//				if (!isDragging)
+//				{
+//					// 若用户没有拖拽，则自动滚动
+//					mAdvPager.setCurrentItem(mAdvPager.getCurrentItem() + 1);
+//				}
+//				mAdvPager.postDelayed(this, 3000);
+//			}
+//		}, 3000);
+//	}
+//	
 	
 	/**
 	 * 轮播图片监听
@@ -301,39 +322,67 @@ public class ImageCycleView1 extends LinearLayout {
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		
+		getParent().requestDisallowInterceptTouchEvent(true);
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			firstY=getY();
-			firstX=getY();
-			
+//			firstY=getY();
+//			firstX=getY();
+			getParent().requestDisallowInterceptTouchEvent(true);
+			isDragging=true;
 			break;
 		case MotionEvent.ACTION_MOVE:
-			
-			Log.e("firstY", firstY+"");
-			Log.e("firstX", firstX+"");
-			
-			lastX=getX();
-			lastY=getY();
-			Log.e("lastX", lastX+"");
-			Log.e("lastY", lastY+"");
-			if (Math.abs(lastX-firstX)>Math.abs(lastY-firstY)) {
-				//阻止父组件截获事件
-				getParent().requestDisallowInterceptTouchEvent(true);
-			}
+			getParent().requestDisallowInterceptTouchEvent(true);
+			isDragging=true;
 			break;
+//			Log.e("firstY", firstY+"");
+//			Log.e("firstX", firstX+"");
+//			
+//			lastX=getX();
+//			lastY=getY();
+//			Log.e("lastX", lastX+"");
+//			Log.e("lastY", lastY+"");
+//			if (Math.abs(lastX-firstX)>Math.abs(lastY-firstY)) {
+//				//阻止父组件截获事件
+//				getParent().requestDisallowInterceptTouchEvent(true);
+//			}
+//			break;
 		case MotionEvent.ACTION_UP:
-			if (Math.abs(lastX-firstX)>Math.abs(lastY-firstY)) {
-				//阻止父组件截获事件
-				getParent().requestDisallowInterceptTouchEvent(true);
-			}
+			getParent().requestDisallowInterceptTouchEvent(true);
+			isDragging=false;
 			break;
-
-		default:
-			break;
+//			if (Math.abs(lastX-firstX)>Math.abs(lastY-firstY)) {
+//				//阻止父组件截获事件
+//				getParent().requestDisallowInterceptTouchEvent(true);
+//			}
+//			break;
+//
+//		default:
+//			break;
 		}
-		return false;
+//		return false;
+		return mAdvPager.onTouchEvent(event);
 	}
 	
+	/**
+	 * 触摸停止计时器，抬起启动计时器
+	 */
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent event)
+	{
+		if (event.getAction() == MotionEvent.ACTION_UP)
+		{
+			isDragging=false;
+			handler.postDelayed(mImageTimerTask, 3000);
+		}
+		else
+		{
+			isDragging=true;
+			handler.removeCallbacks(mImageTimerTask);
+			
+		}
+		return super.dispatchTouchEvent(event);
+	}
 	
 
 }

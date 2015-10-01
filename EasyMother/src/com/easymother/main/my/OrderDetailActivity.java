@@ -1,12 +1,12 @@
 package com.easymother.main.my;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
 import com.easymother.bean.Order;
@@ -15,7 +15,6 @@ import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.MyPopupWindow1;
 import com.easymother.customview.MyPopupWindow1.OnMyPopupWindowsClick;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
@@ -25,20 +24,15 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -205,7 +199,7 @@ public class OrderDetailActivity extends Activity {
 			
 			NurseJobBean nurseJobBean=orderDetail.getNurseJob();
 			
-			if (orderDetail.getNurseJob()!=null) {
+			if (orderDetail.getNurseJob()!=null&& orderDetail.getOrder()!=null) {
 				if (nurseJobBean.getShowPrice()!= null) {
 					price.setText(nurseJobBean.getShowPrice());
 				}else {
@@ -217,12 +211,12 @@ public class OrderDetailActivity extends Activity {
 				}else {
 					marketprice.setText("市场价：");
 				}
-				if (nurseJobBean.getJob() != null) {
+				if (nurseJobBean.getJob() != null && orderDetail.getOrder().getPrice()!=null ) {
 					if ("YS".equals(nurseJobBean.getJob())) {
 						nurse_type.setText("月嫂");
 						job="YS";
 						if (nurseJobBean.getPrice()!=null) {
-							paybyweek.setText(nurseJobBean.getPrice() *day+ "元");
+							paybyweek.setText(orderDetail.getOrder().getPrice() *day+ "元");
 						}
 						
 					}
@@ -232,7 +226,7 @@ public class OrderDetailActivity extends Activity {
 						nurse_type.setText("育婴师");
 						job="YYS";
 						if (nurseJobBean.getPrice()!=null) {
-							paybyweek.setText(nurseJobBean.getPrice() *day+ "元");
+							paybyweek.setText(orderDetail.getOrder().getPrice() *day+ "元");
 						}
 					}
 				}
@@ -241,7 +235,7 @@ public class OrderDetailActivity extends Activity {
 						nurse_type.setText("催乳师");
 						job="CRS";
 						if (nurseJobBean.getPrice()!=null) {
-							paybyweek.setText(nurseJobBean.getPrice()*1 + "元");
+							paybyweek.setText(orderDetail.getOrder().getPrice()*1 + "元");
 						}
 					}
 				}
@@ -250,7 +244,7 @@ public class OrderDetailActivity extends Activity {
 						nurse_type.setText("短期月嫂");
 						job="SHORT_YS";
 						if (nurseJobBean.getPrice()!=null) {
-							paybyweek.setText(nurseJobBean.getPrice() *7+ "元");
+							paybyweek.setText(orderDetail.getOrder().getPrice() *7+ "元");
 						}
 					}
 				}
@@ -259,7 +253,7 @@ public class OrderDetailActivity extends Activity {
 						nurse_type.setText("短期育婴师");
 						job="SHORT_YYS";
 						if (nurseJobBean.getPrice()!=null) {
-							paybyweek.setText(nurseJobBean.getPrice() *7+ "元");
+							paybyweek.setText(orderDetail.getOrder().getPrice() *7+ "元");
 						}
 					}
 				}

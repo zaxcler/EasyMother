@@ -8,11 +8,9 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import com.alibaba.fastjson.JSON;
-import com.alidao.mama.WeiXinUtils;
+import com.alidao.mama.R;
 import com.easymother.bean.ForumPost;
-import com.easymother.bean.ForumPostBean;
 import com.easymother.bean.NurseBaseBean;
-import com.easymother.bean.TestBean;
 import com.easymother.bean.TopicHelpDetailResult;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
@@ -21,19 +19,16 @@ import com.easymother.customview.MyGridView;
 import com.easymother.customview.MyListview;
 import com.easymother.customview.MyPopupWindow1;
 import com.easymother.customview.MyPopupWindow1.OnMyPopupWindowsClick;
-import com.easymother.main.R;
 import com.easymother.main.babytime.ImageAdapter;
-import com.easymother.main.my.CollectionListAdapter;
 import com.easymother.main.my.LoginOrRegisterActivity;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
-import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 import android.app.Activity;
 import android.content.Context;
@@ -43,13 +38,10 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -154,10 +146,16 @@ public class HuLiShiReplyListActivity extends Activity {
 				
 				if (text != null && !"".equals(text)) {
 					params.put("content", NetworkHelper.showFWBText(text));
+				}else {
+					Toast.makeText(HuLiShiReplyListActivity.this,
+							"请输入回复内容", Toast.LENGTH_SHORT).show();
+					return;
 				}
 				params.put("parentId", id);
 				if (postInfo.getContent()!=null) {
-					parentContent = Html.fromHtml(postInfo.getContent()).toString();
+					if (id==postInfo.getId()) {
+						parentContent = Html.fromHtml(postInfo.getContent()).toString();
+					}
 					params.put("parentContent", parentContent);
 				}else {
 					params.put("parentContent", "");
@@ -179,7 +177,7 @@ public class HuLiShiReplyListActivity extends Activity {
 							adapter.notifyDataSetChanged();
 						} else {
 							Toast.makeText(HuLiShiReplyListActivity.this,
-									JsonUtils.getRootResult(response).getMessage(), Toast.LENGTH_SHORT).show();
+									"回复失败", Toast.LENGTH_SHORT).show();
 						}
 					}
 
@@ -196,7 +194,7 @@ public class HuLiShiReplyListActivity extends Activity {
 						Context.INPUT_METHOD_SERVICE);
 //				if (imm.isActive()) {
 					// 如果开启
-					imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,
+					imm.toggleSoftInput(0,
 							InputMethodManager.HIDE_NOT_ALWAYS);
 					// 关闭软键盘，开启方法相同，这个方法是切换开启与关闭状态的
 //				}

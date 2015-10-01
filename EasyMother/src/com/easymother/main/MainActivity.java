@@ -4,6 +4,7 @@ package com.easymother.main;
 import java.io.FileNotFoundException;
 import java.util.Date;
 
+import com.alidao.mama.R;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.utils.EasyMotherUtils;
@@ -20,7 +21,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -251,8 +251,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 					Message message=Message.obtain();
 					message.what=2;
 					message.obj=bitmap;
-					babyTiemFragment.handler.sendMessage(message);
-//					BabyTiemFragment.background.setImageBitmap(bitmap);
+//					babyTiemFragment.handler.sendMessage(message);
+					BabyTiemFragment.background.setImageBitmap(bitmap);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -1,23 +1,20 @@
 package com.easymother.main.my;
 
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.Header;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.NurseJobBean;
-import com.easymother.bean.OrderListBean;
 import com.easymother.bean.OrderPayBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.ImageZoom;
 import com.easymother.customview.MyGridView;
-import com.easymother.main.R;
 import com.easymother.main.homepage.CommentImageAdapter;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
@@ -39,7 +36,6 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;

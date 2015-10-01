@@ -46,14 +46,19 @@
             android:background="@color/line" />
     </LinearLayout>
 
-    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/pulltoreflashscrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:id="@+id/pulltoreflash" >
+         >
+
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
         <LinearLayout
+            android:id="@+id/child"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -110,6 +115,7 @@
                 >
             </com.easymother.customview.MyListview>
         </LinearLayout>
-    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+       </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

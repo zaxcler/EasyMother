@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-import com.easymother.bean.Banners;
+import com.alidao.mama.R;
 import com.easymother.bean.Blocks;
 import com.easymother.bean.CommunityResult;
 import com.easymother.configure.BaseInfo;
@@ -19,19 +19,18 @@ import com.easymother.main.community.MessageContralActivity;
 import com.easymother.main.community.TopicAndAskListActivity;
 import com.easymother.main.community.YSYQActicvity;
 import com.easymother.utils.EasyMotherUtils;
-import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+//import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+//import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
-import android.R.integer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +39,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -54,8 +53,10 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 	private ArrayList<String> mImageUrl = null;
 	private ImageCycleView1 cycleView;// 广告栏
 	
-	public PullToRefreshScrollView pulltoreflash;
-	
+//	public PullToRefreshScrollView pulltoreflash;
+	public SwipeRefreshLayout pulltoreflash;
+	private ScrollView scrollview;
+	private LinearLayout child;
 	public CommunityPageFragment() {
 	}
 
@@ -70,24 +71,36 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 	}
 
 	private void findView(View view) {
-		pulltoreflash=(PullToRefreshScrollView) view.findViewById(R.id.pulltoreflash);
+		pulltoreflash=(SwipeRefreshLayout) view.findViewById(R.id.pulltoreflashscrollview);
 		cycleView = (ImageCycleView1) view.findViewById(R.id.imageCycleView2);
 		mylistview=(MyListview) view.findViewById(R.id.mylistview);
 		hulishizoom = (TextView) view.findViewById(R.id.hulishizone);
 		more = (TextView) view.findViewById(R.id.other);
 		message=(ImageView) view.findViewById(R.id.message);
+		scrollview=(ScrollView) view.findViewById(R.id.scrollview);
+		child=(LinearLayout) view.findViewById(R.id.child);
 
 	}
 
 	private void init() {
 //		pulltoreflash.scrollTo(0, 0);
 		loadData();
-		pulltoreflash.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
-
+//		pulltoreflash.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
+//
+//			@Override
+//			public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+//				loadData();
+//				refreshView.onRefreshComplete();
+//			}
+//		});
+		scrollview.requestChildFocus(child, cycleView);
+		pulltoreflash.setColorSchemeColors(R.color.lightredwine);
+		pulltoreflash.setOnRefreshListener(new OnRefreshListener() {
+			
 			@Override
-			public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+			public void onRefresh() {
 				loadData();
-				refreshView.onRefreshComplete();
+				pulltoreflash.setRefreshing(false);
 			}
 		});
 		hulishizoom.setOnClickListener(this);

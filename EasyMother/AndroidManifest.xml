@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.easymother.main"
-    android:versionCode="2"
+    package="com.alidao.mama"
+    android:versionCode="3"
     android:versionName="2.0" >
 
     <uses-sdk
@@ -32,7 +32,7 @@
         </activity>
          <activity android:name="com.alidao.mama.WelActivity" android:theme="@android:style/Theme.DeviceDefault.NoActionBar"></activity>
         <activity android:name="com.easymother.main.MainActivity"></activity>
-        <activity android:name="com.alidao.mama.YingDao"></activity>
+        <activity android:name="com.easymother.start.YingDao"></activity>
         <activity android:name="com.alipay.sdk.pay.demo.PayCRSActivity"></activity>
         <activity android:name="com.alipay.sdk.pay.demo.PayYSorYYSActivity"></activity>
         <!-- 点击多张图片滑动 -->
@@ -153,28 +153,19 @@
        
         
         <!-- 护理师空间列表 -->
-        <activity android:name="com.easymother.main.community.HuLiShiZoneListActivity" ></activity>
+        <activity android:name="com.easymother.main.community.HuLiShiZoneListActivity"></activity> 
         <!-- 护理师空间-->
-        <activity android:name="com.easymother.main.community.HuLiShiZoneDetailActivity" ></activity>
-       
+        <activity android:name="com.easymother.main.community.HuLiShiZoneDetailActivity"></activity> 
         <!-- 消息管理 -->
-        <activity android:name="com.easymother.main.community.MessageContralActivity" ></activity>
-        <!-- 互动回复 -->
-        <activity android:name="com.easymother.main.community.HuLiShiReplyListActivity" ></activity>
-        <!-- 医食衣趣 -->
-        <activity android:name="com.easymother.main.community.YSYQActicvity" ></activity>
-        <!-- 文章列表 -->
-        <activity android:name="com.easymother.main.community.ArticleListActivity" ></activity>
-        <!-- 文章详情 -->
-        <activity android:name="com.easymother.main.community.ArticleActivity" ></activity>
-        <!-- 话题列表 -->
-        <activity android:name="com.easymother.main.community.TopicAndAskListActivity" ></activity>
-        <!-- 发布话题-->
-        <activity android:name="com.easymother.main.community.TopicOrHelpEditActivity" ></activity>
-       
-        
+        <activity android:name="com.easymother.main.community.MessageContralActivity"></activity> <!--互动回复 -->
+        <activity android:name="com.easymother.main.community.HuLiShiReplyListActivity"></activity><!--医食衣趣-->
+        <activity android:name="com.easymother.main.community.YSYQActicvity"></activity><!--文章列表 -->
+        <activity android:name="com.easymother.main.community.ArticleListActivity"></activity><!--文章详情 -->
+        <activity android:name="com.easymother.main.community.ArticleActivity"></activity><!--话题列表 -->
+        <activity android:name="com.easymother.main.community.TopicAndAskListActivity"></activity><!--发布话题-->
+        <activity android:name="com.easymother.main.community.TopicOrHelpEditActivity"></activity>  
         <!-- 我的心愿单 -->
-        <activity android:name="com.easymother.main.homepage.MyWishListActivity" ></activity>
+        <activity android:name="com.easymother.main.homepage.MyWishListActivity"></activity>
     </application>
 
 </manifest>

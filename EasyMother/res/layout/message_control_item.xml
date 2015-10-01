@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
-        android:src="@drawable/baby" />
+        android:src="@drawable/photo" />
 
     <TextView
         android:id="@+id/user_name"
@@ -56,24 +56,26 @@
         android:src="@drawable/message" />
 
     <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:padding="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_5"
+        android:background="@color/lightlightboro"
+        android:text="雪蛤" />
+
+    <TextView
         android:id="@+id/create_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/content"
+        android:layout_toRightOf="@+id/imageView1"
         android:paddingBottom="@dimen/dp_10"
         android:text="5月15日 16：05"
         android:textColor="@color/boroblacktext"
         android:textSize="@dimen/sp_10" />
-
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dp_5"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
-        android:text="雪蛤" />
 
 </RelativeLayout>

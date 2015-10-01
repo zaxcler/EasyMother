@@ -19,8 +19,7 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 
-import com.easymother.main.R;
-
+import com.alidao.mama.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**

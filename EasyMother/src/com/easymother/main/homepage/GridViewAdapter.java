@@ -2,12 +2,12 @@ package com.easymother.main.homepage;
 
 import java.util.List;
 
+import com.alidao.mama.R;
 import com.easymother.bean.CuiRuShi;
 import com.easymother.bean.YuYingShi;
 import com.easymother.bean.YueSao;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.ViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;

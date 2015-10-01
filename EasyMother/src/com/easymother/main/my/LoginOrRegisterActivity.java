@@ -6,12 +6,11 @@ import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.bean.BabyTimeResult;
 import com.easymother.bean.LoginResult;
-import com.easymother.bean.UserInfo;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
@@ -20,7 +19,6 @@ import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;

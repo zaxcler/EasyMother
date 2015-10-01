@@ -7,18 +7,13 @@ import java.util.List;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.configure.BaseInfo;
-import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
-import com.easymother.main.R.id;
-import com.easymother.main.babytime.BabyTimeActivity;
-import com.easymother.main.babytime.BabyTimeEditActivity;
 import com.easymother.main.homepage.CommentImageAdapter;
-import com.easymother.main.my.LoginOrRegisterActivity;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
-import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -30,8 +25,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -93,13 +88,14 @@ public class TopicOrHelpEditActivity extends Activity {
 							@Override
 							public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 								super.onSuccess(statusCode, headers, response);
-								TopicOrHelpEditActivity.this.finish();
+								
 								if (JsonUtils.getRootResult(response).getIsSuccess()) {
 									Toast.makeText(TopicOrHelpEditActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
 									TopicOrHelpEditActivity.this.setResult(Activity.RESULT_OK);//返回状态给上一级
 								}else {
 									Toast.makeText(TopicOrHelpEditActivity.this, "发布失败", Toast.LENGTH_SHORT).show();
 								}
+								TopicOrHelpEditActivity.this.finish();
 							}
 							@Override
 							public void onFailure(int statusCode, Header[] headers, String responseString,

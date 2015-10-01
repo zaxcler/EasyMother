@@ -38,6 +38,8 @@ public class MyReflashLayout implements OnScrollListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 //	public class MyReflashLayout extends SwipeRefreshLayout implements OnScrollListener{
 //	
 //	/** 

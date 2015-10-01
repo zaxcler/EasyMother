@@ -19,8 +19,9 @@ public class TimeCounter {
 		long endtime=endDate.getTime();
 		String time = null;
 		long result=(endtime-begaintime)/1000;
-
-		if (result<60) {
+		if (result<=0) {
+			time="刚刚";
+		}else if (result<60) {
 			time=result+"秒前";
 			
 		}else if (result>=60 && result<3600) {

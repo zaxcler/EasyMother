@@ -1,6 +1,7 @@
 package com.example.demobyimage;
 
-import com.easymother.main.R;
+
+import com.alidao.mama.R;
 
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;

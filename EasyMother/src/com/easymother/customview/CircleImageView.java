@@ -1,7 +1,8 @@
 package com.easymother.customview;
 
 
-import com.easymother.main.R;
+
+import com.alidao.mama.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;

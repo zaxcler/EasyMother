@@ -7,10 +7,10 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import com.alidao.mama.R;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.MainActivity;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 

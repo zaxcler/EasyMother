@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
+    android:layout_height="match_parent"
     android:background="@color/background"
-    android:orientation="vertical">
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
-         >
+        android:descendantFocusability="blocksDescendants" >
+
         <View
-            android:id="@+id/view2" 
+            android:id="@+id/view2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="@dimen/dp_5"
             android:layout_below="@+id/circleImageView1"
-            android:background="@color/lightlightboro"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
-            />
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@color/lightlightboro" />
 
         <TextView
             android:id="@+id/content"
@@ -27,80 +28,80 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/circleImageView1"
             android:layout_below="@+id/view2"
-            android:layout_marginTop="@dimen/dp_10"
-            android:textColor="@color/liangboro"
-            android:textSize="@dimen/dp_16"
             android:layout_marginBottom="@dimen/dp_10"
-            android:text="第一次用了于嫂空间" />
-       
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="第一次用了于嫂空间"
+            android:textColor="@color/liangboro"
+            android:textSize="@dimen/dp_16" />
 
-        <com.easymother.customview.MyGridView 
+        <com.easymother.customview.MyGridView
             android:id="@+id/pictures"
-            android:numColumns="3"
-            android:gravity="center"
-            android:visibility="gone"
-            android:verticalSpacing="@dimen/dp_5"
-            android:horizontalSpacing="@dimen/dp_5"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/content"
-            >
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:gravity="center"
+            android:horizontalSpacing="@dimen/dp_5"
+            android:numColumns="3"
+            android:verticalSpacing="@dimen/dp_5"
+            android:visibility="gone" >
         </com.easymother.customview.MyGridView>
-        
 
         <View
             android:id="@+id/view1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/pictures"
-            android:layout_marginTop="@dimen/dp_10"
-            />
-        <LinearLayout 
+            android:layout_marginTop="@dimen/dp_10" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/view1"
-            android:orientation="horizontal">
-              <TextView
-            android:id="@+id/share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingRight="@dimen/dp_30"
-            android:paddingLeft="@dimen/dp_30"
-            android:paddingTop="@dimen/dp_5"
-            android:paddingBottom="@dimen/dp_10"
-            android:gravity="center"
-            android:textColor="@color/liangboro"
-            android:drawableLeft="@drawable/share"
-            android:text="分享" />
-              <TextView
-            android:id="@+id/msgAmoount"
-             android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/collect_"
-           android:paddingRight="@dimen/dp_30"
-            android:paddingLeft="@dimen/dp_30"
-            android:paddingTop="@dimen/dp_5"
-            android:textColor="@color/liangboro"
-            android:paddingBottom="@dimen/dp_10"
-            android:gravity="center"
-             />
-              <TextView
-            android:id="@+id/upAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="@dimen/dp_30"
-            android:paddingLeft="@dimen/dp_30"
-            android:paddingTop="@dimen/dp_5"
-            android:textColor="@color/liangboro"
-             android:layout_weight="1"
-             android:gravity="center"
-            android:paddingBottom="@dimen/dp_10"
-            android:drawableLeft="@drawable/xin_1"
-            android:text="24" />
+            android:orientation="horizontal" 
+            android:descendantFocusability="blocksDescendants" >
+
+            <TextView
+                android:id="@+id/share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/share"
+                android:gravity="center"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_30"
+                android:paddingTop="@dimen/dp_5"
+                android:text="分享"
+                android:textColor="@color/liangboro" />
+
+            <TextView
+                android:id="@+id/msgAmoount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/collect_"
+                android:gravity="center"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_30"
+                android:paddingTop="@dimen/dp_5"
+                android:textColor="@color/liangboro" />
+
+            <TextView
+                android:id="@+id/upAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/xin_1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_30"
+                android:paddingTop="@dimen/dp_5"
+                android:text="24"
+                android:textColor="@color/liangboro" />
         </LinearLayout>
 
         <com.easymother.customview.CircleImageView
@@ -118,8 +119,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_10"
             android:layout_alignTop="@+id/circleImageView1"
+            android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/lightredwine_solid"
             android:text="月嫂"
             android:textColor="@color/white" />
@@ -128,23 +129,23 @@
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/circleImageView1"
             android:layout_alignLeft="@+id/name"
             android:layout_below="@+id/nurse_type"
-            android:layout_alignBottom="@id/circleImageView1"
             android:layout_marginTop="14dp"
             android:text="2015-08-09"
             android:textColor="@color/borotext"
             android:textSize="@dimen/sp_12" />
+
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="22dp"
             android:layout_above="@id/time"
+            android:layout_marginLeft="22dp"
             android:layout_toRightOf="@+id/circleImageView1"
             android:text="杨烨"
             android:textSize="@dimen/sp_16" />
-
     </RelativeLayout>
 
 </LinearLayout>

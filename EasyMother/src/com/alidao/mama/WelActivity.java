@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import com.alidao.mama.ScrollLayout.PageListener2;
 import com.easymother.main.MainActivity;
-import com.easymother.main.R;
 
 import android.app.Activity;
 import android.content.Context;

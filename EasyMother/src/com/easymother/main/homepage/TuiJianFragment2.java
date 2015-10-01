@@ -1,18 +1,15 @@
 package com.easymother.main.homepage;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.alidao.mama.R;
 import com.easymother.bean.CuiRuShi;
-import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.YuYingShi;
 import com.easymother.bean.YueSao;
 import com.easymother.customview.MyGridView;
-import com.easymother.main.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;

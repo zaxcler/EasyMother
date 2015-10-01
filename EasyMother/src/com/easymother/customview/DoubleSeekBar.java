@@ -12,7 +12,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import java.math.BigDecimal;
-import com.easymother.main.R;
+
+import com.alidao.mama.R;
 public class DoubleSeekBar extends View {
 	private static final String TAG = "SeekBarPressure";
 	private static final int CLICK_ON_LOW = 1; // 点击在前滑块上

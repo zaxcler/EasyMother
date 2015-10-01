@@ -6,21 +6,20 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import com.alidao.mama.R;
+import com.easymother.bean.NewsBean;
+import com.easymother.configure.BaseInfo;
+import com.easymother.configure.MyApplication;
+import com.easymother.customview.CircleImageView;
+import com.easymother.utils.CommonAdapter;
+import com.easymother.utils.ViewHolder;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import android.content.Context;
 import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.easymother.bean.NewsBean;
-import com.easymother.bean.TestBean;
-import com.easymother.configure.BaseInfo;
-import com.easymother.configure.MyApplication;
-import com.easymother.customview.CircleImageView;
-import com.easymother.main.R;
-import com.easymother.utils.CommonAdapter;
-import com.easymother.utils.ViewHolder;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class CollectionListAdapter extends CommonAdapter<NewsBean> {
 	private List<NewsBean> list;
@@ -32,7 +31,7 @@ public class CollectionListAdapter extends CommonAdapter<NewsBean> {
 		super(context, list, resource);
 		this.list=list;
 	}
-
+	
 	@Override
 	public void setDataToItem(ViewHolder holder, NewsBean t) {
 		

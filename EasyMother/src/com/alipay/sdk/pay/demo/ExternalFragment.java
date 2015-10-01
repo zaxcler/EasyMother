@@ -1,6 +1,7 @@
 package com.alipay.sdk.pay.demo;
 
-import com.easymother.main.R;
+
+import com.alidao.mama.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

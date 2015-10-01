@@ -2,15 +2,13 @@ package com.easymother.main.homepage;
 
 import java.util.List;
 
-
+import com.alidao.mama.R;
+import com.easymother.bean.TestBean;
+import com.easymother.utils.CommonAdapter;
+import com.easymother.utils.ViewHolder;
 
 import android.content.Context;
 import android.view.View;
-
-import com.easymother.bean.TestBean;
-import com.easymother.main.R;
-import com.easymother.utils.CommonAdapter;
-import com.easymother.utils.ViewHolder;
 
 
 /**

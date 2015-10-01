@@ -1,7 +1,7 @@
 package com.easymother.main.my;
 
+import com.alidao.mama.R;
 import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.RegularUtils;
 
@@ -13,7 +13,6 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class ForgetPasswordActivity1 extends Activity {

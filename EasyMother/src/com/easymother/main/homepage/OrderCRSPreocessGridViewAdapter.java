@@ -7,18 +7,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import android.content.Context;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-
+import com.alidao.mama.R;
 import com.easymother.bean.Order;
-import com.easymother.bean.TestBean;
-import com.easymother.configure.MyApplication;
-import com.easymother.main.R;
 import com.easymother.utils.CommonAdapter;
 import com.easymother.utils.TimeCounter;
 import com.easymother.utils.ViewHolder;
+
+import android.content.Context;
+import android.view.View;
+import android.widget.TextView;
 
 /**
  * 时间表的gridview的适配器

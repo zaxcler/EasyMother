@@ -1,6 +1,6 @@
 package com.easymother.utils;
 
-import com.easymother.main.R;
+import com.alidao.mama.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;

@@ -1,8 +1,8 @@
 package com.easymother.main.homepage;
 
+import com.alidao.mama.R;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.MyGridView;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 
 import android.app.Activity;
@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.GridView;
 
 public class OrderCRSProcess3 extends Activity {
 	private Button comfirm;//开始签约

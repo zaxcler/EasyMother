@@ -2,8 +2,11 @@ package com.easymother.main;
 
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
+
 import org.apache.http.Header;
 import org.json.JSONObject;
+
+import com.alidao.mama.R;
 import com.easymother.bean.BabyTimeResult;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
@@ -261,11 +264,11 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 	@Override
 	public void onResume(){
 		super.onResume();
-		String backgroundimgaename=MyApplication.preferences.getString("baby_background", "");
-		Log.e("baby_background", backgroundimgaename);
-		if (backgroundimgaename!=null&&!"".equals(backgroundimgaename)) {
-			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+backgroundimgaename, background);
-		}
+//		String backgroundimgaename=MyApplication.preferences.getString("baby_background", "");
+//		Log.e("baby_background", backgroundimgaename);
+//		if (backgroundimgaename!=null&&!"".equals(backgroundimgaename)) {
+//			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+backgroundimgaename, background);
+//		}
 		String babyimgaename=MyApplication.preferences.getString("baby_image", "");
 		if (babyimgaename!=null&&!"".equals(babyimgaename)) {
 			ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+babyimgaename, circleImageView);
@@ -283,7 +286,7 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode==Activity.RESULT_OK) {
-			Log.e("调用", "-----------");
+			Log.e("调用l", "-----------");
 			switch (requestCode) {
 			case BabyTiemFragment.CHOOSE_PHOTO:
 				try {

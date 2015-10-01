@@ -2,7 +2,6 @@ package com.alidao.mama;
 
 import com.easymother.customview.ImageZoom;
 import com.easymother.main.MainActivity;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 
 import android.app.Activity;

@@ -3,18 +3,16 @@ package com.easymother.main.community;
 import java.util.List;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.easymother.bean.ForumPostBean;
+import com.alidao.mama.R;
 import com.easymother.bean.TopicHelpResult;
 import com.easymother.bean.TopicItemBean;
 import com.easymother.configure.BaseInfo;
-import com.easymother.customview.MyGridView;
 import com.easymother.customview.MyListview;
 import com.easymother.customview.MyPopupWindow1;
 import com.easymother.customview.MyPopupWindow1.OnMyPopupWindowsClick;
-import com.easymother.main.R;
-import com.easymother.main.my.TopicListActivity;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -37,7 +35,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.AbsListView;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,8 +57,8 @@ public class TopicAndAskListActivity extends Activity implements OnClickListener
 	private String flag = "topic";// 是话题还是求助的标记
 	private final int TOPIC = 0;// 话题
 	private final int HELP = 1;// 帮助
-	private int pageNo = 1;
-	boolean canLoad=true;
+	private int pageNo = 2;
+	boolean canLoad = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +79,7 @@ public class TopicAndAskListActivity extends Activity implements OnClickListener
 		more = (ImageView) findViewById(R.id.more);
 		pulltoreflash = (PullToRefreshScrollView) findViewById(R.id.pulltoreflash);
 		mylistview = (MyListview) findViewById(R.id.mylistview);
-//		mylistview1 = (MyListview) findViewById(R.id.mylistview1);
+		// mylistview1 = (MyListview) findViewById(R.id.mylistview1);
 	}
 
 	private void init() {
@@ -100,18 +97,16 @@ public class TopicAndAskListActivity extends Activity implements OnClickListener
 
 			@Override
 			public void onPullDownToRefresh(PullToRefreshBase refreshView) {
-				if (canLoad) {
-//					pageNo++;
+				
 					loadData();
-				}
 				refreshView.onRefreshComplete();
 			}
 
 			@Override
 			public void onPullUpToRefresh(PullToRefreshBase refreshView) {
+				
 				if (canLoad) {
-//					pageNo++;
-					loadData();
+					loadMore(pageNo);
 				}
 				refreshView.onRefreshComplete();
 			}
@@ -119,11 +114,10 @@ public class TopicAndAskListActivity extends Activity implements OnClickListener
 	}
 
 	private void loadData() {
-		Log.e("pageNo", pageNo+"--------");
 		RequestParams params = new RequestParams();
 		params.put("blockId", blockId);
-		params.put("pageNo", pageNo);
-		
+		params.put("pageNo", 1);
+		params.put("pageSize", 10);
 		NetworkHelper.doGet(BaseInfo.TOPIC_LIST, params, new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -133,14 +127,12 @@ public class TopicAndAskListActivity extends Activity implements OnClickListener
 					bindDate(result);
 				} else {
 					Toast.makeText(TopicAndAskListActivity.this, "获取数据失败", Toast.LENGTH_SHORT).show();
-					pageNo = 1;
 				}
 			}
 
 			@Override
 			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 				super.onFailure(statusCode, headers, responseString, throwable);
-				pageNo = 1;
 				Toast.makeText(TopicAndAskListActivity.this, "连接服务器失败", Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -152,101 +144,113 @@ public class TopicAndAskListActivity extends Activity implements OnClickListener
 	 * @param result
 	 */
 	protected void bindDate(TopicHelpResult result1) {
-		
-		Log.e("haha", ""+"--------");
-		List<TopicItemBean> list = null;
-		
-		if ("topic".equals(flag)) {
-			list = result1.getTopics();
-			if (list != null) {
-				if (adapter == null) {
-					adapter = new HuLiShiAdapter(this, list, R.layout.activity_mypage_topic_item);
-				}
-				
-				if (list.size()==0 ) {
-					if (pageNo==1) {
-						if (notice == null) {
-							notice = new TextView(TopicAndAskListActivity.this);
-							notice.setText("没有信息哟！");
-							notice.setGravity(Gravity.CENTER_HORIZONTAL);
-							AbsListView.LayoutParams params = new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT,
-									LayoutParams.WRAP_CONTENT);
-							notice.setLayoutParams(params);
-							notice.setBackgroundColor(getResources().getColor(R.color.background));
-							notice.setTextColor(getResources().getColor(R.color.boroblacktext));
-							mylistview.addFooterView(notice);
-						}
-					}
-					canLoad=false;
-					pageNo=1;
-				}
-				if (list.size() > 0) {
-					
-					if (pageNo>1) {
-						adapter.addList(list);
-					}
-					if (notice != null) {
-						mylistview.removeFooterView(notice);
-					}
-//					if (pageNo==1) {
-//						adapter.clearList();
-//						adapter.addList(list);
-//					}
-//					adapter.notifyDataSetChanged();
-					canLoad=true;
-					pageNo++;
-					
-				}
-				mylistview.startLayoutAnimation();
-				mylistview.setAdapter(adapter);
+
+		List<TopicItemBean> list1 = null;
+		List<TopicItemBean> list2 = null;
+
+		list1 = result1.getTopics();
+		if (list1 != null) {
+			if (adapter == null) {
+				adapter = new HuLiShiAdapter(this, list1, R.layout.activity_mypage_topic_item);
+			}else {
+				adapter.clearList();
+				adapter.addList(list1);
 			}
-		
-		} 
-		else if ("help".equals(flag)) {
-			list = result1.getHelps();
-			if (list != null) {
-				if (adapter1 == null) {
-					adapter1 = new HuLiShiAdapter(this, list, R.layout.activity_mypage_topic_item);
-				}
-				
-				if (list.size()==0 ) {
-					if (pageNo==1) {
-						if (notice == null) {
-							notice = new TextView(TopicAndAskListActivity.this);
-							notice.setText("没有信息哟！");
-							notice.setGravity(Gravity.CENTER_HORIZONTAL);
-							AbsListView.LayoutParams params = new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT,
-									LayoutParams.WRAP_CONTENT);
-							notice.setLayoutParams(params);
-							notice.setBackgroundColor(getResources().getColor(R.color.background));
-							notice.setTextColor(getResources().getColor(R.color.boroblacktext));
-							mylistview.addFooterView(notice);
-						}
-					}
-					canLoad=false;
-					pageNo=1;
-				}
-				if (list.size() > 0) {
-					
-					if (pageNo>1) {
-						adapter1.addList(list);
-//						adapter1.notifyDataSetChanged();
-					}
-					if (notice != null) {
-						mylistview.removeFooterView(notice);
-					}
-					if (pageNo==1) {
-//						adapter.clearList();
-//						adapter.addList(list);
-					}
-					canLoad=true;
-					pageNo++;
-					
-				}
-				mylistview.startLayoutAnimation();
-				mylistview.setAdapter(adapter1);
+			mylistview.startLayoutAnimation();
+
+		}
+
+		list2 = result1.getHelps();
+		if (list2 != null) {
+			if (adapter1 == null) {
+				adapter1 = new HuLiShiAdapter(this, list2, R.layout.activity_mypage_topic_item);
+			}else {
+				adapter1.clearList();
+				adapter1.addList(list2);
+			}
+			mylistview.startLayoutAnimation();
+
+		}
+		if (list2==null && list1==null) {
+			if (notice == null) {
+				notice = new TextView(TopicAndAskListActivity.this);
+				notice.setText("没有信息哟！");
+				notice.setGravity(Gravity.CENTER_HORIZONTAL);
+				AbsListView.LayoutParams params = new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT,
+						LayoutParams.WRAP_CONTENT);
+				notice.setLayoutParams(params);
+				notice.setBackgroundColor(getResources().getColor(R.color.background));
+				notice.setTextColor(getResources().getColor(R.color.boroblacktext));
+				mylistview.addFooterView(notice);
 			}
 		}
+		if ("topic".equals(flag)) {
+			mylistview.setAdapter(adapter);
+			clearState();
+			topic.setBackgroundDrawable(getResources().getDrawable(R.drawable.white_half_solid1));
+			topic.setBackgroundDrawable(getResources().getDrawable(R.drawable.lightredwine_solid2));
+			topic.setTextColor(getResources().getColor(R.color.white));
+		} else if ("help".equals(flag)) {
+			mylistview.setAdapter(adapter1);
+			clearState();
+			ask.setBackgroundDrawable(getResources().getDrawable(R.drawable.white_half_solid2));
+			ask.setBackgroundDrawable(getResources().getDrawable(R.drawable.lightredwine_solid3));
+			ask.setTextColor(getResources().getColor(R.color.white));
+		}
+
+	}
+
+	private void loadMore(int pageNo) {
+		RequestParams params=new RequestParams();
+		params.put("blockId", blockId);
+		params.put("pageNo", pageNo);
+		NetworkHelper.doGet(BaseInfo.TOPIC_LIST, params, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+				super.onSuccess(statusCode, headers, response);
+				if (JsonUtils.getRootResult(response).getIsSuccess()) {
+					result = JsonUtils.getResult(response, TopicHelpResult.class);
+					if (result!=null) {
+						if ("topic".equals(flag)) {
+							if (result.getTopics()!=null) {
+								adapter.addList(result.getTopics());
+								if (result.getTopics().size()>0) {
+									if (notice!=null) {
+										mylistview.removeFooterView(notice);
+									}
+									canLoad=true;
+									TopicAndAskListActivity.this.pageNo++;
+								}else {
+									TopicAndAskListActivity.this.pageNo=2;
+									canLoad=false;
+								}
+								adapter.notifyDataSetChanged();
+							}
+						}else if("help".equals(flag)){
+							if (result.getHelps()!=null) {
+								adapter1.addList(result.getHelps());
+								if (result.getTopics().size()>0) {
+									if (notice!=null) {
+										mylistview.removeFooterView(notice);
+									}
+									TopicAndAskListActivity.this.pageNo++;
+								}else {
+									TopicAndAskListActivity.this.pageNo=2;
+								}
+								adapter1.notifyDataSetChanged();
+							}
+						}
+					}
+					
+				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+				super.onFailure(statusCode, headers, throwable, errorResponse);
+				TopicAndAskListActivity.this.pageNo=2;
+				canLoad=false;
+			}
+		});
 
 	}
 
@@ -262,7 +266,7 @@ public class TopicAndAskListActivity extends Activity implements OnClickListener
 			topic.setBackgroundDrawable(getResources().getDrawable(R.drawable.white_half_solid1));
 			topic.setBackgroundDrawable(getResources().getDrawable(R.drawable.lightredwine_solid2));
 			flag = "topic";
-			pageNo=0;
+			pageNo = 2;
 			topic.setTextColor(getResources().getColor(R.color.white));
 			// adapter.clearList();
 			loadData();
@@ -272,7 +276,7 @@ public class TopicAndAskListActivity extends Activity implements OnClickListener
 			ask.setBackgroundDrawable(getResources().getDrawable(R.drawable.white_half_solid2));
 			ask.setBackgroundDrawable(getResources().getDrawable(R.drawable.lightredwine_solid3));
 			flag = "help";
-			pageNo=0;
+			pageNo = 2;
 			ask.setTextColor(getResources().getColor(R.color.white));
 			// adapter.clearList();
 			loadData();
@@ -309,7 +313,10 @@ public class TopicAndAskListActivity extends Activity implements OnClickListener
 			break;
 		}
 	}
-
+	
+	
+	
+	
 	/*
 	 * 清楚选中状态
 	 */
@@ -322,22 +329,24 @@ public class TopicAndAskListActivity extends Activity implements OnClickListener
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
+
 		if (resultCode == RESULT_OK) {
 			switch (requestCode) {
 			case TOPIC:
 				flag = "topic";
-				pageNo = 1;
+				pageNo = 2;
 				loadData();
+
 				break;
 			case HELP:
 				flag = "help";
-				pageNo = 1;
+				pageNo = 2;
 				loadData();
 				break;
 
 			}
 		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 }

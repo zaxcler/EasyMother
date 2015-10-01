@@ -3,6 +3,7 @@ package com.easymother.main;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.bean.UserInfo;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
@@ -14,11 +15,9 @@ import com.easymother.main.my.CollectListActivity;
 import com.easymother.main.my.ContactActivity;
 import com.easymother.main.my.InfomationActivity;
 import com.easymother.main.my.LoginOrRegisterActivity;
-import com.easymother.main.my.OrderDetailActivity;
 import com.easymother.main.my.PayListActivity;
 import com.easymother.main.my.SettingActivity;
 import com.easymother.main.my.TopicListActivity;
-import com.easymother.main.my.TopicReplyListActivity;
 import com.easymother.main.my.VersionActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
@@ -31,17 +30,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager.OnActivityResultListener;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MyPageFragment extends Fragment implements OnClickListener {
 	private CircleImageView circleImageView;// 用户头像点击登录（未登录状态）登录状态进入个人信息

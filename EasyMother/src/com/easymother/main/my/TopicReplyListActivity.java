@@ -6,12 +6,12 @@ import java.util.List;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.alidao.mama.R;
 import com.easymother.bean.NurseBaseBean;
 import com.easymother.bean.TestBean;
 import com.easymother.bean.TopicHelpDetailResult;
 import com.easymother.configure.BaseInfo;
 import com.easymother.customview.MyListview;
-import com.easymother.main.R;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;

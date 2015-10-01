@@ -8,7 +8,7 @@
         android:id="@+id/imageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/w1"
+        android:src="@drawable/wc1"
         android:scaleType="fitXY"
          />
 
