@@ -63,7 +63,7 @@
         android:layout_height="match_parent"
          >
 
-        <ScrollView
+        <com.easymother.customview.MyScrollView
             android:id="@+id/scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
@@ -339,7 +339,7 @@
                 -->
 
             </LinearLayout>
-        </ScrollView>
+        </com.easymother.customview.MyScrollView>
     </com.easymother.customview.MySwipleReflashLayout>
     <!-- </com.handmark.pulltorefresh.library.PullToRefreshScrollView> -->
 

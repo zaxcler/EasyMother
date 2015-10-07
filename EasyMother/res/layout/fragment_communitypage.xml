@@ -46,13 +46,13 @@
             android:background="@color/line" />
     </LinearLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <com.easymother.customview.MySwipleReflashLayout
         android:id="@+id/pulltoreflashscrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
          >
 
-        <ScrollView
+        <com.easymother.customview.MyScrollView
             android:id="@+id/scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
@@ -115,7 +115,7 @@
                 >
             </com.easymother.customview.MyListview>
         </LinearLayout>
-       </ScrollView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+       </com.easymother.customview.MyScrollView>
+    </com.easymother.customview.MySwipleReflashLayout>
 
 </LinearLayout>

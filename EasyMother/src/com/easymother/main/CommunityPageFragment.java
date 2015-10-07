@@ -13,6 +13,8 @@ import com.easymother.configure.BaseInfo;
 import com.easymother.customview.ImageCycleView1;
 import com.easymother.customview.ImageCycleView1.ImageCycleViewListener;
 import com.easymother.customview.MyListview;
+import com.easymother.customview.MyScrollView;
+import com.easymother.customview.MySwipleReflashLayout;
 import com.easymother.main.community.CommunityAdapter;
 import com.easymother.main.community.HuLiShiZoneListActivity;
 import com.easymother.main.community.MessageContralActivity;
@@ -54,8 +56,10 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 	private ImageCycleView1 cycleView;// 广告栏
 	
 //	public PullToRefreshScrollView pulltoreflash;
-	public SwipeRefreshLayout pulltoreflash;
-	private ScrollView scrollview;
+//	public SwipeRefreshLayout pulltoreflash;
+	public MySwipleReflashLayout pulltoreflash;
+//	private ScrollView scrollview;
+	private MyScrollView scrollview;
 	private LinearLayout child;
 	public CommunityPageFragment() {
 	}
@@ -71,13 +75,13 @@ public class CommunityPageFragment extends Fragment implements OnClickListener {
 	}
 
 	private void findView(View view) {
-		pulltoreflash=(SwipeRefreshLayout) view.findViewById(R.id.pulltoreflashscrollview);
+		pulltoreflash=(MySwipleReflashLayout) view.findViewById(R.id.pulltoreflashscrollview);
 		cycleView = (ImageCycleView1) view.findViewById(R.id.imageCycleView2);
 		mylistview=(MyListview) view.findViewById(R.id.mylistview);
 		hulishizoom = (TextView) view.findViewById(R.id.hulishizone);
 		more = (TextView) view.findViewById(R.id.other);
 		message=(ImageView) view.findViewById(R.id.message);
-		scrollview=(ScrollView) view.findViewById(R.id.scrollview);
+		scrollview=(MyScrollView) view.findViewById(R.id.scrollview);
 		child=(LinearLayout) view.findViewById(R.id.child);
 
 	}

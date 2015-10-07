@@ -1,7 +1,9 @@
 package com.easymother.main;
 
 import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -20,6 +22,7 @@ import com.easymother.main.my.LoginOrRegisterActivity;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
+import com.easymother.utils.TimeCounter;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -183,8 +186,24 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 			if (result.getBabyInfo().getBabyName()!=null&&!"".equals(result.getBabyInfo().getBabyName())) {
 				baby_name.setText(result.getBabyInfo().getBabyName());
 			}
-			if (result.getDays()!=null) {
-				days.setText("出生"+result.getDays()+"天");
+			
+			String birthdayString = MyApplication.preferences.getString("nannan_birthday", "");
+			if (!"".equals(birthdayString) && birthdayString != null ) {
+				// Date currentdate=new Date(System.currentTimeMillis());
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				try {
+					Date birthday = format.parse(birthdayString);
+					// Log.e("birthday", birthday.toString());
+					// Log.e("currentdate", currentdate.toString());
+					int day = TimeCounter.countTimeOfDay(birthday, new Date(System.currentTimeMillis()));
+					days.setText("" + day);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			} else {
+				days.setText("0");
 			}
 				
 		}
@@ -276,6 +295,24 @@ public class BabyTiemFragment extends Fragment implements OnClickListener{
 		String name=MyApplication.preferences.getString("nannan_name", "");
 		if (!"".equals(name)&&name!=null) {
 			baby_name.setText(name);
+		}
+		String birthdayString = MyApplication.preferences.getString("nannan_birthday", "");
+		if (!"".equals(birthdayString) && birthdayString != null ) {
+			// Date currentdate=new Date(System.currentTimeMillis());
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				Date birthday = format.parse(birthdayString);
+				// Log.e("birthday", birthday.toString());
+				// Log.e("currentdate", currentdate.toString());
+				int day = TimeCounter.countTimeOfDay(birthday, new Date(System.currentTimeMillis()));
+				days.setText("出生" + day+"天");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+			days.setText("0");
 		}
 		Log.e("onresume", "=+++++++++++++++++++=====");
 		

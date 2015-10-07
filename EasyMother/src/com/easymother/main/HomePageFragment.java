@@ -19,6 +19,7 @@ import com.easymother.configure.MyApplication;
 import com.easymother.customview.ImageCycleView1;
 import com.easymother.customview.ImageCycleView1.ImageCycleViewListener;
 import com.easymother.customview.MyGridView;
+import com.easymother.customview.MyScrollView;
 import com.easymother.customview.MyScrollView1;
 import com.easymother.customview.MySwipleReflashLayout;
 import com.easymother.customview.MyViewPager;
@@ -103,7 +104,8 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 	private LinearLayout childview;//scroll的子view
 //	private SwipeRefreshLayout swipeRefreshLayout;
 	private MySwipleReflashLayout swipeRefreshLayout;
-	private ScrollView scrollview;
+//	private ScrollView scrollview;
+	private MyScrollView scrollview;
 //	private MyScrollView1 scrollview;
 
 	public HomePageFragment() {
@@ -135,7 +137,8 @@ public class HomePageFragment extends Fragment implements OnClickListener {
 
 //		scrollView=(PullToRefreshScrollView) homepage.findViewById(R.id.pulltoreflashscrollview);
 		swipeRefreshLayout=(MySwipleReflashLayout) homepage.findViewById(R.id.pulltoreflashscrollview);
-		scrollview=(ScrollView) homepage.findViewById(R.id.scrollview);
+//		scrollview=(ScrollView) homepage.findViewById(R.id.scrollview);
+		scrollview=(MyScrollView) homepage.findViewById(R.id.scrollview);
 		homepage_area = (TextView) homepage.findViewById(R.id.home_page_area);
 		homepage_wish =  (ImageView) homepage.findViewById(R.id.home_page_wish);
 		homepage_ad = (ImageCycleView1) homepage.findViewById(R.id.home_page_ad);

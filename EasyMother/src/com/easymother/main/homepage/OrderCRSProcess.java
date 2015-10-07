@@ -358,6 +358,7 @@ public class OrderCRSProcess extends Activity implements OnClickListener {
 		}
 	}
 	private void clearState(){
+		clicktimes=1;
 		day1.setTextColor(getResources().getColor(R.color.blacktext));
 		day2.setTextColor(getResources().getColor(R.color.blacktext));
 		day3.setTextColor(getResources().getColor(R.color.blacktext));
