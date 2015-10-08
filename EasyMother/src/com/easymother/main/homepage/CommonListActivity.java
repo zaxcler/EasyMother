@@ -573,6 +573,8 @@ public class CommonListActivity extends Activity {
 					}
 //					adapter.addAll(list);
 					listView.setAdapter(adapter);
+					editText.setFocusable(true);
+					editText.requestFocus();
 				}
 				
 			}

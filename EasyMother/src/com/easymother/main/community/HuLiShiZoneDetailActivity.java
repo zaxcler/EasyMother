@@ -190,9 +190,9 @@ public class HuLiShiZoneDetailActivity extends Activity {
 						DensityUtil densityUtil=new DensityUtil(this);
 						for (int i = 0; i < picture.size(); i++) {
 							final ImageView imageview = new ImageView(this);
-							int space = densityUtil.convertDipsToPixels(15);// 间距
-							int width = ((densityUtil.getDisplayMetrics().widthPixels - 3 * space) / 2)*2/3;
-							int height = (width * 800 / 480)*2/3;
+							int space = densityUtil.convertDipsToPixels(5);// 间距
+							int width = ((densityUtil.getDisplayMetrics().widthPixels - 3 * space) / 2);
+							int height = (width * 800 / 480)*3/7;
 							layoutParams = new LinearLayout.LayoutParams(width,height);
 							layoutParams.leftMargin = space;
 							if (i == picture.size() - 1) {
