@@ -505,7 +505,7 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 						
 						@Override
 						public void onClick(View v) {
-							ImageZoom.showBigImgaes(YueSaoDetailActivity.this, nurseJobBean.getWorkImages());
+							ImageZoom.showBigImgaes(YueSaoDetailActivity.this, nurseJobBean.getWorkImages(),0);
 						}
 					});
 				}else {

@@ -120,15 +120,17 @@ public class EasyMotherUtils {
 	 * path 设置保存的uri地址
 	 */
 	public static void chosePhoto(Activity activity,int requestCode,Uri path){
-		Intent intent=new Intent();
-		intent.setType("image/*");
+//		Intent intent=new Intent();
+//		intent.setType("image/*");
 		//对于Android版本 大于4.4的和小于4.4的操作不同
-		if (Build.VERSION.SDK_INT<19) {
-			intent.setAction(Intent.ACTION_GET_CONTENT);
-		}else {
-			intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-		}
-		
+//		if (Build.VERSION.SDK_INT<19) {
+//			intent.setAction(Intent.ACTION_GET_CONTENT);
+//		}else {
+//			intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+//		}
+		//解决4.4和4.4以前的打开图库获取的图片路径不同的问题
+		Intent intent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+		intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
 //		intent.putExtra(MediaStore.EXTRA_OUTPUT, path);//设置保存的uri地址
 		activity.startActivityForResult(intent, requestCode);
 		

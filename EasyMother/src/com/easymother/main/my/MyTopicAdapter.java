@@ -195,7 +195,7 @@ public class MyTopicAdapter extends CommonAdapter<TopicItemBean>{
 			gridView.setOnItemClickListener(new OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-					ImageZoom.showBigImgaes(context, t.getImages());
+					ImageZoom.showBigImgaes(context, t.getImages(),arg2);
 				}
 			});
 

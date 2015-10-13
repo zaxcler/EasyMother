@@ -41,7 +41,7 @@ public class ImageZoom {
 	/*
 	 * 图片数组
 	 */
-	public static void showBigImgaes(Context context, String imageurl) {
+	public static void showBigImgaes(Context context, String imageurl,int index) {
 		try {
 			final Dialog dialog = new Dialog(context, R.style.Transparent);
 			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -69,6 +69,7 @@ public class ImageZoom {
 			}
 			ImageviewAdapter adapter = new ImageviewAdapter(images);
 			pager.setAdapter(adapter);
+			pager.setCurrentItem(index);
 			dialog.show();
 
 		} catch (JSONException e) {
