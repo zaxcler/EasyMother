@@ -4,7 +4,7 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import com.alidao.mama.R;
-import com.easymother.bean.UserInfo;
+import com.easymother.bean.UserInfos;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.customview.CircleImageView;
@@ -149,7 +149,7 @@ public class MyPageFragment extends Fragment implements OnClickListener {
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
 				
-					UserInfo info=JsonUtils.getResult(response, UserInfo.class);
+					UserInfos info=JsonUtils.getResult(response, UserInfos.class);
 					bindData(info);
 				
 				
@@ -176,7 +176,7 @@ public class MyPageFragment extends Fragment implements OnClickListener {
 	/*
 	 * 绑定数据
 	 */
-	protected void bindData(UserInfo info) {
+	protected void bindData(UserInfos info) {
 		if (info!=null) {
 			topic_num.setText(info.getMore1());
 			reply_num.setText(info.getMore2());

@@ -4,7 +4,7 @@ public class LoginResult {
 
 	private String appToken;
 
-	private UserInfo userInfo;
+	private UserInfos userInfo;
 
 	private int expiredIn;
 
@@ -14,10 +14,10 @@ public class LoginResult {
 	public String getAppToken(){
 	return this.appToken;
 	}
-	public void setUserInfo(UserInfo userInfo){
+	public void setUserInfo(UserInfos userInfo){
 	this.userInfo = userInfo;
 	}
-	public UserInfo getUserInfo(){
+	public UserInfos getUserInfo(){
 	return this.userInfo;
 	}
 	public void setExpiredIn(int expiredIn){

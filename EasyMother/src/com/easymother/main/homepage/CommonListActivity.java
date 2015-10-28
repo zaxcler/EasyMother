@@ -183,14 +183,27 @@ public class CommonListActivity extends Activity {
 		Date currentdate=new Date(System.currentTimeMillis());
 		Calendar calendar=Calendar.getInstance();
 		calendar.setTime(currentdate);
-		start_time_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
-		end_time_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
 		
-		/**
-		 * 默认时间开始是当前时间 和结束时间是明天
-		 */
-		starttime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
-		endtime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DAY_OF_MONTH)+1);
+//		if ("CRS".equals(getIntent().getStringExtra("job"))) {
+			start_time_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
+			end_time_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
+			
+			/**
+			 * 默认时间开始是当前时间 和结束时间是明天
+			 */
+			starttime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+			endtime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DAY_OF_MONTH)+1);
+//		}else {
+//			start_time_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
+//			starttime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+//			calendar.add(Calendar.DATE, 26);
+//			end_time_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
+//			counttime.setText("共"+26+"天");
+//			/**
+//			 * 默认时间开始是当前时间 和结束时间是26天后
+//			 */
+//			endtime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DAY_OF_MONTH));
+//		}
 		//搜索的布局的点击时间
 		search1.setOnClickListener(new onSeachLayoutClickLisener());
 		listView.addHeaderView(search_layout);

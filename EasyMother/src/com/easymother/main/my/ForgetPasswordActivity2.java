@@ -45,7 +45,7 @@ public class ForgetPasswordActivity2 extends Activity implements OnClickListener
 	private TimerTask task;// 计时器任务
 	private Timer timer;// 计时器
 	private boolean canGetIdentity = true;
-	private int time = 180;
+	private int time = 60;
 	private String phone;
 	private boolean isShow=false;//是否显示密码
 
@@ -53,7 +53,7 @@ public class ForgetPasswordActivity2 extends Activity implements OnClickListener
 		public void handleMessage(Message msg) {
 			if (msg.arg1 == 0) {
 				identity_code.setText("重新获取验证码");
-				time = 180;
+				time = 60;
 				timer.cancel();
 				canGetIdentity = true;
 				identity_code.setTextColor(getResources().getColor(R.color.boroblacktext));
@@ -127,6 +127,7 @@ public class ForgetPasswordActivity2 extends Activity implements OnClickListener
 							timer = new Timer(true);
 							timer.schedule(task, 1000, 1000);
 						} else {
+							canGetIdentity=true;
 							Toast.makeText(ForgetPasswordActivity2.this, JsonUtils.getRootResult(response).getMessage(),
 									0).show();
 						}
@@ -135,6 +136,7 @@ public class ForgetPasswordActivity2 extends Activity implements OnClickListener
 					public void onFailure(int statusCode, Header[] headers, String responseString,
 							Throwable throwable) {
 						Toast.makeText(ForgetPasswordActivity2.this, "连接服务器失败", 0).show();
+						canGetIdentity=true;
 					};
 				});
 

@@ -302,9 +302,12 @@ public class BabyTimeInfomationActivity extends Activity implements OnClickListe
 			case CROP_PHOTO:
 				try {
 					BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-					bitmapOptions.inJustDecodeBounds = true;
-					bitmapOptions.inSampleSize = 4;
-					bitmapOptions.inJustDecodeBounds = false;
+					/*
+					 * 若再继续压缩，会很模糊
+					 */
+//					bitmapOptions.inJustDecodeBounds = true;
+//					bitmapOptions.inSampleSize = 4;
+//					bitmapOptions.inJustDecodeBounds = false;
 					Bitmap bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri2), null,
 							bitmapOptions);
 					circleImageView.setImageBitmap(bitmap);

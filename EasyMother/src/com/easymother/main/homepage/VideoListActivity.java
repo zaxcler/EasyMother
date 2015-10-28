@@ -125,6 +125,9 @@ public class VideoListActivity extends Activity {
 	private void loadData(){
 		RequestParams params=new RequestParams();
 		params.put("pageNo", pageNO);
+		if (nursejob!=null && nursejob.getId()!=null) {
+			params.put("nurseJobId", nursejob.getId());
+		}
 //		params.put("nurseJobId", nursejob.getId());
 		NetworkHelper.doGet(BaseInfo.CHECK_VIDEO, params, new JsonHttpResponseHandler(){
 			@Override

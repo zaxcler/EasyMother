@@ -9,7 +9,10 @@ import org.json.JSONObject;
 
 import com.alidao.mama.R;
 import com.easymother.configure.BaseInfo;
+import com.easymother.configure.MyApplication;
 import com.easymother.main.homepage.CommentImageAdapter;
+import com.easymother.main.my.LoginOrRegisterActivity;
+import com.easymother.utils.CompressImage;
 import com.easymother.utils.EasyMotherUtils;
 import com.easymother.utils.EasyMotherUtils.RightButtonLisenter;
 import com.easymother.utils.JsonUtils;
@@ -68,6 +71,10 @@ public class TopicOrHelpEditActivity extends Activity {
 					
 					@Override
 					public void onClick(View v) {
+						if (MyApplication.preferences.getInt("id", 0)==0) {
+							EasyMotherUtils.goActivity(TopicOrHelpEditActivity.this, LoginOrRegisterActivity.class);
+							return;
+						}
 						RequestParams params=new RequestParams();
 						if (blockId!=0) {
 							params.put("blockId", blockId);
@@ -146,24 +153,33 @@ public class TopicOrHelpEditActivity extends Activity {
 			switch (requestCode) {
 			case CHOOSE_PHOTOS:
 				Uri uri=data.getData();
-				BitmapFactory.Options options=new BitmapFactory.Options();
-				options.inJustDecodeBounds=true;
-				options.inSampleSize=4;
-				options.inJustDecodeBounds=false;
-				try {
-					Bitmap bitmap=BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri), null, options);
-					EasyMotherUtils.uploadPhoto(bitmap, BaseInfo.UPLOADPHTO, null);
-					images.add(bitmap);//保存图片后面上传
-					if (adapter==null) {
-						adapter=new CommentImageAdapter(TopicOrHelpEditActivity.this, images, R.layout.comment_image);
-						gridview.setAdapter(adapter);
-					}else {
-						adapter.notifyDataSetChanged();
-					}
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
+//				BitmapFactory.Options options=new BitmapFactory.Options();
+//				options.inJustDecodeBounds=true;
+//				options.inSampleSize=2;
+//				options.inJustDecodeBounds=false;
+//				try {
+//					Bitmap bitmap=BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri), null, options);
+//					EasyMotherUtils.uploadPhoto(bitmap, BaseInfo.UPLOADPHTO, null);
+//					images.add(bitmap);//保存图片后面上传
+//					if (adapter==null) {
+//						adapter=new CommentImageAdapter(TopicOrHelpEditActivity.this, images, R.layout.comment_image);
+//						gridview.setAdapter(adapter);
+//					}else {
+//						adapter.notifyDataSetChanged();
+//					}
+//				} catch (FileNotFoundException e) {
+//					e.printStackTrace();
+//				}
+//				Bitmap bitmap=CompressImage.getCompressionBitMap(this, CompressImage.getRealFilePath(this, uri));
+				Bitmap bitmap=CompressImage.getSmallBitmap( CompressImage.getRealFilePath(this, uri));
+				EasyMotherUtils.uploadPhoto(bitmap, BaseInfo.UPLOADPHTO, null);
+				images.add(bitmap);//保存图片后面上传
+				if (adapter==null) {
+					adapter=new CommentImageAdapter(TopicOrHelpEditActivity.this, images, R.layout.comment_image);
+					gridview.setAdapter(adapter);
+				}else {
+					adapter.notifyDataSetChanged();
 				}
-				
 				break;
 
 			}

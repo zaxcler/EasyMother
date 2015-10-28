@@ -294,9 +294,9 @@ public class InfomationActivity extends Activity implements OnClickListener {
 				case CROP_PHOTO:
 					try {
 						BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();  
-						bitmapOptions.inJustDecodeBounds = true;
-					      bitmapOptions.inSampleSize = 4;  
-					      bitmapOptions.inJustDecodeBounds = false;
+//						bitmapOptions.inJustDecodeBounds = true;
+//					      bitmapOptions.inSampleSize = 4;  
+//					      bitmapOptions.inJustDecodeBounds = false;
 					    Bitmap  bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(uri2), null , bitmapOptions);  
 						user_photo.setImageBitmap(bitmap);
 						String type="user_image";

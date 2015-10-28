@@ -531,14 +531,24 @@ public class YueSaoDetailActivity extends Activity implements OnClickListener {
 					nurseType.setText("月嫂");
 					nurseLevel.setText(nurseJobBean.getJobTitle() + "");
 					nurseCurrentPrice.setText("￥" + nurseJobBean.getShowPrice());
-					nurseMarketPrice.setText("市场价：" + nurseJobBean.getMarketPrice() + "元/26天");
+					if ("SHORT_YS".equals(nurseJobBean.getJob())) {
+						nurseMarketPrice.setText("市场价：" + nurseJobBean.getMarketPrice() + "元/天");
+					}else {
+						nurseMarketPrice.setText("市场价：" + nurseJobBean.getMarketPrice() + "元/26天");
+					}
+					
 				}
 				if ("YYS".equals(nurseJobBean.getJob()) || "SHORT_YYS".equals(nurseJobBean.getJob())) {
 					ysoryys.setVisibility(View.VISIBLE);
 					nurseType.setText("育婴师");
 					nurseLevel.setText(nurseJobBean.getJobTitle() + "");
 					nurseCurrentPrice.setText("￥" + nurseJobBean.getShowPrice());
-					nurseMarketPrice.setText("市场价：" + nurseJobBean.getMarketPrice() + "元/26天");
+					if ("SHORT_YYS".equals(nurseJobBean.getJob())) {
+						nurseMarketPrice.setText("市场价：" + nurseJobBean.getMarketPrice() + "元/天");
+					}else {
+						nurseMarketPrice.setText("市场价：" + nurseJobBean.getMarketPrice() + "元/26天");
+					}
+					
 				}
 				if ("CRS".equals(nurseJobBean.getJob())) {
 					cuishi_stars.setVisibility(View.GONE);

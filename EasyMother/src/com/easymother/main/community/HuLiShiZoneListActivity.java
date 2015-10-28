@@ -18,6 +18,7 @@ import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -55,6 +56,7 @@ public class HuLiShiZoneListActivity extends Activity {
 		listview = (MyListview) findViewById(R.id.listview);
 		// TODO Auto-generated method stub
 		
+		scrollView.setMode(Mode.BOTH);
 		scrollView.setOnRefreshListener(new OnRefreshListener2() {
 
 			@Override
@@ -66,7 +68,7 @@ public class HuLiShiZoneListActivity extends Activity {
 			@Override
 			public void onPullUpToRefresh(PullToRefreshBase refreshView) {
 				if (canload) {
-					loadData();
+					loadMore(pageNo++);
 				}
 				refreshView.onRefreshComplete();
 			}

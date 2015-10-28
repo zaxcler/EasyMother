@@ -80,17 +80,19 @@ public class CommentListAdapter extends CommonAdapter<OrderComments> {
 		}else {
 			gridView.setVisibility(View.GONE);
 		}
-		if (t.getMore1()!=null) {
-			employer_name.setText(t.getMore1());
-		}else {
-			employer_name.setText("");
-		}
+		
+//		if (t.getMore1()!=null) {
+////			employer_name.setText(t.getMore1());
+//			employer_name.setText("");
+//		}else {
+//			employer_name.setText("");
+//		}
 		
 		ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+t.getMore2(), employer_photo,MyApplication.options_photo);
 		if (t.getMore3()!=null) {
 			String phone=t.getMore3();
 			String newphone=phone.substring(0, 3)+"****"+phone.substring(phone.length()-4,phone.length());
-			employer_num.setText(newphone);
+			employer_name.setText(newphone);
 		}
 		
 		

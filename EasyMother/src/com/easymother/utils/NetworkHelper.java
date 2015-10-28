@@ -14,7 +14,10 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -257,7 +260,6 @@ public class NetworkHelper {
 	 * @param handler 处理json数据
 	 */
 	public static void doPostNoToken(String url,JsonHttpResponseHandler handler){
-		
 		httpClient.post(BaseInfo.BASE_URL+url,handler);
 		Log.e("地址是------", BaseInfo.BASE_URL+url);
 	}
@@ -320,5 +322,23 @@ public class NetworkHelper {
 		});
 	}
 	
+	/**
+	 * 检查网络是否可用
+	 * @param context
+	 * @return
+	 */
+	public static boolean isNetworkConnected(Context context)
+	{
+		if (context != null)
+		{
+			ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+			if (mNetworkInfo != null)
+			{
+				return mNetworkInfo.isAvailable();
+			}
+		}
+		return false;
+	}
 	
 }

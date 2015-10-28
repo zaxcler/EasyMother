@@ -42,7 +42,7 @@ public class RegisterActivity extends Activity implements OnClickListener{
 	private boolean canGetIdentityCode=true;//能否获取验证码
 	private TimerTask timerTask;//短信可以重新获取倒计时
 	private Timer timer;//计时器
-	private int time=180;//重新获取验证码的时间
+	private int time=60;//重新获取验证码的时间
 	private String appTokenId;//注册时获得的tokenid
 	
 	//倒计时，通过handler显示在界面上
@@ -58,7 +58,7 @@ public class RegisterActivity extends Activity implements OnClickListener{
 				timer.cancel();
 				identity_code.setTextColor(getResources().getColor(R.color.boroblacktext));
 				identity_code.setBackgroundDrawable(getResources().getDrawable(R.drawable.boro_border));
-				time=180;
+				time=60;
 			}
 			
 		};
@@ -135,11 +135,13 @@ public class RegisterActivity extends Activity implements OnClickListener{
         				appTokenId=JsonUtils.getRootResult(response).getResult().toString();
         				Log.e("apptokenid", JsonUtils.getRootResult(response).getResult().toString());
         				}else {
+        					canGetIdentityCode=true;
         					Toast.makeText(RegisterActivity.this, JsonUtils.getRootResult(response).getMessage(), 0).show();
 						}
         			};
         			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
         				Toast.makeText(RegisterActivity.this, "连接服务器失败", 0).show();
+        				canGetIdentityCode=true;
         			};
         		});
         		

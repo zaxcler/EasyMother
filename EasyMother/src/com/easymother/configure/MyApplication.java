@@ -10,7 +10,8 @@ import org.json.JSONObject;
 
 import com.alidao.mama.R;
 import com.alidao.mama.WeiXinUtils;
-import com.easymother.bean.UserInfo;
+import com.easymother.bean.LoginResult;
+import com.easymother.bean.UserInfos;
 import com.easymother.utils.JsonUtils;
 import com.easymother.utils.NetworkHelper;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -146,12 +147,12 @@ public class MyApplication extends Application {
 
 		L.disableLogging();
 		ImageLoader.getInstance().init(config);
-		options_image = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisc(true)
+		options_image = new DisplayImageOptions.Builder().cacheOnDisc(true)
 				.bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.IN_SAMPLE_INT)
 				.showImageOnFail(R.drawable.picture).showImageOnLoading(R.drawable.picture)
 				.showImageForEmptyUri(R.drawable.picture)
 				.showImageOnFail(R.drawable.picture).build();
-		options_photo = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisc(true)
+		options_photo = new DisplayImageOptions.Builder().cacheOnDisc(true)
 				.bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.IN_SAMPLE_INT)
 				.showImageOnFail(R.drawable.photo).showImageOnLoading(R.drawable.photo)
 				.showImageForEmptyUri(R.drawable.photo)
@@ -224,7 +225,7 @@ public class MyApplication extends Application {
 		activityMAP = null;
 	}
 
-	public static void saveUserInfo(UserInfo info) {
+	public static void saveUserInfo(UserInfos info) {
 		SharedPreferences.Editor editor = MyApplication.editor;
 		if (info.getCreateTime() != null) {
 			editor.putString("createTime", info.getCreateTime());
@@ -313,14 +314,24 @@ public class MyApplication extends Application {
 		RequestParams params=new RequestParams();
 		params.put("mobile", preferences.getString("mobile", ""));
 		params.put("password", preferences.getString("password", ""));
-		NetworkHelper.doGet(BaseInfo.LOGIN, new JsonHttpResponseHandler(){
+		Log.e("自动登陆", ""+preferences.getString("mobile", "")+"  "+preferences.getString("password", ""));
+		NetworkHelper.doGetNoToken(BaseInfo.LOGIN, params,new JsonHttpResponseHandler(){
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
 				if (JsonUtils.getRootResult(response).getIsSuccess()) {
-					UserInfo info=JsonUtils.getResult(response, UserInfo.class);
+					LoginResult result=JsonUtils.getResult(response, LoginResult.class);
+					UserInfos info=result.getUserInfo();
 					saveUserInfo(info);
+					Log.e("自动登陆成功", ""+preferences.getString("mobile", "")+"  "+preferences.getString("password", ""));
 				}
+				
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+				// TODO Auto-generated method stub
+				super.onFailure(statusCode, headers, responseString, throwable);
+				Log.e("自动登陆失败", ""+preferences.getString("mobile", "")+"  "+preferences.getString("password", ""));
 			}
 		});
 		

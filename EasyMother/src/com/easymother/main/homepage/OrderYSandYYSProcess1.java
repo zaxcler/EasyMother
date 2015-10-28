@@ -100,11 +100,11 @@ public class OrderYSandYYSProcess1 extends Activity {
 //		// 结束时间
 //		Date enddate = nursebase.getEmploymentEndTime();
 
-		
+		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+		Date startdate;
+		Date enddate;
 		if (startTime != null && endTime != null) {
-			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
-			Date startdate;
-			Date enddate;
+			
 			try {
 				startdate = dateFormat.parse(startTime);
 				enddate = dateFormat.parse(endTime);
@@ -125,10 +125,22 @@ public class OrderYSandYYSProcess1 extends Activity {
 			Calendar calendar=Calendar.getInstance();
 			calendar.setTime(currentdate);
 			startTime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+ calendar.get(Calendar.DAY_OF_MONTH);
-			endTime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+ calendar.get(Calendar.DAY_OF_MONTH);
 			startTime_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
+			calendar.add(Calendar.DATE, 26);
+			endTime=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+ calendar.get(Calendar.DAY_OF_MONTH);
+			
 			endTime_tv.setText(calendar.get(Calendar.YEAR)+"年"+(calendar.get(Calendar.MONTH)+1)+"月"+calendar.get(Calendar.DAY_OF_MONTH)+"日");
-			countTime.setText("共计" + 1 + "天");
+			countTime.setText("共计" + 26 + "天");
+			
+			try {
+				startdate = dateFormat.parse(startTime);
+				enddate = dateFormat.parse(endTime);
+				int countday = TimeCounter.countTimeOfDay(startdate, enddate);
+				day=countday;
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
         time.setOnClickListener(new OnClickListener() {
 			

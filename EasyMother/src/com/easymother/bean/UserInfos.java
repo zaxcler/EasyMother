@@ -1,6 +1,6 @@
 package com.easymother.bean;
 
-public class UserInfo {
+public class UserInfos {
 	
 	private String createTime;
 	
@@ -222,7 +222,7 @@ public class UserInfo {
 	}
 	@Override
 	public String toString() {
-		return "UserInfo [createTime=" + createTime + ", createUser=" + createUser + ", updateTime=" + updateTime
+		return "UserInfos [createTime=" + createTime + ", createUser=" + createUser + ", updateTime=" + updateTime
 				+ ", updateUser=" + updateUser + ", id=" + id + ", more1=" + more1 + ", more2=" + more2 + ", more3="
 				+ more3 + ", int1=" + int1 + ", int2=" + int2 + ", sorting=" + sorting + ", account=" + account
 				+ ", nickname=" + nickname + ", image=" + image + ", preDate=" + preDate + ", isVip=" + isVip

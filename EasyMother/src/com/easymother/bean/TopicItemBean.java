@@ -23,9 +23,16 @@ public class TopicItemBean {
 	private String more2;//点赞次数
 	private String more3;//点赞状态
 	private Date createTime;
+	private String realName;
 	
 	
 	
+	public String getRealName() {
+		return realName;
+	}
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
 	public Date getCreateTime() {
 		return createTime;
 	}

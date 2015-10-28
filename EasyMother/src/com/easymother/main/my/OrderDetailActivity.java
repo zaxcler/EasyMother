@@ -216,7 +216,7 @@ public class OrderDetailActivity extends Activity {
 						nurse_type.setText("月嫂");
 						job="YS";
 						if (nurseJobBean.getPrice()!=null) {
-							paybyweek.setText(orderDetail.getOrder().getPrice() *day+ "元");
+							paybyweek.setText(orderDetail.getOrder().getPrice() *(day+1)+ "元");
 						}
 						
 					}
@@ -226,7 +226,7 @@ public class OrderDetailActivity extends Activity {
 						nurse_type.setText("育婴师");
 						job="YYS";
 						if (nurseJobBean.getPrice()!=null) {
-							paybyweek.setText(orderDetail.getOrder().getPrice() *day+ "元");
+							paybyweek.setText(orderDetail.getOrder().getPrice() *(day+1)+ "元");
 						}
 					}
 				}
@@ -244,7 +244,7 @@ public class OrderDetailActivity extends Activity {
 						nurse_type.setText("短期月嫂");
 						job="SHORT_YS";
 						if (nurseJobBean.getPrice()!=null) {
-							paybyweek.setText(orderDetail.getOrder().getPrice() *7+ "元");
+							paybyweek.setText(orderDetail.getOrder().getPrice() *(day+1)+ "元");
 						}
 					}
 				}
@@ -253,7 +253,7 @@ public class OrderDetailActivity extends Activity {
 						nurse_type.setText("短期育婴师");
 						job="SHORT_YYS";
 						if (nurseJobBean.getPrice()!=null) {
-							paybyweek.setText(orderDetail.getOrder().getPrice() *7+ "元");
+							paybyweek.setText(orderDetail.getOrder().getPrice() *(day+1)+ "元");
 						}
 					}
 				}

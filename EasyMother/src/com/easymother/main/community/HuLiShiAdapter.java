@@ -110,6 +110,7 @@ public class HuLiShiAdapter extends CommonAdapter<TopicItemBean> {
 		}
 
 		TextView name = holder.getView(R.id.name);
+		
 		if (t.getUserNickname() != null) {
 			name.setText(t.getUserNickname());
 		} else {

@@ -15,6 +15,7 @@ import com.alidao.mama.StartAnimationActivity;
 import com.easymother.bean.VersionBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.utils.EasyMotherUtils;
+import com.easymother.utils.NetworkHelper;
 import com.shelwee.update.UpdateHelper;
 import com.shelwee.update.listener.OnUpdateListener;
 import com.shelwee.update.pojo.UpdateInfo;
@@ -28,6 +29,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -97,6 +100,10 @@ public class VersionActivity extends Activity {
 
 	private void init() throws NameNotFoundException {
 //		pd=new ProgressDialog(getApplicationContext());
+		if (!NetworkHelper.isNetworkConnected(this)) {
+			Toast.makeText(this, "请检查网络连接", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		linearLayout2.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -118,9 +125,9 @@ public class VersionActivity extends Activity {
 	private void checkVersion()
 	{
 		String url=BaseInfo.BASE_URL+"resources/images/update.json";
+		Log.e("url", url);
 		final UpdateHelper updateHelper = new UpdateHelper.Builder(this).checkUrl(url).isAutoInstall(true) // 设为false需在下载完手动点击安装;默认为true，下载后自动安装。
 				.build();
-		
 		updateHelper.check(new OnUpdateListener() {
 			
 			@Override
@@ -177,6 +184,7 @@ public class VersionActivity extends Activity {
 		Matcher isNum = pattern.matcher(str + "");
 		return isNum.matches();
 	}
+	
 	
 	
 	//---------下面没有用到-----------
