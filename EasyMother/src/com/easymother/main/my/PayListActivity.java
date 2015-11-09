@@ -130,7 +130,7 @@ public class PayListActivity extends Activity {
 	}
 	
 	
-	private void loadData() {
+	public void loadData() {
 		NetworkHelper.doGet(BaseInfo.PAY_ORDER, new JsonHttpResponseHandler(){
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

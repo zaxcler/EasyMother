@@ -70,7 +70,7 @@ public class Order implements Parcelable {
 
     private Double realAllAmount;
 
-    private Byte userDelete;
+    private boolean userDelete;
 
     private Date expireTime;
 
@@ -330,11 +330,11 @@ public class Order implements Parcelable {
         this.realAllAmount = realAllAmount;
     }
 
-    public Byte getUserDelete() {
+    public boolean getUserDelete() {
         return userDelete;
     }
 
-    public void setUserDelete(Byte userDelete) {
+    public void setUserDelete(boolean userDelete) {
         this.userDelete = userDelete;
     }
 
@@ -499,7 +499,7 @@ public class Order implements Parcelable {
         long tmpRealHireEndTime = in.readLong();
         this.realHireEndTime = tmpRealHireEndTime == -1 ? null : new Date(tmpRealHireEndTime);
         this.realAllAmount = (Double) in.readValue(Double.class.getClassLoader());
-        this.userDelete = (Byte) in.readValue(Byte.class.getClassLoader());
+        this.userDelete = (boolean) in.readValue(boolean.class.getClassLoader());
         long tmpExpireTime = in.readLong();
         this.expireTime = tmpExpireTime == -1 ? null : new Date(tmpExpireTime);
         this.nurseJobId = (Integer) in.readValue(Integer.class.getClassLoader());

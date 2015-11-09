@@ -11,9 +11,9 @@ import com.easymother.configure.MyApplication;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.BinaryHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;

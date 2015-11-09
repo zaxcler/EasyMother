@@ -2,20 +2,28 @@ package com.easymother.main.homepage;
 
 import java.util.List;
 
+import org.apache.http.Header;
+import org.json.JSONObject;
+
 import com.alidao.mama.R;
 import com.easymother.bean.OrderListBean;
 import com.easymother.configure.BaseInfo;
 import com.easymother.configure.MyApplication;
 import com.easymother.main.my.PayListActivity;
 import com.easymother.utils.CommonAdapter;
+import com.easymother.utils.NetworkHelper;
 import com.easymother.utils.ViewHolder;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class OrderListAdapter<T> extends CommonAdapter<T> {
 	private List<T> list;
@@ -136,7 +144,9 @@ public class OrderListAdapter<T> extends CommonAdapter<T> {
 				ImageLoader.getInstance().displayImage(BaseInfo.BASE_URL+BaseInfo.BASE_PICTURE+bean.getImage(), photo,MyApplication.options_image);
 			}
 
-		holder.getView(R.id.delete).setVisibility(View.GONE);
+		ImageView delete=holder.getView(R.id.delete);
+		delete.setVisibility(View.INVISIBLE);
+		
 		holder.getView(R.id.pay).setVisibility(View.GONE);
 		holder.getView(R.id.line1).setVisibility(View.GONE);
 		holder.getView(R.id.price_tv).setVisibility(View.GONE);
@@ -169,6 +179,53 @@ public class OrderListAdapter<T> extends CommonAdapter<T> {
 				pay.setText("待付定金");
 				pay.setVisibility(View.VISIBLE);
 				price_tv2.setText("￥"+bean.getPayMoney()+"元");
+				delete.setVisibility(View.VISIBLE);
+				delete.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						RequestParams params=new RequestParams();
+						params.put("id",bean.getOrderId());
+						NetworkHelper.doGet(BaseInfo.DELETE_ORDER, params, new JsonHttpResponseHandler(){
+							@Override
+							public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+								super.onSuccess(statusCode, headers, response);
+								Log.e("response",response.toString());
+								if(response.optBoolean("isSuccess")){
+									Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
+									
+									/**
+									 * 订单列表
+									 */
+									if (context instanceof OrderListActivity) {
+										OrderListActivity activity=(OrderListActivity)context;
+										activity.loadData();
+									}
+									/**
+									 * 付款列表
+									 */
+									else if(context instanceof PayListActivity){
+										PayListActivity activity=(PayListActivity)context;
+										activity.loadData();
+									}
+									
+								}else {
+									if (response.optString("result")!=null) {
+										Toast.makeText(context,response.optString("result"), Toast.LENGTH_SHORT).show();
+									}
+									
+								}
+							}
+							@Override
+							public void onFailure(int statusCode, Header[] headers, String responseString,
+									Throwable throwable) {
+								super.onFailure(statusCode, headers, responseString, throwable);
+								Log.e("responseString",responseString);
+							}
+						});
+					}
+				});
+				
 			}
 			if ("40".equals(bean.getStatus())){
 				TextView pay=holder.getView(R.id.pay);

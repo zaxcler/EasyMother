@@ -32,6 +32,7 @@ public class BaseInfo {
 		public final static String CHECK_TIME="app/order/toCheckOrder";//检查时间是否被占用
 //		public final static String PAY_ORDER="app/order/toPayOrder";//支付订单
 		public final static String PAY_ORDER="app/order/selectNoPayOrders";//支付订单
+		public final static String DELETE_ORDER="app/order/todelete";//删除订单
 		public final static String GET_TAOCAN="app/nurseservice/findByNameAndLevel";//获取套餐
 
 		public final static String CHCLK_LETTER="app/nursepushletter/findByNurseIdAndJob";//查看订单

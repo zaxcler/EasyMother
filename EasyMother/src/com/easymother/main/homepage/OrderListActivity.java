@@ -82,7 +82,7 @@ public class OrderListActivity extends Activity {
 
 	}
 
-	private void loadData() {
+	public void loadData() {
 		RequestParams params = new RequestParams();
 
 		NetworkHelper.doGet(BaseInfo.ORDER_LIST, params, new JsonHttpResponseHandler() {
